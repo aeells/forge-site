@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, subscriptions, contactSubmissions, InsertContactSubmission } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +89,75 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+// Subscription queries
+export async function createOrUpdateSubscription(data: {
+  userId: number;
+  stripeCustomerId?: string;
+  stripeSubscriptionId?: string;
+  stripePriceId?: string;
+  status?: string;
+  currentPeriodEnd?: Date;
+}) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create/update subscription: database not available");
+    return undefined;
+  }
+
+  const existing = await db
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.userId, data.userId))
+    .limit(1);
+
+  if (existing.length > 0) {
+    await db
+      .update(subscriptions)
+      .set({
+        stripeCustomerId: data.stripeCustomerId,
+        stripeSubscriptionId: data.stripeSubscriptionId,
+        stripePriceId: data.stripePriceId,
+        status: data.status,
+        currentPeriodEnd: data.currentPeriodEnd,
+      })
+      .where(eq(subscriptions.userId, data.userId));
+    return existing[0];
+  } else {
+    await db.insert(subscriptions).values(data);
+    // Fetch the newly created subscription
+    const newSub = await db
+      .select()
+      .from(subscriptions)
+      .where(eq(subscriptions.userId, data.userId))
+      .limit(1);
+    return newSub[0];
+  }
+}
+
+export async function getUserSubscription(userId: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get subscription: database not available");
+    return undefined;
+  }
+
+  const result = await db
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.userId, userId))
+    .limit(1);
+
+  return result.length > 0 ? result[0] : undefined;
+}
+
+// Contact form queries
+export async function createContactSubmission(data: InsertContactSubmission) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create contact submission: database not available");
+    return undefined;
+  }
+
+  await db.insert(contactSubmissions).values(data);
+  return true;
+}
