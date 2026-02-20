@@ -17,5 +17,5 @@ jobs:
       - run: pnpm build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: client/dist
+          path: client/dist/public
       - uses: actions/deploy-pages@v4
