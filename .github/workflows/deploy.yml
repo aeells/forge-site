@@ -14,8 +14,10 @@ jobs:
           node-version: "20"
       - run: npm install -g pnpm
       - run: pnpm install
+        working-directory: ./client
       - run: pnpm build
+        working-directory: ./client
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: client/dist/public
+          path: ./client/dist/public
       - uses: actions/deploy-pages@v4
