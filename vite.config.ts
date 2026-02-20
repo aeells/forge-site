@@ -77,22 +77,29 @@ function vitePluginManusDebugCollector(): Plugin {
     name: "manus-debug-collector",
 
     transformIndexHtml(html) {
-      if (process.env.NODE_ENV === "production") {
-        return html;
+      const tags: { tag: string; attrs: Record<string, string>; injectTo: string }[] = [];
+      if (process.env.NODE_ENV !== "production") {
+        tags.push({
+          tag: "script",
+          attrs: { src: "/__manus__/debug-collector.js", defer: "true" },
+          injectTo: "head",
+        });
       }
-      return {
-        html,
-        tags: [
-          {
-            tag: "script",
-            attrs: {
-              src: "/__manus__/debug-collector.js",
-              defer: true,
-            },
-            injectTo: "head",
+      const analyticsEndpoint = process.env.VITE_ANALYTICS_ENDPOINT;
+      const analyticsWebsiteId = process.env.VITE_ANALYTICS_WEBSITE_ID;
+      if (process.env.NODE_ENV === "production" && analyticsEndpoint && analyticsWebsiteId) {
+        tags.push({
+          tag: "script",
+          attrs: {
+            defer: "true",
+            src: `${analyticsEndpoint}/umami`,
+            "data-website-id": analyticsWebsiteId,
           },
-        ],
-      };
+          injectTo: "body",
+        });
+      }
+      if (tags.length === 0) return html;
+      return { html, tags };
     },
 
     configureServer(server: ViteDevServer) {
@@ -150,7 +157,12 @@ function vitePluginManusDebugCollector(): Plugin {
 
 const plugins = [react(), tailwindcss(), vitePluginManusDebugCollector()];
 
+// GitHub Pages serves from /forge-site/; use base so asset URLs resolve correctly
+const base =
+  process.env.GITHUB_PAGES === "true" ? "/forge-site/" : "/";
+
 export default defineConfig({
+  base,
   plugins,
   resolve: {
     alias: {
