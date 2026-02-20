@@ -7,8 +7,8 @@ export const PRICING_TIERS = {
   starter: {
     name: "Starter",
     description: "Perfect for small teams and proof-of-concept projects",
-    monthlyPriceId: "price_starter_monthly",
-    annualPriceId: "price_starter_annual",
+    monthlyPriceId: "price_1QvZzLRVQovWbg9nG5X5X5X5",
+    annualPriceId: "price_1QvZzLRVQovWbg9nG5X5X5X6",
     monthlyPrice: 49,
     annualPrice: 490, // ~17% discount
     features: [
@@ -22,8 +22,8 @@ export const PRICING_TIERS = {
   professional: {
     name: "Professional",
     description: "For growing teams ready to scale production workloads",
-    monthlyPriceId: "price_professional_monthly",
-    annualPriceId: "price_professional_annual",
+    monthlyPriceId: "price_1QvZzLRVQovWbg9nG5X5X5X7",
+    annualPriceId: "price_1QvZzLRVQovWbg9nG5X5X5X8",
     monthlyPrice: 199,
     annualPrice: 1990, // ~17% discount
     features: [
@@ -38,8 +38,8 @@ export const PRICING_TIERS = {
   enterprise: {
     name: "Enterprise",
     description: "Custom solutions for large-scale deployments",
-    monthlyPriceId: "price_enterprise_monthly",
-    annualPriceId: "price_enterprise_annual",
+    monthlyPriceId: "price_1QvZzLRVQovWbg9nG5X5X5X9",
+    annualPriceId: "price_1QvZzLRVQovWbg9nG5X5X5XA",
     monthlyPrice: 999,
     annualPrice: 9990, // ~17% discount
     features: [
