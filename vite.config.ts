@@ -157,7 +157,7 @@ function vitePluginManusDebugCollector(): Plugin {
 
 const plugins = [react(), tailwindcss(), vitePluginManusDebugCollector()];
 
-// GitHub Pages serves from /forge-site/; use base so asset URLs resolve correctly
+// Project site is at https://aeells.github.io/forge-site/ ; use base so assets and routing work
 const base =
   process.env.GITHUB_PAGES === "true" ? "/forge-site/" : "/";
 
