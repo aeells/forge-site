@@ -6,8 +6,11 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 
-// Match Vite base (e.g. /forge-site for GitHub Pages) so "Go Home" and routes stay under it
-const basePath = (import.meta.env.BASE_URL || "/").replace(/\/$/, "") || "/";
+// Runtime base: under /forge-site (project URL) vs root (custom domain forgeplatform.software)
+function getBasePath(): string {
+  if (typeof window === "undefined") return "";
+  return window.location.pathname.startsWith("/forge-site") ? "/forge-site" : "";
+}
 
 function Routes() {
   return (
@@ -21,7 +24,7 @@ function Routes() {
 
 function AppRouter() {
   return (
-    <Router base={basePath}>
+    <Router base={getBasePath()}>
       <Routes />
     </Router>
   );

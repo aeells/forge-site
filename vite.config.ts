@@ -157,12 +157,9 @@ function vitePluginManusDebugCollector(): Plugin {
 
 const plugins = [react(), tailwindcss(), vitePluginManusDebugCollector()];
 
-// Project site is at https://aeells.github.io/forge-site/ ; use base so assets and routing work
-const base =
-  process.env.GITHUB_PAGES === "true" ? "/forge-site/" : "/";
-
+// Relative base: one build works at https://forgeplatform.software/ and https://aeells.github.io/forge-site/
 export default defineConfig({
-  base,
+  base: "./",
   plugins,
   resolve: {
     alias: {
