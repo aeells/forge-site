@@ -18,7 +18,4 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/public
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./client/dist/public
       - uses: actions/deploy-pages@v4
