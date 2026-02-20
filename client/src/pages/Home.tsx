@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { useAuth } from "@/_core/hooks/useAuth";
-import { getLoginUrl } from "@/const";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { 
   Shield, 
@@ -16,13 +13,19 @@ import {
   Settings, 
   ArrowRight, 
   Check,
-  Lock,
-  TrendingUp,
   ChevronRight
 } from "lucide-react";
 
+// Stripe Product IDs
+const STRIPE_PRODUCTS = {
+  starter: "prod_U111jstSxpFPJD",
+  professional: "prod_U112Ow8zXBv4DC",
+};
+
+// Formspree form ID
+const FORMSPREE_FORM_ID = "mreaadaz";
+
 export default function Home() {
-  const { user, isAuthenticated } = useAuth();
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">("monthly");
   const [contactForm, setContactForm] = useState({
     name: "",
@@ -30,41 +33,54 @@ export default function Home() {
     company: "",
     message: "",
   });
-
-  const createCheckout = trpc.stripe.createCheckoutSession.useMutation({
-    onSuccess: (data) => {
-      if (data.url) {
-        toast.info("Redirecting to checkout...");
-        window.open(data.url, "_blank");
-      }
-    },
-    onError: (error) => {
-      toast.error(error.message || "Failed to create checkout session");
-    },
-  });
-
-  const submitContact = trpc.contact.submit.useMutation({
-    onSuccess: () => {
-      toast.success("Message sent! We'll get back to you soon.");
-      setContactForm({ name: "", email: "", company: "", message: "" });
-    },
-    onError: (error) => {
-      toast.error(error.message || "Failed to send message");
-    },
-  });
+  const [isSubmittingContact, setIsSubmittingContact] = useState(false);
 
   const handleCheckout = (tier: "starter" | "professional" | "enterprise") => {
-    if (!isAuthenticated) {
-      toast.info("Please sign in to subscribe");
-      window.location.href = getLoginUrl();
+    if (tier === "enterprise") {
+      scrollToSection("contact");
+      toast.info("Please fill out the contact form for enterprise pricing");
       return;
     }
-    createCheckout.mutate({ tier, billingPeriod });
+
+    const productId = STRIPE_PRODUCTS[tier];
+    if (productId) {
+      // Redirect to Stripe Checkout with product ID
+      const checkoutUrl = `https://checkout.stripe.com/pay/${productId}`;
+      toast.info("Redirecting to checkout...");
+      window.open(checkoutUrl, "_blank");
+    }
   };
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    submitContact.mutate(contactForm);
+    setIsSubmittingContact(true);
+
+    try {
+      // Using Formspree for contact form handling
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: contactForm.name,
+          email: contactForm.email,
+          company: contactForm.company,
+          message: contactForm.message,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Message sent! We'll get back to you soon.");
+        setContactForm({ name: "", email: "", company: "", message: "" });
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmittingContact(false);
+    }
   };
 
   const scrollToSection = (id: string) => {
@@ -99,21 +115,6 @@ export default function Home() {
             >
               Contact
             </button>
-          </div>
-          <div>
-            {isAuthenticated ? (
-              <span className="text-sm text-muted-foreground">
-                {user?.name || user?.email}
-              </span>
-            ) : (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => (window.location.href = getLoginUrl())}
-              >
-                Sign In
-              </Button>
-            )}
           </div>
         </div>
       </nav>
@@ -341,9 +342,8 @@ export default function Home() {
                         : "bg-secondary text-foreground hover:bg-secondary/80 border border-border"
                     }`}
                     onClick={() => handleCheckout(plan.tier)}
-                    disabled={createCheckout.isPending}
                   >
-                    {createCheckout.isPending ? "Processing..." : "Get Started"}
+                    Get Started
                   </Button>
 
                   <ul className="space-y-3">
@@ -437,9 +437,9 @@ export default function Home() {
                 <Button
                   type="submit"
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-10"
-                  disabled={submitContact.isPending}
+                  disabled={isSubmittingContact}
                 >
-                  {submitContact.isPending ? "Sending..." : "Send Message"}
+                  {isSubmittingContact ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </Card>

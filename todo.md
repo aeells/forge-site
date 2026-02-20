@@ -51,3 +51,18 @@
 - [x] Update page title to "Forge Platform - Enterprise Microservices"
 - [x] Update footer branding
 - [x] Test all functionality after branding update
+
+
+## Architecture Simplification - Static SPA
+- [x] Remove server/ directory
+- [x] Remove drizzle/ and database schema
+- [x] Remove tRPC and Express backend
+- [x] Remove Stripe server SDK
+- [x] Update package.json to remove backend dependencies
+- [x] Replace Stripe checkout with Checkout Links
+- [x] Replace contact form with third-party handler (Formspree)
+- [x] Test static Vite build
+- [x] Verify all functionality works in static mode
+- [x] Integrate Formspree form ID (mreaadaz)
+- [x] Configure Stripe product IDs (Starter & Professional)
+- [x] Set up Enterprise tier as contact form link
