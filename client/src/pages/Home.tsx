@@ -77,10 +77,8 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
         <div className="container mx-auto flex items-center justify-between py-4 px-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-white font-bold text-sm">ZT</span>
-            </div>
-            <span className="font-semibold text-foreground">Zero-Trust</span>
+            <img src="/logo.png" alt="Forge Platform" className="w-8 h-8" />
+            <span className="font-semibold text-foreground">Forge</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
             <button
@@ -131,8 +129,8 @@ export default function Home() {
             </div>
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight text-foreground">
-              Enterprise microservices,{" "}
-              <span className="text-primary">built in hours</span>
+              Build enterprise microservices{" "}
+              <span className="text-primary">in hours</span>
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto">
@@ -455,10 +453,8 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-6 h-6 rounded-lg bg-primary flex items-center justify-center">
-                  <span className="text-white font-bold text-xs">ZT</span>
-                </div>
-                <span className="font-semibold text-foreground">Zero-Trust</span>
+                <img src="/logo.png" alt="Forge Platform" className="w-6 h-6" />
+                <span className="font-semibold text-foreground">Forge</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 Enterprise microservices platform built for scale.
@@ -525,8 +521,8 @@ export default function Home() {
           </div>
 
           <div className="pt-8 border-t border-border text-center">
-            <p className="text-sm text-muted-foreground">
-              © 2026 Zero-Trust Micro-Services Platform. All rights reserved.
+            <p className="text-sm text-muted-foreground font-mono">
+              © 2026 Forge Platform. All rights reserved.
             </p>
           </div>
         </div>
