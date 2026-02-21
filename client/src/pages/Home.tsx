@@ -10,8 +10,8 @@ import { Check } from "lucide-react";
 
 // Stripe Payment Link URLs (from Dashboard: Product → Payment link → copy link).
 const STRIPE_PAYMENT_LINKS: Record<string, string> = {
-  starter: "https://buy.stripe.com/5kQ5kCcJ3bjP4Pfa6xaMU00",
-  professional: "https://buy.stripe.com/cNi9AScJ3fA52H7diJaMU01", // Growth
+  starter: "https://buy.stripe.com/5kQ5kCcJ3bjP4Pfa6xaMU00", // Builder
+  professional: "https://buy.stripe.com/cNi9AScJ3fA52H7diJaMU01", // Scale
 };
 
 const FORMSPREE_FORM_ID = "mreaadaz";
@@ -23,32 +23,31 @@ function scrollToSection(id: string) {
 const PLANS = [
   {
     tier: "starter" as const,
-    name: "Starter",
+    name: "Builder",
     monthlyPrice: 49,
     annualPrice: 490,
-    description: "Org < 10 employees",
+    description: "For early-stage teams building their first production system.",
     features: [
-      "Up to 5 microservices",
-      "Basic authentication",
-      "Standard observability",
-      "Community support",
-      "99.5% uptime SLA",
+      "Organisations with fewer than 10 employees",
+      "Full Forge architecture",
+      "Standard documentation and community support",
+      "Email-based support",
+      "Ideal for MVP and early revenue stage",
     ],
     highlight: false,
   },
   {
     tier: "professional" as const,
-    name: "Growth",
+    name: "Scale",
     monthlyPrice: 199,
     annualPrice: 1990,
-    description: "Org 10 - 50 employees",
+    description: "For scaling teams that need architectural consistency.",
     features: [
-      "Unlimited microservices",
-      "Advanced zero-trust security",
-      "Full observability suite",
-      "Operational tooling",
-      "Priority support",
-      "99.9% uptime SLA",
+      "Organisations between 10–50 employees",
+      "Full Forge architecture",
+      "Priority support and Slack channel access",
+      "Architecture guidance sessions (e.g., quarterly review call)",
+      "Best suited for funded startups scaling engineering teams",
     ],
     highlight: true,
   },
@@ -57,14 +56,13 @@ const PLANS = [
     name: "Enterprise",
     monthlyPrice: null,
     annualPrice: null,
-    description: "Large corporations",
+    description: "For established organisations requiring structured oversight.",
     features: [
-      "Everything in Growth",
-      "Dedicated infrastructure",
-      "Custom compliance policies",
-      "24/7 phone & Slack support",
-      "Solutions architect",
-      "99.99% uptime SLA",
+      "Organisations 50+ employees",
+      "Full Forge architecture",
+      "Direct access to founder / architect",
+      "Post-sale consulting and architectural advisory available",
+      "Open to discussions on roadmap influence (non-binding; may not suit every client)",
     ],
     highlight: false,
   },
@@ -123,10 +121,13 @@ export default function Home() {
         <div className="container px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-              Simple, transparent pricing
+            Pricing aligned with scale. Not features.
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Scale as you grow. All plans include core features.
+            Forge is a foundational architecture, not a feature bundle. All customers receive the same production-ready platform.
+            </p>
+            <p className="text-sm text-muted-foreground mb-6">
+              Self-hosted on your own AWS. We don’t host or operate your environment.
             </p>
             <div className="flex items-center justify-center gap-4">
               <span className={billingPeriod === "monthly" ? "text-foreground font-semibold" : "text-muted-foreground"}>
