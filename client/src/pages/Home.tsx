@@ -9,9 +9,15 @@ import { toast } from "sonner";
 import { Check } from "lucide-react";
 
 // Stripe Payment Link URLs (from Dashboard: Product → Payment link → copy link).
-const STRIPE_PAYMENT_LINKS: Record<string, string> = {
-  builder: "https://buy.stripe.com/5kQ5kCcJ3bjP4Pfa6xaMU00", // Builder
-  scale: "https://buy.stripe.com/cNi9AScJ3fA52H7diJaMU01", // Scale
+const STRIPE_PAYMENT_LINKS: Record<string, { monthly: string; annual: string }> = {
+  builder: {
+    monthly: "https://buy.stripe.com/5kQ5kCcJ3bjP4Pfa6xaMU00",
+    annual: "https://buy.stripe.com/fZu6oGgZj4Vr1D30vXaMU02",
+  },
+  scale: {
+    monthly: "https://buy.stripe.com/cNi9AScJ3fA52H7diJaMU01",
+    annual: "https://buy.stripe.com/7sYeVc7oJgE93Lb5QhaMU03",
+  },
 };
 
 const FORMSPREE_FORM_ID = "mreaadaz";
@@ -84,7 +90,8 @@ export default function Home() {
       toast.info("Please fill out the contact form for enterprise pricing");
       return;
     }
-    const paymentLink = STRIPE_PAYMENT_LINKS[tier];
+    const links = STRIPE_PAYMENT_LINKS[tier];
+    const paymentLink = billingPeriod === "annual" ? links?.annual : links?.monthly;
     if (paymentLink) {
       window.open(paymentLink, "_blank");
       toast.info("Redirecting to checkout...");
