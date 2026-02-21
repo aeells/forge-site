@@ -6,13 +6,112 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>Forge Platform - Enterprise Microservices</title>    
-    <!-- Using system fonts for modern minimalist design -->
-    <!-- No custom fonts needed - system font stack provides optimal performance -->
+    <title>Forge Platform - Enterprise Microservices</title>
+    <meta name="description" content="Build enterprise microservices in hours. Launch production-ready applications with zero-trust security, horizontal scaling, and full observability. Built on Java, Maven, and Quarkus on AWS." />
+    <link rel="canonical" href="https://forgeplatform.software/" />
+
+    <!-- Open Graph / social previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://forgeplatform.software/" />
+    <meta property="og:title" content="Forge Platform - Enterprise Microservices" />
+    <meta property="og:description" content="Build enterprise microservices in hours. Launch production-ready applications with zero-trust security, horizontal scaling, and full observability. Built on Java, Maven, and Quarkus on AWS." />
+    <meta property="og:image" content="https://forgeplatform.software/crossed-hammers.png" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Forge Platform - Enterprise Microservices" />
+    <meta name="twitter:description" content="Build enterprise microservices in hours. Launch production-ready applications with zero-trust security, horizontal scaling, and full observability. Built on Java, Maven, and Quarkus on AWS." />
   </head>
 
-  <body>
+  <body class="min-h-screen bg-background">
+    <!-- Static content: nav, hero, features (no React; crawlers and users see this immediately) -->
+    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
+      <div class="container mx-auto flex items-center justify-between py-4 px-4">
+        <a href="#" class="flex items-center gap-3 no-underline text-foreground hover:text-foreground">
+          <img src="./crossed-hammers.png" alt="Forge" class="h-10 w-auto block" />
+          <span class="font-semibold text-xl">Forge Platform</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#features" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Features</a>
+          <a href="#pricing" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
+          <a href="#contact" class="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="relative pt-32 pb-24 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent"></div>
+      <div class="container relative z-10 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full bg-secondary text-sm text-muted-foreground border border-border">
+            <span class="w-2 h-2 rounded-full bg-primary"></span>
+            Now in public beta
+          </div>
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight text-foreground">
+            Build enterprise microservices <span class="text-primary">in hours</span>
+          </h1>
+          <p class="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto">
+            Launch production-ready applications with zero-trust security, horizontal scaling, and full observability. Built on Java, Maven, and Quarkus on AWS.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <a href="#pricing" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-11 px-6 bg-primary text-primary-foreground hover:bg-primary/90">Get Started</a>
+            <a href="#features" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-11 px-6 border border-input bg-background hover:bg-accent hover:text-accent-foreground">Learn More</a>
+          </div>
+          <div class="grid grid-cols-3 gap-8 pt-8 border-t border-border">
+            <div>
+              <div class="text-2xl font-bold text-foreground">100%</div>
+              <div class="text-sm text-muted-foreground">Zero-Trust</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-foreground">∞</div>
+              <div class="text-sm text-muted-foreground">Horizontal Scale</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-foreground">AWS</div>
+              <div class="text-sm text-muted-foreground">Native</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="py-24 border-t border-border">
+      <div class="container px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4 text-foreground">Everything you need</h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">Built-in security, observability, and operational tooling to scale your platform.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+            <div class="mb-4 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"><span class="text-primary font-bold">A</span></div>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Authentication</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">Zero-trust security model with OAuth, JWT, and role-based access control.</p>
+          </article>
+          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+            <div class="mb-4 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"><span class="text-primary font-bold">O</span></div>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Observability</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">Distributed tracing, metrics, and log aggregation out of the box.</p>
+          </article>
+          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+            <div class="mb-4 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"><span class="text-primary font-bold">T</span></div>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Operational Tooling</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">CI/CD pipelines, automated deployments, and infrastructure as code.</p>
+          </article>
+          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+            <div class="mb-4 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center"><span class="text-primary font-bold">S</span></div>
+            <h3 class="text-lg font-semibold mb-2 text-foreground">Scalable Infrastructure</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">Auto-scaling microservices on AWS with Kubernetes orchestration.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- React mounts here: pricing, contact, footer only -->
     <div id="root"></div>
+    <noscript>
+      <p class="text-center py-8 text-muted-foreground">Enable JavaScript for pricing and contact form.</p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 
