@@ -6,11 +6,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { Check, ChevronRight } from "lucide-react";
+import { Check } from "lucide-react";
 
-const STRIPE_PRODUCTS: Record<string, string> = {
-  starter: "prod_U111jstSxpFPJD",
-  professional: "prod_U112Ow8zXBv4DC",
+// Stripe Payment Link URLs (from Dashboard: Product → Payment link → copy link).
+const STRIPE_PAYMENT_LINKS: Record<string, string> = {
+  starter: "https://buy.stripe.com/5kQ5kCcJ3bjP4Pfa6xaMU00",
+  professional: "https://buy.stripe.com/cNi9AScJ3fA52H7diJaMU01", // Growth
 };
 
 const FORMSPREE_FORM_ID = "mreaadaz";
@@ -25,7 +26,7 @@ const PLANS = [
     name: "Starter",
     monthlyPrice: 49,
     annualPrice: 490,
-    description: "Perfect for small teams",
+    description: "Org < 10 employees",
     features: [
       "Up to 5 microservices",
       "Basic authentication",
@@ -37,10 +38,10 @@ const PLANS = [
   },
   {
     tier: "professional" as const,
-    name: "Professional",
+    name: "Growth",
     monthlyPrice: 199,
     annualPrice: 1990,
-    description: "For growing teams",
+    description: "Org 10 - 50 employees",
     features: [
       "Unlimited microservices",
       "Advanced zero-trust security",
@@ -54,11 +55,11 @@ const PLANS = [
   {
     tier: "enterprise" as const,
     name: "Enterprise",
-    monthlyPrice: 999,
-    annualPrice: 9990,
-    description: "For large deployments",
+    monthlyPrice: null,
+    annualPrice: null,
+    description: "Large corporations",
     features: [
-      "Everything in Professional",
+      "Everything in Growth",
       "Dedicated infrastructure",
       "Custom compliance policies",
       "24/7 phone & Slack support",
@@ -85,10 +86,12 @@ export default function Home() {
       toast.info("Please fill out the contact form for enterprise pricing");
       return;
     }
-    const productId = STRIPE_PRODUCTS[tier];
-    if (productId) {
-      window.open(`https://checkout.stripe.com/pay/${productId}`, "_blank");
+    const paymentLink = STRIPE_PAYMENT_LINKS[tier];
+    if (paymentLink) {
+      window.open(paymentLink, "_blank");
       toast.info("Redirecting to checkout...");
+    } else {
+      toast.info("Checkout not configured for this plan. Use the contact form.");
     }
   };
 
@@ -141,7 +144,10 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {PLANS.map((plan) => {
-              const price = billingPeriod === "monthly" ? plan.monthlyPrice : Math.round(plan.annualPrice / 12);
+              const isEnterprise = plan.tier === "enterprise";
+              const price = !isEnterprise && plan.monthlyPrice != null
+                ? (billingPeriod === "monthly" ? plan.monthlyPrice : Math.round((plan.annualPrice ?? 0) / 12))
+                : null;
               return (
                 <Card
                   key={plan.tier}
@@ -159,14 +165,20 @@ export default function Home() {
                   <div className="mb-6">
                     <h3 className="text-2xl font-bold mb-1 text-foreground">{plan.name}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{plan.description}</p>
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-bold text-foreground">${price}</span>
-                      <span className="text-muted-foreground">/month</span>
-                    </div>
-                    {billingPeriod === "annual" && (
-                      <p className="text-xs text-muted-foreground mt-2">
-                        Billed ${plan.annualPrice} annually
-                      </p>
+                    {price != null ? (
+                      <>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-4xl font-bold text-foreground">${price}</span>
+                          <span className="text-muted-foreground">/month</span>
+                        </div>
+                        {billingPeriod === "annual" && plan.annualPrice != null && (
+                          <p className="text-xs text-muted-foreground mt-2">
+                            Billed ${plan.annualPrice} annually
+                          </p>
+                        )}
+                      </>
+                    ) : (
+                      <p className="text-lg font-semibold text-foreground">Custom pricing</p>
                     )}
                   </div>
                   <Button
@@ -177,7 +189,7 @@ export default function Home() {
                     }`}
                     onClick={() => handleCheckout(plan.tier)}
                   >
-                    Get Started
+                    {isEnterprise ? "Contact Us" : "Get Started"}
                   </Button>
                   <ul className="space-y-3">
                     {plan.features.map((feature, idx) => (
@@ -262,46 +274,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <footer className="py-12 border-t border-border">
-        <div className="container px-4">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <img src="./crossed-hammers.png" alt="Forge" className="h-6 w-auto block" />
-                <span className="font-semibold text-foreground">Forge Platform</span>
-              </div>
-              <p className="text-sm text-muted-foreground">Enterprise microservices platform built for scale.</p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-foreground">Product</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><button type="button" onClick={() => scrollToSection("features")} className="hover:text-foreground transition-colors flex items-center gap-1">Features <ChevronRight className="h-3 w-3" /></button></li>
-                <li><button type="button" onClick={() => scrollToSection("pricing")} className="hover:text-foreground transition-colors flex items-center gap-1">Pricing <ChevronRight className="h-3 w-3" /></button></li>
-                <li><a href="#" className="hover:text-foreground transition-colors flex items-center gap-1">Docs <ChevronRight className="h-3 w-3" /></a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-foreground">Company</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors flex items-center gap-1">About <ChevronRight className="h-3 w-3" /></a></li>
-                <li><button type="button" onClick={() => scrollToSection("contact")} className="hover:text-foreground transition-colors flex items-center gap-1">Contact <ChevronRight className="h-3 w-3" /></button></li>
-                <li><a href="#" className="hover:text-foreground transition-colors flex items-center gap-1">Blog <ChevronRight className="h-3 w-3" /></a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-foreground">Legal</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors flex items-center gap-1">Privacy <ChevronRight className="h-3 w-3" /></a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors flex items-center gap-1">Terms <ChevronRight className="h-3 w-3" /></a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="pt-8 border-t border-border text-center">
-            <p className="text-sm text-muted-foreground font-mono">© 2026 Forge Platform. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }
