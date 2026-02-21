@@ -10,8 +10,8 @@ import { Check } from "lucide-react";
 
 // Stripe Payment Link URLs (from Dashboard: Product → Payment link → copy link).
 const STRIPE_PAYMENT_LINKS: Record<string, string> = {
-  starter: "https://buy.stripe.com/5kQ5kCcJ3bjP4Pfa6xaMU00", // Builder
-  professional: "https://buy.stripe.com/cNi9AScJ3fA52H7diJaMU01", // Scale
+  builder: "https://buy.stripe.com/5kQ5kCcJ3bjP4Pfa6xaMU00", // Builder
+  scale: "https://buy.stripe.com/cNi9AScJ3fA52H7diJaMU01", // Scale
 };
 
 const FORMSPREE_FORM_ID = "mreaadaz";
@@ -22,13 +22,13 @@ function scrollToSection(id: string) {
 
 const PLANS = [
   {
-    tier: "starter" as const,
+    tier: "builder" as const,
     name: "Builder",
-    monthlyPrice: 49,
-    annualPrice: 490,
+    monthlyPrice: 99,
+    annualPrice: 1010, // 15% off (99 × 12 × 0.85)
     description: "For early-stage teams building their first production system.",
     features: [
-      "Organisations with fewer than 10 employees",
+      "Organisations with < 10 employees",
       "Full Forge architecture",
       "Standard documentation and community support",
       "Email-based support",
@@ -37,10 +37,10 @@ const PLANS = [
     highlight: false,
   },
   {
-    tier: "professional" as const,
+    tier: "scale" as const,
     name: "Scale",
-    monthlyPrice: 199,
-    annualPrice: 1990,
+    monthlyPrice: 299,
+    annualPrice: 3050, // 15% off (299 × 12 × 0.85)
     description: "For scaling teams that need architectural consistency.",
     features: [
       "Organisations between 10–50 employees",
@@ -78,7 +78,7 @@ export default function Home() {
   });
   const [isSubmittingContact, setIsSubmittingContact] = useState(false);
 
-  const handleCheckout = (tier: "starter" | "professional" | "enterprise") => {
+  const handleCheckout = (tier: "builder" | "scale" | "enterprise") => {
     if (tier === "enterprise") {
       scrollToSection("contact");
       toast.info("Please fill out the contact form for enterprise pricing");
@@ -138,7 +138,7 @@ export default function Home() {
                 onCheckedChange={(checked) => setBillingPeriod(checked ? "annual" : "monthly")}
               />
               <span className={billingPeriod === "annual" ? "text-foreground font-semibold" : "text-muted-foreground"}>
-                Annual <span className="text-primary text-xs ml-1">(Save 17%)</span>
+                Annual <span className="text-primary text-xs ml-1">(Save 15%)</span>
               </span>
             </div>
           </div>
