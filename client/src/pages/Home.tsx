@@ -58,11 +58,11 @@ const PLANS = [
     annualPrice: null,
     description: "For established organisations requiring structured oversight.",
     features: [
-      "Organisations 50+ employees",
-      "Full Forge architecture",
-      "Direct access to founder / architect",
-      "Post-sale consulting and architectural advisory available",
-      "Open to discussions on roadmap influence (non-binding; may not suit every client)",
+      "Designed for organizations of 50+ employees",
+      "Access to the full Forge architecture",
+      "Direct engagement with founder / architect",
+      "Optional post-sale consulting and architectural advisory",
+      "Tailored collaboration on feature roadmap for strategic input",
     ],
     highlight: false,
   },
@@ -125,9 +125,6 @@ export default function Home() {
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
             Forge is a foundational architecture, not a feature bundle. All customers receive the same production-ready platform.
-            </p>
-            <p className="text-sm text-muted-foreground mb-6">
-              Self-hosted on your own AWS. We don’t host or operate your environment.
             </p>
             <div className="flex items-center justify-center gap-4">
               <span className={billingPeriod === "monthly" ? "text-foreground font-semibold" : "text-muted-foreground"}>
