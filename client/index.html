@@ -27,7 +27,7 @@
 
   <body class="min-h-screen bg-background">
     <!-- Static content: nav, hero, features (no React; crawlers and users see this immediately) -->
-    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
+    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
       <div class="container mx-auto flex items-center justify-between py-4 px-4">
         <a href="#" class="flex items-center gap-3 no-underline text-foreground hover:text-foreground">
           <img src="./crossed-hammers.png" alt="Forge" class="h-10 w-auto block" />
@@ -41,15 +41,15 @@
       </div>
     </nav>
 
-    <section class="relative pt-32 pb-24 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent"></div>
+    <section class="relative pt-36 pb-28 overflow-hidden hero-mesh">
+      <div class="hero-mesh-overlay" aria-hidden="true"></div>
       <div class="container relative z-10 px-4">
         <div class="max-w-4xl mx-auto text-center">
           <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full bg-secondary text-sm text-muted-foreground border border-border">
             <span class="w-2 h-2 rounded-full bg-primary"></span>
             Production-ready microservice foundation
           </div>
-          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight text-foreground">
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight text-foreground">
             Production-grade microservices from day one. <span class="text-primary">Enterprise foundations. Startup speed.</span>
           </h1>
           <p class="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto">
@@ -57,11 +57,11 @@
             Built on Java, Maven, and Quarkus on AWS.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <a href="#pricing" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-11 px-6 bg-primary text-primary-foreground hover:bg-primary/90">Get Started</a>
-            <a href="#features" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-11 px-6 border border-input bg-background hover:bg-accent hover:text-accent-foreground">Explore Features</a>
+            <a href="#pricing" class="inline-flex items-center justify-center rounded-xl text-sm font-semibold h-11 px-6 bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm">Get Started</a>
+            <a href="#features" class="inline-flex items-center justify-center rounded-xl text-sm font-semibold h-11 px-6 border border-input bg-background hover:bg-accent hover:text-accent-foreground">Explore Features</a>
           </div>
-          <div class="grid md:grid-cols-3 gap-8 pt-12 border-t border-border text-left">
-            <div>
+          <div class="grid md:grid-cols-3 gap-6 pt-14 text-left">
+            <div class="p-6 rounded-xl border bg-card/80 border-border home-card">
               <h3 class="text-lg font-semibold mb-2 text-foreground">
                 Foundations Before You Need Them
               </h3>
@@ -69,7 +69,7 @@
                 Authentication, service structure, CI/CD, infrastructure-as-code, observability, and deployment standards are pre-defined and production-ready. Your team builds product — not scaffolding.
               </p>
             </div>
-            <div>
+            <div class="p-6 rounded-xl border bg-card/80 border-border home-card">
               <h3 class="text-lg font-semibold mb-2 text-foreground">
                 Zero-Trust by Default
               </h3>
@@ -77,7 +77,7 @@
                 Strong identity boundaries, OAuth2 flows, and JWT validation are embedded across services. Security posture is enforced by architecture — not documentation.
               </p>
             </div>
-            <div>
+            <div class="p-6 rounded-xl border bg-card/80 border-border home-card">
               <h3 class="text-lg font-semibold mb-2 text-foreground">
                 Designed to Scale Cleanly
               </h3>
@@ -90,7 +90,7 @@
       </div>
     </section>
 
-    <section id="features" class="py-24 border-t border-border">
+    <section id="features" class="py-24 border-t border-border section-subtle">
       <div class="container px-4">
         <div class="text-center mb-16 max-w-3xl mx-auto">
           <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">
@@ -101,7 +101,7 @@
           </p>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+          <article class="p-6 rounded-xl border bg-card border-border hover:border-primary/30 transition-all home-card">
             <h3 class="text-lg font-semibold mb-3 text-foreground">
               Security & Identity
             </h3>
@@ -109,7 +109,7 @@
               Zero-trust architecture with OAuth2, JWT validation, service-to-service authentication, and fine-grained role enforcement. Security is embedded into the service model itself.
             </p>
           </article>
-          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+          <article class="p-6 rounded-xl border bg-card border-border hover:border-primary/30 transition-all home-card">
             <h3 class="text-lg font-semibold mb-3 text-foreground">
               Observability Built In
             </h3>
@@ -117,7 +117,7 @@
               Distributed tracing, metrics, structured logging, and centralized aggregation configured from the outset. Diagnose issues before they become outages.
             </p>
           </article>
-          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+          <article class="p-6 rounded-xl border bg-card border-border hover:border-primary/30 transition-all home-card">
             <h3 class="text-lg font-semibold mb-3 text-foreground">
               Deployment Discipline
             </h3>
@@ -125,7 +125,7 @@
               CI/CD pipelines, infrastructure as code, environment isolation, and automated deployments reduce drift and eliminate environment-specific surprises.
             </p>
           </article>
-          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+          <article class="p-6 rounded-xl border bg-card border-border hover:border-primary/30 transition-all home-card">
             <h3 class="text-lg font-semibold mb-3 text-foreground">
               Cloud-Native Architecture
             </h3>
@@ -137,7 +137,7 @@
       </div>
     </section>
 
-    <section class="py-24 border-t border-border">
+    <section class="py-24 border-t border-border section-subtle">
       <div class="container px-4 max-w-4xl mx-auto">
         <div class="text-center mb-12">
           <h2 class="text-4xl md:text-5xl font-bold mb-6 text-foreground">
@@ -170,7 +170,7 @@
           </p>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+          <article class="p-6 rounded-xl border bg-card border-border hover:border-primary/30 transition-all home-card">
             <h3 class="text-lg font-semibold mb-3 text-foreground">
               Licensed Server Architecture
             </h3>
@@ -178,7 +178,7 @@
               Customers receive a server licence enabling use of the full Forge Platform architecture within their organisation. The licence governs commercial use — not access to features. All architectural capabilities are included.
             </p>
           </article>
-          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+          <article class="p-6 rounded-xl border bg-card border-border hover:border-primary/30 transition-all home-card">
             <h3 class="text-lg font-semibold mb-3 text-foreground">
               Full Repository Access
             </h3>
@@ -186,7 +186,7 @@
               You receive a complete fork of the production codebase. The platform is not a black box — your team can inspect, extend, and integrate it into your internal development workflows. Updates can be pulled and merged as new platform versions are released.
             </p>
           </article>
-          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+          <article class="p-6 rounded-xl border bg-card border-border hover:border-primary/30 transition-all home-card">
             <h3 class="text-lg font-semibold mb-3 text-foreground">
               Self-Hosted on Your AWS Account
             </h3>
@@ -194,7 +194,7 @@
               Forge is deployed into your own AWS environment. Services run within your infrastructure, under your security policies, IAM boundaries, and operational controls. There is no shared hosting layer and no vendor-controlled runtime.
             </p>
           </article>
-          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+          <article class="p-6 rounded-xl border bg-card border-border hover:border-primary/30 transition-all home-card">
             <h3 class="text-lg font-semibold mb-3 text-foreground">
               CI/CD and Operational Model
             </h3>
@@ -202,7 +202,7 @@
               The architecture includes opinionated CI/CD pipelines, infrastructure-as-code definitions, and environment promotion patterns. Consistent deployments across development, staging, and production.
             </p>
           </article>
-          <article class="p-6 rounded-lg border bg-card border-border hover:border-primary/30 transition-all">
+          <article class="p-6 rounded-xl border bg-card border-border hover:border-primary/30 transition-all home-card">
             <h3 class="text-lg font-semibold mb-3 text-foreground">
               Built for Architectural Longevity
             </h3>
