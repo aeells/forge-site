@@ -25,7 +25,9 @@
     <meta name="twitter:description" content="Launch secure, scalable microservices without rebuilding core infrastructure. Forge Platform provides zero-trust security, operational discipline, and cloud-native architecture from day one." />
   </head>
 
-  <body class="min-h-screen bg-background">
+  <body class="min-h-screen hero-mesh">
+    <div class="hero-mesh-overlay" aria-hidden="true"></div>
+    <div class="relative z-10">
     <!-- Static content: nav, hero, features (no React; crawlers and users see this immediately) -->
     <nav class="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
       <div class="container mx-auto flex items-center justify-between py-4 px-4">
@@ -41,9 +43,8 @@
       </div>
     </nav>
 
-    <section class="relative pt-36 pb-28 overflow-hidden hero-mesh">
-      <div class="hero-mesh-overlay" aria-hidden="true"></div>
-      <div class="container relative z-10 px-4">
+    <section class="relative pt-36 pb-28 overflow-hidden">
+      <div class="container relative px-4">
         <div class="max-w-4xl mx-auto text-center">
           <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full bg-secondary text-sm text-muted-foreground border border-border">
             <span class="w-2 h-2 rounded-full bg-primary"></span>
@@ -277,6 +278,7 @@
         </div>
       </div>
     </footer>
+    </div>
   </body>
 
 </html>
