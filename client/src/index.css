@@ -207,12 +207,12 @@
     background-size: auto, auto, auto, auto, 64px 64px, 64px 64px;
   }
 
-  /* Alternating section background (semi-transparent so mesh shows through) */
+  /* Alternating section strip: very transparent so mesh always shows through */
   .section-subtle {
-    background: oklch(0.98 0.004 280 / 0.7);
+    background: oklch(0.98 0.004 280 / 0.5);
   }
   .dark .section-subtle {
-    background: oklch(0.16 0.006 285 / 0.85);
+    background: oklch(0.22 0.006 285 / 0.25);
   }
 
   /* Homepage feature/overview cards: sleeker, slight shadow */
