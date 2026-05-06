@@ -977,6 +977,22 @@
   .customers-scroll {
     animation: translateLeft 50s linear infinite;
   }
+  .marquee3k {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  }
+  .marquee3k__copy {
+    padding-right: 77px;
+    padding-left: 120px;
+    box-sizing: border-box;
+  }
+  @media (width >= 768px) {
+    .marquee3k__copy {
+      padding-right: 112px;
+      padding-left: 180px;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .customers-scroll {
       animation-play-state: paused;
@@ -5268,6 +5284,7 @@
       transform: translateX(-25%);
     }
   }
+
 }
 @layer components {
   @keyframes scrollUp {

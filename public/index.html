@@ -63,15 +63,12 @@
       type="font/woff2"
       crossorigin="anonymous" />
 
-    <script nonce="">
-      // Remove noscript elements which break DOMParser (keep this as-is)
-      document.addEventListener("turbo:before-render", function (event) {
-        event.detail.newBody.querySelectorAll("noscript").forEach((e) => e.remove());
-      });
-    </script>
+    <script src="/assets/js/turbo-before-render.js" defer data-turbo-track="reload" nonce=""></script>
 
-    <link rel="stylesheet" href="/assets/css/main.css" media="all" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/css/main.css?v=marquee-gap-5" media="all" data-turbo-track="reload" />
     <script src="/assets/js/img-data-src.js" defer></script>
+    <script src="/assets/js/vendor/marquee3k.js" defer data-turbo-track="reload"></script>
+    <script src="/assets/js/marquee-init.js" defer data-turbo-track="reload"></script>
     <script type="importmap" data-turbo-track="reload" nonce="">
       {
         "imports": {
@@ -97,58 +94,10 @@
     <!-- AOS is UMD-only; a default import in ESM would abort the import graph. Load the global, then the module. -->
     <script src="/assets/js/vendor/aos.js" defer="defer" data-turbo-track="reload" nonce=""></script>
     <script src="/assets/js/vendor/es-module-shims.js" defer="defer" data-turbo-track="reload" nonce=""></script>
+    <script src="/assets/js/cfg.js" data-turbo-track="reload" nonce=""></script>
     <script type="module" src="/assets/js/homepage-imports.js" nonce=""></script>
   </head>
   <body class="helvetica bg-[#0B0C14] text-neutral-200" data-aos-easing="ease" data-aos-duration="1000" data-aos-delay="0">
-    <script type="application/javascript" nonce="">
-      // Minimal cfg for bundled JS; no third-party hosts or PII (replaced from upstream snapshot).
-      //<![CDATA[
-      window.cfg = {
-        base_host: "forgeplatform.software",
-        base_url: "",
-        hub_url: "",
-        uptime_url: "",
-        logtail_url: "",
-        errors_url: "",
-        aisre_url: "",
-        warehouse_url: "",
-        permissions: {
-          teams: { access: false, change: false },
-          billing: { access: false, change: false },
-          sources: { access: false, change: false },
-          services: {
-            access: false,
-            allowed_services: [],
-            allowed_collectors: [],
-            allowed_namespaces: [],
-          },
-          incidents: { access: false, change: false },
-          live_tail: { access: false, change: false },
-          reporting: { access: false },
-          dashboards: { access: false, change: false },
-          organization: { access: false, change: false },
-          status_pages: { access: false, change: false },
-          team_members: { access: false, change: false, invite: false },
-          global_api_tokens: { access: false, change: false },
-          on_call_calendars: { access: false, change: false, override: false, change_own: false },
-          escalations_urgencies: { access: false, change: false },
-          monitors_heartbeats_integrations: { access: false, change: false },
-        },
-        controller: "pages",
-        action: "home",
-        app: "forge",
-        theme: "system",
-        organization_id: null,
-        team_id: null,
-        environment: "production",
-        browser_timezone: "America/Los_Angeles",
-        signed_in: false,
-        team_switcher_items: [],
-        organization_switcher_items: [],
-        user_timezone: "America/Los_Angeles",
-      };
-      //]]>
-    </script>
     <div class="main overflow-x-hidden">
       <header
         class="z-40 top-0 left-0 right-0 flex justify-center helvetica bg-[#0B0C14]/80 fixed before:absolute before:-z-10 before:inset-0 before:backdrop-blur-2xl"
@@ -340,6 +289,33 @@
           </div>
         </section>
       </div-->
+
+      <div class="mt-10 md:mt-12">
+        <section class="relative flex flex-col items-center overflow-hidden">
+          <div class="mx-auto max-w-[1684px]"></div>
+          <div class="scale-75 md:scale-100">
+            <div
+              class="marquee3k text-neutral-100/90 text-base md:text-[20px] tracking-[-0.01em] leading-[145%]"
+              data-speed="0.7"
+              data-pausable="true">
+              <div>
+                <span class="font-semibold text-white">Early adopters:</span>
+                <span> Free founder-led deployment support</span>
+              </div>
+            </div>
+          </div>
+          <div class="absolute inset-0 flex justify-center pointer-events-none">
+            <div class="grow h-full bg-linear-to-r from-[#0B0C14] md:from-50%"></div>
+            <div class="min-w-[200px] md:min-w-[1000px]"></div>
+            <div class="grow h-full bg-linear-to-l from-[#0B0C14] md:from-50%"></div>
+          </div>
+          <div class="absolute inset-0 flex justify-center pointer-events-none">
+            <div class="grow mask-gradient-to-l backdrop-blur-[2px]"></div>
+            <div class="w-[710px]"></div>
+            <div class="grow mask-gradient-to-r backdrop-blur-[2px]"></div>
+          </div>
+        </section>
+      </div>
       <!-- Spacing above this <hr> is mostly from the hero container padding (search "pb-10 md:pb-14"; restore pb-48 with the customer strip). -->
       <hr class="container separator-margin-y mx-auto relative z-10 border-image-t border-separator-gradient" />
       <section class="relative z-10 container mx-auto max-w-[1097px]">
