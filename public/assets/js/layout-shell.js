@@ -40,6 +40,24 @@ function markActiveHeaderLink(root = document) {
   });
 }
 
+function initObfuscatedPhones(root = document) {
+  root.querySelectorAll(".js-obfuscated-phone").forEach((el) => {
+    if (el.dataset.phoneInitialized === "true") return;
+    const c = el.getAttribute("data-phone-country") || "";
+    const a = el.getAttribute("data-phone-area") || "";
+    const p = el.getAttribute("data-phone-prefix") || "";
+    const l = el.getAttribute("data-phone-line") || "";
+    if (!c || !a || !p || !l) return;
+
+    const e164 = `+${c}${a}${p}${l}`;
+    const display = `+${c} (${a}) ${p}-${l}`;
+
+    el.textContent = display;
+    el.setAttribute("href", `tel:${e164}`);
+    el.dataset.phoneInitialized = "true";
+  });
+}
+
 async function boot() {
   const headerHost = document.getElementById("site-header");
   const footerHost = document.getElementById("site-footer");
@@ -55,6 +73,7 @@ async function boot() {
 
   initMobileMenu(document);
   markActiveHeaderLink(document);
+  initObfuscatedPhones(document);
 }
 
 boot();
