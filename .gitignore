@@ -23,3 +23,6 @@ __pycache__/
 .env.local
 
 .idea/
+
+# Keep this out of the public repository
+REFACTOR.md
