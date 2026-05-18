@@ -1703,7 +1703,11 @@
   .text-tertiary:where(.dark,.dark *) {
     color: var(--color-neutral-300);
   }
-  .list-primary-discs .list-disc li::marker {
+  .list-primary-discs ul {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+  }
+  .list-primary-discs ul li::marker {
     color: #7C87F7;
   }
   .text-\[\#7C87F7\] {
@@ -5973,4 +5977,40 @@ html {
     margin-top: 3.63rem;
     margin-bottom: 7.26rem;
   }
+}
+
+/* Audience section: crossed-hammers watermark behind copy */
+.audience-section-watermark {
+  position: relative;
+  isolation: isolate;
+}
+.audience-section-watermark__img {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 0;
+  width: min(300px, 40vw);
+  height: auto;
+  max-height: 75%;
+  object-fit: contain;
+  object-position: right center;
+  opacity: 0.11;
+  transform: translateY(-50%);
+  pointer-events: none;
+  user-select: none;
+}
+.audience-section-watermark__content {
+  position: relative;
+  z-index: 1;
+}
+@media (width < 640px) {
+  .audience-section-watermark__img {
+    display: none;
+  }
+}
+
+/* Platform overview: CPU chart sizing (padding matches zero-trust panel) */
+.platform-overview-performance-chart {
+  object-fit: contain;
+  object-position: center center;
 }
