@@ -58,6 +58,16 @@ function initObfuscatedPhones(root = document) {
   });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  initObfuscatedPhones(document);
+});
+document.addEventListener("turbo:load", () => {
+  initObfuscatedPhones(document);
+});
+document.addEventListener("turbo:frame-load", (event) => {
+  initObfuscatedPhones(event.target);
+});
+
 async function boot() {
   const headerHost = document.getElementById("site-header");
   const footerHost = document.getElementById("site-footer");

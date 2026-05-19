@@ -1351,39 +1351,7 @@
         </footer>
       </div>
 
-      <script nonce="">
-        (function () {
-          function initObfuscatedPhones(root) {
-            var scope = root || document;
-            var nodes = scope.querySelectorAll(".js-obfuscated-phone");
-            nodes.forEach(function (el) {
-              if (el.dataset.phoneInitialized === "true") return;
-              var c = el.getAttribute("data-phone-country") || "";
-              var a = el.getAttribute("data-phone-area") || "";
-              var p = el.getAttribute("data-phone-prefix") || "";
-              var l = el.getAttribute("data-phone-line") || "";
-              if (!c || !a || !p || !l) return;
-
-              var e164 = "+" + c + a + p + l;
-              var display = "+" + c + " (" + a + ") " + p + "-" + l;
-
-              el.textContent = display;
-              el.setAttribute("href", "tel:" + e164);
-              el.dataset.phoneInitialized = "true";
-            });
-          }
-
-          document.addEventListener("DOMContentLoaded", function () {
-            initObfuscatedPhones(document);
-          });
-          document.addEventListener("turbo:load", function () {
-            initObfuscatedPhones(document);
-          });
-          document.addEventListener("turbo:frame-load", function (event) {
-            initObfuscatedPhones(event.target);
-          });
-        })();
-      </script>
+      <script type="module" src="/assets/js/layout-shell.js"></script>
       <script src="/assets/js/pricing.js" defer></script>
     </div>
   </body>
