@@ -40,6 +40,7 @@ async function main() {
     aos: readJson(path.join(nm, "aos/package.json")).version,
     lazysizes: readJson(path.join(nm, "lazysizes/package.json")).version,
     "es-module-shims": readJson(path.join(nm, "es-module-shims/package.json")).version,
+    "accordion-js": readJson(path.join(nm, "accordion-js/package.json")).version,
   };
 
   fs.mkdirSync(vendorDir, { recursive: true });
@@ -49,6 +50,15 @@ async function main() {
   copyFromNodeModules("aos/dist/aos.js", "aos.js");
   copyFromNodeModules("lazysizes/lazysizes.min.js", "lazysizes.min.js");
   copyFromNodeModules("es-module-shims/dist/es-module-shims.js", "es-module-shims.js");
+  copyFromNodeModules("accordion-js/dist/accordion.min.js", "accordion.min.js");
+
+  const vendorCssDir = path.join(root, "public", "assets", "css", "vendor");
+  fs.mkdirSync(vendorCssDir, { recursive: true });
+  fs.copyFileSync(
+    path.join(nm, "accordion-js/dist/accordion.min.css"),
+    path.join(vendorCssDir, "accordion.min.css"),
+  );
+  console.log("copied accordion-js/dist/accordion.min.css -> css/vendor/accordion.min.css");
 
   /** Pin to stimulus-rails release that ships Stimulus importmap helpers. */
   const STIMULUS_RAILS_TAG = "v1.3.4";

@@ -27,6 +27,30 @@
     <meta name="twitter:image" content="https://forgeplatform.software/assets/images/og.png" />
     <meta content="no-cache" name="turbo-cache-control" />
     <link href="https://forgeplatform.software/" rel="canonical" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Forge Platform",
+            "url": "https://forgeplatform.software/",
+            "logo": "https://forgeplatform.software/assets/images/og.png",
+            "sameAs": [
+              "https://www.linkedin.com/company/forgeplatform-software/",
+              "https://github.com/get-forge/"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "name": "Forge Platform",
+            "url": "https://forgeplatform.software/",
+            "description": "Launch secure, scalable microservices without rebuilding core infrastructure. Forge Platform provides zero-trust security, operational discipline, and cloud-native architecture from day one.",
+            "dateModified": "2026-05-25"
+          }
+        ]
+      }
+    </script>
     <meta content="https://forgeplatform.software/" property="og:url" />
     <meta name="csrf-param" content="authenticity_token" />
     <meta name="csrf-token" content="GlBNvqx4uFB7kXE48ZERlP2mFCf3nbkwonPalPKDQiytYOauxRo-D2tKnqkkVG5IWzhGTcXEAcVvznakhKbZZQ" />
@@ -113,9 +137,8 @@
           </div>
           <div class="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3">
             <div class="hidden md:flex flex-wrap items-center justify-end gap-x-1 gap-y-2 lg:gap-x-3">
-<!--              <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/architecture">Architecture</a>-->
-<!--              <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/howitworks">How it works</a>-->
-              <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="https://get-forge.github.io/forge-docs/" target="_blank">Docs</a>
+              <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="https://get-forge.github.io/forge-docs/" target="_blank" rel="noopener noreferrer">Docs</a>
+              <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/faq/">FAQ</a>
               <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="#pricing">Pricing</a>
               <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="#contact">Contact</a>
             </div>
@@ -136,9 +159,8 @@
             class="hidden md:hidden p-5 fixed z-40 left-0 right-0 site-mobile-menu-top backdrop-blur-2xl bg-[#181926]/80 text-[#C9D3EE] overflow-y-scroll mobile-menu-maxh"
             id="mobile-menu">
             <div class="js-menu-section flex flex-col gap-1" data-section="root">
-<!--              <a class="p-3" href="/architecture">Architecture</a>-->
-<!--              <a class="p-3" href="/howitworks">How it works</a>-->
-              <a class="p-3" href="https://get-forge.github.io/forge-docs/" target="_blank">Docs</a>
+              <a class="p-3" href="https://get-forge.github.io/forge-docs/" target="_blank" rel="noopener noreferrer">Docs</a>
+              <a class="p-3" href="/faq/">FAQ</a>
               <a class="p-3" href="#pricing">Pricing</a>
               <a class="p-3" href="#contact">Contact</a>
             </div>
@@ -164,7 +186,7 @@
               <img
                 width="150"
                 height="23"
-                alt=""
+                alt="Forge Platform logo"
                 class="scale-75 md:scale-100"
                 data-aos="fade-up"
                 data-aos-delay="50"
@@ -212,8 +234,7 @@
               <script src="/assets/js/formspree.js" defer></script>
               <div class="w-full flex justify-center md:justify-start md:pl-1">
                 <p class="mt-5 text-13 text-[#646E87] max-md:max-w-[315px] max-md:text-center">
-                  Forge gives engineers the architectural backbone of an enterprise system immediately:
-                  <br class="max-md:hidden" />
+                  Forge Platform gives engineers the architectural backbone of an enterprise system immediately:
                   <strong class="font-bold text-white">zero-trust security, horizontal scalability, observability, and operational discipline</strong>.
                   Forge removes a huge chunk of the engineering work all early-stage teams will end up reinventing themselves.
                   <a
@@ -234,7 +255,7 @@
               class="hero-home-art--mobile"
               width="2048"
               height="1365"
-              alt=""
+              alt="Forge Platform cloud infrastructure illustration"
               draggable="false"
               src="/assets/images/homepage/hero-carousel/hero-home-mobile.jpg" />
             <img
@@ -242,7 +263,7 @@
               class="hero-home-art--desktop"
               width="2048"
               height="1365"
-              alt=""
+              alt="Forge Platform cloud infrastructure illustration"
               draggable="false"
               src="/assets/images/brand/hero-home.jpg" />
           </div>
@@ -485,6 +506,13 @@
               Forge is designed for engineering teams that already know backend architecture and operational maturity will become a
               competitive requirement.
             </p>
+            <p>
+              See
+              <a class="underline underline-offset-4 text-[#C9D3EE] decoration-[#C9D3EE]/20 hover:decoration-[#C9D3EE]" href="/#pricing">pricing</a>,
+              <a class="underline underline-offset-4 text-[#C9D3EE] decoration-[#C9D3EE]/20 hover:decoration-[#C9D3EE]" href="/#contact">contact us</a>,
+              or browse the
+              <a class="underline underline-offset-4 text-[#C9D3EE] decoration-[#C9D3EE]/20 hover:decoration-[#C9D3EE]" href="/faq/">FAQ</a>.
+            </p>
             <div class="list-primary-discs">
               <h3 class="text-white font-medium text-base leading-[145%]">Forge is probably not for you if</h3>
               <ul class="mt-3 space-y-2.5 text-neutral-200 text-base leading-[145%] tracking-[-0.01em]">
@@ -557,6 +585,7 @@
                     width="720"
                     height="471"
                     draggable="false"
+                    alt="Diagram of Forge core microservice startup console"
                     data-src="/assets/images/homepage/forge/forge-service-embedded-features.png"
                     src="" />
                   <div class="absolute bottom-8 right-8 left-6">
@@ -583,6 +612,7 @@
                       width="700"
                       height="956"
                       draggable="false"
+                      alt="Forge zero-trust authentication boundary logging context"
                       data-src="/assets/images/homepage/forge/forge-service-zero-trust-auth.png"
                       src="" />
                   </div>
@@ -606,6 +636,7 @@
                     width="720"
                     height="471"
                     draggable="false"
+                    alt="GitHub Actions deployment workflow for Forge Platform"
                     data-src="/assets/images/homepage/forge/forge-gha-workflow.png"
                     src="" />
                   <div class="absolute bottom-8 right-8 left-6">
@@ -630,7 +661,7 @@
                       class="platform-overview-performance-chart max-h-[min(300px,52vh)] w-full object-contain pointer-events-none rounded-md shadow-[0_12px_40px_-8px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.06] lazyload"
                       width="1700"
                       height="760"
-                      alt=""
+                      alt="GraalVM native image load test CPU chart on AWS ECS"
                       draggable="false"
                       data-src="/assets/images/homepage/forge/forge-performance-cpu-load.png"
                       src="" />
@@ -654,6 +685,7 @@
                     width="700"
                     height="956"
                     draggable="false"
+                    alt="Forge operational taskfile example"
                     data-src="/assets/images/homepage/forge/forge-taskfile-tooling.png"
                     src="" />
                   <div class="absolute bottom-8 right-8 left-8">
@@ -676,6 +708,7 @@
                     width="720"
                     height="471"
                     draggable="false"
+                    alt="JVM metrics dashboard for Forge microservices"
                     data-src="/assets/images/homepage/forge/forge-service-jvm-metrics.png"
                     src="" />
                   <div class="absolute bottom-8 right-8 left-8">
@@ -762,6 +795,7 @@
                     width="720"
                     height="471"
                     draggable="false"
+                    alt="Diagram of Forge core microservice startup console"
                     data-src="/assets/images/homepage/forge/forge-service-embedded-features.png"
                     src="" />
                   <div class="absolute bottom-8 right-8 left-6">
@@ -788,6 +822,7 @@
                       width="700"
                       height="956"
                       draggable="false"
+                      alt="Forge zero-trust authentication boundary logging context"
                       data-src="/assets/images/homepage/forge/forge-service-zero-trust-auth.png"
                       src="" />
                   </div>
@@ -811,6 +846,7 @@
                     width="720"
                     height="471"
                     draggable="false"
+                    alt="GitHub Actions deployment workflow for Forge Platform"
                     data-src="/assets/images/homepage/forge/forge-gha-workflow.png"
                     src="" />
                   <div class="absolute bottom-8 right-8 left-6">
@@ -835,7 +871,7 @@
                       class="platform-overview-performance-chart max-h-[min(300px,52vh)] w-full object-contain pointer-events-none rounded-md shadow-[0_12px_40px_-8px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.06] lazyload"
                       width="1700"
                       height="760"
-                      alt=""
+                      alt="GraalVM native image load test CPU chart on AWS ECS"
                       draggable="false"
                       data-src="/assets/images/homepage/forge/forge-performance-cpu-load.png"
                       src="" />
@@ -859,6 +895,7 @@
                     width="700"
                     height="956"
                     draggable="false"
+                    alt="Forge operational taskfile example"
                     data-src="/assets/images/homepage/forge/forge-taskfile-tooling.png"
                     src="" />
                   <div class="absolute bottom-8 right-8 left-8">
@@ -881,6 +918,7 @@
                     width="720"
                     height="471"
                     draggable="false"
+                    alt="JVM metrics dashboard for Forge microservices"
                     data-src="/assets/images/homepage/forge/forge-service-jvm-metrics.png"
                     src="" />
                   <div class="absolute bottom-8 right-8 left-8">
@@ -1121,7 +1159,7 @@
                   <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#7C87F7]" aria-hidden="true">
                     <use href="#pricing-check-icon" width="20" height="20" />
                   </svg>
-                  <span>Organisations with &lt; 10 employees</span>
+                  <span>Organizations with &lt; 10 employees</span>
                 </li>
                 <li class="flex gap-3">
                   <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#7C87F7]" aria-hidden="true">
@@ -1185,7 +1223,7 @@
                   <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#7C87F7]" aria-hidden="true">
                     <use href="#pricing-check-icon" width="20" height="20" />
                   </svg>
-                  <span>Organisations between 10–50 employees</span>
+                  <span>Organizations between 10–50 employees</span>
                 </li>
                 <li class="flex gap-3">
                   <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#7C87F7]" aria-hidden="true">
@@ -1218,7 +1256,7 @@
               class="relative flex flex-col rounded-xl border border-[#939DB8]/10 bg-[#0F101A] p-5 sm:p-6 hover:border-[#939DB8]/25 transition-colors">
               <h3 class="text-white font-medium text-lg leading-snug">Enterprise</h3>
               <p class="mt-2 text-13 text-neutral-300 leading-[140%] min-h-[3rem]">
-                For established organisations requiring structured oversight.
+                For established organizations requiring structured oversight.
               </p>
               <div class="mt-6">
                 <div class="flex items-baseline gap-1">

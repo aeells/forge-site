@@ -1,0 +1,22 @@
+# Forge Platform
+
+> Bootstrap like a much larger engineering organization.
+
+Forge Platform is an enterprise-grade platform engineering foundation for startups and greenfield engineering teams building distributed systems and microservice architectures.
+
+Forge provides opinionated infrastructure, service patterns, operational tooling, observability, deployment workflows, and zero-trust security foundations so teams can ship production-grade systems without rebuilding internal platform infrastructure from scratch.
+
+## Core resources
+
+- [Home](https://forgeplatform.software/): Product overview, capabilities, architecture, and pricing
+- [FAQ](https://forgeplatform.software/faq/): Common questions about platform fit, onboarding, and commercial model
+
+## Technical documentation
+
+- [Forge technical docs](https://get-forge.github.io/forge-docs/): Architecture documentation, platform operations, infrastructure automation, deployment workflows, observability, service development patterns, and production engineering guidance
+
+## Community and contact
+
+- [Book a discovery call](https://calendly.com/forgeplatform/discovery-call)
+- [LinkedIn](https://www.linkedin.com/company/forgeplatform-software/)
+- [GitHub](https://github.com/get-forge/)

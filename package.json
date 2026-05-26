@@ -13,6 +13,7 @@
   "devDependencies": {
     "@hotwired/stimulus": "3.2.2",
     "@hotwired/turbo-rails": "8.0.4",
+    "accordion-js": "^3.4.1",
     "aos": "2.3.4",
     "es-module-shims": "1.10.0",
     "htmlhint": "^1.7.1",
