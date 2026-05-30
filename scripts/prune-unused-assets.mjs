@@ -105,8 +105,6 @@ function collectHtmlAssetRefs() {
     "partials/header.html",
     "partials/footer.html",
     "faq/index.html",
-    "howitworks/index.html",
-    "architecture/index.html",
   ];
   for (const f of files) {
     const fp = path.join(publicRoot, f);
