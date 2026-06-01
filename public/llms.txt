@@ -13,7 +13,7 @@ Forge provides opinionated infrastructure, service patterns, operational tooling
 
 ## Technical documentation
 
-- [Forge technical docs](https://get-forge.github.io/forge-docs/): Architecture documentation, platform operations, infrastructure automation, deployment workflows, observability, service development patterns, and production engineering guidance
+- [Forge technical docs](https://docs.forgeplatform.software): Architecture documentation, platform operations, infrastructure automation, deployment workflows, observability, service development patterns, and production engineering guidance
 
 ## Community and contact
 
