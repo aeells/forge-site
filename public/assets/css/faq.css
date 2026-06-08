@@ -62,6 +62,7 @@
 }
 
 .forge-faq-accordion.is-active > .ac-header .ac-trigger::after {
+  content: "";
   transform: translateY(-50%) rotate(180deg);
 }
 
