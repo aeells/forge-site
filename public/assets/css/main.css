@@ -5943,40 +5943,62 @@ html {
   min-height: 1.5rem;
 }
 
-/* Section separators: stepped up ~10% twice from base my-16 / md:my-20 / lg:my-24 */
-.separator-margin-y {
-  margin-top: 4.84rem;
-  margin-bottom: 4.84rem;
+/* Homepage content rail — single max-width + gutter for aligned sections */
+:root {
+  --page-gutter: 20px;
+  --page-max-width: 1097px;
+  --page-rail-half: 548.5px;
+  --page-rail-inner: calc(var(--page-max-width) - (var(--page-gutter) * 2));
+  --section-gap: 4rem;
 }
 @media (width >= 768px) {
-  .separator-margin-y {
-    margin-top: 6.05rem;
-    margin-bottom: 6.05rem;
+  :root {
+    --section-gap: 5rem;
   }
 }
 @media (width >= 1024px) {
-  .separator-margin-y {
-    margin-top: 7.26rem;
-    margin-bottom: 7.26rem;
+  :root {
+    --section-gap: 6rem;
   }
 }
 
-/* Enterprise → Pricing divider: stepped ~10% twice from original mt-8–12 / mb-16–24 */
-.separator-margin-pricing {
-  margin-top: 2.42rem;
-  margin-bottom: 4.84rem;
+.page-rail {
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+  box-sizing: border-box;
 }
-@media (width >= 768px) {
-  .separator-margin-pricing {
-    margin-top: 3.025rem;
-    margin-bottom: 6.05rem;
-  }
+
+.page-rail-separator {
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+  box-sizing: border-box;
 }
-@media (width >= 1024px) {
-  .separator-margin-pricing {
-    margin-top: 3.63rem;
-    margin-bottom: 7.26rem;
-  }
+
+/* Carousel snap alignment to the page rail */
+.carousel-scroll-rail {
+  scroll-padding-left: max(calc(50vw - var(--page-rail-half)), var(--page-gutter));
+}
+
+.carousel-scroll-spacer {
+  min-width: max(calc(50vw - var(--page-rail-half)), var(--page-gutter));
+}
+
+.carousel-scroll-spacer--end {
+  min-width: calc(50vw - var(--page-rail-half));
+}
+
+.carousel-gradient-center {
+  width: var(--page-rail-inner);
+}
+
+/* Section separators: symmetric gap above and below each divider */
+.separator-margin-y {
+  margin-top: var(--section-gap);
+  margin-bottom: var(--section-gap);
 }
 
 /* Audience section: crossed-hammers watermark behind copy */
@@ -6013,4 +6035,234 @@ html {
 .platform-overview-performance-chart {
   object-fit: contain;
   object-position: center center;
+}
+
+/* Operational stack: "your product on top, Forge underneath" foundation diagram */
+.forge-stack__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-width: 43.75rem;
+}
+.forge-stack__headline {
+  font-weight: 700;
+  font-size: clamp(1.65rem, 4.6vw, 2.5rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+.forge-stack__sub {
+  color: #c8cfde;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.forge-stack__sub strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.forge-stack__diagram {
+  margin-top: 2.25rem;
+}
+
+/* Top layer: the one box the customer builds */
+.forge-stack__product {
+  position: relative;
+  margin: 0 auto;
+  max-width: 430px;
+  border-radius: 16px;
+  padding: 1.1rem 1.25rem 1.2rem;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(152, 164, 247, 0.22), rgba(91, 99, 211, 0.16));
+  border: 1px solid rgba(152, 164, 247, 0.55);
+  box-shadow: 0 18px 42px -24px rgba(91, 99, 211, 0.7);
+}
+.forge-stack__tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #d7defc;
+  background: rgba(152, 164, 247, 0.16);
+  border: 1px solid rgba(152, 164, 247, 0.4);
+  border-radius: 999px;
+  padding: 0.18rem 0.6rem;
+  margin-bottom: 0.6rem;
+}
+.forge-stack__product-title {
+  display: block;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+.forge-stack__product-sub {
+  display: block;
+  margin-top: 0.2rem;
+  color: #c2cae0;
+  font-size: 0.85rem;
+}
+
+.forge-stack__connector {
+  width: 2px;
+  height: 30px;
+  margin: 0 auto;
+  background: linear-gradient(to bottom, rgba(152, 164, 247, 0.75), rgba(152, 164, 247, 0.12));
+}
+
+/* Lower layer: everything Forge provides */
+.forge-stack__forge {
+  position: relative;
+  border-radius: 20px;
+  padding: 1rem;
+  background: linear-gradient(180deg, rgba(20, 22, 34, 0.92), rgba(15, 16, 26, 0.92));
+  border: 1px solid rgba(147, 157, 184, 0.16);
+}
+.forge-stack__forge-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.forge-stack__badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, #98a4f7, #5b63d3);
+  border-radius: 999px;
+  padding: 0.22rem 0.7rem;
+}
+.forge-stack__forge-name {
+  font-size: 0.82rem;
+  color: #aab2c8;
+}
+.forge-stack__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+}
+@media (width >= 600px) {
+  .forge-stack__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (width >= 940px) {
+  .forge-stack__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.forge-stack__grid-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+@media (width >= 600px) {
+  .forge-stack__grid-pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (width >= 940px) {
+  .forge-stack__grid-pair {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .forge-stack__grid-pair .forge-stack__cell {
+    min-width: 0;
+  }
+}
+.forge-stack__callout {
+  margin-top: 1.25rem;
+  color: #c8cfde;
+  font-size: 1rem;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.forge-stack__callout strong {
+  color: #fff;
+  font-weight: 700;
+}
+@media (width < 768px) {
+  .forge-stack__callout {
+    white-space: normal;
+  }
+}
+.forge-stack__cell {
+  border-radius: 12px;
+  padding: 0.85rem 0.9rem;
+  background: #0f101a;
+  border: 1px solid rgba(147, 157, 184, 0.12);
+  transition: border-color 0.18s ease;
+}
+.forge-stack__cell:hover {
+  border-color: rgba(147, 157, 184, 0.28);
+}
+.forge-stack__cell h3 {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+.forge-stack__cell-gloss {
+  margin-top: 0.2rem;
+  color: #aeb6c9;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+.forge-stack__cell ul {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  padding: 0;
+}
+.forge-stack__cell li {
+  list-style: none;
+  font-size: 0.72rem;
+  color: #c8cfde;
+  background: rgba(147, 157, 184, 0.08);
+  border: 1px solid rgba(147, 157, 184, 0.12);
+  border-radius: 6px;
+  padding: 0.12rem 0.45rem;
+}
+.forge-stack__tag-row-break {
+  flex-basis: 100%;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+}
+.forge-stack__bedrock {
+  margin-top: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.9rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  background: rgba(11, 12, 20, 0.55);
+  border: 1px dashed rgba(147, 157, 184, 0.2);
+  text-align: center;
+}
+.forge-stack__bedrock span {
+  font-size: 0.76rem;
+  color: #aeb6c9;
+}
+.forge-stack__bedrock strong {
+  color: #fff;
+  font-weight: 600;
+}
+.forge-stack__bedrock-link {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.forge-stack__bedrock-link:hover {
+  color: #c9d3ee;
 }

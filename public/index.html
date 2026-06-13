@@ -90,7 +90,7 @@
 
     <script src="/assets/js/turbo-before-render.js" defer data-turbo-track="reload" nonce=""></script>
 
-    <link rel="stylesheet" href="/assets/css/main.css?v=enterprise-header-cta" media="all" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/css/main.css?v=forge-stack-callout-single" media="all" data-turbo-track="reload" />
     <script src="/assets/js/img-data-src.js" defer></script>
     <script src="/assets/js/vendor/marquee3k.js" defer data-turbo-track="reload"></script>
     <script src="/assets/js/marquee-init.js" defer data-turbo-track="reload"></script>
@@ -128,7 +128,7 @@
         class="z-40 top-0 left-0 right-0 flex justify-center helvetica bg-[#0B0C14]/80 fixed before:absolute before:-z-10 before:inset-0 before:backdrop-blur-2xl"
         id="navbar">
         <nav
-          class="grow flex h-[52px] justify-between border-b mx-5 max-w-[1110px] text-[13px] leading-[100%] text-[#C9D3EE] border-[#727DA1]/15">
+          class="page-rail grow flex h-[52px] justify-between border-b text-[13px] leading-[100%] text-[#C9D3EE] border-[#727DA1]/15">
           <div class="flex min-w-0 items-stretch gap-3">
             <a aria-label="Go to homepage" class="flex shrink-0 items-center py-3" href="https://forgeplatform.software/">
               <svg width="154" height="21" class="forge-site-header-logo svg-currentcolor" aria-hidden="true" focusable="false">
@@ -173,15 +173,9 @@
       <link rel="preload" href="/assets/images/homepage/hero-carousel/hero-home-mobile.jpg" as="image" type="image/jpeg" media="(max-width: 639px)" />
       <link rel="preload" href="/assets/images/brand/hero-home.jpg" as="image" type="image/jpeg" media="(min-width: 640px)" />
       <link rel="preload" href="/assets/images/brand/forge-hero.png" as="image" type="image/png" />
-      <section class="relative mx-auto max-w-[1100px]">
-        <!--
-          Customer strip is commented out below (~2066): without it, pb-48 leaves a huge empty gap above the <hr>.
-          When you restore the strip, revert this <div> to the original class (see next comment).
-        -->
-        <!-- Original hero container (restore when uncommenting customer strip):
-          class="container px-2 sm:px-5 pb-48 mx-auto flex flex-col md:flex-row max-md:bg-flare-hero"
-        -->
-        <div class="container px-2 sm:px-5 pb-10 md:pb-14 mx-auto flex flex-col md:flex-row max-md:bg-flare-hero">
+      <section class="relative">
+        <!-- Content sections use .page-rail (1097px max-width, 20px gutter) for aligned left edges -->
+        <div class="page-rail pb-10 md:pb-14 flex flex-col md:flex-row max-md:bg-flare-hero">
           <div class="flex-1 z-30 pt-32 md:pt-40 text-center md:text-left">
             <div class="flex md:hidden w-full justify-center">
               <img
@@ -233,7 +227,7 @@
                 class="hidden mt-3 max-w-[640px] rounded-lg border border-red-500/40 bg-[#171926]/90 px-4 py-3 text-13 leading-[145%] text-red-200/90 md:text-left"
                 role="alert"></p>
               <script src="/assets/js/formspree.js" defer></script>
-              <div class="w-full flex justify-center md:justify-start md:pl-1">
+              <div class="w-full flex justify-center md:justify-start">
                 <p class="mt-5 text-13 text-[#646E87] max-md:max-w-[315px] max-md:text-center">
                   Forge Platform gives engineers the architectural backbone of an enterprise system immediately:
                   <strong class="font-bold text-white">zero-trust security, horizontal scalability, observability, and operational discipline</strong>.
@@ -338,11 +332,144 @@
         </section>
       </div>
       <!-- Spacing above this <hr> is mostly from the hero container padding (search "pb-10 md:pb-14"; restore pb-48 with the customer strip). -->
-      <hr class="container separator-margin-y mx-auto relative z-10 border-image-t border-separator-gradient" />
-      <section class="relative z-10 container mx-auto max-w-[1097px]">
+      <hr class="page-rail-separator separator-margin-y relative z-10 border-0 border-t border-image-t border-separator-gradient" />
+      <section class="relative">
+        <div class="forge-stack relative z-10 page-rail">
+          <div class="forge-stack__intro" data-aos="fade-up">
+            <h2 class="forge-stack__headline font-helveticaDisplay logs-text text-transparent">
+              The entire operational stack behind a modern SaaS company.
+            </h2>
+            <p class="forge-stack__sub">
+              With Forge you build
+              one thing - <strong>your product</strong> - and everything underneath is already engineered,
+              deployed, and operational from day one.
+            </p>
+          </div>
+
+          <div
+            class="forge-stack__diagram"
+            data-aos="fade-up"
+            data-aos-delay="100"
+            role="img"
+            aria-label="Layered diagram: your product sits on top of the Forge platform. Forge provides core service foundations, applications and UIs, delivery, operations, security, infrastructure, governance, and developer experience, all running on your own AWS account, GitHub, and ECS.">
+            <div class="forge-stack__product">
+              <span class="forge-stack__tag">You build this</span>
+              <span class="forge-stack__product-title">Your product</span>
+              <span class="forge-stack__product-sub">your domain services &amp; UI</span>
+            </div>
+
+            <div class="forge-stack__connector" aria-hidden="true"></div>
+
+            <div class="forge-stack__forge">
+              <div class="forge-stack__forge-label">
+                <span class="forge-stack__badge">Forge Platform</span>
+                <span class="forge-stack__forge-name">provides everything below</span>
+              </div>
+
+              <div class="forge-stack__grid">
+                <article class="forge-stack__cell">
+                  <h3>Core service foundations</h3>
+                  <p class="forge-stack__cell-gloss">Shared services every product needs</p>
+                  <ul>
+                    <li>Authentication</li>
+                    <li>User profiles</li>
+                    <li>Notifications</li>
+                    <li>Document storage</li>
+                    <li>Audit</li>
+                  </ul>
+                </article>
+                <article class="forge-stack__cell">
+                  <h3>Applications &amp; UIs</h3>
+                  <p class="forge-stack__cell-gloss">How clients reach your product</p>
+                  <ul>
+                    <li>BFF orchestration</li>
+                    <li>Reference website</li>
+                    <li>Persona APIs</li>
+                  </ul>
+                </article>
+                <article class="forge-stack__cell">
+                  <h3>Delivery</h3>
+                  <p class="forge-stack__cell-gloss">From commit to production</p>
+                  <ul>
+                    <li>CI/CD pipelines</li>
+                    <li>Infra as code</li>
+                    <li class="forge-stack__tag-row-break" aria-hidden="true"></li>
+                    <li>Fully automated releases</li>
+                  </ul>
+                </article>
+                <article class="forge-stack__cell">
+                  <h3>Operations</h3>
+                  <p class="forge-stack__cell-gloss">Knowing it works in production</p>
+                  <ul>
+                    <li>Monitoring</li>
+                    <li>Logging</li>
+                    <li>Alerting</li>
+                    <li>Tracing</li>
+                    <li>Runbooks</li>
+                  </ul>
+                </article>
+                <article class="forge-stack__cell">
+                  <h3>Security</h3>
+                  <p class="forge-stack__cell-gloss">Locked down by default</p>
+                  <ul>
+                    <li>Zero-trust</li>
+                    <li>Secrets</li>
+                    <li>Encryption</li>
+                    <li>Access control</li>
+                  </ul>
+                </article>
+                <article class="forge-stack__cell">
+                  <h3>Infrastructure</h3>
+                  <p class="forge-stack__cell-gloss">Where it runs and stores data</p>
+                  <ul>
+                    <li>AWS</li>
+                    <li>ECS</li>
+                    <li>Postgres, DynamoDB &amp; S3</li>
+                    <li>Networking</li>
+                    <li>Autoscaling</li>
+                  </ul>
+                </article>
+              </div>
+
+              <div class="forge-stack__grid-pair">
+                <article class="forge-stack__cell">
+                  <h3>Governance</h3>
+                  <p class="forge-stack__cell-gloss">Built for auditability</p>
+                  <ul>
+                    <li>Audit trails</li>
+                    <li>Control mapping</li>
+                    <li>Compliance roadmap</li>
+                  </ul>
+                </article>
+                <article class="forge-stack__cell">
+                  <h3>Developer experience</h3>
+                  <p class="forge-stack__cell-gloss">Ready to build from day one</p>
+                  <ul>
+                    <li>Task operations plane</li>
+                    <li>Free-tier local dev</li>
+                    <li>Docs &amp; templates</li>
+                    <li>Dependency mgmt</li>
+                  </ul>
+                </article>
+              </div>
+
+              <div class="forge-stack__bedrock">
+                <span>Deployed to <a class="forge-stack__bedrock-link" href="https://console.aws.amazon.com/" target="_blank" rel="noopener noreferrer">your AWS account</a></span>
+                <span>Built &amp; shipped from <a class="forge-stack__bedrock-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">your GitHub</a></span>
+                <span>You own all of it</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="forge-stack__callout">Most teams spend years assembling this. With Forge <strong>a capable engineer can be deploying on a production-ready platform on Day 1.</strong></p>
+        </div>
+
+      </section>
+      <hr class="page-rail-separator separator-margin-y relative z-10 border-0 border-t border-image-t border-separator-gradient" />
+      <section class="relative z-10 page-rail">
         <div class="mx-auto flex gap-x-16 xl:gap-x-20 flex-col lg:flex-row md:items-center md:justify-between gap-y-10">
           <div class="max-lg:w-full max-lg:max-w-[629px]">
-            <div class="flex flex-col max-w-[356px] left-left max-lg:pl-4" data-aos="fade-up">
+            <div class="flex flex-col max-w-[356px] left-left" data-aos="fade-up">
               <h2 class="mt-2 pb-2 logs-text text-transparent font-bold text-[28px] md:text-[40px] leading-[108%] max-w-[629px]">
                 At a fraction of
                 <br />
@@ -450,9 +577,8 @@
           </div>
         </div>
       </section>
-      <hr class="container separator-margin-y mx-auto relative z-10 border-image-t border-separator-gradient" />
-
-      <section class="audience-section-watermark relative z-10 container mx-auto max-w-[1097px] pt-16 sm:pt-24">
+      <hr class="page-rail-separator separator-margin-y relative z-10 border-0 border-t border-image-t border-separator-gradient" />
+      <section class="audience-section-watermark relative z-10 page-rail">
         <img
           src="/assets/images/brand/crossed-hammers.png"
           alt=""
@@ -461,7 +587,7 @@
           decoding="async"
           class="audience-section-watermark__img"
           aria-hidden="true" />
-        <div class="audience-section-watermark__content flex flex-col max-lg:pl-4 text-left w-full" data-aos="fade-up">
+        <div class="audience-section-watermark__content flex flex-col text-left w-full" data-aos="fade-up">
           <h2 class="logs-text text-transparent font-bold text-[24px] lg:text-[36px] leading-[108%]">
             Who is Forge Platform for?
           </h2>
@@ -510,6 +636,7 @@
             <div class="list-primary-discs">
               <h3 class="text-white font-medium text-base leading-[145%]">Forge is probably not for you if</h3>
               <ul class="mt-3 space-y-2.5 text-neutral-200 text-base leading-[145%] tracking-[-0.01em]">
+                <li>Your product does not need customer accounts, authentication, or the operational backbone behind a SaaS company</li>
                 <li>A simple monolith on Vercel solves your next 2 years</li>
                 <li>Your application has minimal operational complexity</li>
                 <li>You do not expect scale, security, multi-service architecture, or infrastructure requirements to become strategic</li>
@@ -521,13 +648,12 @@
           </div>
         </div>
       </section>
-      <hr class="container separator-margin-y mx-auto relative z-10 border-image-t border-separator-gradient" />
-
+      <hr class="page-rail-separator separator-margin-y relative z-10 border-0 border-t border-image-t border-separator-gradient" />
       <section class="relative">
         <div class="hidden md:block">
           <div class="relative" data-controller="carousel" data-item-widths="[720,350,720,350,350,720]">
-            <div class="px-5 relative z-30 flex flex-col gap-4 md:flex-row md:justify-between mx-auto xl:max-w-[1126px]">
-              <h2 class="text-white font-helveticaDisplay font-bold text-[28px] md:text-[40px] ml-1 md:ml-0">Platform overview</h2>
+            <div class="page-rail relative z-30 flex flex-col gap-4 md:flex-row md:justify-between">
+              <h2 class="text-white font-helveticaDisplay font-bold text-[28px] md:text-[40px]">Technical overview</h2>
               <div class="flex items-center">
                 <div class="hidden md:flex items-center">
                   <button
@@ -563,10 +689,10 @@
             </div>
             <div class="mt-9 relative w-screen max-w-screen">
               <div
-                class="py-1 flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbars"
+                class="py-1 flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbars carousel-scroll-rail"
                 data-carousel-target="scrollContainer"
-                style="scroll-snap-type-x: mandatory; scroll-padding-left: max(50vw - 563px, 20px)">
-                <div class="shrink-0 min-w-[calc(50vw-563px)]"></div>
+                style="scroll-snap-type-x: mandatory">
+                <div class="shrink-0 carousel-scroll-spacer"></div>
                 <a
                   class="relative z-10 shrink-0 snap-start snap-always border rounded-xl overflow-hidden bg-center bg-cover bg-no-repeat bg-[#0F101A] border-[#939DB8]/10 min-h-[478px] md:max-h-[478px] max-w-[85vw] sm:max-w-none hover:scale-[1.01] transition select-none"
                   draggable="false"
@@ -717,7 +843,7 @@
                 <div
                   class="md:hidden shrink-0 snap-start snap-always"
                   style="min-width: max(100vw - 40px - 350px, 100vw - 40px - 85vw - 5vw)"></div>
-                <div class="hidden md:block shrink-0 snap-start snap-always" style="min-width: calc(50vw - 563px)"></div>
+                <div class="hidden md:block shrink-0 snap-start snap-always carousel-scroll-spacer--end"></div>
               </div>
             </div>
             <div class="absolute z-20 inset-0 flex justify-center pointer-events-none">
@@ -726,7 +852,7 @@
                 data-action="click-&gt;carousel#scrollToPrevious"
                 data-carousel-target="gradientPreviousButton"
                 disabled=""></button>
-              <div class="shrink-0 w-[1086px]"></div>
+              <div class="shrink-0 carousel-gradient-center"></div>
               <button
                 class="grow h-full bg-linear-to-l pointer-events-auto from-[#0B0C14] from-20% via-[#0B0C14]/70 via-80% disabled:cursor-default not-disabled:cursor-pointer"
                 data-action="click-&gt;carousel#scrollToNext"
@@ -736,8 +862,8 @@
         </div>
         <div class="md:hidden">
           <div class="relative" data-controller="carousel" data-item-widths="[350,350,350,350,350,350]">
-            <div class="px-5 relative z-30 flex flex-col gap-4 md:flex-row md:justify-between mx-auto xl:max-w-[1126px]">
-              <h2 class="text-white font-helveticaDisplay font-bold text-[28px] md:text-[40px] ml-1 md:ml-0">Platform overview</h2>
+            <div class="page-rail relative z-30 flex flex-col gap-4 md:flex-row md:justify-between">
+              <h2 class="text-white font-helveticaDisplay font-bold text-[28px] md:text-[40px]">Technical overview</h2>
               <div class="flex items-center">
                 <div class="hidden md:flex items-center">
                   <button
@@ -773,10 +899,10 @@
             </div>
             <div class="mt-9 relative w-screen max-w-screen">
               <div
-                class="py-1 flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbars"
+                class="py-1 flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbars carousel-scroll-rail"
                 data-carousel-target="scrollContainer"
-                style="scroll-snap-type-x: mandatory; scroll-padding-left: max(50vw - 563px, 20px)">
-                <div class="shrink-0 min-w-[calc(50vw-563px)]"></div>
+                style="scroll-snap-type-x: mandatory">
+                <div class="shrink-0 carousel-scroll-spacer"></div>
                 <a
                   class="relative z-10 shrink-0 snap-start snap-always border rounded-xl overflow-hidden bg-center bg-cover bg-no-repeat bg-[#0F101A] border-[#939DB8]/10 min-h-[478px] md:max-h-[478px] max-w-[85vw] sm:max-w-none hover:scale-[1.01] transition select-none"
                   draggable="false"
@@ -927,7 +1053,7 @@
                 <div
                   class="md:hidden shrink-0 snap-start snap-always"
                   style="min-width: max(100vw - 40px - 350px, 100vw - 40px - 85vw - 5vw)"></div>
-                <div class="hidden md:block shrink-0 snap-start snap-always" style="min-width: calc(50vw - 563px)"></div>
+                <div class="hidden md:block shrink-0 snap-start snap-always carousel-scroll-spacer--end"></div>
               </div>
             </div>
             <div class="absolute z-20 inset-0 flex justify-center pointer-events-none">
@@ -936,7 +1062,7 @@
                 data-action="click-&gt;carousel#scrollToPrevious"
                 data-carousel-target="gradientPreviousButton"
                 disabled=""></button>
-              <div class="shrink-0 w-[1086px]"></div>
+              <div class="shrink-0 carousel-gradient-center"></div>
               <button
                 class="grow h-full bg-linear-to-l pointer-events-auto from-[#0B0C14] from-20% via-[#0B0C14]/70 via-80% disabled:cursor-default not-disabled:cursor-pointer"
                 data-action="click-&gt;carousel#scrollToNext"
@@ -945,11 +1071,11 @@
           </div>
         </div>
       </section>
-      <div class="container separator-margin-y mx-auto border-t border-image-t border-separator-gradient"></div>
-      <section class="relative z-10 container mx-auto max-w-[1097px] pb-8 md:pb-12 lg:pb-16">
-        <div class="flex flex-col gap-10 w-full max-md:max-w-[629px] max-md:mx-auto md:mx-0">
+      <div class="page-rail-separator separator-margin-y border-t border-image-t border-separator-gradient"></div>
+      <section class="relative z-10 page-rail">
+        <div class="flex flex-col gap-10 w-full">
           <div
-            class="flex flex-col gap-4 md:flex-row md:justify-between md:items-center w-full max-md:pl-4 md:max-lg:pl-4"
+            class="flex flex-col gap-4 md:flex-row md:justify-between md:items-center w-full"
             data-aos="fade-up"
             data-aos-delay="50">
             <h2
@@ -972,7 +1098,7 @@
           </div>
           <!-- Body copy + pillar cards share two columns -->
           <div class="enterprise-copy-and-pillars mt-3 md:mt-0">
-            <div class="flex flex-col w-full max-w-[640px] md:w-auto text-left max-md:pl-4 md:max-lg:pl-4">
+            <div class="flex flex-col w-full max-w-[640px] md:w-auto text-left">
               <div class="text-base md:text-md space-y-4" style="text-wrap: pretty" data-aos="fade-up" data-aos-delay="150">
                 <p>
                   Many startups begin with a single service and gradually assemble
@@ -1008,7 +1134,7 @@
               </div>
             </div>
             <div
-              class="enterprise-pillar-grid w-full max-w-[24.805rem] mx-auto max-md:px-4 md:mx-0 md:max-w-none z-10"
+              class="enterprise-pillar-grid w-full max-w-[24.805rem] mx-auto md:mx-0 md:max-w-none z-10"
               data-aos="fade-up"
               data-aos-delay="100">
               <article
@@ -1044,7 +1170,7 @@
               </article>
             </div>
           </div>
-          <div id="contact" class="w-full sm:w-auto max-md:px-4 md:max-lg:pl-4">
+          <div id="contact" class="w-full sm:w-auto">
             <form
               id="forge-cta-formspree"
               action="https://formspree.io/f/mreoekzn"
@@ -1087,9 +1213,9 @@
           </div>
         </div>
       </section>
-      <div class="container separator-margin-pricing mx-auto border border-image-t border-separator-gradient"></div>
+      <div class="page-rail-separator separator-margin-y border-t border-image-t border-separator-gradient"></div>
 
-      <section id="pricing" class="relative z-10 container mx-auto max-w-[1097px] pb-16 md:pb-24 lg:pb-28 xl:pb-32">
+      <section id="pricing" class="relative z-10 page-rail pb-16 md:pb-24 lg:pb-28 xl:pb-32">
         <svg xmlns="http://www.w3.org/2000/svg" class="hidden" aria-hidden="true">
           <symbol id="pricing-check-icon" viewBox="0 0 20 20" fill="currentColor">
             <path
@@ -1098,8 +1224,8 @@
               clip-rule="evenodd" />
           </symbol>
         </svg>
-        <div class="flex flex-col gap-10 w-full max-md:max-w-[629px] max-md:mx-auto md:mx-0">
-          <div class="max-md:pl-4 md:max-lg:pl-4 text-center md:text-left">
+        <div class="flex flex-col gap-10 w-full">
+          <div class="text-center md:text-left">
             <h2 class="font-helveticaDisplay text-white font-bold text-[24px] lg:text-[36px] leading-[117%] max-w-[640px] mx-auto md:mx-0">
               Pricing aligned with scale. Not features.
             </h2>
@@ -1121,7 +1247,7 @@
             </div>
           </div>
 
-          <div class="grid gap-6 md:grid-cols-3 md:gap-5 lg:gap-6 w-full max-md:px-4 md:max-lg:pl-4">
+          <div class="grid gap-6 md:grid-cols-3 md:gap-5 lg:gap-6 w-full">
             <article
               class="relative flex flex-col rounded-xl border border-[#939DB8]/10 bg-[#0F101A] p-5 sm:p-6 hover:border-[#939DB8]/25 transition-colors">
               <h3 class="text-white font-medium text-lg leading-snug">Starter</h3>
@@ -1302,9 +1428,9 @@
 
       <div class="dark">
         <footer class="bg-[#F3F4F7] dark:bg-[#0B0C14]">
-          <div class="mx-auto text-base lg:px-5 max-w-[1110px] text-[#363D4E] dark:text-neutral-200">
+          <div class="page-rail text-base text-[#363D4E] dark:text-neutral-200">
             <div
-              class="px-5 lg:px-2 lg:mx-3 pt-7 flex flex-col lg:flex-row justify-between items-center lg:items-end border-t border-neutral-300/10">
+              class="pt-7 flex flex-col lg:flex-row justify-between items-center lg:items-end border-t border-neutral-300/10">
               <div>
                 <svg width="154" height="21" alt="" class="text-black dark:text-white scale-75 lg:scale-100 svg-currentcolor">
                   <use href="/assets/images/brand/forge-logo.svg#root"></use>
@@ -1352,7 +1478,7 @@
               </div>
             </div>
             <div
-              class="px-5 lg:px-2 lg:mx-3 mt-5 py-3 lg:border-t flex flex-col lg:flex-row justify-between items-center border-neutral-300/10 text-[12px] leading-[18px]">
+              class="mt-5 py-3 lg:border-t flex flex-col lg:flex-row justify-between items-center border-neutral-300/10 text-[12px] leading-[18px]">
               <div class="flex items-center gap-6 whitespace-nowrap dark:text-neutral-300">
                 <a class="-mx-1 px-1" href="/terms">Terms of Use</a>
                 <a class="-mx-1 px-1" href="/privacy">Privacy Policy</a>

@@ -15,14 +15,14 @@
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "dateModified": "2026-05-25",
+        "dateModified": "2026-06-12",
         "mainEntity": [
           {
             "@type": "Question",
             "name": "What is Forge Platform?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Forge Platform provides a pre-engineered operational foundation for secure, scalable distributed systems on AWS, dramatically reducing the time, cost, and risk of reaching production-grade operational maturity. It encodes years of platform engineering decisions into a deployable operating model built on AWS and Quarkus. Forge is not a framework. It is a pre-engineered operating model for building production systems."
+              "text": "A production-ready operational foundation for AWS—not a framework or boilerplate. Platform engineering decisions you can deploy and build on from day one."
             }
           },
           {
@@ -30,7 +30,7 @@
             "name": "Is Forge right for my team?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Forge is designed for teams building products expected to become operationally serious systems — not throwaway MVPs. Typical adopters include startups preparing to move from prototype to production, founding teams hiring their first senior engineers or CTO, enterprise innovation teams building new greenfield systems, and organizations that need enterprise-grade operational foundations without building an internal platform team first. Forge is a strong fit when security, scalability, auditability, operational maturity, or multi-service architecture are expected requirements within the next 12–24 months."
+              "text": "If you're building something that needs to run seriously in production—not a throwaway MVP—Forge is built for you. Typical adopters are startups scaling up, founding teams hiring their first senior engineers, and greenfield enterprise projects."
             }
           },
           {
@@ -38,7 +38,7 @@
             "name": "Do we own the code and environments?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Forge is forked into your GitHub organization and deployed into your AWS account—not into infrastructure we host. Your engineering team retains ownership of source code, cloud infrastructure, deployment pipelines, operational data, and runtime environments. Forge is not hosted SaaS—your services run in your AWS account, not on servers we operate."
+              "text": "Yes. Forge is forked into your GitHub org and runs in your AWS account. You own the code, infrastructure, pipelines, and data. We don't host your runtime."
             }
           },
           {
@@ -46,7 +46,7 @@
             "name": "Is Forge a framework, boilerplate, or hosted platform?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Forge is best thought of as a production-ready platform foundation. It combines infrastructure automation, shared platform services, operational tooling, deployment workflows, and architectural conventions into a cohesive starting point for building production systems. Unlike simple starter templates, Forge includes operational and organizational patterns typically developed internally over years of scaling."
+              "text": "None of the above. It's a production platform foundation—infrastructure, shared services, deployment workflows, and conventions as one deployable starting point."
             }
           },
           {
@@ -54,7 +54,7 @@
             "name": "Why not just build this internally?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Most teams eventually build versions of authentication, audit infrastructure, deployment automation, observability, service-to-service security, operational tooling, and shared platform conventions internally. The challenge is timing. Early-stage teams are usually forced to choose between shipping product quickly with weak operational foundations, or spending months building internal infrastructure before product velocity exists. Forge attempts to remove that tradeoff."
+              "text": "You can. And most teams will have to. The question is whether you can afford not to use Forge—given the cost comparison versus a single developer salary."
             }
           },
           {
@@ -62,7 +62,7 @@
             "name": "How many users can Forge support?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Forge is designed for horizontally scalable distributed systems rather than fixed single-server capacity limits. The platform has been validated under sustained load on production-style AWS infrastructure using ECS, GraalVM native services, managed AWS networking, and horizontal task scaling. Performance characteristics focus on predictable throughput under concurrency, clean recovery under load, stateless horizontal scaling, and operational stability during traffic increases. Actual supported user volume depends heavily on request patterns, workload complexity, background processing, data access characteristics, and deployed infrastructure sizing. Forge is intended to support systems ranging from early-stage products through to large-scale production deployments by scaling infrastructure horizontally as demand increases. Detailed benchmark methodology and performance data are published at https://docs.forgeplatform.software/docs/performance"
+              "text": "Published benchmarks show ~222 req/s at 200 concurrent users on two minimal ECS tasks, with near-linear scaling as you add capacity. Your limits depend on workload. See https://docs.forgeplatform.software/docs/performance for methodology and numbers."
             }
           },
           {
@@ -70,7 +70,7 @@
             "name": "Does Forge support multi-cloud or Kubernetes?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Forge currently targets AWS as its primary cloud platform. The architecture and deployment tooling are intentionally opinionated around AWS-managed services in order to reduce operational complexity and accelerate delivery. Kubernetes is not currently a deployment requirement. Forge instead prioritizes operational simplicity, predictable deployments, and lower infrastructure overhead for early-stage teams."
+              "text": "AWS only today. No Kubernetes required. Opinionated on purpose—simpler ops, faster delivery."
             }
           },
           {
@@ -78,7 +78,7 @@
             "name": "What AWS services does Forge use?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Forge integrates with core AWS services used in production systems, including VPC, IAM, Cognito, ECS, ALB, RDS, S3, and CloudWatch. Service selection prioritizes operational maturity, scalability, and minimizing infrastructure management overhead."
+              "text": "VPC, IAM, Cognito, ECS, ALB, RDS, S3, and CloudWatch. See the docs for the full picture."
             }
           },
           {
@@ -86,7 +86,7 @@
             "name": "What does Forge typically cost to run?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A typical production-oriented Forge deployment starts at approximately USD $130/month in AWS infrastructure costs before significant production traffic. Costs scale primarily with user traffic, data storage, compute requirements, and workload complexity. Forge is intentionally designed to provide enterprise-grade operational foundations without requiring enterprise-scale infrastructure spend on day one."
+              "text": "About $130/month in AWS before significant traffic. After that, cost follows usage."
             }
           },
           {
@@ -94,7 +94,7 @@
             "name": "Can we extend or replace parts of Forge?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Forge is designed to be extensible rather than restrictive. Teams can add new domain services, replace infrastructure components, customize deployment workflows, and evolve architectural patterns over time. Forge provides a production-ready starting point, not a closed ecosystem."
+              "text": "Yes. Add services, replace components, change workflows. It's a starting point, not a closed ecosystem."
             }
           },
           {
@@ -102,15 +102,7 @@
             "name": "Are we locked into Forge long term?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Forge is commercially licensed software deployed onto infrastructure you control. Your team owns and operates your AWS account, deployment environments, application code, operational data, and service extensions built on top of Forge. Forge includes proprietary platform components and licensed runtime foundations that remain part of the commercial platform subscription. This model allows teams to retain operational ownership and deployment control while avoiding the cost and time required to internally develop equivalent platform infrastructure. Longer-term licensing options may become available as Forge matures."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Where can I read technical documentation?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Full technical documentation is available at https://docs.forgeplatform.software, including architecture guidance, deployment workflows, infrastructure operations, observability, service development patterns, and production engineering practices."
+              "text": "You control your AWS account, code, and data. Forge platform components are commercially licensed—you keep a subscription for those. Longer-term licensing options may become available as the platform matures."
             }
           }
         ]
@@ -149,15 +141,8 @@
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
                   <p>
-                    Forge Platform provides a pre-engineered operational foundation for secure, scalable distributed systems
-                    on AWS, dramatically reducing the time, cost, and risk of reaching production-grade operational maturity.
-                  </p>
-                  <p>
-                    It encodes years of platform engineering decisions into a deployable operating model built on AWS and
-                    Quarkus.
-                  </p>
-                  <p>
-                    Forge is not a framework. It is a pre-engineered operating model for building production systems.
+                    Forge is an enterprise-grade operational foundation for . Platform engineering
+                    decisions you can deploy and build on from day one.
                   </p>
                 </div>
               </div>
@@ -170,24 +155,9 @@
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
                   <p>
-                    Forge is designed for teams building products expected to become operationally serious systems — not
-                    throwaway MVPs.
-                  </p>
-                  <p>Typical adopters include:</p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                    <li>startups preparing to move from prototype to production,</li>
-                    <li>founding teams hiring their first senior engineers or CTO,</li>
-                    <li>enterprise innovation teams building new greenfield systems,</li>
-                    <li>
-                      and organizations that need enterprise-grade operational foundations without building an internal
-                      platform team first.
-                    </li>
-                  </ul>
-                  </div>
-                  <p>
-                    Forge is a strong fit when security, scalability, auditability, operational maturity, or multi-service
-                    architecture are expected requirements within the next 12–24 months.
+                    If you're building something that needs to run seriously in production—not a throwaway MVP—Forge is built
+                    for you. Typical adopters are startups scaling up, founding teams hiring their first senior engineers, and
+                    greenfield enterprise projects.
                   </p>
                 </div>
               </div>
@@ -200,21 +170,8 @@
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
                   <p>
-                    Yes. Forge is forked into your GitHub organization and deployed into your AWS account—not into
-                    infrastructure we host.
-                  </p>
-                  <p>Your engineering team retains ownership of:</p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                    <li>source code,</li>
-                    <li>cloud infrastructure,</li>
-                    <li>deployment pipelines,</li>
-                    <li>operational data,</li>
-                    <li>and runtime environments.</li>
-                  </ul>
-                  </div>
-                  <p>
-                    Forge is not hosted SaaS—your services run in your AWS account, not on servers we operate.
+                    Yes. Forge is forked into your GitHub org and runs in your AWS account. You own the code, infrastructure,
+                    pipelines, and data. We don't host your runtime.
                   </p>
                 </div>
               </div>
@@ -226,21 +183,9 @@
               </h2>
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
-                  <p>Forge is best thought of as a production-ready platform foundation.</p>
-                  <p>It combines:</p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                    <li>infrastructure automation,</li>
-                    <li>shared platform services,</li>
-                    <li>operational tooling,</li>
-                    <li>deployment workflows,</li>
-                    <li>and architectural conventions</li>
-                  </ul>
-                  </div>
-                  <p>into a cohesive starting point for building production systems.</p>
                   <p>
-                    Unlike simple starter templates, Forge includes operational and organizational patterns typically
-                    developed internally over years of scaling.
+                    None of the above. It's a production platform foundation—infrastructure, shared services, deployment
+                    workflows, and conventions as one deployable starting point.
                   </p>
                 </div>
               </div>
@@ -252,27 +197,10 @@
               </h2>
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
-                  <p>Most teams eventually build versions of these systems internally:</p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                    <li>authentication,</li>
-                    <li>audit infrastructure,</li>
-                    <li>deployment automation,</li>
-                    <li>observability,</li>
-                    <li>service-to-service security,</li>
-                    <li>operational tooling,</li>
-                    <li>and shared platform conventions.</li>
-                  </ul>
-                  </div>
-                  <p>The challenge is timing.</p>
-                  <p>Early-stage teams are usually forced to choose between:</p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                    <li>shipping product quickly with weak operational foundations,</li>
-                    <li>or spending months building internal infrastructure before product velocity exists.</li>
-                  </ul>
-                  </div>
-                  <p>Forge attempts to remove that tradeoff.</p>
+                  <p>
+                    You can. And most teams will have to. The question is whether you can afford not to use Forge—given the
+                    cost comparison versus a single developer salary.
+                  </p>
                 </div>
               </div>
             </div>
@@ -284,51 +212,15 @@
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
                   <p>
-                    Forge is designed for horizontally scalable distributed systems rather than fixed single-server capacity
-                    limits.
-                  </p>
-                  <p>
-                    The platform has been validated under sustained load on production-style AWS infrastructure using:
-                  </p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                      <li>ECS,</li>
-                      <li>GraalVM native services,</li>
-                      <li>managed AWS networking,</li>
-                      <li>and horizontal task scaling.</li>
-                    </ul>
-                  </div>
-                  <p>Performance characteristics focus on:</p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                      <li>predictable throughput under concurrency,</li>
-                      <li>clean recovery under load,</li>
-                      <li>stateless horizontal scaling,</li>
-                      <li>and operational stability during traffic increases.</li>
-                    </ul>
-                  </div>
-                  <p>Actual supported user volume depends heavily on:</p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                      <li>request patterns,</li>
-                      <li>workload complexity,</li>
-                      <li>background processing,</li>
-                      <li>data access characteristics,</li>
-                      <li>and deployed infrastructure sizing.</li>
-                    </ul>
-                  </div>
-                  <p>
-                    Forge is intended to support systems ranging from early-stage products through to large-scale production
-                    deployments by scaling infrastructure horizontally as demand increases.
-                  </p>
-                  <p>
-                    Detailed benchmark methodology and performance data are published in the
+                    Published benchmarks show ~222 req/s at 200 concurrent users on two minimal ECS tasks, with near-linear
+                    scaling as you add capacity. Your limits depend on workload.
                     <a
                       href="https://docs.forgeplatform.software/docs/performance"
                       rel="noopener noreferrer"
                       target="_blank"
-                      >performance documentation</a
-                    >.
+                      >Performance docs</a
+                    >
+                    have the methodology and numbers.
                   </p>
                 </div>
               </div>
@@ -340,16 +232,7 @@
               </h2>
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
-                  <p>Forge currently targets AWS as its primary cloud platform.</p>
-                  <p>
-                    The architecture and deployment tooling are intentionally opinionated around AWS-managed services in order
-                    to reduce operational complexity and accelerate delivery.
-                  </p>
-                  <p>Kubernetes is not currently a deployment requirement.</p>
-                  <p>
-                    Forge instead prioritizes operational simplicity, predictable deployments, and lower infrastructure
-                    overhead for early-stage teams.
-                  </p>
+                  <p>AWS only today. No Kubernetes required. Opinionated on purpose—simpler ops, faster delivery.</p>
                 </div>
               </div>
             </div>
@@ -361,23 +244,9 @@
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
                   <p>
-                    Forge integrates with core AWS services used in production systems, including:
-                  </p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                    <li>VPC,</li>
-                    <li>IAM,</li>
-                    <li>Cognito,</li>
-                    <li>ECS,</li>
-                    <li>ALB,</li>
-                    <li>RDS,</li>
-                    <li>S3,</li>
-                    <li>and CloudWatch.</li>
-                  </ul>
-                  </div>
-                  <p>
-                    Service selection prioritizes operational maturity, scalability, and minimizing infrastructure management
-                    overhead.
+                    VPC, IAM, Cognito, ECS, ALB, RDS, S3, and CloudWatch.
+                    <a href="https://docs.forgeplatform.software" rel="noopener noreferrer" target="_blank">Docs</a>
+                    have the full picture.
                   </p>
                 </div>
               </div>
@@ -389,23 +258,7 @@
               </h2>
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
-                  <p>
-                    A typical production-oriented Forge deployment starts at approximately USD $130/month in AWS infrastructure
-                    costs before significant production traffic.
-                  </p>
-                  <p>Costs scale primarily with:</p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                    <li>user traffic,</li>
-                    <li>data storage,</li>
-                    <li>compute requirements,</li>
-                    <li>and workload complexity.</li>
-                  </ul>
-                  </div>
-                  <p>
-                    Forge is intentionally designed to provide enterprise-grade operational foundations without requiring
-                    enterprise-scale infrastructure spend on day one.
-                  </p>
+                  <p>About $130/month in AWS before significant traffic. After that, cost follows usage.</p>
                 </div>
               </div>
             </div>
@@ -416,17 +269,9 @@
               </h2>
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
-                  <p>Yes.</p>
-                  <p>Forge is designed to be extensible rather than restrictive. Teams can:</p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                    <li>add new domain services,</li>
-                    <li>replace infrastructure components,</li>
-                    <li>customize deployment workflows,</li>
-                    <li>and evolve architectural patterns over time.</li>
-                  </ul>
-                  </div>
-                  <p>Forge provides a production-ready starting point, not a closed ecosystem.</p>
+                  <p>
+                    Yes. Add services, replace components, change workflows. It's a starting point, not a closed ecosystem.
+                  </p>
                 </div>
               </div>
             </div>
@@ -437,56 +282,14 @@
               </h2>
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
-                  <p>Forge is commercially licensed software deployed onto infrastructure you control.</p>
-                  <p>Your team owns and operates:</p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                    <li>your AWS account,</li>
-                    <li>deployment environments,</li>
-                    <li>application code,</li>
-                    <li>operational data,</li>
-                    <li>and service extensions built on top of Forge.</li>
-                  </ul>
-                  </div>
                   <p>
-                    Forge itself includes proprietary platform components and licensed runtime foundations that remain part of
-                    the commercial platform subscription.
+                    You control your AWS account, code, and data. Forge platform components are commercially licensed—you keep
+                    a subscription for those. Longer-term licensing options may become available as the platform matures.
                   </p>
-                  <p>
-                    This model allows teams to retain operational ownership and deployment control while avoiding the cost and
-                    time required to internally develop equivalent platform infrastructure.
-                  </p>
-                  <p>Longer-term licensing options may become available as Forge matures.</p>
                 </div>
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
-              <h2 class="ac-header">
-                <button type="button" class="ac-trigger">Where can I read technical documentation?</button>
-              </h2>
-              <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
-                  <p>
-                    Full technical documentation is available at
-                    <a href="https://docs.forgeplatform.software" rel="noopener noreferrer" target="_blank"
-                      >https://docs.forgeplatform.software</a
-                    >.
-                  </p>
-                  <p>The documentation includes:</p>
-                  <div class="list-primary-discs">
-                    <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
-                    <li>architecture guidance,</li>
-                    <li>deployment workflows,</li>
-                    <li>infrastructure operations,</li>
-                    <li>observability,</li>
-                    <li>service development patterns,</li>
-                    <li>and production engineering practices.</li>
-                  </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </main>
