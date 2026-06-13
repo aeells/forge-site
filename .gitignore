@@ -17,6 +17,7 @@ npm-debug.log*
 __pycache__/
 *.py[cod]
 *$py.class
+.venv-pdf/
 
 # Local env (if you add secrets later)
 .env

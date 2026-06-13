@@ -6001,6 +6001,31 @@ html {
   margin-bottom: var(--section-gap);
 }
 
+/* Prose pages: CTA box extends past text column; inner padding keeps copy aligned */
+.prose-cta-box {
+  margin-inline: -1.25rem;
+  padding-inline: 1.25rem;
+  padding-block: 1.75rem;
+}
+@media (min-width: 640px) {
+  .prose-cta-box {
+    margin-inline: -1.5rem;
+    padding-inline: 1.5rem;
+    padding-block: 2rem;
+  }
+}
+/* Prose pages: same gradient dividers, tighter rhythm than homepage sections */
+.separator-margin-y-compact {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .separator-margin-y-compact {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
 /* Audience section: crossed-hammers watermark behind copy */
 .audience-section-watermark {
   position: relative;
