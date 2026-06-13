@@ -1707,6 +1707,12 @@
     list-style-type: disc;
     padding-left: 1.25rem;
   }
+  .list-primary-discs ol {
+    padding-left: 1.25rem;
+  }
+  .list-primary-discs ol li::marker {
+    color: #7C87F7;
+  }
   .list-primary-discs ul li::marker {
     color: #7C87F7;
   }
