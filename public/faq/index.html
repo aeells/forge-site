@@ -22,7 +22,15 @@
             "name": "What is Forge Platform?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A production-ready operational foundation for AWS—not a framework or boilerplate. Platform engineering decisions you can deploy and build on from day one."
+              "text": "Forge is an enterprise-grade, operational foundation for SaaS product companies that want to scale securely."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Forge a framework, boilerplate, or hosted platform?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "None of the above. It's a top-to-bottom production platform foundation — infrastructure, shared services, deployment workflows, and conventions you can deploy immediately."
             }
           },
           {
@@ -30,7 +38,7 @@
             "name": "Is Forge right for my team?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "If you're building something that needs to run seriously in production—not a throwaway MVP—Forge is built for you. Typical adopters are startups scaling up, founding teams hiring their first senior engineers, and greenfield enterprise projects."
+              "text": "If you're building something that needs to run at scale in production — not a throwaway MVP — Forge is built for you. Typical adopters are startups scaling up, founding teams hiring their first senior engineers, and greenfield enterprise projects."
             }
           },
           {
@@ -43,18 +51,10 @@
           },
           {
             "@type": "Question",
-            "name": "Is Forge a framework, boilerplate, or hosted platform?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "None of the above. It's a production platform foundation—infrastructure, shared services, deployment workflows, and conventions as one deployable starting point."
-            }
-          },
-          {
-            "@type": "Question",
             "name": "Why not just build this internally?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "You can. And most teams will have to. The question is whether you can afford not to use Forge—given the cost comparison versus a single developer salary."
+              "text": "You can. And most teams will have to. The question is whether you can afford not to use Forge — given the cost comparison versus a single developer salary and the required focus on non-differential infrastructure and plumbing."
             }
           },
           {
@@ -70,7 +70,7 @@
             "name": "Does Forge support multi-cloud or Kubernetes?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "AWS only today. No Kubernetes required. Opinionated on purpose—simpler ops, faster delivery."
+              "text": "AWS only today. No Kubernetes complexity required. Opinionated on purpose — simpler ops, faster delivery."
             }
           },
           {
@@ -78,7 +78,7 @@
             "name": "What AWS services does Forge use?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "VPC, IAM, Cognito, ECS, ALB, RDS, S3, and CloudWatch. See the docs for the full picture."
+              "text": "VPC, IAM, Cognito, ECS, ALB, RDS, S3, and CloudWatch. See https://docs.forgeplatform.software for the full picture."
             }
           },
           {
@@ -94,7 +94,7 @@
             "name": "Can we extend or replace parts of Forge?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Add services, replace components, change workflows. It's a starting point, not a closed ecosystem."
+              "text": "Yes. You'll add your domain services — and you're free to replace components, change workflows, or code as needed. You'll also get updates from the upstream Forge repo."
             }
           },
           {
@@ -102,7 +102,7 @@
             "name": "Are we locked into Forge long term?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "You control your AWS account, code, and data. Forge platform components are commercially licensed—you keep a subscription for those. Longer-term licensing options may become available as the platform matures."
+              "text": "You control your AWS account, code, and data. Forge platform components are commercially licensed — you keep a subscription for those. Longer-term licensing options may become available as the platform matures."
             }
           }
         ]
@@ -121,17 +121,6 @@
           <h1 class="logs-text text-transparent font-bold text-[24px] lg:text-[36px] leading-[108%]">
             Frequently asked questions
           </h1>
-          <p class="mt-4 text-neutral-200 leading-[145%] tracking-[-0.01em] max-w-[610px]">
-            <a class="underline underline-offset-4 text-[#C9D3EE] decoration-[#C9D3EE]/20 hover:decoration-[#C9D3EE]" href="/">Visit the homepage</a>
-            for pricing and product overview, or
-            <a
-              class="underline underline-offset-4 text-[#C9D3EE] decoration-[#C9D3EE]/20 hover:decoration-[#C9D3EE]"
-              href="https://calendly.com/forgeplatform/discovery-call"
-              rel="noopener noreferrer"
-              target="_blank">
-              book a discovery call</a
-            >.
-          </p>
 
           <div id="forge-faq-accordion" class="mt-10 w-full max-w-[820px]">
             <div class="ac forge-faq-accordion">
@@ -141,8 +130,21 @@
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
                   <p>
-                    Forge is an enterprise-grade operational foundation for . Platform engineering
-                    decisions you can deploy and build on from day one.
+                    Forge is an enterprise-grade, operational foundation for SaaS product companies that want to scale securely.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="ac forge-faq-accordion">
+              <h2 class="ac-header">
+                <button type="button" class="ac-trigger">Is Forge a framework, boilerplate, or hosted platform?</button>
+              </h2>
+              <div class="ac-panel">
+                <div class="ac-text forge-faq-panel">
+                  <p>
+                    None of the above. It's a top-to-bottom production platform foundation — infrastructure, shared services, deployment
+                    workflows, and conventions you can deploy immediately.
                   </p>
                 </div>
               </div>
@@ -155,7 +157,7 @@
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
                   <p>
-                    If you're building something that needs to run seriously in production—not a throwaway MVP—Forge is built
+                    If you're building something that needs to run at scale in production — not a throwaway MVP — Forge is built
                     for you. Typical adopters are startups scaling up, founding teams hiring their first senior engineers, and
                     greenfield enterprise projects.
                   </p>
@@ -179,27 +181,13 @@
 
             <div class="ac forge-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">Is Forge a framework, boilerplate, or hosted platform?</button>
-              </h2>
-              <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
-                  <p>
-                    None of the above. It's a production platform foundation—infrastructure, shared services, deployment
-                    workflows, and conventions as one deployable starting point.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="ac forge-faq-accordion">
-              <h2 class="ac-header">
                 <button type="button" class="ac-trigger">Why not just build this internally?</button>
               </h2>
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
                   <p>
-                    You can. And most teams will have to. The question is whether you can afford not to use Forge—given the
-                    cost comparison versus a single developer salary.
+                    You can. And most teams will have to. The question is whether you can afford <em>not</em> to use Forge — given the
+                    cost comparison versus a single developer salary and the required focus on non-differential infrastructure and plumbing.
                   </p>
                 </div>
               </div>
@@ -232,7 +220,7 @@
               </h2>
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
-                  <p>AWS only today. No Kubernetes required. Opinionated on purpose—simpler ops, faster delivery.</p>
+                  <p>AWS only today. No Kubernetes complexity required. Opinionated on purpose — simpler ops, faster delivery.</p>
                 </div>
               </div>
             </div>
@@ -270,7 +258,8 @@
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
                   <p>
-                    Yes. Add services, replace components, change workflows. It's a starting point, not a closed ecosystem.
+                    Yes. You'll add your domain services — and you're free to replace components, change workflows, or code as needed.
+                    You'll also get updates from the upstream Forge repo.
                   </p>
                 </div>
               </div>
@@ -283,7 +272,7 @@
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
                   <p>
-                    You control your AWS account, code, and data. Forge platform components are commercially licensed—you keep
+                    You control your AWS account, code, and data. Forge platform components are commercially licensed — you keep
                     a subscription for those. Longer-term licensing options may become available as the platform matures.
                   </p>
                 </div>
