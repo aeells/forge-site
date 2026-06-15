@@ -4,10 +4,10 @@
 
   var STRIPE = {
     builder: {
-      monthly: "https://buy.stripe.com/5kQ5kCcJ3bjP4Pfa6xaMU00",
-      annual: "https://buy.stripe.com/fZu6oGgZj4Vr1D30vXaMU02",
-      monthlyPrice: 399,
-      annualTotal: 4070,
+      monthly: "https://buy.stripe.com/5kQ28q5gBbjPgxX0vXaMU04",
+      annual: "https://buy.stripe.com/8x29AS9wRbjP0yZceFaMU05",
+      monthlyPrice: 499,
+      annualTotal: 5090,
     },
     scale: {
       monthly: "https://buy.stripe.com/cNi9AScJ3fA52H7diJaMU01",
