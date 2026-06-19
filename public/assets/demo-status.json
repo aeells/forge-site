@@ -1,6 +1,6 @@
 {
-  "online": true,
-  "checkedAt": "2026-06-19T02:39:47Z",
+  "online": false,
+  "checkedAt": "2026-06-19T03:22:22Z",
   "probe": "/auth/login",
-  "httpCode": 405
+  "httpCode": 502
 }
