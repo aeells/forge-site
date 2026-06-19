@@ -1,0 +1,38 @@
+---
+name: Demo status heartbeat
+
+# Probe INT runtime (ALB/BFF) and publish demo-status.json for the marketing site footer.
+# Schedule: 06:00 PST (14:00 UTC). During PDT this runs at 05:00 local.
+on:
+  schedule:
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: demo-status-heartbeat
+  cancel-in-progress: false
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Probe INT demo runtime
+        run: bash scripts/probe-demo-status.sh
+
+      - name: Commit and push if status changed
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/assets/demo-status.json
+          if git diff --staged --quiet; then
+            echo "demo-status.json unchanged — skip commit"
+            exit 0
+          fi
+          git commit -m "chore: update INT demo heartbeat status"
+          git push

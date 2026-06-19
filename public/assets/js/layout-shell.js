@@ -40,6 +40,36 @@ function markActiveHeaderLink(root = document) {
   });
 }
 
+const DEMO_STATUS_GREEN = "/assets/images/social/status-green-4e79760e.svg#root";
+const DEMO_STATUS_RED = "/assets/images/social/status-red-e5484d.svg#root";
+
+async function initDemoStatus(root = document) {
+  const links = root.querySelectorAll(".js-demo-site-link");
+  if (links.length === 0) return;
+
+  let status;
+  try {
+    const res = await fetch("/assets/demo-status.json", { credentials: "same-origin" });
+    if (!res.ok) return;
+    status = await res.json();
+  } catch {
+    return;
+  }
+
+  const online = status.online === true;
+  const iconHref = online ? DEMO_STATUS_GREEN : DEMO_STATUS_RED;
+  const label = online
+    ? "Demo environment online — opens int.forgeplatform.software"
+    : "Demo environment offline — opens holding page at int.forgeplatform.software";
+
+  links.forEach((link) => {
+    link.setAttribute("aria-label", label);
+    link.setAttribute("title", label);
+    const icon = link.querySelector(".js-demo-site-status use");
+    if (icon) icon.setAttribute("href", iconHref);
+  });
+}
+
 function initObfuscatedPhones(root = document) {
   root.querySelectorAll(".js-obfuscated-phone").forEach((el) => {
     if (el.dataset.phoneInitialized === "true") return;
@@ -60,12 +90,15 @@ function initObfuscatedPhones(root = document) {
 
 document.addEventListener("DOMContentLoaded", () => {
   initObfuscatedPhones(document);
+  initDemoStatus(document);
 });
 document.addEventListener("turbo:load", () => {
   initObfuscatedPhones(document);
+  initDemoStatus(document);
 });
 document.addEventListener("turbo:frame-load", (event) => {
   initObfuscatedPhones(event.target);
+  initDemoStatus(event.target);
 });
 
 async function boot() {
@@ -84,6 +117,7 @@ async function boot() {
   initMobileMenu(document);
   markActiveHeaderLink(document);
   initObfuscatedPhones(document);
+  initDemoStatus(document);
 }
 
 boot();
