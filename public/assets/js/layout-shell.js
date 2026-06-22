@@ -42,19 +42,26 @@ function markActiveHeaderLink(root = document) {
 
 const DEMO_STATUS_GREEN = "/assets/images/social/status-green-4e79760e.svg#root";
 const DEMO_STATUS_RED = "/assets/images/social/status-red-e5484d.svg#root";
+const DEMO_STATUS_SCRIPT_URL = "https://int.forgeplatform.software/demo-status.js";
 
-async function initDemoStatus(root = document) {
+function loadIntDemoStatus() {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `${DEMO_STATUS_SCRIPT_URL}?v=${Date.now()}`;
+    script.onload = () => {
+      resolve(window.__forgeDemoStatus ?? { online: true });
+    };
+    script.onerror = () => {
+      resolve({ online: true });
+    };
+    document.head.appendChild(script);
+  });
+}
+
+function applyDemoStatus(root, status) {
   const links = root.querySelectorAll(".js-demo-site-link");
   if (links.length === 0) return;
-
-  let status;
-  try {
-    const res = await fetch("/assets/demo-status.json", { credentials: "same-origin" });
-    if (!res.ok) return;
-    status = await res.json();
-  } catch {
-    return;
-  }
 
   const online = status.online === true;
   const iconHref = online ? DEMO_STATUS_GREEN : DEMO_STATUS_RED;
@@ -68,6 +75,11 @@ async function initDemoStatus(root = document) {
     const icon = link.querySelector(".js-demo-site-status use");
     if (icon) icon.setAttribute("href", iconHref);
   });
+}
+
+async function initDemoStatus(root = document) {
+  const status = await loadIntDemoStatus();
+  applyDemoStatus(root, status);
 }
 
 function initObfuscatedPhones(root = document) {
