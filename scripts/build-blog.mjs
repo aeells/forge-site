@@ -241,7 +241,7 @@ ${related
         </section>`;
 
   const body = `
-      <main class="mx-auto max-w-[1110px] px-5 pt-32 pb-24">
+      <main class="page-rail pt-32 pb-24">
         <article class="blog-article">
           <a class="blog-back" href="/blog/">&larr; All articles</a>
           <h1>${escapeHtml(article.title)}</h1>
@@ -306,7 +306,7 @@ function renderIndex(all) {
     .join("\n");
 
   const body = `
-      <main class="mx-auto max-w-[1110px] px-5 pt-32 pb-24">
+      <main class="page-rail pt-32 pb-24">
         <header class="max-w-[820px]" style="text-wrap: pretty">
           <h1 class="font-helveticaDisplay text-white font-bold text-[40px] leading-[110%]">${escapeHtml(
             BLOG_TITLE,
