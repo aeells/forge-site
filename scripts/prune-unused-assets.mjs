@@ -89,6 +89,7 @@ function bfsJsFiles(importMap) {
     "/assets/js/img-data-src.js",
     "/assets/js/formspree.js",
     "/assets/css/main.css",
+    "/assets/css/blog.css",
     "/assets/js/homepage-imports.js",
     "/assets/js/layout-shell.js",
     "/assets/js/pricing.js",
@@ -106,6 +107,13 @@ function collectHtmlAssetRefs() {
     "partials/footer.html",
     "faq/index.html",
   ];
+  // Generated blog pages bake in their own asset references.
+  const blogDir = path.join(publicRoot, "blog");
+  if (fs.existsSync(blogDir)) {
+    for (const p of walk(blogDir)) {
+      if (p.endsWith(".html")) files.push(path.relative(publicRoot, p));
+    }
+  }
   for (const f of files) {
     const fp = path.join(publicRoot, f);
     if (!fs.existsSync(fp)) continue;

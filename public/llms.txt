@@ -9,6 +9,7 @@ Forge provides opinionated infrastructure, service patterns, operational tooling
 ## Core resources
 
 - [Home](https://forgeplatform.software/): Product overview, capabilities, architecture, and pricing
+- [Blog](https://forgeplatform.software/blog/): Engineering insights on platform engineering, production readiness, and the foundations behind scalable software
 - [FAQ](https://forgeplatform.software/faq/): Common questions about platform fit, onboarding, and commercial model
 
 ## Technical documentation

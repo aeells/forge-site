@@ -1,0 +1,45 @@
+[
+  {
+    "title": "The software nobody plans to build - but every successful team eventually does...",
+    "slug": "the-software-nobody-plans-to-build",
+    "url": "/blog/the-software-nobody-plans-to-build/",
+    "summary": "Every software company starts with one product. Given enough time, almost every successful team ends up building a second one they never planned for.",
+    "published": "2026-06-26",
+    "updated": "2026-06-26",
+    "tags": [
+      "saas",
+      "aws",
+      "software-engineering"
+    ],
+    "readingTime": 3
+  },
+  {
+    "title": "What \"production-ready\" actually means - and why most teams discover it too late.",
+    "slug": "what-production-ready-actually-means",
+    "url": "/blog/what-production-ready-actually-means/",
+    "summary": "Production readiness isn't about whether a system runs. It's about how it behaves under failure, change, and scale - and most teams discover the gap too late.",
+    "published": "2026-06-06",
+    "updated": "2026-06-06",
+    "tags": [
+      "startup",
+      "devops",
+      "microservices",
+      "aws"
+    ],
+    "readingTime": 3
+  },
+  {
+    "title": "The real startup killer isn't product - it's building platform foundations from scratch.",
+    "slug": "the-real-startup-killer",
+    "url": "/blog/the-real-startup-killer/",
+    "summary": "Most early-stage teams think they're building one product. They're actually building two - and the second one quietly consumes man-years of engineering time.",
+    "published": "2026-05-08",
+    "updated": "2026-05-08",
+    "tags": [
+      "startup",
+      "devops",
+      "microservices"
+    ],
+    "readingTime": 3
+  }
+]

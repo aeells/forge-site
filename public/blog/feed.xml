@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Forge Engineering</title>
+    <link>https://forgeplatform.software/blog/</link>
+    <atom:link href="https://forgeplatform.software/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Opinionated engineering notes on building production SaaS platforms - from runtime architecture and platform engineering to the realities of running software at scale.</description>
+    <language>en</language>
+    <lastBuildDate>Fri, 26 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>The software nobody plans to build - but every successful team eventually does...</title>
+      <link>https://forgeplatform.software/blog/the-software-nobody-plans-to-build/</link>
+      <guid isPermaLink="true">https://forgeplatform.software/blog/the-software-nobody-plans-to-build/</guid>
+      <pubDate>Fri, 26 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Every software company starts with one product. Given enough time, almost every successful team ends up building a second one they never planned for.</description>
+      <content:encoded><![CDATA[<p>Every software company starts with one product.</p>
+<p>The product customers buy.</p>
+<p>The product investors care about.</p>
+<p>The product the roadmap revolves around.</p>
+<p>But given enough time, almost every successful engineering team finds itself building something else.</p>
+<p>Not because they planned to.</p>
+<p>Because they have to.</p>
+<h2>The second product</h2>
+<p>It doesn&#39;t have a marketing website.</p>
+<p>Customers never ask for it by name.</p>
+<p>Nobody demos it to investors.</p>
+<p>Yet it quietly grows alongside the business.</p>
+<p>It&#39;s your engineering foundations.</p>
+<p>The authentication services.</p>
+<p>The deployment pipelines.</p>
+<p>The infrastructure.</p>
+<p>The observability stack.</p>
+<p>The audit logging.</p>
+<p>The notification system.</p>
+<p>The release processes.</p>
+<p>The operational tooling.</p>
+<p>The architectural conventions.</p>
+<p>Individually, none of these things are your product.</p>
+<p>Collectively, they&#39;re what allow your product to scale.</p>
+<h2>It happens one decision at a time</h2>
+<p>Nobody sets out to spend months building engineering foundations.</p>
+<p>Instead, they make perfectly reasonable decisions.</p>
+<p>&quot;We&#39;ll automate deployments later.&quot;</p>
+<p>&quot;This service just needs its own authentication for now.&quot;</p>
+<p>&quot;We&#39;ll improve the monitoring once we&#39;ve got more customers.&quot;</p>
+<p>&quot;We&#39;ll standardise this after the next release.&quot;</p>
+<p>Every one of those decisions is commercially rational.</p>
+<p>Product delivery has to come first.</p>
+<p>But each compromise adds another piece to a second codebase that the business never intended to own.</p>
+<h2>The hidden backlog</h2>
+<p>Earlier in my career, while CTO at a UK insurance startup, I estimated that around <strong>60% of our engineering backlog</strong> wasn&#39;t product work at all.</p>
+<p>It was engineering foundations.</p>
+<p>Improving CI/CD.</p>
+<p>Standardising infrastructure.</p>
+<p>Strengthening security.</p>
+<p>Adding observability.</p>
+<p>Operational tooling.</p>
+<p>Developer experience.</p>
+<p>Performance and security testing.</p>
+<p>None of those stories generated revenue directly.</p>
+<p>But every one of them made future product delivery faster, safer and more predictable.</p>
+<p>Eventually we realised something important:</p>
+<p>We weren&#39;t just building an insurance platform anymore.</p>
+<p>We were also building the engineering foundations that made the insurance platform possible.</p>
+<h2>The Groundhog Day problem</h2>
+<p>Over the last 20+ years I&#39;ve worked across startups, consultancies and enterprise engineering teams.</p>
+<p>Different industries.</p>
+<p>Different products.</p>
+<p>Different company sizes.</p>
+<p>Yet I kept rebuilding remarkably similar engineering foundations.</p>
+<p>Authentication.</p>
+<p>Audit.</p>
+<p>Notifications.</p>
+<p>Infrastructure.</p>
+<p>Deployment pipelines.</p>
+<p>Observability.</p>
+<p>Release management.</p>
+<p>Security controls.</p>
+<p>Developer tooling.</p>
+<p>Different implementations.</p>
+<p>The same problems.</p>
+<p>After a while it started to feel like Groundhog Day.</p>
+<p>Every organisation was independently solving problems that thousands of engineering teams had already solved before.</p>
+<h2>Engineering foundations are inevitable</h2>
+<p>This isn&#39;t an argument against building engineering foundations.</p>
+<p>They&#39;re essential.</p>
+<p>Every successful software company eventually needs them.</p>
+<p>The question is simply <strong>when</strong> and <strong>how</strong> you build them.</p>
+<p>Do you invest months (or years) constructing them incrementally while trying to deliver product?</p>
+<p>Or do you begin with mature engineering foundations already in place and let your team focus on the capabilities that actually differentiate your business?</p>
+<p>That&#39;s a very different starting position.</p>
+<h2>Final thoughts</h2>
+<p>I&#39;ve come to believe that one of the biggest hidden costs in software engineering isn&#39;t technical debt.</p>
+<p>It&#39;s repeatedly rebuilding the same engineering foundations.</p>
+<p>Not because they&#39;re unique.</p>
+<p>But because every organisation assumes it has to start from scratch.</p>
+<p>That realisation is ultimately what led me to build Forge Platform.</p>
+<p>After spending more than two decades repeatedly building the same operational capabilities across startups and enterprise programmes, I wanted to create something that lets engineering teams begin with mature foundations already in place - so more of their time is spent building the product they&#39;re actually in business to create.</p>
+<p>If that resonates, you can learn more at <a href="https://forgeplatform.software/">forgeplatform.software</a>.</p>
+]]></content:encoded>
+      <category>saas</category>
+      <category>aws</category>
+      <category>software-engineering</category>
+    </item>
+    <item>
+      <title>What &quot;production-ready&quot; actually means - and why most teams discover it too late.</title>
+      <link>https://forgeplatform.software/blog/what-production-ready-actually-means/</link>
+      <guid isPermaLink="true">https://forgeplatform.software/blog/what-production-ready-actually-means/</guid>
+      <pubDate>Sat, 06 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Production readiness isn&apos;t about whether a system runs. It&apos;s about how it behaves under failure, change, and scale - and most teams discover the gap too late.</description>
+      <content:encoded><![CDATA[<p>&quot;Production-ready&quot; is one of the most misused phrases in software engineering.</p>
+<p>It usually means:</p>
+<ul>
+<li>it runs</li>
+<li>it deploys</li>
+<li>it works in a happy path</li>
+</ul>
+<p>But in real systems, production readiness is not about functionality.</p>
+<p>It&#39;s about behaviour under failure, change, and scale.</p>
+<h2>The difference between working and production-ready</h2>
+<p>A system is not production-ready when:</p>
+<ul>
+<li>it can be deployed</li>
+</ul>
+<p>It is production-ready when:</p>
+<ul>
+<li>it can fail safely</li>
+<li>it can be observed</li>
+<li>it can be redeployed without service interruption</li>
+<li>it behaves consistently under load</li>
+<li>it can be operated by people who did not build it</li>
+</ul>
+<p>Most early-stage systems do not meet this bar.</p>
+<p>Not because teams are careless - but because these properties are usually added after the system exists.</p>
+<h2>The problem with &quot;we&#39;ll add it later&quot;</h2>
+<p>In practice, &quot;later&quot; becomes:</p>
+<ul>
+<li>after customers arrive</li>
+<li>after scale pressure begins</li>
+<li>after incidents expose gaps</li>
+<li>after engineering velocity slows</li>
+</ul>
+<p>At that point, the system is no longer neutral.</p>
+<p>It has opinions:</p>
+<p>about structure</p>
+<p>about deployment</p>
+<p>about observability</p>
+<p>about service boundaries</p>
+<p>And those opinions are expensive to change.</p>
+<h2>Where teams actually spend their time</h2>
+<p>Across multiple environments I&#39;ve worked in - from startups to large AWS-based enterprise systems - a consistent pattern appears:</p>
+<p>Engineering effort splits into two categories:</p>
+<ul>
+<li>domain / product requirements and features</li>
+<li>engineering foundation and operational work</li>
+</ul>
+<p>In many early systems, the work that goes into engineering foundations - such as deployments, versioning, build and test standards and optimisations, pipelines etc. - becomes a dominant and usually hidden cost.</p>
+<p>At one startup, my estimate was that &quot;technical&quot; stories accounted for the majority of backlog creation over time, eclipsing feature development.</p>
+<p>This is not an edge case.</p>
+<p>This is how systems evolve.</p>
+<h2>Why this is so hard to avoid</h2>
+<p>Most teams don&#39;t consciously choose to neglect operational maturity.</p>
+<p>The problem is that product work is always visible, while engineering foundations are largely invisible.</p>
+<p>A new feature can be demonstrated to customers, investors, and stakeholders. It can be tied directly to revenue, growth, or market validation. Improvements to deployment pipelines, observability, security controls, or operational tooling rarely have that luxury. Their value is indirect, preventative, and often only becomes obvious when something goes wrong.</p>
+<p>As a result, engineering teams are under constant pressure to prioritise business-driven outcomes over engineering excellence. Every sprint presents another feature request, customer commitment, sales opportunity, or roadmap deadline competing for attention.</p>
+<p>Over time, small compromises accumulate:</p>
+<ul>
+<li>Deployment processes remain partially manual because &quot;we&#39;ll automate it later.&quot;</li>
+<li>Monitoring exists, but not at the depth needed to diagnose production issues quickly.</li>
+<li>Security controls are good enough for today&#39;s customers, but not tomorrow&#39;s.</li>
+<li>Operational knowledge lives in people&#39;s heads rather than in systems and documentation.</li>
+</ul>
+<p>None of these decisions are unreasonable in isolation. In fact, most are rational responses to commercial pressure.</p>
+<p>The challenge is that operational maturity compounds in exactly the same way technical debt does. The cost of postponing it is often hidden until growth, scale, compliance requirements, or a production incident suddenly expose the gap.</p>
+<p>By that point, fixing the foundations is competing with an even larger backlog, a larger customer base, and a business that has become increasingly dependent on systems that were never designed for the level of demand being placed on them.</p>
+<h2>The real definition of production-ready</h2>
+<p>A more accurate definition is:</p>
+<blockquote>
+<p>A system is production-ready when its operational properties are designed, not discovered.</p>
+</blockquote>
+<p>That includes:</p>
+<ul>
+<li>observability as a first-class concern</li>
+<li>consistent service structure and bounded contexts</li>
+<li>predictable deployment behaviour</li>
+<li>explicit failure handling patterns</li>
+<li>security and access boundaries defined early</li>
+</ul>
+<h2>The uncomfortable truth</h2>
+<p>Most teams don&#39;t lack capability.</p>
+<p>They lack a reusable starting point.</p>
+<p>So they rebuild production-readiness repeatedly, instead of inheriting it once.</p>
+<h2>The shift that matters</h2>
+<p>The real architectural question is not:</p>
+<blockquote>
+<p>&quot;How do we make this production-ready?&quot;</p>
+</blockquote>
+<p>It is:</p>
+<blockquote>
+<p>&quot;Why are we rebuilding production readiness every time?&quot;</p>
+</blockquote>
+<p>This is the problem space I&#39;ve been focused on with Forge: creating a reusable foundation so teams don&#39;t rediscover production-readiness under pressure.</p>
+]]></content:encoded>
+      <category>startup</category>
+      <category>devops</category>
+      <category>microservices</category>
+      <category>aws</category>
+    </item>
+    <item>
+      <title>The real startup killer isn&apos;t product - it&apos;s building platform foundations from scratch.</title>
+      <link>https://forgeplatform.software/blog/the-real-startup-killer/</link>
+      <guid isPermaLink="true">https://forgeplatform.software/blog/the-real-startup-killer/</guid>
+      <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
+      <description>Most early-stage teams think they&apos;re building one product. They&apos;re actually building two - and the second one quietly consumes man-years of engineering time.</description>
+      <content:encoded><![CDATA[<p>There&#39;s a pattern I&#39;ve seen repeat a few times over 20 years building software systems in both startup and enterprise environments.</p>
+<p>Most early-stage teams believe they are building a product.</p>
+<p>In reality, they are building two things at once:</p>
+<ul>
+<li>Their actual product</li>
+<li>An internal platform they didn&#39;t intend to build</li>
+</ul>
+<p>And the second one quietly consumes man-years of engineering time.</p>
+<h2>The hidden tax on early-stage teams</h2>
+<p>At some point, every startup hits the same phase:</p>
+<ul>
+<li>The MVP works</li>
+<li>The first customers arrive</li>
+<li>Engineering velocity starts to slow</li>
+<li>&quot;Just one more service&quot; becomes a platform discussion</li>
+</ul>
+<p>And suddenly the backlog shifts.</p>
+<p>Not because the product changed - but because the foundations underneath it needed to evolve (without the wheels falling off!).</p>
+<p>Based on greenfield experience, I&#39;d guesstimate that up to 60% of engineering effort can be focused on platform foundations, delivery lifecycle and operational processes, not domain features or core business differentiators.</p>
+<p>That ratio is not unusual.</p>
+<p>It is normal.</p>
+<p>And it is also destructive.</p>
+<h2>The repeated mistake</h2>
+<p>Across organisations, I&#39;ve seen the same systems rebuilt repeatedly:</p>
+<ul>
+<li>CI/CD pipelines</li>
+<li>Infrastructure-as-code structures</li>
+<li>Observability setups</li>
+<li>Security and access control patterns</li>
+<li>Service templates and API conventions</li>
+<li>Deployment and rollback strategies</li>
+</ul>
+<p>Each time:</p>
+<ul>
+<li>slightly different</li>
+<li>slightly inconsistent</li>
+<li>always re-learned under pressure</li>
+<li>and generally whilst trying to keep production lights on</li>
+</ul>
+<p>The irony is that none of these are domain-specific.</p>
+<p>They are global engineering concerns.</p>
+<p>Yet every team reinvents them.</p>
+<h2>Why this keeps happening</h2>
+<p>It&#39;s not incompetence.</p>
+<p>It&#39;s timing.</p>
+<p>Early-stage teams optimise for:</p>
+<ul>
+<li>speed</li>
+<li>product delivery</li>
+<li>survival</li>
+</ul>
+<p>So they defer platform thinking until it becomes unavoidable.</p>
+<p>At which point:</p>
+<ul>
+<li>the system is already live</li>
+<li>constraints are already baked in</li>
+<li>rewrites are expensive</li>
+</ul>
+<p>So they rebuild under pressure instead of designing under intention.</p>
+<h2>The real cost</h2>
+<p>The cost isn&#39;t just engineering time.</p>
+<p>It&#39;s:</p>
+<ul>
+<li>delayed product delivery</li>
+<li>inconsistent system behaviour</li>
+<li>increased operational risk</li>
+<li>premature senior hiring in platform roles</li>
+<li>architectural fragmentation across services (and teams)</li>
+</ul>
+<p>Most importantly:</p>
+<blockquote>
+<p>It shifts engineering from building product value to managing internal complexity.</p>
+</blockquote>
+<h2>What changes when you design it once</h2>
+<p>When these concerns are treated as a reusable foundation instead of one-off decisions:</p>
+<ul>
+<li>teams ship faster</li>
+<li>systems stay consistent</li>
+<li>operational overhead drops</li>
+<li>architecture stops diverging across services</li>
+<li>engineering focus returns to product domain logic</li>
+</ul>
+<p>This is the problem I&#39;ve been formalising into an opinionated bootstrap approach with Forge Platform.</p>
+<p>It enables production-grade microservices from day one with enterprise foundations at startup speed.</p>
+<p>Not because teams cannot build these things.</p>
+<p>But because they keep building them repeatedly, under pressure, in slightly different ways, everywhere.</p>
+<h2>The question I keep coming back to</h2>
+<p>If every team ends up rebuilding the same foundations…</p>
+<p>Why are we still rebuilding them every time?</p>
+<p>If you have any questions or are interested to find out more, it would be great to hear from you.</p>
+]]></content:encoded>
+      <category>startup</category>
+      <category>devops</category>
+      <category>microservices</category>
+    </item>
+  </channel>
+</rss>

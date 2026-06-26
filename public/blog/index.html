@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Forge Engineering | Forge Platform</title>
+    <meta name="description" content="Opinionated engineering notes on building production SaaS platforms - from runtime architecture and platform engineering to the realities of running software at scale." />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link href="https://forgeplatform.software/blog/" rel="canonical" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://forgeplatform.software/blog/" />
+    <meta property="og:title" content="Forge Engineering | Forge Platform" />
+    <meta property="og:description" content="Opinionated engineering notes on building production SaaS platforms - from runtime architecture and platform engineering to the realities of running software at scale." />
+    <meta property="og:image" content="https://forgeplatform.software/assets/images/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Forge Engineering | Forge Platform" />
+    <meta name="twitter:description" content="Opinionated engineering notes on building production SaaS platforms - from runtime architecture and platform engineering to the realities of running software at scale." />
+    <meta name="twitter:image" content="https://forgeplatform.software/assets/images/og.png" />
+    <link rel="alternate" type="application/rss+xml" title="Forge Engineering" href="/blog/feed.xml" />
+    <link rel="stylesheet" href="/assets/css/main.css" media="all" />
+    <link rel="stylesheet" href="/assets/css/blog.css" media="all" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Forge Engineering",
+  "description": "Opinionated engineering notes on building production SaaS platforms - from runtime architecture and platform engineering to the realities of running software at scale.",
+  "url": "https://forgeplatform.software/blog/",
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "The software nobody plans to build - but every successful team eventually does...",
+      "description": "Every software company starts with one product. Given enough time, almost every successful team ends up building a second one they never planned for.",
+      "url": "https://forgeplatform.software/blog/the-software-nobody-plans-to-build/",
+      "datePublished": "2026-06-26",
+      "dateModified": "2026-06-26",
+      "author": {
+        "@type": "Person",
+        "name": "Andrew Eells"
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "What \"production-ready\" actually means - and why most teams discover it too late.",
+      "description": "Production readiness isn't about whether a system runs. It's about how it behaves under failure, change, and scale - and most teams discover the gap too late.",
+      "url": "https://forgeplatform.software/blog/what-production-ready-actually-means/",
+      "datePublished": "2026-06-06",
+      "dateModified": "2026-06-06",
+      "author": {
+        "@type": "Person",
+        "name": "Andrew Eells"
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "The real startup killer isn't product - it's building platform foundations from scratch.",
+      "description": "Most early-stage teams think they're building one product. They're actually building two - and the second one quietly consumes man-years of engineering time.",
+      "url": "https://forgeplatform.software/blog/the-real-startup-killer/",
+      "datePublished": "2026-05-08",
+      "dateModified": "2026-05-08",
+      "author": {
+        "@type": "Person",
+        "name": "Andrew Eells"
+      }
+    }
+  ]
+}
+    </script>
+    <script type="module" src="/assets/js/layout-shell.js"></script>
+  </head>
+  <body class="helvetica bg-[#0B0C14] text-neutral-200">
+    <div class="main overflow-x-hidden has-top-glow">
+      <header class="z-40 top-0 left-0 right-0 flex justify-center helvetica bg-[#0B0C14]/80 fixed before:absolute before:-z-10 before:inset-0 before:backdrop-blur-2xl" id="navbar">
+  <nav
+    class="grow flex h-[52px] justify-between border-b mx-5 max-w-[1110px] text-[13px] leading-[100%] text-[#C9D3EE] border-[#727DA1]/15">
+    <div class="flex min-w-0 items-stretch gap-3">
+      <a aria-label="Go to homepage" class="flex shrink-0 items-center py-3" href="/">
+        <svg width="154" height="21" class="forge-site-header-logo svg-currentcolor" aria-hidden="true" focusable="false">
+          <use href="/assets/images/brand/forge-logo.svg#root"></use>
+        </svg>
+      </a>
+    </div>
+    <div class="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3">
+      <div class="hidden md:flex flex-wrap items-center justify-end gap-x-1 gap-y-2 lg:gap-x-3">
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="https://docs.forgeplatform.software" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap text-white" href="/blog/">Blog</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/faq/">FAQ</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/#pricing">Pricing</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/#contact">Contact</a>
+      </div>
+      <div class="flex items-center sm:gap-2 whitespace-nowrap shrink-0 -mr-3 md:mr-0">
+        <button aria-label="Open menu" class="p-2 group relative md:hidden text-neutral-300" id="open-menu">
+          <svg class="w-5 h-5 inline svg-currentcolor">
+            <use href="/assets/icons/heroicons_v2/outline/bars-3-4a440a20.svg#root"></use>
+          </svg>
+        </button>
+        <button aria-label="Close menu" class="hidden p-2 group relative md:hidden text-neutral-300" id="close-menu">
+          <svg class="w-5 h-5 inline svg-currentcolor">
+            <use href="/assets/icons/heroicons_v2/outline/x-mark-1a7d1e94.svg#root"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div
+      class="hidden md:hidden p-5 fixed z-40 left-0 right-0 site-mobile-menu-top backdrop-blur-2xl bg-[#181926]/80 text-[#C9D3EE] overflow-y-scroll mobile-menu-maxh"
+      id="mobile-menu">
+      <div class="js-menu-section flex flex-col gap-1" data-section="root">
+        <a class="p-3" href="https://docs.forgeplatform.software" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a class="p-3 text-white" href="/blog/">Blog</a>
+        <a class="p-3" href="/faq/">FAQ</a>
+        <a class="p-3" href="/#pricing">Pricing</a>
+        <a class="p-3" href="/#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+</header>
+      <main class="mx-auto max-w-[1110px] px-5 pt-32 pb-24">
+        <header class="max-w-[820px]" style="text-wrap: pretty">
+          <h1 class="font-helveticaDisplay text-white font-bold text-[40px] leading-[110%]">Forge Engineering</h1>
+          <p class="mt-4 text-neutral-200 text-lg leading-[145%]">Opinionated engineering notes on building production SaaS platforms - from runtime architecture and platform engineering to the realities of running software at scale.</p>
+        </header>
+        <hr class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient" aria-hidden="true" />
+        <ul class="blog-card-list">
+          <li class="blog-card">
+            <a class="blog-card-title" href="/blog/the-software-nobody-plans-to-build/"><h2>The software nobody plans to build - but every successful team eventually does...</h2></a>
+            <div class="blog-card-meta"><time datetime="2026-06-26">26 June 2026</time> &middot; 3 min read</div>
+            <p class="blog-card-summary">Every software company starts with one product. Given enough time, almost every successful team ends up building a second one they never planned for.</p>
+            <a class="blog-card-more" href="/blog/the-software-nobody-plans-to-build/">Read article &rarr;</a>
+          </li>
+          <li class="blog-card">
+            <a class="blog-card-title" href="/blog/what-production-ready-actually-means/"><h2>What "production-ready" actually means - and why most teams discover it too late.</h2></a>
+            <div class="blog-card-meta"><time datetime="2026-06-06">6 June 2026</time> &middot; 3 min read</div>
+            <p class="blog-card-summary">Production readiness isn't about whether a system runs. It's about how it behaves under failure, change, and scale - and most teams discover the gap too late.</p>
+            <a class="blog-card-more" href="/blog/what-production-ready-actually-means/">Read article &rarr;</a>
+          </li>
+          <li class="blog-card">
+            <a class="blog-card-title" href="/blog/the-real-startup-killer/"><h2>The real startup killer isn't product - it's building platform foundations from scratch.</h2></a>
+            <div class="blog-card-meta"><time datetime="2026-05-08">8 May 2026</time> &middot; 3 min read</div>
+            <p class="blog-card-summary">Most early-stage teams think they're building one product. They're actually building two - and the second one quietly consumes man-years of engineering time.</p>
+            <a class="blog-card-more" href="/blog/the-real-startup-killer/">Read article &rarr;</a>
+          </li>
+        </ul>
+      </main>
+      <div class="dark">
+  <footer class="bg-[#F3F4F7] dark:bg-[#0B0C14]">
+    <div class="mx-auto text-base lg:px-5 max-w-[1110px] text-[#363D4E] dark:text-neutral-200">
+      <div class="px-5 lg:px-2 lg:mx-3 pt-7 flex flex-col lg:flex-row justify-between items-center lg:items-end border-t border-neutral-300/10">
+        <div>
+          <svg width="154" height="21" alt="" class="text-black dark:text-white scale-75 lg:scale-100 svg-currentcolor">
+            <use href="/assets/images/brand/forge-logo.svg#root"></use>
+          </svg>
+          <p class="mt-3 hidden lg:block max-w-[342px]">
+            Production-grade microservices.
+            <br />
+            Enterprise foundations. Startup speed.
+          </p>
+        </div>
+        <div class="flex items-center gap-6 whitespace-nowrap">
+          <a
+            class="hidden lg:block -mx-1 px-1 js-obfuscated-phone"
+            href="#"
+            data-phone-country="1"
+            data-phone-area="604"
+            data-phone-prefix="932"
+            data-phone-line="8674"
+            aria-label="Call Forge Platform"></a>
+          <a class="hidden lg:block -mx-1 px-1" href="mailto:hello@forgeplatform.software">hello@forgeplatform.software</a>
+          <div class="hidden lg:block h-4 border-l border-neutral-300/10"></div>
+          <div class="hidden lg:flex">
+            <div class="flex gap-4 text-neutral-300">
+              <a
+                aria-label="Forge Platform on LinkedIn"
+                href="https://www.linkedin.com/company/forgeplatform-software/"
+                rel="nofollow noopener"
+                target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/linkedin-143ab64c.svg#root"></use>
+                </svg>
+              </a>
+              <a aria-label="Get Forge on Github" href="https://github.com/get-forge/" rel="nofollow noopener" target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
+                </svg>
+              </a>
+              <a aria-label="Forge Platform on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/twitter-x.svg#root"></use>
+                </svg>
+              </a>
+              <a
+                aria-label="Forge Platform on Reddit"
+                href="https://www.reddit.com/user/forgeplatform/"
+                rel="nofollow noopener"
+                target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/reddit.svg#root"></use>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-5 lg:px-2 lg:mx-3 mt-5 py-3 lg:border-t flex flex-col lg:flex-row justify-between items-center border-neutral-300/10 text-[12px] leading-[18px]">
+        <div class="flex items-center gap-6 whitespace-nowrap dark:text-neutral-300">
+          <a class="-mx-1 px-1" href="/terms">Terms of Use</a>
+          <a class="-mx-1 px-1" href="/privacy">Privacy Policy</a>
+          <a class="-mx-1 px-1" href="/licence">Commercial Licence</a>
+          <a
+            class="js-demo-site-link hidden sm:block -mx-1 px-1"
+            href="https://int.forgeplatform.software/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Demo environment status unknown">
+            <svg width="14" height="15" class="js-demo-site-status mr-1 hidden lg:inline svg-currentcolor" aria-hidden="true">
+              <use href="/assets/images/social/status-green-4e79760e.svg#root"></use>
+            </svg>
+            Demo site
+          </a>
+        </div>
+        <div class="mt-8 mb-2 flex lg:hidden">
+          <div class="flex gap-4 text-neutral-300">
+            <a
+              aria-label="Forge Platform on LinkedIn"
+              href="https://www.linkedin.com/company/forgeplatform-software/"
+              rel="nofollow noopener"
+              target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/linkedin-143ab64c.svg#root"></use>
+              </svg>
+            </a>
+            <a aria-label="Get Forge on Github" href="https://github.com/get-forge/" rel="nofollow noopener" target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
+              </svg>
+            </a>
+            <a aria-label="Forge Platform on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/twitter-x.svg#root"></use>
+              </svg>
+            </a>
+            <a
+              aria-label="Forge Platform on Reddit"
+              href="https://www.reddit.com/user/forgeplatform/"
+              rel="nofollow noopener"
+              target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/reddit.svg#root"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="flex items-center text-neutral-300">© 2026 Andrew Eells. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+</div>
+    </div>
+  </body>
+</html>
