@@ -26,6 +26,7 @@ const contentDir = path.join(root, "content", "blog");
 const blogOutDir = path.join(publicRoot, "blog");
 
 const SITE = "https://forgeplatform.software";
+const DOCS_SITE = "https://docs.forgeplatform.software";
 const BLOG_TITLE = "Forge Engineering";
 const BLOG_DESC =
   "Opinionated engineering notes on building production SaaS platforms - from runtime architecture and platform engineering to the realities of running software at scale.";
@@ -36,6 +37,7 @@ const AUTHOR = "Andrew Eells";
 // hand-maintained sitemap so existing behaviour is preserved).
 const STATIC_ROUTES = [
   { loc: `${SITE}/`, lastmod: "2026-05-25" },
+  { loc: `${DOCS_SITE}/`, lastmod: "2026-06-22" },
   { loc: `${SITE}/faq/`, lastmod: "2026-05-25" },
   { loc: `${SITE}/privacy/`, lastmod: "2026-05-25" },
   { loc: `${SITE}/terms/`, lastmod: "2026-05-25" },
