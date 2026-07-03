@@ -1171,26 +1171,37 @@
               </article>
             </div>
           </div>
-          <div id="contact" class="w-full sm:w-auto">
-            <form
-              id="forge-cta-formspree"
-              action="https://formspree.io/f/mreoekzn"
-              method="POST"
-              class="flex flex-col sm:flex-row gap-3 items-center">
-              <input
-                type="email"
-                name="email"
-                autocomplete="email"
-                class="appearance-none px-5 border rounded-lg backdrop-blur-2xl text-white h-12 w-full max-w-[316px] sm:max-w-full sm:w-[324px] border-[#727DA1]/20 bg-[#727DA1]/10 placeholder:text-neutral-300"
-                data-1p-ignore=""
-                placeholder="Your work e-mail"
-                required="" />
-              <button
-                class="cta-button px-6 flex items-center justify-center text-white font-medium whitespace-nowrap h-12 w-full sm:w-auto max-w-[316px]"
-                type="submit">
-                Is Forge right for me?
-              </button>
-            </form>
+          <div id="contact" class="w-full">
+            <div class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between w-full">
+              <form
+                id="forge-cta-formspree"
+                action="https://formspree.io/f/mreoekzn"
+                method="POST"
+                class="flex flex-col sm:flex-row gap-3 items-center">
+                <input
+                  type="email"
+                  name="email"
+                  autocomplete="email"
+                  class="appearance-none px-5 border rounded-lg backdrop-blur-2xl text-white h-12 w-full max-w-[316px] sm:max-w-full sm:w-[324px] border-[#727DA1]/20 bg-[#727DA1]/10 placeholder:text-neutral-300"
+                  data-1p-ignore=""
+                  placeholder="Your work e-mail"
+                  required="" />
+                <button
+                  class="cta-button px-6 flex items-center justify-center text-white font-medium whitespace-nowrap h-12 w-full sm:w-auto max-w-[316px]"
+                  type="submit">
+                  Is Forge right for me?
+                </button>
+              </form>
+              <div class="flex justify-center md:justify-end shrink-0" data-aos="fade-up" data-aos-delay="50">
+                <a href="https://kittylaunch.com/p/forge-platform" target="_blank" rel="noopener">
+                  <img
+                    src="https://kittylaunch.com/api/public/badges/launch_badge.svg?theme=dark&name=Forge%20Platform"
+                    width="280"
+                    alt="Forge Platform on KittyLaunch"
+                    data-kittylaunch-badge="1" />
+                </a>
+              </div>
+            </div>
             <p
               id="forge-cta-formspree-success"
               class="hidden mt-3 max-w-[640px] rounded-lg border border-[#939db833] bg-[#171926]/90 px-4 py-3 text-13 leading-[145%] text-neutral-200 text-center lg:ml-2 lg:text-left"
