@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It | Forge Platform</title>
+    <meta name="description" content="How we debugged intermittent AMP remote-write 400 errors on GraalVM ECS tasks: ruling out URL, SigV4, and Snappy, finding new-value-for-timestamp in CloudWatch, and fixing fleet-wide series collisions with Micrometer common tags." />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link href="https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/" rel="canonical" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/" />
+    <meta property="og:title" content="AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It | Forge Platform" />
+    <meta property="og:description" content="How we debugged intermittent AMP remote-write 400 errors on GraalVM ECS tasks: ruling out URL, SigV4, and Snappy, finding new-value-for-timestamp in CloudWatch, and fixing fleet-wide series collisions with Micrometer common tags." />
+    <meta property="og:image" content="https://forgeplatform.software/assets/images/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It | Forge Platform" />
+    <meta name="twitter:description" content="How we debugged intermittent AMP remote-write 400 errors on GraalVM ECS tasks: ruling out URL, SigV4, and Snappy, finding new-value-for-timestamp in CloudWatch, and fixing fleet-wide series collisions with Micrometer common tags." />
+    <meta name="twitter:image" content="https://forgeplatform.software/assets/images/og.png" />
+    <link rel="alternate" type="application/rss+xml" title="Forge Engineering" href="/blog/feed.xml" />
+    <link rel="stylesheet" href="/assets/css/main.css" media="all" />
+    <link rel="stylesheet" href="/assets/css/blog.css" media="all" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It",
+  "description": "How we debugged intermittent AMP remote-write 400 errors on GraalVM ECS tasks: ruling out URL, SigV4, and Snappy, finding new-value-for-timestamp in CloudWatch, and fixing fleet-wide series collisions with Micrometer common tags.",
+  "datePublished": "2026-07-03",
+  "dateModified": "2026-07-03",
+  "articleSection": "Forge Engineering",
+  "keywords": "devops, aws, observability, prometheus, micrometer",
+  "url": "https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/",
+  "mainEntityOfPage": "https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/",
+  "image": "https://forgeplatform.software/assets/images/og.png",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Eells"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Forge Platform",
+    "url": "https://forgeplatform.software/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://forgeplatform.software/assets/images/og.png"
+    }
+  }
+}
+    </script>
+    <script type="module" src="/assets/js/layout-shell.js"></script>
+  </head>
+  <body class="helvetica bg-[#0B0C14] text-neutral-200">
+    <div class="main overflow-x-hidden has-top-glow">
+      <header class="z-40 top-0 left-0 right-0 flex justify-center helvetica bg-[#0B0C14]/80 fixed before:absolute before:-z-10 before:inset-0 before:backdrop-blur-2xl" id="navbar">
+  <nav
+    class="page-rail grow flex h-[52px] justify-between border-b text-[13px] leading-[100%] text-[#C9D3EE] border-[#727DA1]/15">
+    <div class="flex min-w-0 items-stretch gap-3">
+      <a aria-label="Go to homepage" class="flex shrink-0 items-center py-3" href="/">
+        <svg width="154" height="21" class="forge-site-header-logo svg-currentcolor" aria-hidden="true" focusable="false">
+          <use href="/assets/images/brand/forge-logo.svg#root"></use>
+        </svg>
+      </a>
+    </div>
+    <div class="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3">
+      <div class="hidden md:flex flex-wrap items-center justify-end gap-x-1 gap-y-2 lg:gap-x-3">
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="https://docs.forgeplatform.software" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap text-white" href="/blog/">Blog</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/faq/">FAQ</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/#pricing">Pricing</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/#contact">Contact</a>
+      </div>
+      <div class="flex items-center sm:gap-2 whitespace-nowrap shrink-0 -mr-3 md:mr-0">
+        <button aria-label="Open menu" class="p-2 group relative md:hidden text-neutral-300" id="open-menu">
+          <svg class="w-5 h-5 inline svg-currentcolor">
+            <use href="/assets/icons/heroicons_v2/outline/bars-3-4a440a20.svg#root"></use>
+          </svg>
+        </button>
+        <button aria-label="Close menu" class="hidden p-2 group relative md:hidden text-neutral-300" id="close-menu">
+          <svg class="w-5 h-5 inline svg-currentcolor">
+            <use href="/assets/icons/heroicons_v2/outline/x-mark-1a7d1e94.svg#root"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div
+      class="hidden md:hidden p-5 fixed z-40 left-0 right-0 site-mobile-menu-top backdrop-blur-2xl bg-[#181926]/80 text-[#C9D3EE] overflow-y-scroll mobile-menu-maxh"
+      id="mobile-menu">
+      <div class="js-menu-section flex flex-col gap-1" data-section="root">
+        <a class="p-3" href="https://docs.forgeplatform.software" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a class="p-3 text-white" href="/blog/">Blog</a>
+        <a class="p-3" href="/faq/">FAQ</a>
+        <a class="p-3" href="/#pricing">Pricing</a>
+        <a class="p-3" href="/#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+</header>
+      <main class="page-rail pt-32 pb-24">
+        <article class="blog-article">
+          <a class="blog-back" href="/blog/">&larr; All articles</a>
+          <h1>AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It</h1>
+          <div class="blog-byline">
+            By Andrew Eells &middot;
+            <time datetime="2026-07-03">3 July 2026</time> &middot;
+            7 min read
+          </div>
+          <ul class="blog-tags" aria-label="Tags"><li>devops</li><li>aws</li><li>observability</li><li>prometheus</li><li>micrometer</li></ul>
+          <hr class="blog-rule" aria-hidden="true" />
+          <div class="blog-prose">
+<p>AMP said 400. CloudWatch said why.</p>
+<p>We turned on Amazon Managed Prometheus (AMP) remote write from our Quarkus services on ECS — Micrometer snapshots, Snappy-compressed Prometheus remote write, SigV4 signing — and everything <em>mostly</em> worked.</p>
+<p>Mostly.</p>
+<p>Every service logged <code>AMP remote write failed with status 400</code> on a ~60 second cadence. Not constantly. Not only at startup. Intermittently, across the fleet, continually.</p>
+<p>HTTP 400 with an empty body is a frustrating place to start.</p>
+<p>This post is how we narrowed it down, why the obvious suspects weren&#39;t the culprit, and the CloudWatch metric that finally made the failure mode obvious.</p>
+<h2>The setup</h2>
+<p>Forge pushes application metrics in-process:</p>
+<ul>
+<li><strong>Micrometer</strong> with the Prometheus v1 registry (<code>/q/metrics</code> for local scrape, <code>MetricSnapshots</code> for export)</li>
+<li><strong>Remote write</strong> to AMP over HTTPS with <code>Content-Encoding: snappy</code> and AWS SigV4 (<code>aps</code> signing name)</li>
+<li><strong>One AMP workspace</strong> shared by every ECS service in the environment (auth, actor, document, notification, audit, BFF, …)</li>
+<li><strong>GraalVM native</strong> images on Fargate, private subnets, no collector sidecar</li>
+</ul>
+<p>The architecture is deliberate: fewer moving parts, right-sized tasks, metrics, and traces exported directly from the app.</p>
+<p>When remote write misbehaves, the failure is somewhere in a short chain: scrape → encode → compress → sign → POST.</p>
+<h2>What we ruled out first</h2>
+<h3>Wrong URL</h3>
+<p>A previous deploy had pointed at the wrong path suffix. AMP&#39;s real endpoint is:</p>
+<pre><code class="language-text">https://aps-workspaces.&lt;region&gt;.amazonaws.com/workspaces/&lt;ws-id&gt;/api/v1/remote_write
+</code></pre>
+<p>Not <code>.../remote_write</code> alone (that returned 404).</p>
+<p>We verified the CloudFormation export, the ECS task environment variable, and a <strong>SigV4-signed POST with an empty Snappy payload</strong> to the correct URL. That returned <strong>200</strong>. So URL and IAM were fine.</p>
+<h3>SigV4 and transport</h3>
+<p>The same signing code path used in production (<code>AwsSignedHttpTransport</code>) worked from a JVM probe on a developer machine against the live workspace. Empty payload and full payload both succeeded when credentials and URL were correct.</p>
+<h3>&quot;A bad metric family&quot;</h3>
+<p>We scraped live exposition text from a running native task (more on that pattern below), loaded it into a JVM integration test, encoded it with the same remote-write encoder, and POSTed to AMP.</p>
+<p><strong>200. Full payload accepted.</strong></p>
+<p>So the metric <em>content</em> at scrape time was not inherently toxic. The encoder and Snappy path on JVM were fine.</p>
+<p>That left something about the <strong>native periodic push path</strong> or <strong>fleet-wide ingestion behaviour</strong> — not a single broken histogram hiding in auth-service.</p>
+<h2>The pivot: CloudWatch <code>DiscardedSamples</code></h2>
+<p>AMP exposes <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-CW-usage-metrics.html">vended CloudWatch metrics</a> under the <code>AWS/Prometheus</code> namespace. One of them is <strong><code>DiscardedSamples</code></strong>, with a <strong><code>Reason</code> dimension</strong> explaining why samples were dropped.</p>
+<p>We listed metrics for our workspace:</p>
+<pre><code class="language-bash">aws cloudwatch list-metrics \
+  --namespace &quot;AWS/Prometheus&quot; \
+  --metric-name &quot;DiscardedSamples&quot; \
+  --region us-west-2
+</code></pre>
+<p>The only reason showing material volume:</p>
+<pre><code class="language-text">Reason = new-value-for-timestamp
+</code></pre>
+<p>Querying that dimension:</p>
+<pre><code class="language-bash">aws cloudwatch get-metric-statistics \
+  --namespace &quot;AWS/Prometheus&quot; \
+  --metric-name &quot;DiscardedSamples&quot; \
+  --dimensions \
+    Name=Workspace,Value=ws-xxxxxxxx \
+    Name=Reason,Value=new-value-for-timestamp \
+  --start-time &quot;$START&quot; --end-time &quot;$END&quot; \
+  --period 300 \
+  --statistics Sum \
+  --region us-west-2
+</code></pre>
+<p>We saw <strong>hundreds of discards per five-minute bucket</strong>, sustained, fleet-wide.</p>
+<p>That is not a signing bug. It is not Snappy corruption.</p>
+<p>In Prometheus remote write semantics, <strong><code>new-value-for-timestamp</code></strong> means: AMP already has a sample for this <strong>exact time series</strong> (same metric name and label set) at this <strong>exact timestamp</strong>, but the new sample has a <strong>different value</strong>.</p>
+<p>In Prometheus, a series is defined by the metric name and its complete label set. If two writers produce identical labels, the backend treats them as one time series regardless of which process produced them.</p>
+<p>Same series. Same millisecond. Different number. Rejected.</p>
+<p>Once we saw that, the intermittent 400s and the ~95% push success rate (success counter climbing, failure counter occasionally ticking) both made sense: most pushes partially or fully conflicted with other writers or stale timestamps; some requests failed hard at the HTTP layer.</p>
+<h2>The actual bug: six services, one series</h2>
+<p>Each ECS service exports the same Micrometer binders: <code>jvm_*</code>, <code>process_*</code>, <code>system_*</code>, HTTP server metrics, and our own <code>forge_observability_amp_push_*</code> counters.</p>
+<p>We had <strong>no common tags</strong> — no <code>service</code>, no <code>instance</code>, no <code>pod</code>.</p>
+<p>So from AMP&#39;s perspective:</p>
+<pre><code class="language-text">auth-service   → jvm_threads_live_threads = 21  @ T
+actor-service  → jvm_threads_live_threads = 14  @ T
+document-service → jvm_threads_live_threads = 19 @ T
+</code></pre>
+<p>That is <strong>one series</strong> (<code>jvm_threads_live_threads</code> with identical labels) receiving <strong>different values at the same timestamp</strong> from different tasks, every push interval, forever.</p>
+<p>Classic multi-writer collision.</p>
+<p>It is the same class of problem as running multiple Prometheus replicas remote-writing the same targets without external labels — except we did it with six application services and one workspace.</p>
+<h3>Why the JVM probe didn&#39;t catch it</h3>
+<p>The probe used a <strong>single</strong> scraped exposition file from <strong>one</strong> task. One writer. AMP happily ingested it.</p>
+<p>The failure mode only appears when <strong>multiple tasks</strong> push <strong>overlapping label sets</strong> to <strong>one workspace</strong> on the same schedule.</p>
+<h3>Why <code>hasScrapeTimestamp()</code> wasn&#39;t the story</h3>
+<p>We also suspected stale per-datapoint scrape timestamps from the registry. On JVM Micrometer scrape, <strong><code>hasScrapeTimestamp()</code> was false for every data point</strong> in our tests. The old encoder fell back to <code>System.currentTimeMillis()</code> per sample anyway.</p>
+<p>Fleet collision fit the CloudWatch evidence better than stale scrape timestamps.</p>
+<p>We still normalized to <strong>one batch push timestamp per remote-write request</strong> — correct semantics for periodic push export — but the fix that cleared discards was <strong>disambiguating series</strong>.</p>
+<h2>The fix</h2>
+<h3>1. Common tags (the real fix)</h3>
+<p>In forge-kit <code>forge-metrics</code>, a CDI <code>MeterFilter</code>:</p>
+<pre><code class="language-java">MeterFilter.commonTags(
+    Tag.of(&quot;service&quot;, applicationName),   // quarkus.application.name
+    Tag.of(&quot;instance&quot;, hostName)        // ECS task hostname; override via config
+);
+</code></pre>
+<p>After deploy, AMP queries looked like:</p>
+<pre><code class="language-promql">forge_observability_amp_push_success_total
+jvm_threads_live_threads{service=&quot;auth-service&quot;}
+count by (service) (jvm_memory_used_bytes)
+</code></pre>
+<p>Six services, six distinct label sets. Immediately after deploying the common tags, new <code>DiscardedSamples{Reason=&quot;new-value-for-timestamp&quot;}</code> buckets dropped to zero across the workspace while historical buckets retained the earlier collisions. No other code changes were required.</p>
+<h3>2. Richer failure logging</h3>
+<p><code>AmpMetricsExporter</code> had only logged <code>status 400</code>. We added <strong>Snappy body size</strong>, <strong>snapshot count</strong>, and <strong>AMP response body</strong> on failure so the next incident doesn&#39;t require guesswork.</p>
+<h3>3. Batch push timestamp</h3>
+<p>Remote-write encoding now stamps every sample in a <code>WriteRequest</code> with <strong>one wall-clock time</strong> at export. That is standard push-agent behaviour and avoids mixed timestamps within a single push. It did not replace the need for <code>service</code> / <code>instance</code> tags.</p>
+<h2>How we verified ingestion (not just &quot;no errors&quot;)</h2>
+<p>Empty HTTP failures are necessary but not sufficient. We confirmed data was <strong>stored and queryable</strong>:</p>
+<pre><code class="language-bash">QUERY_ENDPOINT=&quot;https://aps-workspaces.us-west-2.amazonaws.com/workspaces/${WORKSPACE_ID}/api/v1/query&quot;
+
+awscurl --service aps --region us-west-2 \
+  -X POST &quot;${QUERY_ENDPOINT}&quot; \
+  -H &#39;Content-Type: application/x-www-form-urlencoded&#39; \
+  -d &#39;query=forge_observability_amp_push_success_total&#39;
+</code></pre>
+<p>Success counters for all six workloads, each with <code>service</code> and <code>instance</code> labels. Failure metric absent (never incremented since deploy). CloudWatch discards at zero post-rollout.</p>
+<p>That is the bar: <strong>PromQL returns your series with the labels you expect</strong>, and <strong>DiscardedSamples stays quiet</strong>.</p>
+<h2>Appendix: debugging when you can&#39;t reach <code>/q/metrics</code></h2>
+<p>Our laptops can&#39;t hit task private IPs in a NAT-less VPC. To compare native exposition with the JVM encoder, we used a one-off Fargate task pattern:</p>
+<ol>
+<li>Publish a tiny <strong>private ECR</strong> image (<code>busybox</code> + <code>wget</code>) — Docker Hub and public ECR aren&#39;t reachable from the VPC without NAT.</li>
+<li>Run a task in the cluster that <code>wget</code>s <code>http://&lt;task-private-ip&gt;:8080/q/metrics</code> (same path the target group uses for health checks).</li>
+<li>Pull logs into a local file and feed it to a JVM probe (<code>FORGE_AMP_METRICS_FILE=...</code>).</li>
+</ol>
+<p>We also briefly added a <strong>same-SG ingress on 8080</strong> so the scrape task could reach the service ENI — then <strong>revoked</strong> it after debugging. That rule is not part of normal infra; ALB → task rules stay as designed.</p>
+<p>This tooling was valuable for one INT session. We don&#39;t plan to keep the scrape image or scripts in the application repo long term — the durable lessons are the <strong>CloudWatch reason dimension</strong>, the <strong>multi-writer tag discipline</strong>, and the <strong>PromQL verification queries</strong>.</p>
+<h2>Takeaways</h2>
+<ol>
+<li><strong>AMP HTTP 400 with an empty body</strong> sends you down a long hallway. <strong><code>DiscardedSamples</code> by <code>Reason</code></strong> is often the door.</li>
+<li><strong><code>new-value-for-timestamp</code></strong> on a shared workspace screams <strong>label collision</strong> — multiple writers, identical series, aligned push intervals.</li>
+<li><strong>Micrometer <code>MeterFilter.commonTags</code></strong> with low-cardinality <code>service</code> (and <code>instance</code> when you scale replicas) is not optional when many processes remote-write to one Prometheus-compatible backend.</li>
+<li><strong>Single-service probes prove encoding</strong>, not fleet behaviour. Reproduce collisions with multi-writer thinking.</li>
+<li><strong>Confirm consumption</strong> with PromQL and CloudWatch ingestion metrics — not only &quot;the error log stopped.&quot;</li>
+</ol>
+<p>If you&#39;re wiring Micrometer → AMP on ECS, check your tags before you tune Snappy JNI or second-guess your SigV4 implementation.</p>
+<p>The platform was fine. We were just telling six services to sign the same name on the same line.</p>
+
+          </div>
+        </article>
+
+        <section class="blog-related" aria-labelledby="related-heading">
+          <h2 id="related-heading">Related articles</h2>
+          <ul>
+            <li><a href="/blog/what-production-ready-actually-means/">What "production-ready" actually means - and why most teams discover it too late.</a><span class="blog-related-meta">6 June 2026 · 3 min read</span></li>
+            <li><a href="/blog/the-software-nobody-plans-to-build/">The software nobody plans to build - but every successful team eventually does...</a><span class="blog-related-meta">26 June 2026 · 3 min read</span></li>
+            <li><a href="/blog/the-real-startup-killer/">The real startup killer isn't product - it's building platform foundations from scratch.</a><span class="blog-related-meta">8 May 2026 · 3 min read</span></li>
+          </ul>
+        </section>
+
+        <section class="blog-cta">
+          <div class="prose-cta-box rounded-xl border border-[#939DB8]/10 bg-[#0F101A]">
+            <h2 class="text-white font-semibold text-[18px] md:text-[20px]">Building production software at scale?</h2>
+            <p class="mt-3 text-neutral-300 leading-[165%]">
+              Forge Platform is an opinionated runtime foundation for modern SaaS systems - designed to handle deployment,
+              observability, security, and cloud-native operations as a coherent whole.
+            </p>
+            <p class="mt-2 text-neutral-300 leading-[165%]">
+              So your team can focus on business value rather than undifferentiated effort.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a class="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 hover:bg-[#727DA1]/20 transition-colors" href="/">Explore Forge</a>
+              <a class="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 hover:bg-[#727DA1]/20 transition-colors" href="/faq/">Read the FAQ</a>
+            </div>
+          </div>
+        </section>
+      </main>
+      <div class="dark">
+  <footer class="bg-[#F3F4F7] dark:bg-[#0B0C14]">
+    <div class="page-rail text-base text-[#363D4E] dark:text-neutral-200">
+      <div
+        class="pt-7 flex flex-col lg:flex-row justify-between items-center lg:items-end border-t border-neutral-300/10">
+        <div>
+          <svg width="154" height="21" alt="" class="text-black dark:text-white scale-75 lg:scale-100 svg-currentcolor">
+            <use href="/assets/images/brand/forge-logo.svg#root"></use>
+          </svg>
+          <p class="mt-3 hidden lg:block max-w-[342px]">
+            Production-grade bootstrapping.
+            <br />
+            Enterprise foundations. Startup speed.
+          </p>
+        </div>
+        <div class="flex items-center gap-6 whitespace-nowrap">
+          <a
+            class="hidden lg:block -mx-1 px-1 js-obfuscated-phone"
+            href="#"
+            data-phone-country="1"
+            data-phone-area="604"
+            data-phone-prefix="932"
+            data-phone-line="8674"
+            aria-label="Call Forge Platform"></a>
+          <a class="hidden lg:block -mx-1 px-1" href="mailto:hello@forgeplatform.software">hello@forgeplatform.software</a>
+          <div class="hidden lg:block h-4 border-l border-neutral-300/10"></div>
+          <div class="hidden lg:flex">
+            <div class="flex gap-4 text-neutral-300">
+              <a
+                aria-label="Forge Platform on LinkedIn"
+                href="https://www.linkedin.com/company/forgeplatform-software/"
+                rel="nofollow noopener"
+                target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/linkedin-143ab64c.svg#root"></use>
+                </svg>
+              </a>
+              <a aria-label="Get Forge on Github" href="https://github.com/get-forge/" rel="nofollow noopener" target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
+                </svg>
+              </a>
+              <a aria-label="Forge Platform on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/twitter-x.svg#root"></use>
+                </svg>
+              </a>
+              <a
+                aria-label="Forge Platform on Reddit"
+                href="https://www.reddit.com/user/forgeplatform/"
+                rel="nofollow noopener"
+                target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/reddit.svg#root"></use>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-5 py-3 lg:border-t flex flex-col lg:flex-row justify-between items-center border-neutral-300/10 text-[12px] leading-[18px]">
+        <div class="flex items-center gap-6 whitespace-nowrap dark:text-neutral-300">
+          <a class="-mx-1 px-1" href="/terms">Terms of Use</a>
+          <a class="-mx-1 px-1" href="/privacy">Privacy Policy</a>
+          <a class="-mx-1 px-1" href="/licence">Commercial Licence</a>
+          <a
+            class="js-demo-site-link hidden sm:block -mx-1 px-1"
+            href="https://int.forgeplatform.software/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Demo environment status unknown">
+            <svg width="14" height="15" class="js-demo-site-status mr-1 hidden lg:inline svg-currentcolor" aria-hidden="true">
+              <use href="/assets/images/social/status-green-4e79760e.svg#root"></use>
+            </svg>
+            Demo site
+          </a>
+        </div>
+        <div class="mt-8 mb-2 flex lg:hidden">
+          <div class="flex gap-4 text-neutral-300">
+            <a
+              aria-label="Forge Platform on LinkedIn"
+              href="https://www.linkedin.com/company/forgeplatform-software/"
+              rel="nofollow noopener"
+              target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/linkedin-143ab64c.svg#root"></use>
+              </svg>
+            </a>
+            <a aria-label="Get Forge on Github" href="https://github.com/get-forge/" rel="nofollow noopener" target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
+              </svg>
+            </a>
+            <a aria-label="Forge Platform on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/twitter-x.svg#root"></use>
+              </svg>
+            </a>
+            <a
+              aria-label="Forge Platform on Reddit"
+              href="https://www.reddit.com/user/forgeplatform/"
+              rel="nofollow noopener"
+              target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/reddit.svg#root"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="flex items-center text-neutral-300">© 2026 Andrew Eells. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+</div>
+    </div>
+  </body>
+</html>

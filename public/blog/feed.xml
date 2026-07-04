@@ -6,7 +6,145 @@
     <atom:link href="https://forgeplatform.software/blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>Opinionated engineering notes on building production SaaS platforms - from runtime architecture and platform engineering to the realities of running software at scale.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 26 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It</title>
+      <link>https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/</link>
+      <guid isPermaLink="true">https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/</guid>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
+      <description>Intermittent Amazon Managed Prometheus remote-write failures looked like encoding or signing bugs. The real signal was CloudWatch DiscardedSamples — and the fix was embarrassingly familiar if you&apos;ve operated Prometheus at scale.</description>
+      <content:encoded><![CDATA[<p>AMP said 400. CloudWatch said why.</p>
+<p>We turned on Amazon Managed Prometheus (AMP) remote write from our Quarkus services on ECS — Micrometer snapshots, Snappy-compressed Prometheus remote write, SigV4 signing — and everything <em>mostly</em> worked.</p>
+<p>Mostly.</p>
+<p>Every service logged <code>AMP remote write failed with status 400</code> on a ~60 second cadence. Not constantly. Not only at startup. Intermittently, across the fleet, continually.</p>
+<p>HTTP 400 with an empty body is a frustrating place to start.</p>
+<p>This post is how we narrowed it down, why the obvious suspects weren&#39;t the culprit, and the CloudWatch metric that finally made the failure mode obvious.</p>
+<h2>The setup</h2>
+<p>Forge pushes application metrics in-process:</p>
+<ul>
+<li><strong>Micrometer</strong> with the Prometheus v1 registry (<code>/q/metrics</code> for local scrape, <code>MetricSnapshots</code> for export)</li>
+<li><strong>Remote write</strong> to AMP over HTTPS with <code>Content-Encoding: snappy</code> and AWS SigV4 (<code>aps</code> signing name)</li>
+<li><strong>One AMP workspace</strong> shared by every ECS service in the environment (auth, actor, document, notification, audit, BFF, …)</li>
+<li><strong>GraalVM native</strong> images on Fargate, private subnets, no collector sidecar</li>
+</ul>
+<p>The architecture is deliberate: fewer moving parts, right-sized tasks, metrics, and traces exported directly from the app.</p>
+<p>When remote write misbehaves, the failure is somewhere in a short chain: scrape → encode → compress → sign → POST.</p>
+<h2>What we ruled out first</h2>
+<h3>Wrong URL</h3>
+<p>A previous deploy had pointed at the wrong path suffix. AMP&#39;s real endpoint is:</p>
+<pre><code class="language-text">https://aps-workspaces.&lt;region&gt;.amazonaws.com/workspaces/&lt;ws-id&gt;/api/v1/remote_write
+</code></pre>
+<p>Not <code>.../remote_write</code> alone (that returned 404).</p>
+<p>We verified the CloudFormation export, the ECS task environment variable, and a <strong>SigV4-signed POST with an empty Snappy payload</strong> to the correct URL. That returned <strong>200</strong>. So URL and IAM were fine.</p>
+<h3>SigV4 and transport</h3>
+<p>The same signing code path used in production (<code>AwsSignedHttpTransport</code>) worked from a JVM probe on a developer machine against the live workspace. Empty payload and full payload both succeeded when credentials and URL were correct.</p>
+<h3>&quot;A bad metric family&quot;</h3>
+<p>We scraped live exposition text from a running native task (more on that pattern below), loaded it into a JVM integration test, encoded it with the same remote-write encoder, and POSTed to AMP.</p>
+<p><strong>200. Full payload accepted.</strong></p>
+<p>So the metric <em>content</em> at scrape time was not inherently toxic. The encoder and Snappy path on JVM were fine.</p>
+<p>That left something about the <strong>native periodic push path</strong> or <strong>fleet-wide ingestion behaviour</strong> — not a single broken histogram hiding in auth-service.</p>
+<h2>The pivot: CloudWatch <code>DiscardedSamples</code></h2>
+<p>AMP exposes <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-CW-usage-metrics.html">vended CloudWatch metrics</a> under the <code>AWS/Prometheus</code> namespace. One of them is <strong><code>DiscardedSamples</code></strong>, with a <strong><code>Reason</code> dimension</strong> explaining why samples were dropped.</p>
+<p>We listed metrics for our workspace:</p>
+<pre><code class="language-bash">aws cloudwatch list-metrics \
+  --namespace &quot;AWS/Prometheus&quot; \
+  --metric-name &quot;DiscardedSamples&quot; \
+  --region us-west-2
+</code></pre>
+<p>The only reason showing material volume:</p>
+<pre><code class="language-text">Reason = new-value-for-timestamp
+</code></pre>
+<p>Querying that dimension:</p>
+<pre><code class="language-bash">aws cloudwatch get-metric-statistics \
+  --namespace &quot;AWS/Prometheus&quot; \
+  --metric-name &quot;DiscardedSamples&quot; \
+  --dimensions \
+    Name=Workspace,Value=ws-xxxxxxxx \
+    Name=Reason,Value=new-value-for-timestamp \
+  --start-time &quot;$START&quot; --end-time &quot;$END&quot; \
+  --period 300 \
+  --statistics Sum \
+  --region us-west-2
+</code></pre>
+<p>We saw <strong>hundreds of discards per five-minute bucket</strong>, sustained, fleet-wide.</p>
+<p>That is not a signing bug. It is not Snappy corruption.</p>
+<p>In Prometheus remote write semantics, <strong><code>new-value-for-timestamp</code></strong> means: AMP already has a sample for this <strong>exact time series</strong> (same metric name and label set) at this <strong>exact timestamp</strong>, but the new sample has a <strong>different value</strong>.</p>
+<p>In Prometheus, a series is defined by the metric name and its complete label set. If two writers produce identical labels, the backend treats them as one time series regardless of which process produced them.</p>
+<p>Same series. Same millisecond. Different number. Rejected.</p>
+<p>Once we saw that, the intermittent 400s and the ~95% push success rate (success counter climbing, failure counter occasionally ticking) both made sense: most pushes partially or fully conflicted with other writers or stale timestamps; some requests failed hard at the HTTP layer.</p>
+<h2>The actual bug: six services, one series</h2>
+<p>Each ECS service exports the same Micrometer binders: <code>jvm_*</code>, <code>process_*</code>, <code>system_*</code>, HTTP server metrics, and our own <code>forge_observability_amp_push_*</code> counters.</p>
+<p>We had <strong>no common tags</strong> — no <code>service</code>, no <code>instance</code>, no <code>pod</code>.</p>
+<p>So from AMP&#39;s perspective:</p>
+<pre><code class="language-text">auth-service   → jvm_threads_live_threads = 21  @ T
+actor-service  → jvm_threads_live_threads = 14  @ T
+document-service → jvm_threads_live_threads = 19 @ T
+</code></pre>
+<p>That is <strong>one series</strong> (<code>jvm_threads_live_threads</code> with identical labels) receiving <strong>different values at the same timestamp</strong> from different tasks, every push interval, forever.</p>
+<p>Classic multi-writer collision.</p>
+<p>It is the same class of problem as running multiple Prometheus replicas remote-writing the same targets without external labels — except we did it with six application services and one workspace.</p>
+<h3>Why the JVM probe didn&#39;t catch it</h3>
+<p>The probe used a <strong>single</strong> scraped exposition file from <strong>one</strong> task. One writer. AMP happily ingested it.</p>
+<p>The failure mode only appears when <strong>multiple tasks</strong> push <strong>overlapping label sets</strong> to <strong>one workspace</strong> on the same schedule.</p>
+<h3>Why <code>hasScrapeTimestamp()</code> wasn&#39;t the story</h3>
+<p>We also suspected stale per-datapoint scrape timestamps from the registry. On JVM Micrometer scrape, <strong><code>hasScrapeTimestamp()</code> was false for every data point</strong> in our tests. The old encoder fell back to <code>System.currentTimeMillis()</code> per sample anyway.</p>
+<p>Fleet collision fit the CloudWatch evidence better than stale scrape timestamps.</p>
+<p>We still normalized to <strong>one batch push timestamp per remote-write request</strong> — correct semantics for periodic push export — but the fix that cleared discards was <strong>disambiguating series</strong>.</p>
+<h2>The fix</h2>
+<h3>1. Common tags (the real fix)</h3>
+<p>In forge-kit <code>forge-metrics</code>, a CDI <code>MeterFilter</code>:</p>
+<pre><code class="language-java">MeterFilter.commonTags(
+    Tag.of(&quot;service&quot;, applicationName),   // quarkus.application.name
+    Tag.of(&quot;instance&quot;, hostName)        // ECS task hostname; override via config
+);
+</code></pre>
+<p>After deploy, AMP queries looked like:</p>
+<pre><code class="language-promql">forge_observability_amp_push_success_total
+jvm_threads_live_threads{service=&quot;auth-service&quot;}
+count by (service) (jvm_memory_used_bytes)
+</code></pre>
+<p>Six services, six distinct label sets. Immediately after deploying the common tags, new <code>DiscardedSamples{Reason=&quot;new-value-for-timestamp&quot;}</code> buckets dropped to zero across the workspace while historical buckets retained the earlier collisions. No other code changes were required.</p>
+<h3>2. Richer failure logging</h3>
+<p><code>AmpMetricsExporter</code> had only logged <code>status 400</code>. We added <strong>Snappy body size</strong>, <strong>snapshot count</strong>, and <strong>AMP response body</strong> on failure so the next incident doesn&#39;t require guesswork.</p>
+<h3>3. Batch push timestamp</h3>
+<p>Remote-write encoding now stamps every sample in a <code>WriteRequest</code> with <strong>one wall-clock time</strong> at export. That is standard push-agent behaviour and avoids mixed timestamps within a single push. It did not replace the need for <code>service</code> / <code>instance</code> tags.</p>
+<h2>How we verified ingestion (not just &quot;no errors&quot;)</h2>
+<p>Empty HTTP failures are necessary but not sufficient. We confirmed data was <strong>stored and queryable</strong>:</p>
+<pre><code class="language-bash">QUERY_ENDPOINT=&quot;https://aps-workspaces.us-west-2.amazonaws.com/workspaces/${WORKSPACE_ID}/api/v1/query&quot;
+
+awscurl --service aps --region us-west-2 \
+  -X POST &quot;${QUERY_ENDPOINT}&quot; \
+  -H &#39;Content-Type: application/x-www-form-urlencoded&#39; \
+  -d &#39;query=forge_observability_amp_push_success_total&#39;
+</code></pre>
+<p>Success counters for all six workloads, each with <code>service</code> and <code>instance</code> labels. Failure metric absent (never incremented since deploy). CloudWatch discards at zero post-rollout.</p>
+<p>That is the bar: <strong>PromQL returns your series with the labels you expect</strong>, and <strong>DiscardedSamples stays quiet</strong>.</p>
+<h2>Appendix: debugging when you can&#39;t reach <code>/q/metrics</code></h2>
+<p>Our laptops can&#39;t hit task private IPs in a NAT-less VPC. To compare native exposition with the JVM encoder, we used a one-off Fargate task pattern:</p>
+<ol>
+<li>Publish a tiny <strong>private ECR</strong> image (<code>busybox</code> + <code>wget</code>) — Docker Hub and public ECR aren&#39;t reachable from the VPC without NAT.</li>
+<li>Run a task in the cluster that <code>wget</code>s <code>http://&lt;task-private-ip&gt;:8080/q/metrics</code> (same path the target group uses for health checks).</li>
+<li>Pull logs into a local file and feed it to a JVM probe (<code>FORGE_AMP_METRICS_FILE=...</code>).</li>
+</ol>
+<p>We also briefly added a <strong>same-SG ingress on 8080</strong> so the scrape task could reach the service ENI — then <strong>revoked</strong> it after debugging. That rule is not part of normal infra; ALB → task rules stay as designed.</p>
+<p>This tooling was valuable for one INT session. We don&#39;t plan to keep the scrape image or scripts in the application repo long term — the durable lessons are the <strong>CloudWatch reason dimension</strong>, the <strong>multi-writer tag discipline</strong>, and the <strong>PromQL verification queries</strong>.</p>
+<h2>Takeaways</h2>
+<ol>
+<li><strong>AMP HTTP 400 with an empty body</strong> sends you down a long hallway. <strong><code>DiscardedSamples</code> by <code>Reason</code></strong> is often the door.</li>
+<li><strong><code>new-value-for-timestamp</code></strong> on a shared workspace screams <strong>label collision</strong> — multiple writers, identical series, aligned push intervals.</li>
+<li><strong>Micrometer <code>MeterFilter.commonTags</code></strong> with low-cardinality <code>service</code> (and <code>instance</code> when you scale replicas) is not optional when many processes remote-write to one Prometheus-compatible backend.</li>
+<li><strong>Single-service probes prove encoding</strong>, not fleet behaviour. Reproduce collisions with multi-writer thinking.</li>
+<li><strong>Confirm consumption</strong> with PromQL and CloudWatch ingestion metrics — not only &quot;the error log stopped.&quot;</li>
+</ol>
+<p>If you&#39;re wiring Micrometer → AMP on ECS, check your tags before you tune Snappy JNI or second-guess your SigV4 implementation.</p>
+<p>The platform was fine. We were just telling six services to sign the same name on the same line.</p>
+]]></content:encoded>
+      <category>devops</category>
+      <category>aws</category>
+      <category>observability</category>
+      <category>prometheus</category>
+      <category>micrometer</category>
+    </item>
     <item>
       <title>The software nobody plans to build - but every successful team eventually does...</title>
       <link>https://forgeplatform.software/blog/the-software-nobody-plans-to-build/</link>

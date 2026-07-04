@@ -1,5 +1,21 @@
 [
   {
+    "title": "AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It",
+    "slug": "when-amp-returns-400-check-discarded-samples",
+    "url": "/blog/when-amp-returns-400-check-discarded-samples/",
+    "summary": "Intermittent Amazon Managed Prometheus remote-write failures looked like encoding or signing bugs. The real signal was CloudWatch DiscardedSamples — and the fix was embarrassingly familiar if you've operated Prometheus at scale.",
+    "published": "2026-07-03",
+    "updated": "2026-07-03",
+    "tags": [
+      "devops",
+      "aws",
+      "observability",
+      "prometheus",
+      "micrometer"
+    ],
+    "readingTime": 7
+  },
+  {
     "title": "The software nobody plans to build - but every successful team eventually does...",
     "slug": "the-software-nobody-plans-to-build",
     "url": "/blog/the-software-nobody-plans-to-build/",
