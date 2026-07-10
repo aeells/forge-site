@@ -1,5 +1,22 @@
 [
   {
+    "title": "The CDK diagram generators were right - and not publishable",
+    "slug": "how-ai-finally-solved-aws-architecture-diagrams",
+    "url": "/blog/how-ai-finally-solved-aws-architecture-diagrams/",
+    "summary": "CloudFormation graphs answer a different question than architecture diagrams. A hybrid workflow - Cursor analysing CDK intent, a curated YAML model, and Kiro CLI rendering via MCP - produced the first AWS diagram I'd actually publish.",
+    "published": "2026-07-09",
+    "updated": "2026-07-09",
+    "tags": [
+      "aws",
+      "cdk",
+      "architecture",
+      "ai",
+      "platform-engineering",
+      "devops"
+    ],
+    "readingTime": 10
+  },
+  {
     "title": "AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It",
     "slug": "when-amp-returns-400-check-discarded-samples",
     "url": "/blog/when-amp-returns-400-check-discarded-samples/",

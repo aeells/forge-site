@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>The CDK diagram generators were right - and not publishable | Forge Platform</title>
+    <meta name="description" content="Why CDK auto-diagram tools faithfully render infrastructure you would never show a customer, and how a hybrid AI workflow (Cursor + Kiro CLI + AWS Diagram MCP) finally made architecture diagrams maintainable." />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link href="https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/" rel="canonical" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/" />
+    <meta property="og:title" content="The CDK diagram generators were right - and not publishable | Forge Platform" />
+    <meta property="og:description" content="Why CDK auto-diagram tools faithfully render infrastructure you would never show a customer, and how a hybrid AI workflow (Cursor + Kiro CLI + AWS Diagram MCP) finally made architecture diagrams maintainable." />
+    <meta property="og:image" content="https://forgeplatform.software/assets/images/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="The CDK diagram generators were right - and not publishable | Forge Platform" />
+    <meta name="twitter:description" content="Why CDK auto-diagram tools faithfully render infrastructure you would never show a customer, and how a hybrid AI workflow (Cursor + Kiro CLI + AWS Diagram MCP) finally made architecture diagrams maintainable." />
+    <meta name="twitter:image" content="https://forgeplatform.software/assets/images/og.png" />
+    <link rel="alternate" type="application/rss+xml" title="Forge Engineering" href="/blog/feed.xml" />
+    <link rel="stylesheet" href="/assets/css/main.css" media="all" />
+    <link rel="stylesheet" href="/assets/css/blog.css" media="all" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "The CDK diagram generators were right - and not publishable",
+  "description": "Why CDK auto-diagram tools faithfully render infrastructure you would never show a customer, and how a hybrid AI workflow (Cursor + Kiro CLI + AWS Diagram MCP) finally made architecture diagrams maintainable.",
+  "datePublished": "2026-07-09",
+  "dateModified": "2026-07-09",
+  "articleSection": "Forge Engineering",
+  "keywords": "aws, cdk, architecture, ai, platform-engineering, devops",
+  "url": "https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/",
+  "mainEntityOfPage": "https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/",
+  "image": "https://forgeplatform.software/assets/images/og.png",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Eells"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Forge Platform",
+    "url": "https://forgeplatform.software/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://forgeplatform.software/assets/images/og.png"
+    }
+  }
+}
+    </script>
+    <script type="module" src="/assets/js/layout-shell.js"></script>
+  </head>
+  <body class="helvetica bg-[#0B0C14] text-neutral-200">
+    <div class="main overflow-x-hidden has-top-glow">
+      <header class="z-40 top-0 left-0 right-0 flex justify-center helvetica bg-[#0B0C14]/80 fixed before:absolute before:-z-10 before:inset-0 before:backdrop-blur-2xl" id="navbar">
+  <nav
+    class="page-rail grow flex h-[52px] justify-between border-b text-[13px] leading-[100%] text-[#C9D3EE] border-[#727DA1]/15">
+    <div class="flex min-w-0 items-stretch gap-3">
+      <a aria-label="Go to homepage" class="flex shrink-0 items-center py-3" href="/">
+        <svg width="154" height="21" class="forge-site-header-logo svg-currentcolor" aria-hidden="true" focusable="false">
+          <use href="/assets/images/brand/forge-logo.svg#root"></use>
+        </svg>
+      </a>
+    </div>
+    <div class="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3">
+      <div class="hidden md:flex flex-wrap items-center justify-end gap-x-1 gap-y-2 lg:gap-x-3">
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="https://docs.forgeplatform.software" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap text-white" href="/blog/">Blog</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/faq/">FAQ</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/#pricing">Pricing</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/#contact">Contact</a>
+      </div>
+      <div class="flex items-center sm:gap-2 whitespace-nowrap shrink-0 -mr-3 md:mr-0">
+        <button aria-label="Open menu" class="p-2 group relative md:hidden text-neutral-300" id="open-menu">
+          <svg class="w-5 h-5 inline svg-currentcolor">
+            <use href="/assets/icons/heroicons_v2/outline/bars-3-4a440a20.svg#root"></use>
+          </svg>
+        </button>
+        <button aria-label="Close menu" class="hidden p-2 group relative md:hidden text-neutral-300" id="close-menu">
+          <svg class="w-5 h-5 inline svg-currentcolor">
+            <use href="/assets/icons/heroicons_v2/outline/x-mark-1a7d1e94.svg#root"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div
+      class="hidden md:hidden p-5 fixed z-40 left-0 right-0 site-mobile-menu-top backdrop-blur-2xl bg-[#181926]/80 text-[#C9D3EE] overflow-y-scroll mobile-menu-maxh"
+      id="mobile-menu">
+      <div class="js-menu-section flex flex-col gap-1" data-section="root">
+        <a class="p-3" href="https://docs.forgeplatform.software" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a class="p-3 text-white" href="/blog/">Blog</a>
+        <a class="p-3" href="/faq/">FAQ</a>
+        <a class="p-3" href="/#pricing">Pricing</a>
+        <a class="p-3" href="/#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+</header>
+      <main class="page-rail pt-32 pb-24">
+        <article class="blog-article">
+          <a class="blog-back" href="/blog/">&larr; All articles</a>
+          <h1>The CDK diagram generators were right - and not publishable</h1>
+          <div class="blog-byline">
+            By Andrew Eells &middot;
+            <time datetime="2026-07-09">9 July 2026</time> &middot;
+            10 min read
+          </div>
+          <ul class="blog-tags" aria-label="Tags"><li>aws</li><li>cdk</li><li>architecture</li><li>ai</li><li>platform-engineering</li><li>devops</li></ul>
+          <hr class="blog-rule" aria-hidden="true" />
+          <div class="blog-prose">
+<p>After years of fighting draw.io, CloudFormation graphs and auto-generated spaghetti, I finally found a workflow that generates AWS architecture diagrams I&#39;d actually publish.</p>
+<p>I&#39;ve been building software professionally for over 25 years.</p>
+<p>I have yet to be genuinely excited by AI&#39;s impact on large-scale software engineering. It&#39;s exceptionally good at bounded problems - a Bash script, a utility class, an isolated feature - and it&#39;s undeniably accelerating delivery. But building an entire production platform is a different challenge. That&#39;s still about architecture, trade-offs, operational thinking and years of accumulated engineering judgement.</p>
+<p>I don&#39;t believe &quot;vibe coding&quot; is replacing experienced engineers any time soon. AI is an extraordinary force multiplier, but it doesn&#39;t replace engineering judgement. If you&#39;re only capable of building poor software today, AI mostly helps you build poor software faster.</p>
+<p>But this...</p>
+<p>This genuinely felt like the first time AI solved <em>this category of</em> problem I&#39;d been wrestling with for years.</p>
+<p>In under two hours I went from this...</p>
+<p>&quot;A salesperson asked if I had an architecture diagram. I said, &#39;Yes... but it&#39;s rubbish.&#39;&quot;</p>
+<p>...to publishing this.</p>
+<p><img src="https://raw.githubusercontent.com/get-forge/forge-docs/v1.0/assets/forge-architecture.png" alt="Forge Platform AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services"></p>
+<p>You can see the <a href="https://docs.forgeplatform.software/docs/welcome#architecture-and-runtime-model">live diagram on the Forge docs site</a>, with more detail in the <a href="https://docs.forgeplatform.software/docs/infrastructure">AWS platform infrastructure guide</a>.</p>
+<p>After literally <strong>years</strong> of trying different approaches, this is the first workflow that has produced an architecture diagram I&#39;d happily put in front of customers.</p>
+<h2>The problem with architecture diagrams</h2>
+<p>Anyone building on <a href="https://aws.amazon.com/">AWS</a> has probably been here.</p>
+<p>The architecture changes.</p>
+<p>The diagram doesn&#39;t.</p>
+<p>Eventually someone opens draw.io and spends half a day dragging icons around.</p>
+<p>Six months later it&#39;s wrong again.</p>
+<p>I&#39;ve spent years trying to solve this problem.</p>
+<h3>Manual diagrams</h3>
+<p>I&#39;ve built diagrams using tools including:</p>
+<ul>
+<li><a href="https://www.drawio.com/docs/diagram-types/aws-diagrams/">draw.io AWS diagram shapes</a></li>
+<li><a href="https://www.lucidchart.com/">Lucidchart</a></li>
+<li><a href="https://www.microsoft.com/en-us/microsoft-365/visio/flowchart-software">Microsoft Visio</a></li>
+<li><a href="https://www.cloudcraft.co/">Cloudcraft</a> (live AWS/Azure scanning and visual designer)</li>
+<li><a href="https://www.eraser.io/ai/aws-diagram-generator">Eraser AI AWS Diagram Generator</a> (prompt-to-diagram)</li>
+</ul>
+<p>The results can look fantastic - whether you drew them by hand, scanned live infrastructure, or generated them from a written description.</p>
+<p>Until the infrastructure changes.</p>
+<p>Then they immediately start drifting from reality.</p>
+<h3>CDK diagram generators</h3>
+<p>I also explored tools including:</p>
+<ul>
+<li><a href="https://github.com/pistazie/cdk-dia">cdk-dia</a></li>
+<li><a href="https://github.com/duartealexf/cdk2d2">cdk2d2</a></li>
+<li><a href="https://aws.github.io/aws-pdk/developer_guides/cdk-graph/index.html">AWS PDK CDK Graph</a> (with its <a href="https://aws.github.io/aws-pdk/developer_guides/cdk-graph-plugin-diagram/index.html">diagram plugin</a>)</li>
+</ul>
+<p>These are clever projects.</p>
+<p>They faithfully represent your infrastructure.</p>
+<p>Unfortunately, for <em>customer-facing architecture communication</em>, that&#39;s exactly the problem.</p>
+<p>A single ECS service explodes into something like:</p>
+<ul>
+<li>Task Definition</li>
+<li>Execution Role</li>
+<li>Task Role</li>
+<li>Security Groups</li>
+<li>Target Groups</li>
+<li>Listener Rules</li>
+<li>Auto Scaling</li>
+<li>CloudWatch Alarms</li>
+<li>Log Groups</li>
+<li>IAM Policies</li>
+<li>ENIs</li>
+</ul>
+<p>Everything is technically correct.</p>
+<p>Nothing is architecturally useful.</p>
+<p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">CloudFormation</a> graphs answer:</p>
+<blockquote>
+<p><strong>&quot;What AWS resources exist?&quot;</strong></p>
+</blockquote>
+<p>Architects are usually trying to answer:</p>
+<blockquote>
+<p><strong>&quot;How does this system work?&quot;</strong></p>
+</blockquote>
+<p>Those are completely different questions.</p>
+<p>The CDK diagram generators were right. They just weren&#39;t publishable.</p>
+<h3>AWS Workload Discovery</h3>
+<p>I even evaluated AWS&#39; own solution:</p>
+<p><a href="https://docs.aws.amazon.com/solutions/latest/workload-discovery-on-aws/solution-overview.html">AWS Workload Discovery on AWS</a></p>
+<p>It discovers infrastructure.</p>
+<p>It inventories resources.</p>
+<p>It builds dependency graphs.</p>
+<p>For me?</p>
+<p>It simply wasn&#39;t worth the cost - <strong>over $400/month</strong> just to deploy the CloudFormation stack and keep the discovery pipeline running, so you can draw a diagram of what you already deployed with CloudFormation. That is a genuinely terrible proposal for a documentation problem.</p>
+<p>Again, it documents what AWS has deployed.</p>
+<p>It doesn&#39;t communicate your architecture.</p>
+<h2>The breakthrough</h2>
+<p>The breakthrough came from this AWS blog:</p>
+<p><a href="https://aws.amazon.com/blogs/machine-learning/build-aws-architecture-diagrams-using-amazon-q-cli-and-mcp/">Build AWS architecture diagrams using Kiro CLI and MCP</a></p>
+<p><em>(The URL still references Amazon Q; the post was reviewed and updated for <a href="https://kiro.dev/docs/cli/chat/security/">Kiro CLI</a> in December 2025.)</em></p>
+<p>At first I thought:</p>
+<blockquote>
+<p>&quot;Interesting... but they&#39;re just feeding text into an LLM.&quot;</p>
+</blockquote>
+<p>Then I realised something.</p>
+<p><strong>That isn&#39;t a weakness. It&#39;s the entire point.</strong></p>
+<p>An experienced solutions architect doesn&#39;t think in CloudFormation resources.</p>
+<p>They mentally ignore:</p>
+<ul>
+<li>IAM Roles</li>
+<li>Security Groups</li>
+<li>Parameters</li>
+<li>Log Groups</li>
+<li>Listener Rules</li>
+<li>Auto Scaling Targets</li>
+</ul>
+<p>and instead think:</p>
+<ul>
+<li>Application Load Balancer</li>
+<li>ECS Services</li>
+<li>PostgreSQL</li>
+<li>Redis</li>
+<li>S3</li>
+<li>Cognito</li>
+</ul>
+<p>That&#39;s architecture.</p>
+<p>Not implementation.</p>
+<p>The LLM wasn&#39;t trying to replace an architect.</p>
+<p>It was acting as an <strong>architectural abstraction layer</strong> - the same idea as a <a href="https://c4model.com/">C4 container diagram</a>: document intent at the level stakeholders actually care about.</p>
+<p>That was the lightbulb moment.</p>
+<h2>Cursor did almost all of the work</h2>
+<p>Armed with that idea, I pointed <a href="https://cursor.com/">Cursor</a> at my <a href="https://docs.aws.amazon.com/cdk/v2/guide/home.html">AWS CDK</a> repository.</p>
+<p>I also gave it some context from a conversation I&#39;d had with ChatGPT about why CloudFormation graphs are the wrong level of abstraction - useful for framing, but Cursor did the actual work.</p>
+<p>Then I basically let it loose.</p>
+<p>It analysed the repository.</p>
+<p>It walked the stacks.</p>
+<p>It understood the constructs.</p>
+<p>It traced the networking.</p>
+<p>It identified which AWS resources represented meaningful architectural components and which were simply implementation plumbing.</p>
+<p>Then it produced:</p>
+<ul>
+<li>a curated architecture model</li>
+<li>rendering instructions</li>
+<li>a repeatable workflow</li>
+<li>automation scripts</li>
+<li>documentation updates</li>
+<li>and finally, the diagram itself.</li>
+</ul>
+<p>I didn&#39;t manually reverse-engineer thousands of CloudFormation resources into a diagram. I reviewed and refined what the tooling produced.</p>
+<p>That&#39;s a huge distinction.</p>
+<p>The AI wasn&#39;t making architectural decisions.</p>
+<p>It was reverse engineering architectural decisions I&#39;d already made in code.</p>
+<p>My role was limited - mostly review, a few rounds of feedback, and sanity-checking that the subnet story matched what we&#39;d actually built.</p>
+<h2>That&#39;s a far harder problem than it sounds</h2>
+<p>The YAML wasn&#39;t the clever part.</p>
+<p>The clever part was that Cursor understood:</p>
+<ul>
+<li>an ECS Task Role isn&#39;t an architectural component</li>
+<li>an Application Load Balancer definitely is</li>
+<li>six Fargate services belong together</li>
+<li>subnet boundaries matter</li>
+<li>CloudFront belongs at the edge</li>
+<li>PostgreSQL, Redis and Cognito deserve first-class representation</li>
+</ul>
+<p>None of that existed in a single file.</p>
+<p>It emerged from analysing thousands of lines of CDK spread across stacks, constructs and configuration - including constructs like <code>ForgeStaticEdgeDeliveryConstruct</code>, which encodes the CloudFront → S3 static UI + API path proxying story as a single architectural unit rather than a pile of distribution behaviours and origin policies.</p>
+<p>That&#39;s genuinely impressive.</p>
+<h2>Was it perfect first time?</h2>
+<p>No.</p>
+<p>I iterated a couple of times.</p>
+<p>I told Cursor to:</p>
+<ul>
+<li>collapse repeated Cognito connections and repeated metrics connections to AMP</li>
+<li>show public/private subnet boundaries in the VPC</li>
+</ul>
+<p>The second render was immediately publishable.</p>
+<p>There was also a small tooling wrinkle: the <a href="https://github.com/awslabs/mcp/tree/main/src/aws-diagram-mcp-server">AWS Diagram MCP server</a> package has been yanked upstream, so we pinned the last published version (<code>1.0.23</code>) in a source-controlled <code>mcp.json</code>. That kind of friction is worth mentioning - this wasn&#39;t magic; we wrestled with it slightly to get it working.</p>
+<h2>The hybrid workflow</h2>
+<p>The workflow ended up looking like this.</p>
+<pre><code class="language-text">CDK repository
+        │
+        ▼
+Cursor analyses architectural intent
+        │
+        ▼
+Curated intermediate model (YAML)
+        │
+        ▼
+Kiro CLI
+        │
+        ▼
+AWS Diagram MCP ([Model Context Protocol](https://modelcontextprotocol.io/))
+        │
+        ▼
+Published AWS architecture diagram
+        ([Python diagrams](https://diagrams.mingrammer.com/) + [Graphviz](https://graphviz.org/) + AWS icons)
+</code></pre>
+<p>The architecture model is version controlled.</p>
+<p>The prompt is version controlled.</p>
+<p>The rendering script is version controlled.</p>
+<p>The generated diagram can be regenerated whenever the platform evolves.</p>
+<p>For the first time ever, my architecture documentation actually feels maintainable.</p>
+<h2>Why this works</h2>
+<p>The key insight is surprisingly simple.</p>
+<p><strong>Architecture diagrams should document intent, not implementation.</strong></p>
+<p>My CDK constructs already encode that intent.</p>
+<p>They have names like:</p>
+<ul>
+<li><code>ForgeStaticEdgeDeliveryConstruct</code></li>
+<li><code>ForgeEcsWorkloadConstruct</code></li>
+<li><code>ForgeCognitoIdpStack</code></li>
+</ul>
+<p>Those are architectural concepts.</p>
+<p>CloudFormation is an implementation detail.</p>
+<p>Trying to diagram CloudFormation is a bit like trying to explain a car by drawing every nut and bolt.</p>
+<p>Sometimes abstraction is exactly what you want.</p>
+<h2>AI finally solved the right problem</h2>
+<p>This experience genuinely changed my opinion of where AI delivers value.</p>
+<p>Not by replacing engineers.</p>
+<p>Not by generating production systems from prompts.</p>
+<p>Not by writing thousands of lines of code you&#39;ll spend next week debugging.</p>
+<p>Instead, it behaved like a very competent technical collaborator.</p>
+<p>It absorbed an entire repository.</p>
+<p>It reconstructed the architecture.</p>
+<p>It understood what mattered.</p>
+<p>It ignored what didn&#39;t.</p>
+<p>It accepted feedback.</p>
+<p>It refined the output.</p>
+<p>The AI wasn&#39;t designing my platform.</p>
+<p>But it did an excellent job of documenting a platform that already exists - the same platform I write about when debugging <a href="https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/">AMP remote write failures</a> or explaining <a href="https://forgeplatform.software/blog/what-production-ready-actually-means/">what production-ready actually means</a>.</p>
+<h2>Would I trust it blindly?</h2>
+<p>Absolutely not.</p>
+<p>The architecture still belongs to the engineers who built the system.</p>
+<p>The AI isn&#39;t deciding what the platform looks like.</p>
+<p>It&#39;s modelling something that already exists.</p>
+<p>The human remains accountable.</p>
+<p>The AI removes an enormous amount of tedious work.</p>
+<p>That&#39;s augmentation.</p>
+<p>Not replacement.</p>
+<h2>What&#39;s next?</h2>
+<p>This has me thinking the future isn&#39;t another CDK diagram generator.</p>
+<p>It&#39;s architecture-aware tooling.</p>
+<p>Imagine a workflow that can:</p>
+<ul>
+<li>analyse your CDK constructs</li>
+<li>infer architectural components</li>
+<li>maintain a version-controlled intermediate model</li>
+<li>regenerate diagrams automatically</li>
+<li>produce different views for developers, operations, security reviews and customer documentation</li>
+</ul>
+<p>That feels considerably more exciting than another CloudFormation graph.</p>
+<p>And I essentially have that version-controlled now - tied to a real <a href="https://docs.aws.amazon.com/AmazonECS/latest/bestpracticesguide/intro.html">ECS on Fargate</a> platform, not a toy example.</p>
+<h2>Here&#39;s how Cursor did it</h2>
+<p>The interesting part isn&#39;t the PNG. It&#39;s the intermediate model - a curated, solutions-architect view derived from CDK constructs, not from the synthesized CloudFormation dependency graph.</p>
+<p>The model header explains the intent:</p>
+<pre><code class="language-yaml">---
+# Forge Platform - curated architecture model
+#
+# Derived from CDK constructs under infra/src/lib (NOT from the synthesized
+# CloudFormation dependency graph). Low-level noise (IAM roles/policies,
+# security groups, log groups, alarms, KMS keys, SSM params, ENIs, target
+# groups, listener rules) is deliberately omitted.
+#
+# Source of truth mapping:
+#   - Edge / CloudFront .......... forge-static-edge-delivery-construct.ts
+#   - Ingress (ALBs) ............. forge-ecs-ingress-construct.ts
+#   - Compute (Fargate) .......... forge-ecs-workload-construct.ts
+#   ...
+</code></pre>
+<p>Nested groups encode the VPC security boundary:</p>
+<pre><code class="language-yaml">groups:
+  - id: vpc
+    label: VPC (ForgePlatformVpc)
+  - id: public_subnets
+    label: Public Subnets
+    parent: vpc
+  - id: private_subnets
+    label: Private Subnets
+    parent: vpc
+  - id: compute
+    label: ECS Fargate Cluster
+    parent: private_subnets
+  # ...
+</code></pre>
+<p>Aggregate connections collapse repeated edges - six identical &quot;service auth&quot; lines become one:</p>
+<pre><code class="language-yaml">  - from: compute
+    to: cognito_service
+    label: service auth
+    aggregate: true
+</code></pre>
+<p>The MCP server registration is trivial - no secrets, just a pinned package launch:</p>
+<pre><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;awslabsawsdiagrammcpserver&quot;: {
+      &quot;command&quot;: &quot;uvx&quot;,
+      &quot;args&quot;: [
+        &quot;--from&quot;,
+        &quot;awslabs.aws-diagram-mcp-server==1.0.23&quot;,
+        &quot;awslabs.aws-diagram-mcp-server&quot;
+      ],
+      &quot;env&quot;: {}
+    }
+  }
+}
+</code></pre>
+<p>And regeneration is a one-liner:</p>
+<pre><code class="language-bash">./infra/architecture/render-diagram.sh
+</code></pre>
+<p>Which syncs the MCP config, then drives Kiro non-interactively:</p>
+<pre><code class="language-bash">kiro-cli mcp import --file &quot;${mcp_config}&quot; --force global
+kiro-cli chat --no-interactive --trust-all-tools &quot;$(cat diagram-prompt.md)&quot;
+</code></pre>
+<p>The prompt tells the MCP server how to map component types to <a href="https://diagrams.mingrammer.com/">diagrams</a> nodes, nest subnet clusters, and honour aggregate edges - treating the YAML as the single source of truth.</p>
+<p>That&#39;s the whole trick: <strong>deterministic extraction from code you already wrote, LLM-assisted rendering for polish.</strong></p>
+<h2>Final thoughts</h2>
+<p>This is probably the first AI workflow I&#39;ve adopted where I immediately thought:</p>
+<blockquote>
+<p><strong>&quot;I&#39;m never going back.&quot;</strong></p>
+</blockquote>
+<p>Not because the AI was smarter than me.</p>
+<p>Because it could absorb an entire repository, retain all of that context, and perform a task that would have taken me several evenings of tedious work.</p>
+<p>I&#39;ve spent years looking for a workflow that made architecture diagrams feel like source code instead of PowerPoint.</p>
+<p>This approach is by far the best I&#39;ve seen.</p>
+<p>Not because AI magically solved architecture.</p>
+<p>Because it finally solved the tedious part.</p>
+
+          </div>
+        </article>
+
+        <section class="blog-related" aria-labelledby="related-heading">
+          <h2 id="related-heading">Related articles</h2>
+          <ul>
+            <li><a href="/blog/when-amp-returns-400-check-discarded-samples/">AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It</a><span class="blog-related-meta">3 July 2026 · 7 min read</span></li>
+            <li><a href="/blog/what-production-ready-actually-means/">What "production-ready" actually means - and why most teams discover it too late.</a><span class="blog-related-meta">6 June 2026 · 3 min read</span></li>
+            <li><a href="/blog/the-software-nobody-plans-to-build/">The software nobody plans to build - but every successful team eventually does...</a><span class="blog-related-meta">26 June 2026 · 3 min read</span></li>
+          </ul>
+        </section>
+
+        <section class="blog-cta">
+          <div class="prose-cta-box rounded-xl border border-[#939DB8]/10 bg-[#0F101A]">
+            <h2 class="text-white font-semibold text-[18px] md:text-[20px]">Building production software at scale?</h2>
+            <p class="mt-3 text-neutral-300 leading-[165%]">
+              Forge Platform is an opinionated runtime foundation for modern SaaS systems - designed to handle deployment,
+              observability, security, and cloud-native operations as a coherent whole.
+            </p>
+            <p class="mt-2 text-neutral-300 leading-[165%]">
+              So your team can focus on business value rather than undifferentiated effort.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a class="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 hover:bg-[#727DA1]/20 transition-colors" href="/">Explore Forge</a>
+              <a class="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 hover:bg-[#727DA1]/20 transition-colors" href="/faq/">Read the FAQ</a>
+            </div>
+          </div>
+        </section>
+      </main>
+      <div class="dark">
+  <footer class="bg-[#F3F4F7] dark:bg-[#0B0C14]">
+    <div class="page-rail text-base text-[#363D4E] dark:text-neutral-200">
+      <div
+        class="pt-7 flex flex-col lg:flex-row justify-between items-center lg:items-end border-t border-neutral-300/10">
+        <div>
+          <svg width="154" height="21" alt="" class="text-black dark:text-white scale-75 lg:scale-100 svg-currentcolor">
+            <use href="/assets/images/brand/forge-logo.svg#root"></use>
+          </svg>
+          <p class="mt-3 hidden lg:block max-w-[342px]">
+            Production-grade bootstrapping.
+            <br />
+            Enterprise foundations. Startup speed.
+          </p>
+        </div>
+        <div class="flex items-center gap-6 whitespace-nowrap">
+          <a
+            class="hidden lg:block -mx-1 px-1 js-obfuscated-phone"
+            href="#"
+            data-phone-country="1"
+            data-phone-area="604"
+            data-phone-prefix="932"
+            data-phone-line="8674"
+            aria-label="Call Forge Platform"></a>
+          <a class="hidden lg:block -mx-1 px-1" href="mailto:hello@forgeplatform.software">hello@forgeplatform.software</a>
+          <div class="hidden lg:block h-4 border-l border-neutral-300/10"></div>
+          <div class="hidden lg:flex">
+            <div class="flex gap-4 text-neutral-300">
+              <a
+                aria-label="Forge Platform on LinkedIn"
+                href="https://www.linkedin.com/company/forgeplatform-software/"
+                rel="nofollow noopener"
+                target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/linkedin-143ab64c.svg#root"></use>
+                </svg>
+              </a>
+              <a aria-label="Get Forge on Github" href="https://github.com/get-forge/" rel="nofollow noopener" target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
+                </svg>
+              </a>
+              <a aria-label="Forge Platform on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/twitter-x.svg#root"></use>
+                </svg>
+              </a>
+              <a
+                aria-label="Forge Platform on Reddit"
+                href="https://www.reddit.com/user/forgeplatform/"
+                rel="nofollow noopener"
+                target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/reddit.svg#root"></use>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-5 py-3 lg:border-t flex flex-col lg:flex-row justify-between items-center border-neutral-300/10 text-[12px] leading-[18px]">
+        <div class="flex items-center gap-6 whitespace-nowrap dark:text-neutral-300">
+          <a class="-mx-1 px-1" href="/terms">Terms of Use</a>
+          <a class="-mx-1 px-1" href="/privacy">Privacy Policy</a>
+          <a class="-mx-1 px-1" href="/licence">Commercial Licence</a>
+          <a
+            class="js-demo-site-link hidden sm:block -mx-1 px-1"
+            href="https://int.forgeplatform.software/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Demo environment status unknown">
+            <svg width="14" height="15" class="js-demo-site-status mr-1 hidden lg:inline svg-currentcolor" aria-hidden="true">
+              <use href="/assets/images/social/status-green-4e79760e.svg#root"></use>
+            </svg>
+            Demo site
+          </a>
+        </div>
+        <div class="mt-8 mb-2 flex lg:hidden">
+          <div class="flex gap-4 text-neutral-300">
+            <a
+              aria-label="Forge Platform on LinkedIn"
+              href="https://www.linkedin.com/company/forgeplatform-software/"
+              rel="nofollow noopener"
+              target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/linkedin-143ab64c.svg#root"></use>
+              </svg>
+            </a>
+            <a aria-label="Get Forge on Github" href="https://github.com/get-forge/" rel="nofollow noopener" target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
+              </svg>
+            </a>
+            <a aria-label="Forge Platform on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/twitter-x.svg#root"></use>
+              </svg>
+            </a>
+            <a
+              aria-label="Forge Platform on Reddit"
+              href="https://www.reddit.com/user/forgeplatform/"
+              rel="nofollow noopener"
+              target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/reddit.svg#root"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="flex items-center text-neutral-300">© 2026 Andrew Eells. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+</div>
+    </div>
+  </body>
+</html>
