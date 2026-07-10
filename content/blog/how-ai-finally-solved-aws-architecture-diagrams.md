@@ -135,8 +135,6 @@ The breakthrough came from this AWS blog:
 
 [Build AWS architecture diagrams using Kiro CLI and MCP](https://aws.amazon.com/blogs/machine-learning/build-aws-architecture-diagrams-using-amazon-q-cli-and-mcp/)
 
-*(The URL still references Amazon Q; the post was reviewed and updated for [Kiro CLI](https://kiro.dev/docs/cli/chat/security/) in December 2025.)*
-
 At first I thought:
 
 > "Interesting... but they're just feeding text into an LLM."

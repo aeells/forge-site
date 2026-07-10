@@ -94,7 +94,6 @@
 <h2>The breakthrough</h2>
 <p>The breakthrough came from this AWS blog:</p>
 <p><a href="https://aws.amazon.com/blogs/machine-learning/build-aws-architecture-diagrams-using-amazon-q-cli-and-mcp/">Build AWS architecture diagrams using Kiro CLI and MCP</a></p>
-<p><em>(The URL still references Amazon Q; the post was reviewed and updated for <a href="https://kiro.dev/docs/cli/chat/security/">Kiro CLI</a> in December 2025.)</em></p>
 <p>At first I thought:</p>
 <blockquote>
 <p>&quot;Interesting... but they&#39;re just feeding text into an LLM.&quot;</p>
