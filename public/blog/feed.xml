@@ -8,12 +8,12 @@
     <language>en</language>
     <lastBuildDate>Thu, 09 Jul 2026 00:00:00 GMT</lastBuildDate>
     <item>
-      <title>The CDK diagram generators were right - and not publishable</title>
+      <title>How AI finally solved AWS architecture diagrams</title>
       <link>https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/</link>
       <guid isPermaLink="true">https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/</guid>
       <pubDate>Thu, 09 Jul 2026 00:00:00 GMT</pubDate>
-      <description>CloudFormation graphs answer a different question than architecture diagrams. A hybrid workflow - Cursor analysing CDK intent, a curated YAML model, and Kiro CLI rendering via MCP - produced the first AWS diagram I&apos;d actually publish.</description>
-      <content:encoded><![CDATA[<p>After years of fighting draw.io, CloudFormation graphs and auto-generated spaghetti, I finally found a workflow that generates AWS architecture diagrams I&#39;d actually publish.</p>
+      <description>CloudFormation graph tools faithfully document infrastructure, not architecture. A hybrid Cursor + Kiro workflow analysed a real CDK repository, extracted architectural intent and generated the first AWS diagram I&apos;d actually publish.</description>
+      <content:encoded><![CDATA[<p>After years of fighting draw.io, CloudFormation graphs and auto-generated spaghetti, architecture diagrams felt like the final boss of platform engineering - one I&#39;d never quite beaten.</p>
 <p>I&#39;ve been building software professionally for over 25 years.</p>
 <p>I have yet to be genuinely excited by AI&#39;s impact on large-scale software engineering. It&#39;s exceptionally good at bounded problems - a Bash script, a utility class, an isolated feature - and it&#39;s undeniably accelerating delivery. But building an entire production platform is a different challenge. That&#39;s still about architecture, trade-offs, operational thinking and years of accumulated engineering judgement.</p>
 <p>I don&#39;t believe &quot;vibe coding&quot; is replacing experienced engineers any time soon. AI is an extraordinary force multiplier, but it doesn&#39;t replace engineering judgement. If you&#39;re only capable of building poor software today, AI mostly helps you build poor software faster.</p>
@@ -79,7 +79,8 @@
 <p><strong>&quot;How does this system work?&quot;</strong></p>
 </blockquote>
 <p>Those are completely different questions.</p>
-<p>The CDK diagram generators were right. They just weren&#39;t publishable.</p>
+<p>The CDK diagram generators were right.</p>
+<p>They just weren&#39;t publishable.</p>
 <h3>AWS Workload Discovery</h3>
 <p>I even evaluated AWS&#39; own solution:</p>
 <p><a href="https://docs.aws.amazon.com/solutions/latest/workload-discovery-on-aws/solution-overview.html">AWS Workload Discovery on AWS</a></p>

@@ -1,15 +1,15 @@
 ---
-title: "The CDK diagram generators were right - and not publishable"
+title: "How AI finally solved AWS architecture diagrams"
 slug: how-ai-finally-solved-aws-architecture-diagrams
-summary: "CloudFormation graphs answer a different question than architecture diagrams. A hybrid workflow - Cursor analysing CDK intent, a curated YAML model, and Kiro CLI rendering via MCP - produced the first AWS diagram I'd actually publish."
-description: "Why CDK auto-diagram tools faithfully render infrastructure you would never show a customer, and how a hybrid AI workflow (Cursor + Kiro CLI + AWS Diagram MCP) finally made architecture diagrams maintainable."
+summary: "CloudFormation graph tools faithfully document infrastructure, not architecture. A hybrid Cursor + Kiro workflow analysed a real CDK repository, extracted architectural intent and generated the first AWS diagram I'd actually publish."
+description: "CloudFormation graph tools faithfully render infrastructure - but that's not architecture. Here's how Cursor and Kiro analysed a real CDK repository and generated an AWS architecture diagram I'd actually publish."
 published: 2026-07-09
 updated: 2026-07-09
 author: Andrew Eells
 tags: [aws, cdk, architecture, ai, platform-engineering, devops]
 ---
 
-After years of fighting draw.io, CloudFormation graphs and auto-generated spaghetti, I finally found a workflow that generates AWS architecture diagrams I'd actually publish.
+After years of fighting draw.io, CloudFormation graphs and auto-generated spaghetti, architecture diagrams felt like the final boss of platform engineering - one I'd never quite beaten.
 
 I've been building software professionally for over 25 years.
 
@@ -105,7 +105,9 @@ Architects are usually trying to answer:
 
 Those are completely different questions.
 
-The CDK diagram generators were right. They just weren't publishable.
+The CDK diagram generators were right.
+
+They just weren't publishable.
 
 ### AWS Workload Discovery
 

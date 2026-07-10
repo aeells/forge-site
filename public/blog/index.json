@@ -1,9 +1,9 @@
 [
   {
-    "title": "The CDK diagram generators were right - and not publishable",
+    "title": "How AI finally solved AWS architecture diagrams",
     "slug": "how-ai-finally-solved-aws-architecture-diagrams",
     "url": "/blog/how-ai-finally-solved-aws-architecture-diagrams/",
-    "summary": "CloudFormation graphs answer a different question than architecture diagrams. A hybrid workflow - Cursor analysing CDK intent, a curated YAML model, and Kiro CLI rendering via MCP - produced the first AWS diagram I'd actually publish.",
+    "summary": "CloudFormation graph tools faithfully document infrastructure, not architecture. A hybrid Cursor + Kiro workflow analysed a real CDK repository, extracted architectural intent and generated the first AWS diagram I'd actually publish.",
     "published": "2026-07-09",
     "updated": "2026-07-09",
     "tags": [
