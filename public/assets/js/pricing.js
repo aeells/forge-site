@@ -2,18 +2,21 @@
   var toggle = document.getElementById("pricing-billing-toggle");
   if (!toggle) return;
 
+  // Annual totals are the published list prices ($15k / $30k).
+  // Monthly stickers are rounded clean numbers (~17% above annual effective).
+  // Stripe checkout URLs left unchanged until new Payment Links are provided.
   var STRIPE = {
     builder: {
       monthly: "https://buy.stripe.com/5kQ28q5gBbjPgxX0vXaMU04",
       annual: "https://buy.stripe.com/8x29AS9wRbjP0yZceFaMU05",
-      monthlyPrice: 499,
-      annualTotal: 5090,
+      monthlyPrice: 1500,
+      annualTotal: 15000,
     },
     scale: {
       monthly: "https://buy.stripe.com/cNi9AScJ3fA52H7diJaMU01",
       annual: "https://buy.stripe.com/7sYeVc7oJgE93Lb5QhaMU03",
-      monthlyPrice: 1199,
-      annualTotal: 12230,
+      monthlyPrice: 3000,
+      annualTotal: 30000,
     },
   };
 
