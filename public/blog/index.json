@@ -1,5 +1,21 @@
 [
   {
+    "title": "AWS Transform and Superwerker: same vocabulary, different problems",
+    "slug": "aws-transform-vs-superwerker",
+    "url": "/blog/aws-transform-vs-superwerker/",
+    "summary": "AWS Transform's new landing zone agent and Superwerker both stand up governed multi-account AWS environments — but they're built for different moments in a company's cloud journey. A read-from-the-docs take, plus why Forge still points greenfield teams at Superwerker.",
+    "published": "2026-07-11",
+    "updated": "2026-07-11",
+    "tags": [
+      "aws",
+      "platform-engineering",
+      "devops",
+      "startup",
+      "migration"
+    ],
+    "readingTime": 2
+  },
+  {
     "title": "How AI finally solved AWS architecture diagrams",
     "slug": "how-ai-finally-solved-aws-architecture-diagrams",
     "url": "/blog/how-ai-finally-solved-aws-architecture-diagrams/",
@@ -14,7 +30,7 @@
       "platform-engineering",
       "devops"
     ],
-    "readingTime": 10
+    "readingTime": 9
   },
   {
     "title": "AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It",
