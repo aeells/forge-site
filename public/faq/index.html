@@ -6,7 +6,7 @@
     <title>FAQ | Forge Platform</title>
     <meta
       name="description"
-      content="Frequently asked questions about Forge Platform: fit, ownership, AWS architecture, running costs, extensibility, licensing, and technical documentation." />
+      content="Frequently asked questions about Forge Platform: fit, ownership, AWS architecture, running costs, extensibility, licensing, comparisons to DIY and adjacent tools, and technical documentation." />
     <link href="https://forgeplatform.software/faq/" rel="canonical" />
     <link rel="stylesheet" href="/assets/css/main.css" media="all" />
     <link rel="stylesheet" href="/assets/css/vendor/accordion.min.css" media="all" />
@@ -15,7 +15,7 @@
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "dateModified": "2026-06-12",
+        "dateModified": "2026-07-14",
         "mainEntity": [
           {
             "@type": "Question",
@@ -30,7 +30,7 @@
             "name": "Is Forge a framework, boilerplate, or hosted platform?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "None of the above. It's a top-to-bottom production platform foundation — infrastructure, shared services, deployment workflows, and conventions you can deploy immediately."
+              "text": "None of the above. It's a top-to-bottom production platform foundation - infrastructure, shared services, deployment workflows, and conventions you can deploy immediately."
             }
           },
           {
@@ -38,7 +38,7 @@
             "name": "Is Forge right for my team?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "If you're building something that needs to run at scale in production — not a throwaway MVP — Forge is built for you. Typical adopters are startups scaling up, founding teams hiring their first senior engineers, and greenfield enterprise projects."
+              "text": "If you're building something that needs to run at scale in production - not a throwaway MVP - Forge is built for you. Typical adopters are startups scaling up, founding teams hiring their first senior engineers, and greenfield enterprise projects."
             }
           },
           {
@@ -51,10 +51,34 @@
           },
           {
             "@type": "Question",
-            "name": "Why not just build this internally?",
+            "name": "How does Forge compare to building it ourselves?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "You can. And most teams will have to. The question is whether you can afford not to use Forge — given the cost comparison versus a single developer salary and the required focus on non-differential infrastructure and plumbing."
+              "text": "You can build it yourselves - and most teams eventually assemble something similar. Direct cost is typically ~$200k-$500k over 2-3 years, plus the larger cost of seniors off product. Forge ships Year 3 operational maturity on Day 1 as one coherent operating model. Compare Forge to building an engineering capability, not to a single developer tool. See https://forgeplatform.software/compare/."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why not Backstage or an Internal Developer Platform?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "IDPs and portals like Backstage assume a platform team already exists and make developers faster on top of it. Forge assumes there isn't one yet - it is the operational foundation that team would otherwise spend years creating. See https://forgeplatform.software/compare/."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why not Render or a PaaS?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "PaaS platforms are a good fit when a simple monolith covers the next two years. Forge is for teams that need audit trails, multi-service shape, predictable scale, enterprise diligence, and ownership inside your AWS account. See https://forgeplatform.software/compare/."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I still need Vanta?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Forge is not a compliance monitoring platform. It gives you the architecture - identity, audit, logging, deploy discipline - that tools like Vanta expect to find. Many Forge adopters can defer continuous compliance automation until formal SOC 2 or ISO attestation is on the critical path. See https://forgeplatform.software/compare/."
             }
           },
           {
@@ -70,7 +94,7 @@
             "name": "Does Forge support multi-cloud or Kubernetes?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "AWS only today. No Kubernetes complexity required. Opinionated on purpose — simpler ops, faster delivery."
+              "text": "AWS only today. No Kubernetes complexity required. Opinionated on purpose - simpler ops, faster delivery."
             }
           },
           {
@@ -94,7 +118,7 @@
             "name": "Can we extend or replace parts of Forge?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. You'll add your domain services — and you're free to replace components, change workflows, or code as needed. You'll also get updates from the upstream Forge repo."
+              "text": "Yes. You'll add your domain services - and you're free to replace components, change workflows, or code as needed. You'll also get updates from the upstream Forge repo."
             }
           },
           {
@@ -102,7 +126,7 @@
             "name": "Are we locked into Forge long term?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "You control your AWS account, code, and data. Forge platform components are commercially licensed — you keep a subscription for those. Longer-term licensing options may become available as the platform matures."
+              "text": "You control your AWS account, code, and data. Forge platform components are commercially licensed - you keep a subscription for those. Longer-term licensing options may become available as the platform matures."
             }
           }
         ]
@@ -181,13 +205,64 @@
 
             <div class="ac forge-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">Why not just build this internally?</button>
+                <button type="button" class="ac-trigger">How does Forge compare to building it ourselves?</button>
               </h2>
               <div class="ac-panel">
                 <div class="ac-text forge-faq-panel">
                   <p>
-                    You can. And most teams will have to. The question is whether you can afford <em>not</em> to use Forge — given the
-                    cost comparison versus a single developer salary and the required focus on non-differential infrastructure and plumbing.
+                    You can build it yourselves - and most teams eventually assemble something similar. Direct cost is typically
+                    ~$200k-$500k over 2-3 years, plus the larger cost of seniors off product while inventing plumbing.
+                  </p>
+                  <p>
+                    Forge ships Year 3 operational maturity on Day 1 as one coherent operating model. Compare Forge to building an
+                    engineering capability, not to a single developer tool.
+                    <a href="/compare/">See how Forge compares</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="ac forge-faq-accordion">
+              <h2 class="ac-header">
+                <button type="button" class="ac-trigger">Why not Backstage or an Internal Developer Platform?</button>
+              </h2>
+              <div class="ac-panel">
+                <div class="ac-text forge-faq-panel">
+                  <p>
+                    IDPs and portals like Backstage assume a platform team already exists and make developers faster on top of it. Forge
+                    assumes there isn't one yet - it is the operational foundation that team would otherwise spend years creating.
+                    <a href="/compare/">Compare Forge to adjacent tools</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="ac forge-faq-accordion">
+              <h2 class="ac-header">
+                <button type="button" class="ac-trigger">Why not Render or a PaaS?</button>
+              </h2>
+              <div class="ac-panel">
+                <div class="ac-text forge-faq-panel">
+                  <p>
+                    PaaS platforms are a good fit when a simple monolith covers the next two years. Forge is for teams that need audit
+                    trails, multi-service shape, predictable scale, enterprise diligence, and ownership inside your AWS account.
+                    <a href="/compare/">See the full comparison</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="ac forge-faq-accordion">
+              <h2 class="ac-header">
+                <button type="button" class="ac-trigger">Do I still need Vanta?</button>
+              </h2>
+              <div class="ac-panel">
+                <div class="ac-text forge-faq-panel">
+                  <p>
+                    Forge is not a compliance monitoring platform. It gives you the architecture - identity, audit, logging, deploy
+                    discipline - that tools like Vanta expect to find. Many Forge adopters can defer continuous compliance automation until
+                    formal SOC 2 or ISO attestation is on the critical path.
+                    <a href="/compare/">Forge vs compliance tooling</a>.
                   </p>
                 </div>
               </div>

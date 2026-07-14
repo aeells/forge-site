@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Forge vs DIY and Adjacent Tools | Forge Platform</title>
+    <meta
+      name="description"
+      content="How Forge compares to DIY platform builds and adjacent tools like Backstage, Humanitec, Quovery, Syntasso, Render, and Vanta. Operational maturity on day one - not a single-layer tool." />
+    <link href="https://forgeplatform.software/compare/" rel="canonical" />
+    <meta property="og:title" content="Forge vs DIY and Adjacent Tools | Forge Platform" />
+    <meta
+      property="og:description"
+      content="Most vendors sell one layer. Forge sells the operational maturity those layers converge into. Compare Forge to DIY, IDPs, PaaS, and compliance tooling." />
+    <meta property="og:url" content="https://forgeplatform.software/compare/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="/assets/css/main.css" media="all" />
+    <link rel="stylesheet" href="/assets/css/compare.css?v=5" media="all" />
+    <script type="module" src="/assets/js/layout-shell.js"></script>
+    <script src="/assets/js/compare.js" defer></script>
+  </head>
+  <body class="helvetica bg-[#0B0C14] text-neutral-200">
+    <div class="main overflow-x-hidden has-top-glow">
+      <div id="site-header"></div>
+
+      <main class="relative z-10 page-rail pt-32 pb-24">
+        <header class="max-w-[820px]" style="text-wrap: pretty">
+          <p class="text-[12px] uppercase tracking-[0.04em] font-semibold text-[#98A4F7]">Compare</p>
+          <h1 class="mt-3 font-helveticaDisplay text-white font-bold text-[32px] md:text-[40px] leading-[110%]">
+            Forge vs DIY and adjacent tools
+          </h1>
+          <p class="mt-4 text-neutral-200 text-lg leading-[145%]">
+            Most vendors sell one layer. Forge sells the operational maturity those layers eventually converge into - designed as one coherent
+            operating model from day one.
+          </p>
+          <p class="mt-4 text-neutral-300 leading-[160%]">
+            Forge is not a head-to-head rival of Backstage, Vanta, or Render in the narrow sense. Those products solve one job well. The real
+            decision for funded SaaS teams is usually
+            <strong class="text-white font-semibold">Forge or DIY</strong>
+            - hiring seniors, engaging a consultancy, or spending years assembling Cognito, GitHub Actions, Terraform, observability, auth,
+            audit, and compliance tooling while trying to ship product.
+          </p>
+          <div class="forge-compare-pill-row" aria-label="Products referenced on this page">
+            <span class="forge-compare-pill">DIY / consultancy</span>
+            <span class="forge-compare-pill">Syntasso</span>
+            <span class="forge-compare-pill">Quovery</span>
+            <span class="forge-compare-pill">Humanitec</span>
+            <span class="forge-compare-pill">Backstage</span>
+            <span class="forge-compare-pill">Render</span>
+            <span class="forge-compare-pill">Vanta</span>
+          </div>
+        </header>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <section class="max-w-[820px]" style="text-wrap: pretty" aria-labelledby="lost-opportunity-heading">
+          <div class="forge-compare-callout">
+            <p class="forge-compare-callout__eyebrow">The real cost</p>
+            <h2 id="lost-opportunity-heading" class="forge-compare-callout__title">
+              Direct build cost is six figures. Lost opportunity is larger.
+            </h2>
+            <p class="forge-compare-callout__body">
+              Building comparable operational capability yourself typically means
+              <strong class="text-white font-semibold">~$200k-$500k</strong>
+              of direct engineering over 2-3 years. The larger cost is what you forgo while seniors are off product: delayed launches,
+              enterprise deals stalled on security diligence, and the year-2 rewrite when MVP shortcuts meet production pressure.
+            </p>
+          </div>
+
+          <div class="forge-compare-tco mt-6 overflow-x-auto">
+            <table>
+              <caption class="sr-only">
+                Cost types for DIY versus Forge
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Cost type</th>
+                  <th scope="col">DIY / tool assembly</th>
+                  <th scope="col">Forge</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Direct engineering</th>
+                  <td>~$200k-$500k over 2-3 years</td>
+                  <td class="is-forge">$15k-$30k/year licence</td>
+                </tr>
+                <tr>
+                  <th scope="row">Senior time off product</th>
+                  <td>1-2 engineers x 18-36 months</td>
+                  <td class="is-forge">Baseline in ~2 days; team on domain from week one</td>
+                </tr>
+                <tr>
+                  <th scope="row">Delayed revenue / fundraising</th>
+                  <td>Features and pilots deferred while building plumbing</td>
+                  <td class="is-forge">Production credibility earlier</td>
+                </tr>
+                <tr>
+                  <th scope="row">Rework at scale</th>
+                  <td>Common when MVP shortcuts meet enterprise pressure</td>
+                  <td class="is-forge">Coherent architecture from the start</td>
+                </tr>
+                <tr>
+                  <th scope="row">Tool assembly tax</th>
+                  <td>Many subscriptions + integration toil</td>
+                  <td class="is-forge">One operating model, one fork</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <!-- Desktop / tablet matrix -->
+        <section class="hidden md:block" aria-labelledby="matrix-heading">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div class="min-w-0">
+              <h2 id="matrix-heading" class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">
+                Comparison matrix
+              </h2>
+              <p class="mt-3 forge-compare-section-lead">
+                Rows are what buyers care about when evaluating operational maturity - not a feature tour of products Forge does not try to
+                replace.
+              </p>
+            </div>
+            <div class="flex shrink-0 items-center self-end sm:self-auto" data-compare-nav>
+              <button
+                type="button"
+                class="forge-compare-nav-btn mr-2"
+                data-compare-prev
+                aria-label="Scroll comparison matrix left"
+                disabled>
+                <svg class="text-[#C9D3EE] w-4 h-4 inline svg-currentcolor" aria-hidden="true">
+                  <use href="/assets/icons/heroicons_v2/mini/chevron-left-cb239563.svg#root"></use>
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="forge-compare-nav-btn"
+                data-compare-next
+                aria-label="Scroll comparison matrix right">
+                <svg class="text-[#C9D3EE] w-4 h-4 inline svg-currentcolor" aria-hidden="true">
+                  <use href="/assets/icons/heroicons_v2/mini/chevron-right-03b53609.svg#root"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="forge-compare-matrix relative mt-6">
+            <div class="forge-compare-table-wrap no-scrollbars scroll-smooth" data-compare-scroll>
+              <table class="forge-compare-table">
+              <thead>
+                <tr>
+                  <th scope="col">Capability</th>
+                  <th scope="col" class="is-forge">Forge</th>
+                  <th scope="col">DIY / consultancy</th>
+                  <th scope="col">Syntasso</th>
+                  <th scope="col">Quovery</th>
+                  <th scope="col">Humanitec</th>
+                  <th scope="col">Backstage</th>
+                  <th scope="col">Render</th>
+                  <th scope="col">Vanta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">What you are buying</th>
+                  <td class="is-forge">
+                    Productized operational maturity for SaaS: developer workflow through production operations in one forkable foundation
+                  </td>
+                  <td>Custom platform built over years by internal engineers or a systems integrator</td>
+                  <td>Platform orchestration for teams building an IDP</td>
+                  <td>Agentic infrastructure / IDP control plane on Kubernetes</td>
+                  <td>Platform Orchestrator for IDP golden paths and self-service deploys</td>
+                  <td>Open-source developer portal and service catalog</td>
+                  <td>Managed PaaS for apps, databases, and workers</td>
+                  <td>Compliance automation and continuous controls monitoring</td>
+                </tr>
+                <tr>
+                  <th scope="row">End-to-end operational foundation</th>
+                  <td class="is-forge">
+                    Application services, delivery, security, observability, IaC, and governance evidence - designed together
+                  </td>
+                  <td>Can reach the same end state eventually; every layer is a separate project</td>
+                  <td>Orchestration middle layer only</td>
+                  <td>Strong on deploy and K8s fleets; not a runnable SaaS product</td>
+                  <td>Infra orchestration and deploy self-service; not a SaaS product foundation</td>
+                  <td>Portal and catalog UX only</td>
+                  <td>Hosting and deploy surface</td>
+                  <td>Compliance program management</td>
+                </tr>
+                <tr>
+                  <th scope="row">Application runtime services</th>
+                  <td class="is-forge">Auth, users, audit, documents, notifications, BFF - shipped with shared patterns</td>
+                  <td>Must design, build, and maintain each service</td>
+                  <td>Not included</td>
+                  <td>Not included</td>
+                  <td>Not included</td>
+                  <td>Catalog metadata only</td>
+                  <td>Managed Postgres / Redis primitives only</td>
+                  <td>Not included</td>
+                </tr>
+                <tr>
+                  <th scope="row">CI/CD and release discipline</th>
+                  <td class="is-forge">Full spine: hygiene, build/test, versioning, publish, ECS deploy, infra, coverage</td>
+                  <td>Often 6-18 months to reach equivalent maturity</td>
+                  <td>Coordinates workflows; does not replace pipeline design</td>
+                  <td>Built-in deploy pipelines on K8s</td>
+                  <td>Integrates with existing CI/CD</td>
+                  <td>Plugin ecosystem; you own pipelines</td>
+                  <td>Git-based deploys and rollbacks</td>
+                  <td>Monitors CI/CD evidence; does not operate pipelines</td>
+                </tr>
+                <tr>
+                  <th scope="row">Security and identity baseline</th>
+                  <td class="is-forge">Identity-first, zero-trust, secrets, WAF, rate limiting, private compute from day one</td>
+                  <td>Achievable, usually retrofitted after MVP</td>
+                  <td>Policy in platform workflows</td>
+                  <td>RBAC and deployment rules for platform actions</td>
+                  <td>RBAC on provisioning requests</td>
+                  <td>No security runtime</td>
+                  <td>TLS, private networking; shared multi-tenant runtime</td>
+                  <td>Tests whether controls pass; does not implement architecture</td>
+                </tr>
+                <tr>
+                  <th scope="row">Observability foundations</th>
+                  <td class="is-forge">Metrics, logs, tracing, health, dashboards aligned to production</td>
+                  <td>Major workstream; often bolted on late</td>
+                  <td>Not a focus</td>
+                  <td>Expanding monitoring and log integration</td>
+                  <td>Not a focus</td>
+                  <td>Integrations to external tools</td>
+                  <td>Basic metrics and logs</td>
+                  <td>Not an observability platform</td>
+                </tr>
+                <tr>
+                  <th scope="row">Runs in your AWS account</th>
+                  <td class="is-forge">Yes - fork to your GitHub, deploy to your accounts; you own code, infra, and data</td>
+                  <td>Yes, by definition</td>
+                  <td>Orchestrates in your infra</td>
+                  <td>Yes - data plane in your cloud</td>
+                  <td>SaaS control plane connecting to your infra</td>
+                  <td>Portal software you host</td>
+                  <td>No - Render-managed infrastructure</td>
+                  <td>Read-only integrations for evidence</td>
+                </tr>
+                <tr>
+                  <th scope="row">Documented engineering decisions</th>
+                  <td class="is-forge">27+ ADRs with rationale and trade-offs</td>
+                  <td>Rarely documented until audit or scale crisis</td>
+                  <td>Org-specific ADRs still yours to write</td>
+                  <td>Product ADRs still yours</td>
+                  <td>Application ADRs still yours</td>
+                  <td>Templates and catalog entries</td>
+                  <td>Blueprints; limited decision record</td>
+                  <td>Policy templates for frameworks</td>
+                </tr>
+                <tr>
+                  <th scope="row">Assumes a platform team exists</th>
+                  <td class="is-forge">No - Year 3 maturity before Year 3 headcount</td>
+                  <td>N/A</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                  <td>No - developer-friendly, ops-light</td>
+                  <td>No - but someone must own compliance</td>
+                </tr>
+                <tr>
+                  <th scope="row">Time to production-ready baseline</th>
+                  <td class="is-forge">~2 days to AWS-deployed baseline with pipeline and operational visibility</td>
+                  <td>2-3 years elapsed senior engineering time</td>
+                  <td>Months for orchestration; foundation still separate</td>
+                  <td>Weeks to months for IDP on existing K8s</td>
+                  <td>Weeks for orchestrator; foundation still separate</td>
+                  <td>Months for portal; everything else separate</td>
+                  <td>Hours to days for a deployable app</td>
+                  <td>Weeks to months for audit readiness</td>
+                </tr>
+                <tr>
+                  <th scope="row">Compliance and audit readiness</th>
+                  <td class="is-forge">Audit trail, identity evidence, and security baseline built in - shortens path to formal attestation</td>
+                  <td>Retrofit is expensive; evidence scattered</td>
+                  <td>Not a compliance product</td>
+                  <td>Not a compliance product</td>
+                  <td>Not a compliance product</td>
+                  <td>Not a compliance product</td>
+                  <td>Vendor SOC 2/ISO for Render; your app compliance is yours</td>
+                  <td>Core product - continuous monitoring and auditor workflows</td>
+                </tr>
+                <tr>
+                  <th scope="row">Best fit when</th>
+                  <td class="is-forge">
+                    Funded B2B SaaS needs production credibility without hiring a platform team first
+                  </td>
+                  <td>Preference to invent everything in-house; unlimited senior bandwidth</td>
+                  <td>Mature org with dedicated platform engineering</td>
+                  <td>Org already on K8s wanting self-service deploys</td>
+                  <td>Platform team wants golden-path orchestration</td>
+                  <td>Large eng org needs a service catalog on an existing platform</td>
+                  <td>Simple-to-moderate app; MVP with limited enterprise pressure</td>
+                  <td>Running product needing SOC 2 / ISO / HIPAA attestation</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+            <button
+              type="button"
+              class="forge-compare-fade forge-compare-fade--right"
+              data-compare-fade-right
+              aria-label="Scroll comparison matrix right"></button>
+          </div>
+        </section>
+
+        <!-- Mobile: DIY first, then competitor cards -->
+        <section class="md:hidden" aria-labelledby="mobile-matrix-heading">
+          <h2 id="mobile-matrix-heading" class="text-white font-semibold text-[20px] leading-[120%]">How Forge stacks up</h2>
+          <p class="mt-3 forge-compare-section-lead">Start with the real decision (DIY), then adjacent tools one layer at a time.</p>
+
+          <div class="mt-6 forge-compare-card" style="border-color: rgba(91, 99, 211, 0.35)">
+            <span class="forge-compare-card__tag">Primary comparison</span>
+            <h3>Forge vs DIY / consultancy</h3>
+            <ul class="mt-3 space-y-2 list-disc pl-5">
+              <li>
+                <strong class="text-white">Forge:</strong>
+                full operational foundation in ~2 days on your AWS; $15k-$30k/year
+              </li>
+              <li>
+                <strong class="text-white">DIY:</strong>
+                ~$200k-$500k over 2-3 years plus seniors off product
+              </li>
+              <li>Forge is a coherent operating model. DIY is an assembly project with rewrite risk.</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 forge-compare-grid">
+            <article class="forge-compare-card">
+              <span class="forge-compare-card__tag">Platform orchestration</span>
+              <h3>Syntasso</h3>
+              <p class="mt-2">
+                IDP orchestration middle layer for platform teams. Coordinates tools; does not ship auth, audit, or app services. Assumes a
+                platform engineering org already exists.
+              </p>
+            </article>
+            <article class="forge-compare-card">
+              <span class="forge-compare-card__tag">IDP / deploy</span>
+              <h3>Quovery</h3>
+              <p class="mt-2">
+                Strong Kubernetes control plane for self-service deploys and fleets. Adjacent to Forge on delivery; not an end-to-end SaaS
+                operational foundation.
+              </p>
+            </article>
+            <article class="forge-compare-card">
+              <span class="forge-compare-card__tag">Platform orchestrator</span>
+              <h3>Humanitec</h3>
+              <p class="mt-2">
+                Golden-path orchestration for IDPs. Built for platform engineers configuring self-service infra - not greenfield teams
+                without a platform team.
+              </p>
+            </article>
+            <article class="forge-compare-card">
+              <span class="forge-compare-card__tag">Developer portal</span>
+              <h3>Backstage</h3>
+              <p class="mt-2">
+                Service catalog and portal UX. Assumes the platform underneath already exists. Forge is that underlying foundation when you
+                do not have a platform team yet.
+              </p>
+            </article>
+            <article class="forge-compare-card">
+              <span class="forge-compare-card__tag">PaaS</span>
+              <h3>Render</h3>
+              <p class="mt-2">
+                Fast path to a deployed app on managed infrastructure. Fit for simpler MVPs. Forge is for teams that need audit trails,
+                tenant isolation, and ownership inside their AWS account.
+              </p>
+            </article>
+            <article class="forge-compare-card">
+              <span class="forge-compare-card__tag">Compliance</span>
+              <h3>Vanta</h3>
+              <p class="mt-2">
+                Continuous compliance monitoring and auditor workflows. Forge gives you the architecture Vanta expects to find. Many teams
+                can defer Vanta until formal attestation is on the roadmap.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <section class="max-w-[820px] forge-compare-narrative" style="text-wrap: pretty">
+          <div>
+            <h2 class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">Forge vs platform orchestrators</h2>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              <strong class="text-white">Humanitec</strong>,
+              <strong class="text-white">Syntasso</strong>, and
+              <strong class="text-white">Quovery</strong>
+              help platform teams orchestrate golden paths across Terraform, Kubernetes, and CI/CD. They are strong answers when you already
+              have engineers whose job is building an Internal Developer Platform.
+            </p>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              Forge assumes that team does not exist yet. It ships the operational foundation those orchestrators would wrap - application
+              services included - as a forkable product in your AWS account.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">Forge vs developer portals</h2>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              <strong class="text-white">Backstage</strong>
+              (and portals like Port) improve how developers discover and navigate a platform. They do not replace the platform underneath.
+              Teams that start with Forge already get shared patterns, delivery rails, and operational evidence. A portal becomes optional
+              later, not a prerequisite for shipping.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">Forge vs PaaS</h2>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              <strong class="text-white">Render</strong>, Railway, Heroku, and Fly.io optimize for ship-fast hosting. That is the right path when a
+              simple monolith covers the next two years. Forge is for teams that expect enterprise scrutiny, multi-service shape, audit
+              trails, predictable scale, and a path that stays in
+              <strong class="text-white">your</strong>
+              AWS account.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">Forge vs compliance automation</h2>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              <strong class="text-white">Vanta</strong>
+              (and Drata / Secureframe) monitor controls and collect audit evidence. Forge is not a compliance monitoring product. Starting
+              with Forge gives you identity, logging, access patterns, and deploy discipline that make later attestation shorter - and that
+              often mean you do not need a full compliance suite until certification is on the critical path.
+            </p>
+          </div>
+        </section>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <section aria-labelledby="other-players-heading">
+          <h2 id="other-players-heading" class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">
+            Other players worth knowing
+          </h2>
+          <p class="mt-3 forge-compare-section-lead">
+            Adjacent references buyers sometimes raise. None is an end-to-end peer to Forge.
+          </p>
+          <div class="mt-6 forge-compare-grid forge-compare-grid--3">
+            <article class="forge-compare-card">
+              <h3>Port</h3>
+              <p class="mt-2">Developer portal layer - like Backstage. Assumes a platform already exists underneath.</p>
+            </article>
+            <article class="forge-compare-card">
+              <h3>Railway / Heroku / Fly.io</h3>
+              <p class="mt-2">PaaS speed for MVPs. Weaker on enterprise SaaS backbone, audit, and AWS ownership.</p>
+            </article>
+            <article class="forge-compare-card">
+              <h3>AWS-native assembly</h3>
+              <p class="mt-2">Cognito + ECS + CDK + Actions are strong parts. Integration and decision debt are still yours.</p>
+            </article>
+            <article class="forge-compare-card">
+              <h3>Consultancies / SIs</h3>
+              <p class="mt-2">Same outcome shape as DIY - often slower and more expensive, with less reusable product maturity.</p>
+            </article>
+            <article class="forge-compare-card">
+              <h3>Drata / Secureframe</h3>
+              <p class="mt-2">Same category as Vanta: compliance automation that monitors what Forge helps you build correctly from the start.</p>
+            </article>
+          </div>
+        </section>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <section class="max-w-[820px]" style="text-wrap: pretty" aria-labelledby="caveats-heading">
+          <h2 id="caveats-heading" class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">Honest caveats</h2>
+          <div class="mt-4 list-primary-discs">
+            <ul class="space-y-3 text-neutral-300 leading-[160%]">
+              <li>
+                Forge is
+                <strong class="text-white">not</strong>
+                a compliance monitoring platform. When you pursue SOC 2 Type II, Vanta or similar may still add value for continuous control
+                testing and auditor workflows.
+              </li>
+              <li>
+                Forge is
+                <strong class="text-white">not</strong>
+                a PaaS. If a simple monolith on Render covers the next two years, Forge is probably not the fit.
+              </li>
+              <li>
+                Forge is
+                <strong class="text-white">not</strong>
+                an IDP portal. It does not assume you have a platform team configuring golden paths - it
+                <strong class="text-white">is</strong>
+                the pre-built foundation that team would otherwise create.
+              </li>
+              <li>
+                Forge is
+                <strong class="text-white">greenfield-first</strong>.
+                It is also a fit for legacy rewrites or consolidation, with a deliberate migration plan.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <section class="w-full" style="text-wrap: pretty" aria-labelledby="next-step-heading">
+          <h2 id="next-step-heading" class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">Next step</h2>
+          <p class="mt-3 max-w-[820px] text-neutral-300 leading-[160%]">
+            Prefer a short architecture-fit conversation over a feature tour?
+            <br />
+            Compare Forge to building an engineering capability - not to a single developer tool.
+          </p>
+          <div id="contact" class="mt-8 w-full">
+            <div class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between w-full">
+              <form
+                id="forge-compare-formspree"
+                action="https://formspree.io/f/mreoekzn"
+                method="POST"
+                class="flex flex-col sm:flex-row gap-3 items-center">
+                <input
+                  type="email"
+                  name="email"
+                  autocomplete="email"
+                  class="appearance-none px-5 border rounded-lg backdrop-blur-2xl text-white h-12 w-full max-w-[316px] sm:max-w-full sm:w-[324px] border-[#727DA1]/20 bg-[#727DA1]/10 placeholder:text-neutral-300"
+                  data-1p-ignore=""
+                  placeholder="Your work e-mail"
+                  required="" />
+                <button
+                  class="cta-button px-6 flex items-center justify-center text-white font-medium whitespace-nowrap h-12 w-full sm:w-auto max-w-[316px]"
+                  type="submit">
+                  Is Forge right for me?
+                </button>
+              </form>
+            </div>
+            <p
+              id="forge-compare-formspree-success"
+              class="hidden mt-3 max-w-[640px] rounded-lg border border-[#939db833] bg-[#171926]/90 px-4 py-3 text-13 leading-[145%] text-neutral-200 text-center lg:ml-2 lg:text-left"
+              role="status">
+              Thanks - we received your email and will be in touch.
+            </p>
+            <p
+              id="forge-compare-formspree-error"
+              class="hidden mt-3 max-w-[640px] rounded-lg border border-red-500/40 bg-[#171926]/90 px-4 py-3 text-13 leading-[145%] text-red-200/90 text-center lg:ml-2 lg:text-left"
+              role="alert"></p>
+            <p class="mt-5 pb-2 text-13 text-[#646E87] text-center md:text-left lg:ml-2">
+              Prefer a call?
+              <a
+                class="underline underline-offset-4 transition text-[#C9D3EE] decoration-[#C9D3EE]/20 hover:decoration-[#C9D3EE]"
+                href="https://calendly.com/forgeplatform/discovery-call"
+                rel="nofollow noopener"
+                target="_blank">
+                Book a discovery
+              </a>
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <div id="site-footer"></div>
+    </div>
+    <script src="/assets/js/formspree.js" defer></script>
+  </body>
+</html>
