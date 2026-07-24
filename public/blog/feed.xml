@@ -31,7 +31,7 @@
 <p>Then came DevOps.</p>
 <p>Operations moved left too. Infrastructure, monitoring, deployments and incident response all became part of the same team&#39;s responsibility.</p>
 <p>&quot;You build it, you run it.&quot;</p>
-<p>Then security took its turn. DevSecOps pushed security left as well - threat modelling, dependency scanning and policy checks moving out of a late-stage gate and into the pipeline itself.</p>
+<p>Then security took its turn. <a href="https://medium.com/slalom-build/devsecops-in-effect-at-the-web-application-firewall-472481688f8d">DevSecOps</a> pushed security left as well - threat modelling, dependency scanning and policy checks moving out of a late-stage gate and into the pipeline itself.</p>
 <p>Every few years another discipline moved closer to the developer.</p>
 <p>Testing.</p>
 <p>Delivery.</p>
