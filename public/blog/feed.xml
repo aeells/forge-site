@@ -6,7 +6,120 @@
     <atom:link href="https://forgeplatform.software/blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>Opinionated engineering notes on building production SaaS platforms - from runtime architecture and platform engineering to the realities of running software at scale.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 11 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 24 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>We&apos;ve Spent 25 Years Shifting Left. The Next Shift Is Down.</title>
+      <link>https://forgeplatform.software/blog/twenty-five-years-of-shifting-left/</link>
+      <guid isPermaLink="true">https://forgeplatform.software/blog/twenty-five-years-of-shifting-left/</guid>
+      <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+      <description>For 25 years we&apos;ve shifted engineering work left: CI, CD, DevOps, DevSecOps and now AI. But we&apos;ve never stopped rebuilding the same operational foundations. The next shift isn&apos;t left. It&apos;s down.</description>
+      <content:encoded><![CDATA[<p>I&#39;ve been building software professionally for about 25 years.</p>
+<p>Looking back, I realised that a surprising amount of that time has been spent doing one thing.</p>
+<p>Shifting left.</p>
+<p>Moving work earlier. Catching problems sooner. Automating the things we used to do by hand at the end of a project.</p>
+<p>It&#39;s been one of the defining trends of modern software engineering.</p>
+<p>But recently I&#39;ve started wondering whether we&#39;ve been optimising along the wrong axis.</p>
+<h2>Twenty-five years of shifting left</h2>
+<p>Around the turn of the millennium, continuously building and testing software instead of integrating everything just before release was still a relatively new idea.</p>
+<p>Continuous integration emerged. CruiseControl popularised the approach, Hudson followed a few years later, and eventually Jenkins became the tool many teams knew best. &quot;Does it build?&quot; became a question answered automatically on every commit.</p>
+<p>That was shift-left number one.</p>
+<p>Testing and integration moved earlier.</p>
+<p>Then continuous integration became continuous <strong>delivery</strong>. Martin Fowler and Jez Humble helped turn the idea into mainstream engineering practice. Building software wasn&#39;t enough; every commit produced something releasable.</p>
+<p>Then the &quot;D&quot; quietly changed meaning.</p>
+<p>Delivery became <strong>deployment</strong>.</p>
+<p>Releasing software stopped being a scheduled event and became something that happened continuously as a consequence of merging code.</p>
+<p>Then came DevOps.</p>
+<p>Operations moved left too. Infrastructure, monitoring, deployments and incident response all became part of the same team&#39;s responsibility.</p>
+<p>&quot;You build it, you run it.&quot;</p>
+<p>Then security took its turn. DevSecOps pushed security left as well - threat modelling, dependency scanning and policy checks moving out of a late-stage gate and into the pipeline itself.</p>
+<p>Every few years another discipline moved closer to the developer.</p>
+<p>Testing.</p>
+<p>Delivery.</p>
+<p>Deployment.</p>
+<p>Operations.</p>
+<p>Security.</p>
+<p>It genuinely made us better engineers.</p>
+<h2>AI isn&#39;t really shifting left</h2>
+<p>Today it&#39;s fashionable to put AI into the same story.</p>
+<p>I&#39;m not convinced that&#39;s what&#39;s happening.</p>
+<p>AI isn&#39;t primarily moving work earlier.</p>
+<p>It&#39;s helping us perform the same work faster.</p>
+<p>That&#39;s an important distinction.</p>
+<p>Where AI has changed things is by lowering the barrier to entry. Someone with relatively little operational experience can now generate a CI pipeline, Terraform configuration or deployment workflow in minutes.</p>
+<p>Useful?</p>
+<p>Absolutely.</p>
+<p>But if AI&#39;s biggest contribution is helping us recreate the same infrastructure more quickly, then perhaps recreating it was never the thing we should have been doing in the first place.</p>
+<h2>The pattern I couldn&#39;t ignore</h2>
+<p>Here&#39;s what those 25 years actually looked like.</p>
+<p>I built CI pipelines.</p>
+<p>Then I built them again somewhere else.</p>
+<p>Then again.</p>
+<p>I created infrastructure-as-code.</p>
+<p>Then recreated it for the next company.</p>
+<p>I wired up authentication.</p>
+<p>Observability.</p>
+<p>Deployment pipelines.</p>
+<p>Audit logging.</p>
+<p>Secrets management.</p>
+<p>Monitoring.</p>
+<p>Rollback procedures.</p>
+<p>Different organisations.</p>
+<p>Different technology stacks.</p>
+<p>Different decades.</p>
+<p>Almost exactly the same engineering disciplines.</p>
+<p>None of that work was the product.</p>
+<p>None of it differentiated the business.</p>
+<p>It was simply the operational foundation required before the product could exist.</p>
+<blockquote>
+<p>These aren&#39;t product problems. They&#39;re engineering fundamentals. Yet almost every team rebuilds them from scratch, every single time.</p>
+</blockquote>
+<p>Shift-left made us do this work earlier.</p>
+<p>It never asked why we were repeating it at all.</p>
+<p>Every startup, every consultancy and every enterprise greenfield project still begins by rebuilding the same engineering capabilities before a single customer problem gets solved.</p>
+<h2>Forge is about shifting down</h2>
+<p>That&#39;s the shift I&#39;m interested in now.</p>
+<p>Not left.</p>
+<p>Down.</p>
+<p>Imagine rotating the software lifecycle ninety degrees.</p>
+<p>Across the top sits your product: the services, APIs and user experience your customers actually pay for.</p>
+<p>Underneath sits everything every serious SaaS product inevitably needs.</p>
+<p>Authentication.</p>
+<p>Identity.</p>
+<p>CI/CD.</p>
+<p>Observability.</p>
+<p>Audit.</p>
+<p>Notifications.</p>
+<p>Document services.</p>
+<p>Infrastructure.</p>
+<p>Operational tooling.</p>
+<p>These capabilities aren&#39;t unique to your business.</p>
+<p>They&#39;re shared engineering concerns.</p>
+<p>So why are they still treated as project work?</p>
+<p><strong>Shifting down means moving those undifferentiated engineering disciplines beneath your application into a reusable operational foundation instead of rebuilding them inside every new product.</strong></p>
+<p>That&#39;s what Forge Platform is.</p>
+<p>Not another framework.</p>
+<p>Not another starter template.</p>
+<p>An opinionated operational backbone for modern SaaS products.</p>
+<p>Authentication, users, audit, notifications, documents and a BFF orchestration layer. Infrastructure-as-code. CI/CD. Observability. Security. Everything deployed into your own AWS account, from your own GitHub repositories, remaining entirely under your control.</p>
+<p>The disciplines I spent decades shifting left don&#39;t disappear.</p>
+<p>They simply stop living inside every application.</p>
+<h2>Left was never the destination</h2>
+<p>Shift-left was absolutely the right idea.</p>
+<p>Finding problems earlier has transformed our industry.</p>
+<p>But somewhere along the way we confused the mechanism with the objective.</p>
+<p>The objective was never simply to push more responsibility onto developers.</p>
+<p>It was to stop repeatedly paying for the same engineering work in every company, on every project, for every new product.</p>
+<p>Some engineering problems only need solving once.</p>
+<p>The operational backbone beneath your SaaS product is one of them.</p>
+<p>After 25 years of shifting left, that feels like the direction we&#39;ve really been heading all along.</p>
+<p>If that resonates, I&#39;d genuinely like to hear from you - you can find out more at <a href="https://forgeplatform.software/">forgeplatform.software</a>.</p>
+]]></content:encoded>
+      <category>devops</category>
+      <category>software-engineering</category>
+      <category>ci-cd</category>
+      <category>ai</category>
+      <category>platform</category>
+    </item>
     <item>
       <title>AWS Transform and Superwerker: same vocabulary, different problems</title>
       <link>https://forgeplatform.software/blog/aws-transform-vs-superwerker/</link>

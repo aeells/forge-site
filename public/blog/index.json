@@ -1,5 +1,21 @@
 [
   {
+    "title": "We've Spent 25 Years Shifting Left. The Next Shift Is Down.",
+    "slug": "twenty-five-years-of-shifting-left",
+    "url": "/blog/twenty-five-years-of-shifting-left/",
+    "summary": "For 25 years we've shifted engineering work left: CI, CD, DevOps, DevSecOps and now AI. But we've never stopped rebuilding the same operational foundations. The next shift isn't left. It's down.",
+    "published": "2026-07-24",
+    "updated": "2026-07-24",
+    "tags": [
+      "devops",
+      "software-engineering",
+      "ci-cd",
+      "ai",
+      "platform"
+    ],
+    "readingTime": 4
+  },
+  {
     "title": "AWS Transform and Superwerker: same vocabulary, different problems",
     "slug": "aws-transform-vs-superwerker",
     "url": "/blog/aws-transform-vs-superwerker/",
