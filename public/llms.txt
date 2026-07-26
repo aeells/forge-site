@@ -20,5 +20,5 @@ Forge provides opinionated infrastructure, service patterns, operational tooling
 
 - [Book a discovery call](https://calendly.com/forgeplatform/discovery-call)
 - [LinkedIn](https://www.linkedin.com/company/forgeplatform-software/)
-- [GitHub](https://github.com/get-forge/)
+- [GitHub](https://github.com/get-backbone/)
 - [X](https://x.com/_get_forge)
