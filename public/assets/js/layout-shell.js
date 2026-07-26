@@ -66,8 +66,8 @@ function applyDemoStatus(root, status) {
   const online = status.online === true;
   const iconHref = online ? DEMO_STATUS_GREEN : DEMO_STATUS_RED;
   const label = online
-    ? "Demo environment online — opens int.backbonehq.io"
-    : "Demo environment offline — opens holding page at int.backbonehq.io";
+    ? "Demo environment online - opens int.backbonehq.io"
+    : "Demo environment offline - opens holding page at int.backbonehq.io";
 
   links.forEach((link) => {
     link.setAttribute("aria-label", label);

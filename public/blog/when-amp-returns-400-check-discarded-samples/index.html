@@ -108,7 +108,7 @@
           <hr class="blog-rule" aria-hidden="true" />
           <div class="blog-prose">
 <p>AMP said 400. CloudWatch said why.</p>
-<p>We turned on Amazon Managed Prometheus (AMP) remote write from our Quarkus services on ECS — Micrometer snapshots, Snappy-compressed Prometheus remote write, SigV4 signing — and everything <em>mostly</em> worked.</p>
+<p>We turned on Amazon Managed Prometheus (AMP) remote write from our Quarkus services on ECS - Micrometer snapshots, Snappy-compressed Prometheus remote write, SigV4 signing - and everything <em>mostly</em> worked.</p>
 <p>Mostly.</p>
 <p>Every service logged <code>AMP remote write failed with status 400</code> on a ~60 second cadence. Not constantly. Not only at startup. Intermittently, across the fleet, continually.</p>
 <p>HTTP 400 with an empty body is a frustrating place to start.</p>
@@ -136,7 +136,7 @@
 <p>We scraped live exposition text from a running native task (more on that pattern below), loaded it into a JVM integration test, encoded it with the same remote-write encoder, and POSTed to AMP.</p>
 <p><strong>200. Full payload accepted.</strong></p>
 <p>So the metric <em>content</em> at scrape time was not inherently toxic. The encoder and Snappy path on JVM were fine.</p>
-<p>That left something about the <strong>native periodic push path</strong> or <strong>fleet-wide ingestion behaviour</strong> — not a single broken histogram hiding in auth-service.</p>
+<p>That left something about the <strong>native periodic push path</strong> or <strong>fleet-wide ingestion behaviour</strong> - not a single broken histogram hiding in auth-service.</p>
 <h2>The pivot: CloudWatch <code>DiscardedSamples</code></h2>
 <p>AMP exposes <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-CW-usage-metrics.html">vended CloudWatch metrics</a> under the <code>AWS/Prometheus</code> namespace. One of them is <strong><code>DiscardedSamples</code></strong>, with a <strong><code>Reason</code> dimension</strong> explaining why samples were dropped.</p>
 <p>We listed metrics for our workspace:</p>
@@ -168,7 +168,7 @@
 <p>Once we saw that, the intermittent 400s and the ~95% push success rate (success counter climbing, failure counter occasionally ticking) both made sense: most pushes partially or fully conflicted with other writers or stale timestamps; some requests failed hard at the HTTP layer.</p>
 <h2>The actual bug: six services, one series</h2>
 <p>Each ECS service exports the same Micrometer binders: <code>jvm_*</code>, <code>process_*</code>, <code>system_*</code>, HTTP server metrics, and our own <code>forge_observability_amp_push_*</code> counters.</p>
-<p>We had <strong>no common tags</strong> — no <code>service</code>, no <code>instance</code>, no <code>pod</code>.</p>
+<p>We had <strong>no common tags</strong> - no <code>service</code>, no <code>instance</code>, no <code>pod</code>.</p>
 <p>So from AMP&#39;s perspective:</p>
 <pre><code class="language-text">auth-service   → jvm_threads_live_threads = 21  @ T
 actor-service  → jvm_threads_live_threads = 14  @ T
@@ -176,14 +176,14 @@ document-service → jvm_threads_live_threads = 19 @ T
 </code></pre>
 <p>That is <strong>one series</strong> (<code>jvm_threads_live_threads</code> with identical labels) receiving <strong>different values at the same timestamp</strong> from different tasks, every push interval, forever.</p>
 <p>Classic multi-writer collision.</p>
-<p>It is the same class of problem as running multiple Prometheus replicas remote-writing the same targets without external labels — except we did it with six application services and one workspace.</p>
+<p>It is the same class of problem as running multiple Prometheus replicas remote-writing the same targets without external labels - except we did it with six application services and one workspace.</p>
 <h3>Why the JVM probe didn&#39;t catch it</h3>
 <p>The probe used a <strong>single</strong> scraped exposition file from <strong>one</strong> task. One writer. AMP happily ingested it.</p>
 <p>The failure mode only appears when <strong>multiple tasks</strong> push <strong>overlapping label sets</strong> to <strong>one workspace</strong> on the same schedule.</p>
 <h3>Why <code>hasScrapeTimestamp()</code> wasn&#39;t the story</h3>
 <p>We also suspected stale per-datapoint scrape timestamps from the registry. On JVM Micrometer scrape, <strong><code>hasScrapeTimestamp()</code> was false for every data point</strong> in our tests. The old encoder fell back to <code>System.currentTimeMillis()</code> per sample anyway.</p>
 <p>Fleet collision fit the CloudWatch evidence better than stale scrape timestamps.</p>
-<p>We still normalized to <strong>one batch push timestamp per remote-write request</strong> — correct semantics for periodic push export — but the fix that cleared discards was <strong>disambiguating series</strong>.</p>
+<p>We still normalized to <strong>one batch push timestamp per remote-write request</strong> - correct semantics for periodic push export - but the fix that cleared discards was <strong>disambiguating series</strong>.</p>
 <h2>The fix</h2>
 <h3>1. Common tags (the real fix)</h3>
 <p>In forge-kit <code>forge-metrics</code>, a CDI <code>MeterFilter</code>:</p>
@@ -216,19 +216,19 @@ awscurl --service aps --region us-west-2 \
 <h2>Appendix: debugging when you can&#39;t reach <code>/q/metrics</code></h2>
 <p>Our laptops can&#39;t hit task private IPs in a NAT-less VPC. To compare native exposition with the JVM encoder, we used a one-off Fargate task pattern:</p>
 <ol>
-<li>Publish a tiny <strong>private ECR</strong> image (<code>busybox</code> + <code>wget</code>) — Docker Hub and public ECR aren&#39;t reachable from the VPC without NAT.</li>
+<li>Publish a tiny <strong>private ECR</strong> image (<code>busybox</code> + <code>wget</code>) - Docker Hub and public ECR aren&#39;t reachable from the VPC without NAT.</li>
 <li>Run a task in the cluster that <code>wget</code>s <code>http://&lt;task-private-ip&gt;:8080/q/metrics</code> (same path the target group uses for health checks).</li>
 <li>Pull logs into a local file and feed it to a JVM probe (<code>FORGE_AMP_METRICS_FILE=...</code>).</li>
 </ol>
-<p>We also briefly added a <strong>same-SG ingress on 8080</strong> so the scrape task could reach the service ENI — then <strong>revoked</strong> it after debugging. That rule is not part of normal infra; ALB → task rules stay as designed.</p>
-<p>This tooling was valuable for one INT session. We don&#39;t plan to keep the scrape image or scripts in the application repo long term — the durable lessons are the <strong>CloudWatch reason dimension</strong>, the <strong>multi-writer tag discipline</strong>, and the <strong>PromQL verification queries</strong>.</p>
+<p>We also briefly added a <strong>same-SG ingress on 8080</strong> so the scrape task could reach the service ENI - then <strong>revoked</strong> it after debugging. That rule is not part of normal infra; ALB → task rules stay as designed.</p>
+<p>This tooling was valuable for one INT session. We don&#39;t plan to keep the scrape image or scripts in the application repo long term - the durable lessons are the <strong>CloudWatch reason dimension</strong>, the <strong>multi-writer tag discipline</strong>, and the <strong>PromQL verification queries</strong>.</p>
 <h2>Takeaways</h2>
 <ol>
 <li><strong>AMP HTTP 400 with an empty body</strong> sends you down a long hallway. <strong><code>DiscardedSamples</code> by <code>Reason</code></strong> is often the door.</li>
-<li><strong><code>new-value-for-timestamp</code></strong> on a shared workspace screams <strong>label collision</strong> — multiple writers, identical series, aligned push intervals.</li>
+<li><strong><code>new-value-for-timestamp</code></strong> on a shared workspace screams <strong>label collision</strong> - multiple writers, identical series, aligned push intervals.</li>
 <li><strong>Micrometer <code>MeterFilter.commonTags</code></strong> with low-cardinality <code>service</code> (and <code>instance</code> when you scale replicas) is not optional when many processes remote-write to one Prometheus-compatible backend.</li>
 <li><strong>Single-service probes prove encoding</strong>, not fleet behaviour. Reproduce collisions with multi-writer thinking.</li>
-<li><strong>Confirm consumption</strong> with PromQL and CloudWatch ingestion metrics — not only &quot;the error log stopped.&quot;</li>
+<li><strong>Confirm consumption</strong> with PromQL and CloudWatch ingestion metrics - not only &quot;the error log stopped.&quot;</li>
 </ol>
 <p>If you&#39;re wiring Micrometer → AMP on ECS, check your tags before you tune Snappy JNI or second-guess your SigV4 implementation.</p>
 <p>The platform was fine. We were just telling six services to sign the same name on the same line.</p>
@@ -304,7 +304,7 @@ awscurl --service aps --region us-west-2 \
                   <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
                 </svg>
               </a>
-              <a aria-label="Backbone on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+              <a aria-label="Backbone on X" href="https://x.com/_backbonehq" rel="nofollow noopener" target="_blank">
                 <svg width="16" height="17" class="svg-currentcolor">
                   <use href="/assets/images/social/twitter-x.svg#root"></use>
                 </svg>
@@ -356,7 +356,7 @@ awscurl --service aps --region us-west-2 \
                 <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
               </svg>
             </a>
-            <a aria-label="Backbone on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+            <a aria-label="Backbone on X" href="https://x.com/_backbonehq" rel="nofollow noopener" target="_blank">
               <svg width="16" height="17" class="svg-currentcolor">
                 <use href="/assets/images/social/twitter-x.svg#root"></use>
               </svg>

@@ -4,17 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>AWS Transform and Superwerker: same vocabulary, different problems | Backbone</title>
-    <meta name="description" content="AWS Transform's landing zone agent and Superwerker both create governed AWS environments, but they solve different problems. A practitioner's comparison — including hands-on Superwerker experience — and where Backbone fits." />
+    <meta name="description" content="AWS Transform's landing zone agent and Superwerker both create governed AWS environments, but they solve different problems. A practitioner's comparison - including hands-on Superwerker experience - and where Backbone fits." />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link href="https://backbonehq.io/blog/aws-transform-vs-superwerker/" rel="canonical" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://backbonehq.io/blog/aws-transform-vs-superwerker/" />
     <meta property="og:title" content="AWS Transform and Superwerker: same vocabulary, different problems | Backbone" />
-    <meta property="og:description" content="AWS Transform's landing zone agent and Superwerker both create governed AWS environments, but they solve different problems. A practitioner's comparison — including hands-on Superwerker experience — and where Backbone fits." />
+    <meta property="og:description" content="AWS Transform's landing zone agent and Superwerker both create governed AWS environments, but they solve different problems. A practitioner's comparison - including hands-on Superwerker experience - and where Backbone fits." />
     <meta property="og:image" content="https://backbonehq.io/assets/images/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="AWS Transform and Superwerker: same vocabulary, different problems | Backbone" />
-    <meta name="twitter:description" content="AWS Transform's landing zone agent and Superwerker both create governed AWS environments, but they solve different problems. A practitioner's comparison — including hands-on Superwerker experience — and where Backbone fits." />
+    <meta name="twitter:description" content="AWS Transform's landing zone agent and Superwerker both create governed AWS environments, but they solve different problems. A practitioner's comparison - including hands-on Superwerker experience - and where Backbone fits." />
     <meta name="twitter:image" content="https://backbonehq.io/assets/images/og.png" />
     <link rel="alternate" type="application/rss+xml" title="Backbone Engineering" href="/blog/feed.xml" />
     <link rel="stylesheet" href="/assets/css/main.css" media="all" />
@@ -24,7 +24,7 @@
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "AWS Transform and Superwerker: same vocabulary, different problems",
-  "description": "AWS Transform's landing zone agent and Superwerker both create governed AWS environments, but they solve different problems. A practitioner's comparison — including hands-on Superwerker experience — and where Backbone fits.",
+  "description": "AWS Transform's landing zone agent and Superwerker both create governed AWS environments, but they solve different problems. A practitioner's comparison - including hands-on Superwerker experience - and where Backbone fits.",
   "datePublished": "2026-07-11",
   "dateModified": "2026-07-11",
   "articleSection": "Backbone Engineering",
@@ -108,17 +108,17 @@
           <hr class="blog-rule" aria-hidden="true" />
           <div class="blog-prose">
 <p>Most people will read <a href="https://aws.amazon.com/blogs/migration-and-modernization/automate-your-landing-zone-creation-with-aws-transform/">AWS Transform&#39;s landing zone agent</a> as Superwerker&#39;s smarter cousin. I don&#39;t think that&#39;s right.</p>
-<p>Same destination. Different problems. Treating them as substitutes is how greenfield teams buy enterprise process they don&#39;t need — and how migration teams under-buy governance they do.</p>
-<p>I saw the announcement via a LinkedIn post, and it stuck because the vocabulary overlaps heavily with a tool I&#39;ve actually used and rate highly: <a href="https://github.com/superwerker/superwerker">Superwerker</a>. I haven&#39;t run Transform myself — this is a read from the announcement and docs, not a hands-on review. I&#39;d genuinely like to hear from anyone who has.</p>
+<p>Same destination. Different problems. Treating them as substitutes is how greenfield teams buy enterprise process they don&#39;t need - and how migration teams under-buy governance they do.</p>
+<p>I saw the announcement via a LinkedIn post, and it stuck because the vocabulary overlaps heavily with a tool I&#39;ve actually used and rate highly: <a href="https://github.com/superwerker/superwerker">Superwerker</a>. I haven&#39;t run Transform myself - this is a read from the announcement and docs, not a hands-on review. I&#39;d genuinely like to hear from anyone who has.</p>
 <h2>Superwerker: opinionated defaults, shipped</h2>
-<p>Superwerker is a free, MIT-licensed CloudFormation stack. You run it, and it stands up a multi-account baseline — Control Tower, SSO, and sensible guardrails — without a discovery workshop. We used it on a recent greenfield build and had SSO and baseline guardrails live in an afternoon. The entire decision tree is a public repo you can read end to end before you commit to anything.</p>
+<p>Superwerker is a free, MIT-licensed CloudFormation stack. You run it, and it stands up a multi-account baseline - Control Tower, SSO, and sensible guardrails - without a discovery workshop. We used it on a recent greenfield build and had SSO and baseline guardrails live in an afternoon. The entire decision tree is a public repo you can read end to end before you commit to anything.</p>
 <p>I&#39;m generally a fan of opinionated tooling. If there is a sensible default, I&#39;d rather spend engineering time building product than debating OU structures.</p>
 <p>If I were founding again tomorrow with a blank AWS org, I&#39;d run Superwerker before I spent a day on account design. Greenfield teams don&#39;t fail because their landing zone wasn&#39;t migration-aware. They fail because they never got a baseline and spent months refactoring after the event.</p>
 <h2>Transform: a different problem</h2>
-<p>Transform&#39;s agent is a different shape of tool entirely. It&#39;s not a standalone landing zone builder — it&#39;s embedded in AWS Transform&#39;s end-to-end migration workflow. Transform gathers information about your organisation, migration waves, compliance requirements and account structure before proposing a landing zone.</p>
+<p>Transform&#39;s agent is a different shape of tool entirely. It&#39;s not a standalone landing zone builder - it&#39;s embedded in AWS Transform&#39;s end-to-end migration workflow. Transform gathers information about your organisation, migration waves, compliance requirements and account structure before proposing a landing zone.</p>
 <p>That&#39;s a fundamentally different problem from &quot;deploy me a sensible default.&quot;</p>
 <h2>Where Backbone sits</h2>
-<p><a href="https://backbonehq.io/">Backbone</a> deliberately stops at the landing zone boundary. That&#39;s infrastructure governance, and every organisation has different requirements. Once that foundation exists — whether it came from Superwerker, AWS Transform or something else — that&#39;s where Backbone starts.</p>
+<p><a href="https://backbonehq.io/">Backbone</a> deliberately stops at the landing zone boundary. That&#39;s infrastructure governance, and every organisation has different requirements. Once that foundation exists - whether it came from Superwerker, AWS Transform or something else - that&#39;s where Backbone starts.</p>
 <h2>A working rule of thumb</h2>
 <ul>
 <li><strong>Greenfield startup?</strong> Use Superwerker.</li>
@@ -198,7 +198,7 @@
                   <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
                 </svg>
               </a>
-              <a aria-label="Backbone on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+              <a aria-label="Backbone on X" href="https://x.com/_backbonehq" rel="nofollow noopener" target="_blank">
                 <svg width="16" height="17" class="svg-currentcolor">
                   <use href="/assets/images/social/twitter-x.svg#root"></use>
                 </svg>
@@ -250,7 +250,7 @@
                 <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
               </svg>
             </a>
-            <a aria-label="Backbone on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+            <a aria-label="Backbone on X" href="https://x.com/_backbonehq" rel="nofollow noopener" target="_blank">
               <svg width="16" height="17" class="svg-currentcolor">
                 <use href="/assets/images/social/twitter-x.svg#root"></use>
               </svg>

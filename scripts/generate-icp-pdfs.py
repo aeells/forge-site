@@ -124,7 +124,7 @@ CORE_TECH_STACK = [
 ]
 
 CORE_TECH_STACK_ENTERPRISE = CORE_TECH_STACK + [
-    "AWS-only today — opinionated by design",
+    "AWS-only today - opinionated by design",
 ]
 
 
@@ -133,7 +133,7 @@ EARLY_STAGE: list[Block] = [
     ("heading", "Core hypothesis"),
     (
         "body",
-        "Technical founders want to spend time on product differentiation — not rebuilding authentication, "
+        "Technical founders want to spend time on product differentiation - not rebuilding authentication, "
         "deployment pipelines, observability, cloud infrastructure, and operational tooling.",
     ),
     ("heading", "Typical characteristics"),
@@ -162,8 +162,8 @@ EARLY_STAGE: list[Block] = [
     (
         "bullets",
         [
-            "Are they building a real product — not a demo, agency deliverable, or throwaway MVP?",
-            "Will they need accounts, auth, deployment discipline, and observability within the next 6–12 months?",
+            "Are they building a real product - not a demo, agency deliverable, or throwaway MVP?",
+            "Will they need accounts, auth, deployment discipline, and observability within the next 6-12 months?",
             "Would a platform engineer month (or more) on undifferentiated infrastructure hurt their timeline or runway?",
         ],
     ),
@@ -194,16 +194,16 @@ EARLY_STAGE: list[Block] = [
     (
         "body",
         "Launch with enterprise-grade operational maturity from day one. Focus engineering on domain services and "
-        "differentiators — not on rebuilding the platform every scaling company eventually needs.",
+        "differentiators - not on rebuilding the platform every scaling company eventually needs.",
     ),
     ("heading", "Conversation hooks"),
     (
         "hooks",
         [
             "Most teams spend years assembling the operational stack behind a SaaS company. With Backbone, a capable engineer can be deploying on a production-ready platform from day one.",
-            "Shortcut your CTO or founding engineer's workload by ~50% — and keep them on product, not plumbing.",
-            "The entire operational stack behind a modern SaaS company — without hiring a platform team first.",
-            "Platform capability normally built by companies 10x your size — available from the start.",
+            "Shortcut your CTO or founding engineer's workload by ~50% - and keep them on product, not plumbing.",
+            "The entire operational stack behind a modern SaaS company - without hiring a platform team first.",
+            "Platform capability normally built by companies 10x your size - available from the start.",
             "Enterprise-grade foundations at a fraction of the cost of building them yourself.",
             "Early adopters: free founder-led deployment support.",
         ],
@@ -250,7 +250,7 @@ ENTERPRISE: list[Block] = [
     (
         "bullets",
         [
-            "Is this a net-new product or platform — not a lift-and-shift of a legacy monolith?",
+            "Is this a net-new product or platform - not a lift-and-shift of a legacy monolith?",
             "Does leadership want standardized architecture without a multi-year internal platform build?",
             "Is AWS an acceptable deployment target for the initiative?",
         ],
@@ -278,18 +278,18 @@ ENTERPRISE: list[Block] = [
     (
         "body",
         "Standardized enterprise-grade architecture with security, governance, operational consistency, and automated "
-        "delivery — available immediately rather than built internally over several years.",
+        "delivery - available immediately rather than built internally over several years.",
     ),
     ("heading", "Conversation hooks"),
     (
         "hooks",
         [
-            "Give a greenfield team the internal platform capability normally built by companies 10x their size — without standing up a platform engineering function.",
-            "The entire operational stack behind a modern SaaS company — with security, governance, and operational consistency built in.",
+            "Give a greenfield team the internal platform capability normally built by companies 10x their size - without standing up a platform engineering function.",
+            "The entire operational stack behind a modern SaaS company - with security, governance, and operational consistency built in.",
             "Standardized architecture now, not a multi-year internal platform build.",
             "Most teams spend years assembling this. Backbone puts a production-ready foundation in place from day one.",
             "Production-grade platform foundations at a fraction of the cost of building them internally.",
-            "Founder-led deployment support — hands-on help through onboarding and first production deploy.",
+            "Founder-led deployment support - hands-on help through onboarding and first production deploy.",
         ],
     ),
 ]

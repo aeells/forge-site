@@ -1,7 +1,7 @@
 ---
 title: "AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It"
 slug: when-amp-returns-400-check-discarded-samples
-summary: "Intermittent Amazon Managed Prometheus remote-write failures looked like encoding or signing bugs. The real signal was CloudWatch DiscardedSamples — and the fix was embarrassingly familiar if you've operated Prometheus at scale."
+summary: "Intermittent Amazon Managed Prometheus remote-write failures looked like encoding or signing bugs. The real signal was CloudWatch DiscardedSamples - and the fix was embarrassingly familiar if you've operated Prometheus at scale."
 description: "How we debugged intermittent AMP remote-write 400 errors on GraalVM ECS tasks: ruling out URL, SigV4, and Snappy, finding new-value-for-timestamp in CloudWatch, and fixing fleet-wide series collisions with Micrometer common tags."
 published: 2026-07-03
 updated: 2026-07-03
@@ -11,7 +11,7 @@ tags: [devops, aws, observability, prometheus, micrometer]
 
 AMP said 400. CloudWatch said why.
 
-We turned on Amazon Managed Prometheus (AMP) remote write from our Quarkus services on ECS — Micrometer snapshots, Snappy-compressed Prometheus remote write, SigV4 signing — and everything *mostly* worked.
+We turned on Amazon Managed Prometheus (AMP) remote write from our Quarkus services on ECS - Micrometer snapshots, Snappy-compressed Prometheus remote write, SigV4 signing - and everything *mostly* worked.
 
 Mostly.
 
@@ -60,7 +60,7 @@ We scraped live exposition text from a running native task (more on that pattern
 
 So the metric *content* at scrape time was not inherently toxic. The encoder and Snappy path on JVM were fine.
 
-That left something about the **native periodic push path** or **fleet-wide ingestion behaviour** — not a single broken histogram hiding in auth-service.
+That left something about the **native periodic push path** or **fleet-wide ingestion behaviour** - not a single broken histogram hiding in auth-service.
 
 ## The pivot: CloudWatch `DiscardedSamples`
 
@@ -112,7 +112,7 @@ Once we saw that, the intermittent 400s and the ~95% push success rate (success 
 
 Each ECS service exports the same Micrometer binders: `jvm_*`, `process_*`, `system_*`, HTTP server metrics, and our own `forge_observability_amp_push_*` counters.
 
-We had **no common tags** — no `service`, no `instance`, no `pod`.
+We had **no common tags** - no `service`, no `instance`, no `pod`.
 
 So from AMP's perspective:
 
@@ -126,7 +126,7 @@ That is **one series** (`jvm_threads_live_threads` with identical labels) receiv
 
 Classic multi-writer collision.
 
-It is the same class of problem as running multiple Prometheus replicas remote-writing the same targets without external labels — except we did it with six application services and one workspace.
+It is the same class of problem as running multiple Prometheus replicas remote-writing the same targets without external labels - except we did it with six application services and one workspace.
 
 ### Why the JVM probe didn't catch it
 
@@ -140,7 +140,7 @@ We also suspected stale per-datapoint scrape timestamps from the registry. On JV
 
 Fleet collision fit the CloudWatch evidence better than stale scrape timestamps.
 
-We still normalized to **one batch push timestamp per remote-write request** — correct semantics for periodic push export — but the fix that cleared discards was **disambiguating series**.
+We still normalized to **one batch push timestamp per remote-write request** - correct semantics for periodic push export - but the fix that cleared discards was **disambiguating series**.
 
 ## The fix
 
@@ -194,21 +194,21 @@ That is the bar: **PromQL returns your series with the labels you expect**, and 
 
 Our laptops can't hit task private IPs in a NAT-less VPC. To compare native exposition with the JVM encoder, we used a one-off Fargate task pattern:
 
-1. Publish a tiny **private ECR** image (`busybox` + `wget`) — Docker Hub and public ECR aren't reachable from the VPC without NAT.
+1. Publish a tiny **private ECR** image (`busybox` + `wget`) - Docker Hub and public ECR aren't reachable from the VPC without NAT.
 2. Run a task in the cluster that `wget`s `http://<task-private-ip>:8080/q/metrics` (same path the target group uses for health checks).
 3. Pull logs into a local file and feed it to a JVM probe (`FORGE_AMP_METRICS_FILE=...`).
 
-We also briefly added a **same-SG ingress on 8080** so the scrape task could reach the service ENI — then **revoked** it after debugging. That rule is not part of normal infra; ALB → task rules stay as designed.
+We also briefly added a **same-SG ingress on 8080** so the scrape task could reach the service ENI - then **revoked** it after debugging. That rule is not part of normal infra; ALB → task rules stay as designed.
 
-This tooling was valuable for one INT session. We don't plan to keep the scrape image or scripts in the application repo long term — the durable lessons are the **CloudWatch reason dimension**, the **multi-writer tag discipline**, and the **PromQL verification queries**.
+This tooling was valuable for one INT session. We don't plan to keep the scrape image or scripts in the application repo long term - the durable lessons are the **CloudWatch reason dimension**, the **multi-writer tag discipline**, and the **PromQL verification queries**.
 
 ## Takeaways
 
 1. **AMP HTTP 400 with an empty body** sends you down a long hallway. **`DiscardedSamples` by `Reason`** is often the door.
-2. **`new-value-for-timestamp`** on a shared workspace screams **label collision** — multiple writers, identical series, aligned push intervals.
+2. **`new-value-for-timestamp`** on a shared workspace screams **label collision** - multiple writers, identical series, aligned push intervals.
 3. **Micrometer `MeterFilter.commonTags`** with low-cardinality `service` (and `instance` when you scale replicas) is not optional when many processes remote-write to one Prometheus-compatible backend.
 4. **Single-service probes prove encoding**, not fleet behaviour. Reproduce collisions with multi-writer thinking.
-5. **Confirm consumption** with PromQL and CloudWatch ingestion metrics — not only "the error log stopped."
+5. **Confirm consumption** with PromQL and CloudWatch ingestion metrics - not only "the error log stopped."
 
 If you're wiring Micrometer → AMP on ECS, check your tags before you tune Snappy JNI or second-guess your SigV4 implementation.
 

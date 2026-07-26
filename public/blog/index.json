@@ -19,7 +19,7 @@
     "title": "AWS Transform and Superwerker: same vocabulary, different problems",
     "slug": "aws-transform-vs-superwerker",
     "url": "/blog/aws-transform-vs-superwerker/",
-    "summary": "AWS Transform's new landing zone agent and Superwerker both stand up governed multi-account AWS environments — but they're built for different moments in a company's cloud journey. A read-from-the-docs take, plus why Backbone still points greenfield teams at Superwerker.",
+    "summary": "AWS Transform's new landing zone agent and Superwerker both stand up governed multi-account AWS environments - but they're built for different moments in a company's cloud journey. A read-from-the-docs take, plus why Backbone still points greenfield teams at Superwerker.",
     "published": "2026-07-11",
     "updated": "2026-07-11",
     "tags": [
@@ -52,7 +52,7 @@
     "title": "AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It",
     "slug": "when-amp-returns-400-check-discarded-samples",
     "url": "/blog/when-amp-returns-400-check-discarded-samples/",
-    "summary": "Intermittent Amazon Managed Prometheus remote-write failures looked like encoding or signing bugs. The real signal was CloudWatch DiscardedSamples — and the fix was embarrassingly familiar if you've operated Prometheus at scale.",
+    "summary": "Intermittent Amazon Managed Prometheus remote-write failures looked like encoding or signing bugs. The real signal was CloudWatch DiscardedSamples - and the fix was embarrassingly familiar if you've operated Prometheus at scale.",
     "published": "2026-07-03",
     "updated": "2026-07-03",
     "tags": [
