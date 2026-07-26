@@ -5357,7 +5357,7 @@
       linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 0%, rgba(11, 12, 20, 0) 65%);
   }
 
-  .forge-site-header-logo {
+  .backbone-site-header-logo {
     display: block;
     flex-shrink: 0;
     transform: scale(0.75);
@@ -6068,36 +6068,36 @@ html {
   object-position: center center;
 }
 
-/* Operational stack: "your product on top, Forge underneath" foundation diagram */
-.forge-stack__intro {
+/* Operational stack: "your product on top, Backbone underneath" foundation diagram */
+.backbone-stack__intro {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
   max-width: 43.75rem;
 }
-.forge-stack__headline {
+.backbone-stack__headline {
   font-weight: 700;
   font-size: clamp(1.65rem, 4.6vw, 2.5rem);
   line-height: 1.08;
   text-wrap: balance;
 }
-.forge-stack__sub {
+.backbone-stack__sub {
   color: #c8cfde;
   font-size: 1rem;
   line-height: 1.5;
   text-wrap: pretty;
 }
-.forge-stack__sub strong {
+.backbone-stack__sub strong {
   color: #fff;
   font-weight: 700;
 }
 
-.forge-stack__diagram {
+.backbone-stack__diagram {
   margin-top: 2.25rem;
 }
 
 /* Top layer: the one box the customer builds */
-.forge-stack__product {
+.backbone-stack__product {
   position: relative;
   margin: 0 auto;
   max-width: 430px;
@@ -6108,7 +6108,7 @@ html {
   border: 1px solid rgba(152, 164, 247, 0.55);
   box-shadow: 0 18px 42px -24px rgba(91, 99, 211, 0.7);
 }
-.forge-stack__tag {
+.backbone-stack__tag {
   display: inline-block;
   font-size: 0.65rem;
   letter-spacing: 0.14em;
@@ -6120,36 +6120,36 @@ html {
   padding: 0.18rem 0.6rem;
   margin-bottom: 0.6rem;
 }
-.forge-stack__product-title {
+.backbone-stack__product-title {
   display: block;
   color: #fff;
   font-weight: 700;
   font-size: 1.2rem;
   line-height: 1.2;
 }
-.forge-stack__product-sub {
+.backbone-stack__product-sub {
   display: block;
   margin-top: 0.2rem;
   color: #c2cae0;
   font-size: 0.85rem;
 }
 
-.forge-stack__connector {
+.backbone-stack__connector {
   width: 2px;
   height: 30px;
   margin: 0 auto;
   background: linear-gradient(to bottom, rgba(152, 164, 247, 0.75), rgba(152, 164, 247, 0.12));
 }
 
-/* Lower layer: everything Forge provides */
-.forge-stack__forge {
+/* Lower layer: everything Backbone provides */
+.backbone-stack__platform {
   position: relative;
   border-radius: 20px;
   padding: 1rem;
   background: linear-gradient(180deg, rgba(20, 22, 34, 0.92), rgba(15, 16, 26, 0.92));
   border: 1px solid rgba(147, 157, 184, 0.16);
 }
-.forge-stack__forge-label {
+.backbone-stack__platform-label {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6157,7 +6157,7 @@ html {
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
-.forge-stack__badge {
+.backbone-stack__badge {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -6167,90 +6167,90 @@ html {
   border-radius: 999px;
   padding: 0.22rem 0.7rem;
 }
-.forge-stack__forge-name {
+.backbone-stack__platform-name {
   font-size: 0.82rem;
   color: #aab2c8;
 }
-.forge-stack__grid {
+.backbone-stack__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.6rem;
 }
 @media (width >= 600px) {
-  .forge-stack__grid {
+  .backbone-stack__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (width >= 940px) {
-  .forge-stack__grid {
+  .backbone-stack__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
-.forge-stack__grid-pair {
+.backbone-stack__grid-pair {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.6rem;
   margin-top: 0.6rem;
 }
 @media (width >= 600px) {
-  .forge-stack__grid-pair {
+  .backbone-stack__grid-pair {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (width >= 940px) {
-  .forge-stack__grid-pair {
+  .backbone-stack__grid-pair {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .forge-stack__grid-pair .forge-stack__cell {
+  .backbone-stack__grid-pair .backbone-stack__cell {
     min-width: 0;
   }
 }
-.forge-stack__callout {
+.backbone-stack__callout {
   margin-top: 1.25rem;
   color: #c8cfde;
   font-size: 1rem;
   line-height: 1.5;
   white-space: nowrap;
 }
-.forge-stack__callout strong {
+.backbone-stack__callout strong {
   color: #fff;
   font-weight: 700;
 }
 @media (width < 768px) {
-  .forge-stack__callout {
+  .backbone-stack__callout {
     white-space: normal;
   }
 }
-.forge-stack__cell {
+.backbone-stack__cell {
   border-radius: 12px;
   padding: 0.85rem 0.9rem;
   background: #0f101a;
   border: 1px solid rgba(147, 157, 184, 0.12);
   transition: border-color 0.18s ease;
 }
-.forge-stack__cell:hover {
+.backbone-stack__cell:hover {
   border-color: rgba(147, 157, 184, 0.28);
 }
-.forge-stack__cell h3 {
+.backbone-stack__cell h3 {
   color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
   line-height: 1.2;
 }
-.forge-stack__cell-gloss {
+.backbone-stack__cell-gloss {
   margin-top: 0.2rem;
   color: #aeb6c9;
   font-size: 0.78rem;
   line-height: 1.35;
 }
-.forge-stack__cell ul {
+.backbone-stack__cell ul {
   margin-top: 0.6rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem;
   padding: 0;
 }
-.forge-stack__cell li {
+.backbone-stack__cell li {
   list-style: none;
   font-size: 0.72rem;
   color: #c8cfde;
@@ -6259,7 +6259,7 @@ html {
   border-radius: 6px;
   padding: 0.12rem 0.45rem;
 }
-.forge-stack__tag-row-break {
+.backbone-stack__tag-row-break {
   flex-basis: 100%;
   height: 0;
   padding: 0;
@@ -6267,7 +6267,7 @@ html {
   border: 0;
   background: none;
 }
-.forge-stack__bedrock {
+.backbone-stack__bedrock {
   margin-top: 0.7rem;
   display: flex;
   flex-wrap: wrap;
@@ -6280,20 +6280,20 @@ html {
   border: 1px dashed rgba(147, 157, 184, 0.2);
   text-align: center;
 }
-.forge-stack__bedrock span {
+.backbone-stack__bedrock span {
   font-size: 0.76rem;
   color: #aeb6c9;
 }
-.forge-stack__bedrock strong {
+.backbone-stack__bedrock strong {
   color: #fff;
   font-weight: 600;
 }
-.forge-stack__bedrock-link {
+.backbone-stack__bedrock-link {
   color: #fff;
   font-weight: 600;
   text-decoration: none;
   transition: color 0.15s ease;
 }
-.forge-stack__bedrock-link:hover {
+.backbone-stack__bedrock-link:hover {
   color: #c9d3ee;
 }

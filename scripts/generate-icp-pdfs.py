@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Forge ICP PDFs for the founding partners program.
+"""Generate Backbone ICP PDFs for the founding partners program.
 
 Requires: pip install reportlab
 
@@ -129,7 +129,7 @@ CORE_TECH_STACK_ENTERPRISE = CORE_TECH_STACK + [
 
 
 EARLY_STAGE: list[Block] = [
-    ("title", "Forge Platform ICP #1: Early-Stage Technical Founders"),
+    ("title", "Backbone ICP #1: Early-Stage Technical Founders"),
     ("heading", "Core hypothesis"),
     (
         "body",
@@ -188,7 +188,7 @@ EARLY_STAGE: list[Block] = [
     (
         "body",
         "Recent or planned hiring for backend, platform, DevOps, or infrastructure engineering often indicates "
-        "the team is about to invest in foundations Forge already provides.",
+        "the team is about to invest in foundations Backbone already provides.",
     ),
     ("heading", "Primary message"),
     (
@@ -200,7 +200,7 @@ EARLY_STAGE: list[Block] = [
     (
         "hooks",
         [
-            "Most teams spend years assembling the operational stack behind a SaaS company. With Forge, a capable engineer can be deploying on a production-ready platform from day one.",
+            "Most teams spend years assembling the operational stack behind a SaaS company. With Backbone, a capable engineer can be deploying on a production-ready platform from day one.",
             "Shortcut your CTO or founding engineer's workload by ~50% — and keep them on product, not plumbing.",
             "The entire operational stack behind a modern SaaS company — without hiring a platform team first.",
             "Platform capability normally built by companies 10x your size — available from the start.",
@@ -212,7 +212,7 @@ EARLY_STAGE: list[Block] = [
 
 
 ENTERPRISE: list[Block] = [
-    ("title", "Forge Platform ICP #2: Enterprise Greenfield Teams"),
+    ("title", "Backbone ICP #2: Enterprise Greenfield Teams"),
     ("heading", "Core hypothesis"),
     (
         "body",
@@ -287,7 +287,7 @@ ENTERPRISE: list[Block] = [
             "Give a greenfield team the internal platform capability normally built by companies 10x their size — without standing up a platform engineering function.",
             "The entire operational stack behind a modern SaaS company — with security, governance, and operational consistency built in.",
             "Standardized architecture now, not a multi-year internal platform build.",
-            "Most teams spend years assembling this. Forge puts a production-ready foundation in place from day one.",
+            "Most teams spend years assembling this. Backbone puts a production-ready foundation in place from day one.",
             "Production-grade platform foundations at a fraction of the cost of building them internally.",
             "Founder-led deployment support — hands-on help through onboarding and first production deploy.",
         ],
@@ -297,8 +297,8 @@ ENTERPRISE: list[Block] = [
 
 def main() -> None:
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    build_pdf("Forge_ICP_Early_Stage_Technical_Founders.pdf", EARLY_STAGE)
-    build_pdf("Forge_ICP_Enterprise_Greenfield_Teams.pdf", ENTERPRISE)
+    build_pdf("Backbone_ICP_Early_Stage_Technical_Founders.pdf", EARLY_STAGE)
+    build_pdf("Backbone_ICP_Enterprise_Greenfield_Teams.pdf", ENTERPRISE)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 title: "We've Spent 25 Years Shifting Left. The Next Shift Is Down."
 slug: twenty-five-years-of-shifting-left
 summary: "For 25 years we've shifted engineering work left: CI, CD, DevOps, DevSecOps and now AI. But we've never stopped rebuilding the same operational foundations. The next shift isn't left. It's down."
-description: "Continuous integration, continuous deployment, DevOps, DevSecOps and AI all made software delivery faster by moving work earlier. But they didn't eliminate the need to repeatedly build the same operational foundation. Forge takes a different approach: move those concerns beneath your product into a shared platform."
+description: "Continuous integration, continuous deployment, DevOps, DevSecOps and AI all made software delivery faster by moving work earlier. But they didn't eliminate the need to repeatedly build the same operational foundation. Backbone takes a different approach: move those concerns beneath your product into a shared platform."
 published: 2026-07-24
 updated: 2026-07-24
 author: Andrew Eells
@@ -131,7 +131,7 @@ It never asked why we were repeating it at all.
 
 Every startup, every consultancy and every enterprise greenfield project still begins by rebuilding the same engineering capabilities before a single customer problem gets solved.
 
-## Forge is about shifting down
+## Backbone is about shifting down
 
 That's the shift I'm interested in now.
 
@@ -171,13 +171,13 @@ So why are they still treated as project work?
 
 **Shifting down means moving those undifferentiated engineering disciplines beneath your application into a reusable operational foundation instead of rebuilding them inside every new product.**
 
-That's what Forge Platform is.
+That's what Backbone is.
 
 Not another framework.
 
 Not another starter template.
 
-An opinionated operational backbone for modern SaaS products.
+An opinionated operational foundation for modern SaaS products.
 
 Authentication, users, audit, notifications, documents and a BFF orchestration layer. Infrastructure-as-code. CI/CD. Observability. Security. Everything deployed into your own AWS account, from your own GitHub repositories, remaining entirely under your control.
 
@@ -199,8 +199,8 @@ It was to stop repeatedly paying for the same engineering work in every company,
 
 Some engineering problems only need solving once.
 
-The operational backbone beneath your SaaS product is one of them.
+The operational foundation beneath your SaaS product is one of them.
 
 After 25 years of shifting left, that feels like the direction we've really been heading all along.
 
-If that resonates, I'd genuinely like to hear from you - you can find out more at [forgeplatform.software](https://forgeplatform.software/).
+If that resonates, I'd genuinely like to hear from you - you can find out more at [backbonehq.io](https://backbonehq.io/).

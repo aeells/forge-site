@@ -1,20 +1,20 @@
-# Forge Platform
+# Backbone
 
 > Bootstrap like a much larger engineering organization.
 
-Forge Platform is an enterprise-grade platform engineering foundation for startups and greenfield engineering teams building distributed systems and microservice architectures.
+Backbone is an enterprise-grade platform engineering foundation for startups and greenfield engineering teams building distributed systems and microservice architectures.
 
-Forge provides opinionated infrastructure, service patterns, operational tooling, observability, deployment workflows, and zero-trust security foundations so teams can ship production-grade systems without rebuilding internal platform infrastructure from scratch.
+Backbone provides opinionated infrastructure, service patterns, operational tooling, observability, deployment workflows, and zero-trust security foundations so teams can ship production-grade systems without rebuilding internal platform infrastructure from scratch.
 
 ## Core resources
 
-- [Home](https://forgeplatform.software/): Product overview, capabilities, architecture, and pricing
-- [Blog](https://forgeplatform.software/blog/): Engineering insights on platform engineering, production readiness, and the foundations behind scalable software
-- [FAQ](https://forgeplatform.software/faq/): Common questions about platform fit, onboarding, and commercial model
+- [Home](https://backbonehq.io/): Product overview, capabilities, architecture, and pricing
+- [Blog](https://backbonehq.io/blog/): Engineering insights on platform engineering, production readiness, and the foundations behind scalable software
+- [FAQ](https://backbonehq.io/faq/): Common questions about platform fit, onboarding, and commercial model
 
 ## Technical documentation
 
-- [Forge technical docs](https://docs.forgeplatform.software): Architecture documentation, platform operations, infrastructure automation, deployment workflows, observability, service development patterns, and production engineering guidance
+- [Backbone technical docs](https://docs.backbonehq.io): Architecture documentation, platform operations, infrastructure automation, deployment workflows, observability, service development patterns, and production engineering guidance
 
 ## Community and contact
 

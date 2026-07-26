@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const root = document.querySelector("#forge-faq-accordion");
+  const root = document.querySelector("#backbone-faq-accordion");
   if (!root || typeof Accordion === "undefined") return;
 
   new Accordion(root, {

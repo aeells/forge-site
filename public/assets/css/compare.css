@@ -1,6 +1,6 @@
-/* Forge Compare — comparison matrix + callouts */
+/* Backbone Compare — comparison matrix + callouts */
 
-.forge-compare-callout {
+.backbone-compare-callout {
   border: 1px solid rgba(147, 157, 184, 0.14);
   border-radius: 16px;
   background: linear-gradient(180deg, rgba(23, 25, 38, 0.92) 0%, rgba(15, 16, 26, 0.96) 100%);
@@ -8,12 +8,12 @@
 }
 
 @media (min-width: 768px) {
-  .forge-compare-callout {
+  .backbone-compare-callout {
     padding: 1.5rem 1.75rem;
   }
 }
 
-.forge-compare-callout__eyebrow {
+.backbone-compare-callout__eyebrow {
   font-size: 12px;
   line-height: 100%;
   letter-spacing: 0.04em;
@@ -22,7 +22,7 @@
   font-weight: 600;
 }
 
-.forge-compare-callout__title {
+.backbone-compare-callout__title {
   margin-top: 0.5rem;
   color: #fff;
   font-weight: 600;
@@ -30,13 +30,13 @@
   line-height: 130%;
 }
 
-.forge-compare-callout__body {
+.backbone-compare-callout__body {
   margin-top: 0.65rem;
   color: #d4d4d4;
   line-height: 160%;
 }
 
-.forge-compare-table-wrap {
+.backbone-compare-table-wrap {
   margin-top: 0;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -46,11 +46,11 @@
   scroll-behavior: smooth;
 }
 
-.forge-compare-matrix {
+.backbone-compare-matrix {
   position: relative;
 }
 
-.forge-compare-nav-btn {
+.backbone-compare-nav-btn {
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
@@ -64,16 +64,16 @@
   cursor: pointer;
 }
 
-.forge-compare-nav-btn:hover:not(:disabled) {
+.backbone-compare-nav-btn:hover:not(:disabled) {
   background-color: #222330;
 }
 
-.forge-compare-nav-btn:disabled {
+.backbone-compare-nav-btn:disabled {
   opacity: 0.4;
   cursor: default;
 }
 
-.forge-compare-fade {
+.backbone-compare-fade {
   position: absolute;
   top: 1px;
   bottom: 1px;
@@ -84,7 +84,7 @@
   cursor: pointer;
 }
 
-.forge-compare-fade--right {
+.backbone-compare-fade--right {
   right: 1px;
   border-radius: 0 15px 15px 0;
   background: linear-gradient(
@@ -95,17 +95,17 @@
   );
 }
 
-.forge-compare-fade[hidden] {
+.backbone-compare-fade[hidden] {
   display: none;
 }
 
-.forge-compare-fade:disabled {
+.backbone-compare-fade:disabled {
   cursor: default;
 }
 
-.forge-compare-table {
-  --forge-compare-col-capability: 170px;
-  --forge-compare-col-forge: 220px;
+.backbone-compare-table {
+  --backbone-compare-col-capability: 170px;
+  --backbone-compare-col-backbone: 220px;
   width: max-content;
   min-width: 100%;
   border-collapse: separate;
@@ -114,8 +114,8 @@
   line-height: 145%;
 }
 
-.forge-compare-table th,
-.forge-compare-table td {
+.backbone-compare-table th,
+.backbone-compare-table td {
   padding: 0.9rem 1rem;
   vertical-align: top;
   border-bottom: 1px solid rgba(147, 157, 184, 0.1);
@@ -123,12 +123,12 @@
   max-width: 220px;
 }
 
-.forge-compare-table th:last-child,
-.forge-compare-table td:last-child {
+.backbone-compare-table th:last-child,
+.backbone-compare-table td:last-child {
   border-right: 0;
 }
 
-.forge-compare-table thead th {
+.backbone-compare-table thead th {
   background-color: #171824;
   color: #fff;
   font-weight: 600;
@@ -139,88 +139,88 @@
 }
 
 /* Col 1: Capability - always stuck to the left edge */
-.forge-compare-table thead th:first-child,
-.forge-compare-table tbody th {
+.backbone-compare-table thead th:first-child,
+.backbone-compare-table tbody th {
   position: sticky;
   left: 0;
   z-index: 3;
-  width: var(--forge-compare-col-capability);
-  min-width: var(--forge-compare-col-capability);
-  max-width: var(--forge-compare-col-capability);
+  width: var(--backbone-compare-col-capability);
+  min-width: var(--backbone-compare-col-capability);
+  max-width: var(--backbone-compare-col-capability);
   background-color: #0f101a;
   color: #c9d3ee;
   font-weight: 500;
   text-align: left;
 }
 
-.forge-compare-table thead th:first-child {
+.backbone-compare-table thead th:first-child {
   z-index: 5;
   background-color: #171824;
   color: #fff;
   font-weight: 600;
 }
 
-/* Col 2: Forge - stuck beside Capability so it stays visible while scrolling */
-.forge-compare-table thead th.is-forge,
-.forge-compare-table tbody td.is-forge {
+/* Col 2: Backbone - stuck beside Capability so it stays visible while scrolling */
+.backbone-compare-table thead th.is-backbone,
+.backbone-compare-table tbody td.is-backbone {
   position: sticky;
-  left: var(--forge-compare-col-capability);
+  left: var(--backbone-compare-col-capability);
   z-index: 3;
-  width: var(--forge-compare-col-forge);
-  min-width: var(--forge-compare-col-forge);
-  max-width: var(--forge-compare-col-forge);
+  width: var(--backbone-compare-col-backbone);
+  min-width: var(--backbone-compare-col-backbone);
+  max-width: var(--backbone-compare-col-backbone);
   box-shadow: 6px 0 12px -8px rgba(0, 0, 0, 0.55);
 }
 
-.forge-compare-table thead th.is-forge {
+.backbone-compare-table thead th.is-backbone {
   z-index: 5;
   color: #fff;
   font-weight: 600;
   background-color: #252a48;
 }
 
-.forge-compare-table tbody td.is-forge {
+.backbone-compare-table tbody td.is-backbone {
   background-color: #161937;
   color: #e8ecff;
   font-weight: 500;
 }
 
-.forge-compare-table .is-forge {
+.backbone-compare-table .is-backbone {
   color: #e8ecff;
   font-weight: 500;
 }
 
-.forge-compare-table tbody tr:last-child th,
-.forge-compare-table tbody tr:last-child td {
+.backbone-compare-table tbody tr:last-child th,
+.backbone-compare-table tbody tr:last-child td {
   border-bottom: 0;
 }
 
-.forge-compare-table td {
+.backbone-compare-table td {
   color: #a3a3a3;
 }
 
-.forge-compare-card {
+.backbone-compare-card {
   border: 1px solid rgba(147, 157, 184, 0.12);
   border-radius: 14px;
   background-color: #0f101a;
   padding: 1.15rem 1.2rem;
 }
 
-.forge-compare-card h3 {
+.backbone-compare-card h3 {
   color: #fff;
   font-weight: 600;
   font-size: 1rem;
   line-height: 130%;
 }
 
-.forge-compare-card p,
-.forge-compare-card li {
+.backbone-compare-card p,
+.backbone-compare-card li {
   color: #d4d4d4;
   font-size: 0.9375rem;
   line-height: 155%;
 }
 
-.forge-compare-card__tag {
+.backbone-compare-card__tag {
   display: inline-block;
   margin-bottom: 0.45rem;
   font-size: 11px;
@@ -231,73 +231,73 @@
   font-weight: 600;
 }
 
-.forge-compare-grid {
+.backbone-compare-grid {
   display: grid;
   gap: 0.85rem;
 }
 
 @media (min-width: 768px) {
-  .forge-compare-grid {
+  .backbone-compare-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
 }
 
 @media (min-width: 1100px) {
-  .forge-compare-grid--3 {
+  .backbone-compare-grid--3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-.forge-compare-tco {
+.backbone-compare-tco {
   border: 1px solid rgba(147, 157, 184, 0.12);
   border-radius: 16px;
   overflow: hidden;
   background-color: #0f101a;
 }
 
-.forge-compare-tco table {
+.backbone-compare-tco table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
   line-height: 145%;
 }
 
-.forge-compare-tco th,
-.forge-compare-tco td {
+.backbone-compare-tco th,
+.backbone-compare-tco td {
   padding: 0.85rem 1rem;
   text-align: left;
   border-bottom: 1px solid rgba(147, 157, 184, 0.1);
   vertical-align: top;
 }
 
-.forge-compare-tco thead th {
+.backbone-compare-tco thead th {
   background-color: rgba(23, 24, 36, 0.9);
   color: #fff;
   font-weight: 600;
 }
 
-.forge-compare-tco tbody th {
+.backbone-compare-tco tbody th {
   color: #c9d3ee;
   font-weight: 500;
   width: 28%;
 }
 
-.forge-compare-tco td {
+.backbone-compare-tco td {
   color: #a3a3a3;
 }
 
-.forge-compare-tco td.is-forge {
+.backbone-compare-tco td.is-backbone {
   color: #e8ecff;
   background: rgba(91, 99, 211, 0.08);
 }
 
-.forge-compare-tco tr:last-child th,
-.forge-compare-tco tr:last-child td {
+.backbone-compare-tco tr:last-child th,
+.backbone-compare-tco tr:last-child td {
   border-bottom: 0;
 }
 
-.forge-compare-link {
+.backbone-compare-link {
   color: #c9d3ee;
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -305,19 +305,19 @@
   transition: text-decoration-color 0.15s ease, color 0.15s ease;
 }
 
-.forge-compare-link:hover {
+.backbone-compare-link:hover {
   color: #fff;
   text-decoration-color: rgba(201, 211, 238, 1);
 }
 
-.forge-compare-pill-row {
+.backbone-compare-pill-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 1rem;
 }
 
-.forge-compare-pill {
+.backbone-compare-pill {
   display: inline-flex;
   align-items: center;
   border: 1px solid rgba(147, 157, 184, 0.2);
@@ -329,13 +329,13 @@
   padding: 0.45rem 0.75rem;
 }
 
-.forge-compare-section-lead {
+.backbone-compare-section-lead {
   color: #d4d4d4;
   line-height: 160%;
   max-width: 720px;
 }
 
-.forge-compare-narrative {
+.backbone-compare-narrative {
   display: flex;
   flex-direction: column;
   gap: 2.75rem;

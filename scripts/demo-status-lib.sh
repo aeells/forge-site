@@ -5,7 +5,7 @@ set -euo pipefail
 # Helpers for the offline demo marker served from the INT static-edge S3 bucket.
 # Marketing site loads demo-status.js cross-origin via a script tag.
 
-PROBE_URL="https://int.forgeplatform.software/auth/login"
+PROBE_URL="https://int.backbonehq.io/auth/login"
 DEMO_STATUS_OBJECT_KEY="demo-status.js"
 
 probe_int_demo_status() {
@@ -38,7 +38,7 @@ render_demo_status_js() {
         --arg probe "/auth/login" \
         --argjson httpCode "${http_code}" \
         '{online: $online, checkedAt: $checkedAt, probe: $probe, httpCode: $httpCode}' \
-        | jq -r '"window.__forgeDemoStatus=" + (. | tojson) + ";"' > "${output_path}"
+        | jq -r '"window.__backboneDemoStatus=" + (. | tojson) + ";"' > "${output_path}"
 }
 
 render_offline_demo_status_js() {

@@ -42,7 +42,7 @@ function markActiveHeaderLink(root = document) {
 
 const DEMO_STATUS_GREEN = "/assets/images/social/status-green-4e79760e.svg#root";
 const DEMO_STATUS_RED = "/assets/images/social/status-red-e5484d.svg#root";
-const DEMO_STATUS_SCRIPT_URL = "https://int.forgeplatform.software/demo-status.js";
+const DEMO_STATUS_SCRIPT_URL = "https://int.backbonehq.io/demo-status.js";
 
 function loadIntDemoStatus() {
   return new Promise((resolve) => {
@@ -50,7 +50,7 @@ function loadIntDemoStatus() {
     script.async = true;
     script.src = `${DEMO_STATUS_SCRIPT_URL}?v=${Date.now()}`;
     script.onload = () => {
-      resolve(window.__forgeDemoStatus ?? { online: true });
+      resolve(window.__backboneDemoStatus ?? { online: true });
     };
     script.onerror = () => {
       resolve({ online: true });
@@ -66,8 +66,8 @@ function applyDemoStatus(root, status) {
   const online = status.online === true;
   const iconHref = online ? DEMO_STATUS_GREEN : DEMO_STATUS_RED;
   const label = online
-    ? "Demo environment online — opens int.forgeplatform.software"
-    : "Demo environment offline — opens holding page at int.forgeplatform.software";
+    ? "Demo environment online — opens int.backbonehq.io"
+    : "Demo environment offline — opens holding page at int.backbonehq.io";
 
   links.forEach((link) => {
     link.setAttribute("aria-label", label);

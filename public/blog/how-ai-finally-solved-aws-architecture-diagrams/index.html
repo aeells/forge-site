@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>How AI finally solved AWS architecture diagrams | Forge Platform</title>
+    <title>How AI finally solved AWS architecture diagrams | Backbone</title>
     <meta name="description" content="CloudFormation graph tools faithfully render infrastructure - but that's not architecture. Here's how Cursor and Kiro analysed a real CDK repository and generated an AWS architecture diagram I'd actually publish." />
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link href="https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/" rel="canonical" />
+    <link href="https://backbonehq.io/blog/how-ai-finally-solved-aws-architecture-diagrams/" rel="canonical" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/" />
-    <meta property="og:title" content="How AI finally solved AWS architecture diagrams | Forge Platform" />
+    <meta property="og:url" content="https://backbonehq.io/blog/how-ai-finally-solved-aws-architecture-diagrams/" />
+    <meta property="og:title" content="How AI finally solved AWS architecture diagrams | Backbone" />
     <meta property="og:description" content="CloudFormation graph tools faithfully render infrastructure - but that's not architecture. Here's how Cursor and Kiro analysed a real CDK repository and generated an AWS architecture diagram I'd actually publish." />
-    <meta property="og:image" content="https://forgeplatform.software/assets/images/og.png" />
+    <meta property="og:image" content="https://backbonehq.io/assets/images/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="How AI finally solved AWS architecture diagrams | Forge Platform" />
+    <meta name="twitter:title" content="How AI finally solved AWS architecture diagrams | Backbone" />
     <meta name="twitter:description" content="CloudFormation graph tools faithfully render infrastructure - but that's not architecture. Here's how Cursor and Kiro analysed a real CDK repository and generated an AWS architecture diagram I'd actually publish." />
-    <meta name="twitter:image" content="https://forgeplatform.software/assets/images/og.png" />
-    <link rel="alternate" type="application/rss+xml" title="Forge Engineering" href="/blog/feed.xml" />
+    <meta name="twitter:image" content="https://backbonehq.io/assets/images/og.png" />
+    <link rel="alternate" type="application/rss+xml" title="Backbone Engineering" href="/blog/feed.xml" />
     <link rel="stylesheet" href="/assets/css/main.css" media="all" />
     <link rel="stylesheet" href="/assets/css/blog.css" media="all" />
     <script type="application/ld+json">
@@ -27,22 +27,22 @@
   "description": "CloudFormation graph tools faithfully render infrastructure - but that's not architecture. Here's how Cursor and Kiro analysed a real CDK repository and generated an AWS architecture diagram I'd actually publish.",
   "datePublished": "2026-07-09",
   "dateModified": "2026-07-09",
-  "articleSection": "Forge Engineering",
+  "articleSection": "Backbone Engineering",
   "keywords": "aws, cdk, architecture, ai, platform-engineering, devops",
-  "url": "https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/",
-  "mainEntityOfPage": "https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/",
-  "image": "https://forgeplatform.software/assets/images/og.png",
+  "url": "https://backbonehq.io/blog/how-ai-finally-solved-aws-architecture-diagrams/",
+  "mainEntityOfPage": "https://backbonehq.io/blog/how-ai-finally-solved-aws-architecture-diagrams/",
+  "image": "https://backbonehq.io/assets/images/og.png",
   "author": {
     "@type": "Person",
     "name": "Andrew Eells"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Forge Platform",
-    "url": "https://forgeplatform.software/",
+    "name": "Backbone",
+    "url": "https://backbonehq.io/",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://forgeplatform.software/assets/images/og.png"
+      "url": "https://backbonehq.io/assets/images/og.png"
     }
   }
 }
@@ -56,14 +56,14 @@
     class="page-rail grow flex h-[52px] justify-between border-b text-[13px] leading-[100%] text-[#C9D3EE] border-[#727DA1]/15">
     <div class="flex min-w-0 items-stretch gap-3">
       <a aria-label="Go to homepage" class="flex shrink-0 items-center py-3" href="/">
-        <svg width="125" height="21" class="forge-site-header-logo svg-currentcolor" aria-hidden="true" focusable="false">
+        <svg width="125" height="21" class="backbone-site-header-logo svg-currentcolor" aria-hidden="true" focusable="false">
           <use href="/assets/images/brand/backbone-lockup.svg#root"></use>
         </svg>
       </a>
     </div>
     <div class="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3">
       <div class="hidden md:flex flex-wrap items-center justify-end gap-x-1 gap-y-2 lg:gap-x-3">
-        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="https://docs.forgeplatform.software" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="https://docs.backbonehq.io" target="_blank" rel="noopener noreferrer">Docs</a>
         <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap text-white" href="/blog/">Blog</a>
         <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/faq/">FAQ</a>
         <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/#pricing">Pricing</a>
@@ -86,7 +86,7 @@
       class="hidden md:hidden p-5 fixed z-40 left-0 right-0 site-mobile-menu-top backdrop-blur-2xl bg-[#181926]/80 text-[#C9D3EE] overflow-y-scroll mobile-menu-maxh"
       id="mobile-menu">
       <div class="js-menu-section flex flex-col gap-1" data-section="root">
-        <a class="p-3" href="https://docs.forgeplatform.software" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a class="p-3" href="https://docs.backbonehq.io" target="_blank" rel="noopener noreferrer">Docs</a>
         <a class="p-3 text-white" href="/blog/">Blog</a>
         <a class="p-3" href="/faq/">FAQ</a>
         <a class="p-3" href="/#pricing">Pricing</a>
@@ -116,8 +116,8 @@
 <p>In under two hours I went from...</p>
 <p>&quot;A salesperson asked if I had an architecture diagram. I said, &#39;Yes... but it&#39;s rubbish.&#39;&quot;</p>
 <p>...to publishing this.</p>
-<p><img src="https://raw.githubusercontent.com/get-forge/forge-docs/v1.0/assets/forge-architecture.png" alt="Forge Platform AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services"></p>
-<p>You can see the <a href="https://docs.forgeplatform.software/docs/welcome#architecture-and-runtime-model">live diagram on the Forge docs site</a>, with more detail in the <a href="https://docs.forgeplatform.software/docs/infrastructure">AWS platform infrastructure guide</a>.</p>
+<p><img src="https://raw.githubusercontent.com/get-backbone/forge-docs/v1.0/assets/forge-architecture.png" alt="Backbone AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services"></p>
+<p>You can see the <a href="https://docs.backbonehq.io/docs/welcome#architecture-and-runtime-model">live diagram on the Backbone docs site</a>, with more detail in the <a href="https://docs.backbonehq.io/docs/infrastructure">AWS platform infrastructure guide</a>.</p>
 <p>After literally <strong>years</strong> of trying different approaches, this is the first workflow that has produced an architecture diagram I&#39;d happily put in front of customers.</p>
 <h2>The problem with architecture diagrams</h2>
 <p>Anyone building on <a href="https://aws.amazon.com/">AWS</a> has probably been here.</p>
@@ -253,7 +253,7 @@
 <li>PostgreSQL, Redis and Cognito deserve first-class representation</li>
 </ul>
 <p>None of that existed in a single file.</p>
-<p>It emerged from analysing thousands of lines of CDK spread across stacks, constructs and configuration - including constructs like <code>ForgeStaticEdgeDeliveryConstruct</code>, which encodes the CloudFront → S3 static UI + API path proxying story as a single architectural unit rather than a pile of distribution behaviours and origin policies.</p>
+<p>It emerged from analysing thousands of lines of CDK spread across stacks, constructs and configuration - including constructs like <code>BackboneStaticEdgeDeliveryConstruct</code>, which encodes the CloudFront → S3 static UI + API path proxying story as a single architectural unit rather than a pile of distribution behaviours and origin policies.</p>
 <p>That&#39;s genuinely impressive.</p>
 <h2>Was it perfect first time?</h2>
 <p>No.</p>
@@ -296,9 +296,9 @@ Published AWS architecture diagram
 <p>My CDK constructs already encode that intent.</p>
 <p>They have names like:</p>
 <ul>
-<li><code>ForgeStaticEdgeDeliveryConstruct</code></li>
-<li><code>ForgeEcsWorkloadConstruct</code></li>
-<li><code>ForgeCognitoIdpStack</code></li>
+<li><code>BackboneStaticEdgeDeliveryConstruct</code></li>
+<li><code>BackboneEcsWorkloadConstruct</code></li>
+<li><code>BackboneCognitoIdpStack</code></li>
 </ul>
 <p>Those are architectural concepts.</p>
 <p>CloudFormation is an implementation detail.</p>
@@ -317,7 +317,7 @@ Published AWS architecture diagram
 <p>It accepted feedback.</p>
 <p>It refined the output.</p>
 <p>The AI wasn&#39;t designing my platform.</p>
-<p>But it did an excellent job of documenting a platform that already exists - the same platform I write about when debugging <a href="https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/">AMP remote write failures</a> or explaining <a href="https://forgeplatform.software/blog/what-production-ready-actually-means/">what production-ready actually means</a>.</p>
+<p>But it did an excellent job of documenting a platform that already exists - the same platform I write about when debugging <a href="https://backbonehq.io/blog/when-amp-returns-400-check-discarded-samples/">AMP remote write failures</a> or explaining <a href="https://backbonehq.io/blog/what-production-ready-actually-means/">what production-ready actually means</a>.</p>
 <h2>Would I trust it blindly?</h2>
 <p>Absolutely not.</p>
 <p>The architecture still belongs to the engineers who built the system.</p>
@@ -344,7 +344,7 @@ Published AWS architecture diagram
 <p>The interesting part isn&#39;t the PNG. It&#39;s the intermediate model - a curated, solutions-architect view derived from CDK constructs, not from the synthesized CloudFormation dependency graph.</p>
 <p>The model header explains the intent:</p>
 <pre><code class="language-yaml">---
-# Forge Platform - curated architecture model
+# Backbone - curated architecture model
 #
 # Derived from CDK constructs under infra/src/lib (NOT from the synthesized
 # CloudFormation dependency graph). Low-level noise (IAM roles/policies,
@@ -352,15 +352,15 @@ Published AWS architecture diagram
 # groups, listener rules) is deliberately omitted.
 #
 # Source of truth mapping:
-#   - Edge / CloudFront .......... forge-static-edge-delivery-construct.ts
-#   - Ingress (ALBs) ............. forge-ecs-ingress-construct.ts
-#   - Compute (Fargate) .......... forge-ecs-workload-construct.ts
+#   - Edge / CloudFront .......... backbone-static-edge-delivery-construct.ts
+#   - Ingress (ALBs) ............. backbone-ecs-ingress-construct.ts
+#   - Compute (Fargate) .......... backbone-ecs-workload-construct.ts
 #   ...
 </code></pre>
 <p>Nested groups encode the VPC security boundary:</p>
 <pre><code class="language-yaml">groups:
   - id: vpc
-    label: VPC (ForgePlatformVpc)
+    label: VPC (BackbonePlatformVpc)
   - id: public_subnets
     label: Public Subnets
     parent: vpc
@@ -430,14 +430,14 @@ kiro-cli chat --no-interactive --trust-all-tools &quot;$(cat diagram-prompt.md)&
           <div class="prose-cta-box rounded-xl border border-[#939DB8]/10 bg-[#0F101A]">
             <h2 class="text-white font-semibold text-[18px] md:text-[20px]">Building production software at scale?</h2>
             <p class="mt-3 text-neutral-300 leading-[165%]">
-              Forge Platform is an opinionated runtime foundation for modern SaaS systems - designed to handle deployment,
+              Backbone is an opinionated runtime foundation for modern SaaS systems - designed to handle deployment,
               observability, security, and cloud-native operations as a coherent whole.
             </p>
             <p class="mt-2 text-neutral-300 leading-[165%]">
               So your team can focus on business value rather than undifferentiated effort.
             </p>
             <div class="mt-6 flex flex-wrap gap-3">
-              <a class="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 hover:bg-[#727DA1]/20 transition-colors" href="/">Explore Forge</a>
+              <a class="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 hover:bg-[#727DA1]/20 transition-colors" href="/">Explore Backbone</a>
               <a class="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 hover:bg-[#727DA1]/20 transition-colors" href="/faq/">Read the FAQ</a>
             </div>
           </div>
@@ -466,13 +466,13 @@ kiro-cli chat --no-interactive --trust-all-tools &quot;$(cat diagram-prompt.md)&
             data-phone-area="604"
             data-phone-prefix="932"
             data-phone-line="8674"
-            aria-label="Call Forge Platform"></a>
-          <a class="hidden lg:block -mx-1 px-1" href="mailto:hello@forgeplatform.software">hello@forgeplatform.software</a>
+            aria-label="Call Backbone"></a>
+          <a class="hidden lg:block -mx-1 px-1" href="mailto:hello@backbonehq.io">hello@backbonehq.io</a>
           <div class="hidden lg:block h-4 border-l border-neutral-300/10"></div>
           <div class="hidden lg:flex">
             <div class="flex gap-4 text-neutral-300">
               <a
-                aria-label="Forge Platform on LinkedIn"
+                aria-label="Backbone on LinkedIn"
                 href="https://www.linkedin.com/company/forgeplatform-software/"
                 rel="nofollow noopener"
                 target="_blank">
@@ -480,18 +480,18 @@ kiro-cli chat --no-interactive --trust-all-tools &quot;$(cat diagram-prompt.md)&
                   <use href="/assets/images/social/linkedin-143ab64c.svg#root"></use>
                 </svg>
               </a>
-              <a aria-label="Get Forge on Github" href="https://github.com/get-backbone/" rel="nofollow noopener" target="_blank">
+              <a aria-label="Get Backbone on Github" href="https://github.com/get-backbone/" rel="nofollow noopener" target="_blank">
                 <svg width="16" height="17" class="svg-currentcolor">
                   <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
                 </svg>
               </a>
-              <a aria-label="Forge Platform on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+              <a aria-label="Backbone on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
                 <svg width="16" height="17" class="svg-currentcolor">
                   <use href="/assets/images/social/twitter-x.svg#root"></use>
                 </svg>
               </a>
               <a
-                aria-label="Forge Platform on Reddit"
+                aria-label="Backbone on Reddit"
                 href="https://www.reddit.com/user/forgeplatform/"
                 rel="nofollow noopener"
                 target="_blank">
@@ -511,7 +511,7 @@ kiro-cli chat --no-interactive --trust-all-tools &quot;$(cat diagram-prompt.md)&
           <a class="-mx-1 px-1" href="/licence">Commercial Licence</a>
           <a
             class="js-demo-site-link hidden sm:block -mx-1 px-1"
-            href="https://int.forgeplatform.software/"
+            href="https://int.backbonehq.io/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Demo environment status unknown">
@@ -524,7 +524,7 @@ kiro-cli chat --no-interactive --trust-all-tools &quot;$(cat diagram-prompt.md)&
         <div class="mt-8 mb-2 flex lg:hidden">
           <div class="flex gap-4 text-neutral-300">
             <a
-              aria-label="Forge Platform on LinkedIn"
+              aria-label="Backbone on LinkedIn"
               href="https://www.linkedin.com/company/forgeplatform-software/"
               rel="nofollow noopener"
               target="_blank">
@@ -532,18 +532,18 @@ kiro-cli chat --no-interactive --trust-all-tools &quot;$(cat diagram-prompt.md)&
                 <use href="/assets/images/social/linkedin-143ab64c.svg#root"></use>
               </svg>
             </a>
-            <a aria-label="Get Forge on Github" href="https://github.com/get-backbone/" rel="nofollow noopener" target="_blank">
+            <a aria-label="Get Backbone on Github" href="https://github.com/get-backbone/" rel="nofollow noopener" target="_blank">
               <svg width="16" height="17" class="svg-currentcolor">
                 <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
               </svg>
             </a>
-            <a aria-label="Forge Platform on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
+            <a aria-label="Backbone on X" href="https://x.com/_get_forge" rel="nofollow noopener" target="_blank">
               <svg width="16" height="17" class="svg-currentcolor">
                 <use href="/assets/images/social/twitter-x.svg#root"></use>
               </svg>
             </a>
             <a
-              aria-label="Forge Platform on Reddit"
+              aria-label="Backbone on Reddit"
               href="https://www.reddit.com/user/forgeplatform/"
               rel="nofollow noopener"
               target="_blank">

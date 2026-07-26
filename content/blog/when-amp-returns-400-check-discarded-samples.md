@@ -23,7 +23,7 @@ This post is how we narrowed it down, why the obvious suspects weren't the culpr
 
 ## The setup
 
-Forge pushes application metrics in-process:
+Backbone pushes application metrics in-process:
 
 - **Micrometer** with the Prometheus v1 registry (`/q/metrics` for local scrape, `MetricSnapshots` for export)
 - **Remote write** to AMP over HTTPS with `Content-Encoding: snappy` and AWS SigV4 (`aps` signing name)

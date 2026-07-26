@@ -27,9 +27,9 @@ In under two hours I went from...
 
 ...to publishing this.
 
-![Forge Platform AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services](https://raw.githubusercontent.com/get-forge/forge-docs/v1.0/assets/forge-architecture.png)
+![Backbone AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services](https://raw.githubusercontent.com/get-backbone/forge-docs/v1.0/assets/forge-architecture.png)
 
-You can see the [live diagram on the Forge docs site](https://docs.forgeplatform.software/docs/welcome#architecture-and-runtime-model), with more detail in the [AWS platform infrastructure guide](https://docs.forgeplatform.software/docs/infrastructure).
+You can see the [live diagram on the Backbone docs site](https://docs.backbonehq.io/docs/welcome#architecture-and-runtime-model), with more detail in the [AWS platform infrastructure guide](https://docs.backbonehq.io/docs/infrastructure).
 
 After literally **years** of trying different approaches, this is the first workflow that has produced an architecture diagram I'd happily put in front of customers.
 
@@ -225,7 +225,7 @@ The clever part was that Cursor understood:
 
 None of that existed in a single file.
 
-It emerged from analysing thousands of lines of CDK spread across stacks, constructs and configuration - including constructs like `ForgeStaticEdgeDeliveryConstruct`, which encodes the CloudFront → S3 static UI + API path proxying story as a single architectural unit rather than a pile of distribution behaviours and origin policies.
+It emerged from analysing thousands of lines of CDK spread across stacks, constructs and configuration - including constructs like `BackboneStaticEdgeDeliveryConstruct`, which encodes the CloudFront → S3 static UI + API path proxying story as a single architectural unit rather than a pile of distribution behaviours and origin policies.
 
 That's genuinely impressive.
 
@@ -288,9 +288,9 @@ My CDK constructs already encode that intent.
 
 They have names like:
 
-- `ForgeStaticEdgeDeliveryConstruct`
-- `ForgeEcsWorkloadConstruct`
-- `ForgeCognitoIdpStack`
+- `BackboneStaticEdgeDeliveryConstruct`
+- `BackboneEcsWorkloadConstruct`
+- `BackboneCognitoIdpStack`
 
 Those are architectural concepts.
 
@@ -326,7 +326,7 @@ It refined the output.
 
 The AI wasn't designing my platform.
 
-But it did an excellent job of documenting a platform that already exists - the same platform I write about when debugging [AMP remote write failures](https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/) or explaining [what production-ready actually means](https://forgeplatform.software/blog/what-production-ready-actually-means/).
+But it did an excellent job of documenting a platform that already exists - the same platform I write about when debugging [AMP remote write failures](https://backbonehq.io/blog/when-amp-returns-400-check-discarded-samples/) or explaining [what production-ready actually means](https://backbonehq.io/blog/what-production-ready-actually-means/).
 
 ## Would I trust it blindly?
 
@@ -372,7 +372,7 @@ The model header explains the intent:
 
 ```yaml
 ---
-# Forge Platform - curated architecture model
+# Backbone - curated architecture model
 #
 # Derived from CDK constructs under infra/src/lib (NOT from the synthesized
 # CloudFormation dependency graph). Low-level noise (IAM roles/policies,
@@ -380,9 +380,9 @@ The model header explains the intent:
 # groups, listener rules) is deliberately omitted.
 #
 # Source of truth mapping:
-#   - Edge / CloudFront .......... forge-static-edge-delivery-construct.ts
-#   - Ingress (ALBs) ............. forge-ecs-ingress-construct.ts
-#   - Compute (Fargate) .......... forge-ecs-workload-construct.ts
+#   - Edge / CloudFront .......... backbone-static-edge-delivery-construct.ts
+#   - Ingress (ALBs) ............. backbone-ecs-ingress-construct.ts
+#   - Compute (Fargate) .......... backbone-ecs-workload-construct.ts
 #   ...
 ```
 
@@ -391,7 +391,7 @@ Nested groups encode the VPC security boundary:
 ```yaml
 groups:
   - id: vpc
-    label: VPC (ForgePlatformVpc)
+    label: VPC (BackbonePlatformVpc)
   - id: public_subnets
     label: Public Subnets
     parent: vpc

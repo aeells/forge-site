@@ -172,8 +172,8 @@ Not because they're unique.
 
 But because every organisation assumes it has to start from scratch.
 
-That realisation is ultimately what led me to build Forge Platform.
+That realisation is ultimately what led me to build Backbone.
 
 After spending more than two decades repeatedly building the same operational capabilities across startups and enterprise programmes, I wanted to create something that lets engineering teams begin with mature foundations already in place - so more of their time is spent building the product they're actually in business to create.
 
-If that resonates, you can learn more at [forgeplatform.software](https://forgeplatform.software/).
+If that resonates, you can learn more at [backbonehq.io](https://backbonehq.io/).

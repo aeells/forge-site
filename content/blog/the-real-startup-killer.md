@@ -114,7 +114,7 @@ When these concerns are treated as a reusable foundation instead of one-off deci
 - architecture stops diverging across services
 - engineering focus returns to product domain logic
 
-This is the problem I've been formalising into an opinionated bootstrap approach with Forge Platform.
+This is the problem I've been formalising into an opinionated bootstrap approach with Backbone.
 
 It enables production-grade microservices from day one with enterprise foundations at startup speed.
 

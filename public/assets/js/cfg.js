@@ -1,6 +1,6 @@
 // Minimal cfg for bundled JS; no third-party hosts or PII (replaced from upstream snapshot).
 window.cfg = {
-  base_host: "forgeplatform.software",
+  base_host: "backbonehq.io",
   base_url: "",
   hub_url: "",
   uptime_url: "",
@@ -32,7 +32,7 @@ window.cfg = {
   },
   controller: "pages",
   action: "home",
-  app: "forge",
+  app: "backbone",
   theme: "system",
   organization_id: null,
   team_id: null,

@@ -1,5 +1,5 @@
 {
-  "name": "forge-site",
+  "name": "backbone-site",
   "private": true,
   "scripts": {
     "format": "prettier --write public/index.html",

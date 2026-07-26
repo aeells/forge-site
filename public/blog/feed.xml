@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Forge Engineering</title>
-    <link>https://forgeplatform.software/blog/</link>
-    <atom:link href="https://forgeplatform.software/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <title>Backbone Engineering</title>
+    <link>https://backbonehq.io/blog/</link>
+    <atom:link href="https://backbonehq.io/blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>Opinionated engineering notes on building production SaaS platforms - from runtime architecture and platform engineering to the realities of running software at scale.</description>
     <language>en</language>
     <lastBuildDate>Fri, 24 Jul 2026 00:00:00 GMT</lastBuildDate>
     <item>
       <title>We&apos;ve Spent 25 Years Shifting Left. The Next Shift Is Down.</title>
-      <link>https://forgeplatform.software/blog/twenty-five-years-of-shifting-left/</link>
-      <guid isPermaLink="true">https://forgeplatform.software/blog/twenty-five-years-of-shifting-left/</guid>
+      <link>https://backbonehq.io/blog/twenty-five-years-of-shifting-left/</link>
+      <guid isPermaLink="true">https://backbonehq.io/blog/twenty-five-years-of-shifting-left/</guid>
       <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
       <description>For 25 years we&apos;ve shifted engineering work left: CI, CD, DevOps, DevSecOps and now AI. But we&apos;ve never stopped rebuilding the same operational foundations. The next shift isn&apos;t left. It&apos;s down.</description>
       <content:encoded><![CDATA[<p>I&#39;ve been building software professionally for about 25 years.</p>
@@ -76,7 +76,7 @@
 <p>Shift-left made us do this work earlier.</p>
 <p>It never asked why we were repeating it at all.</p>
 <p>Every startup, every consultancy and every enterprise greenfield project still begins by rebuilding the same engineering capabilities before a single customer problem gets solved.</p>
-<h2>Forge is about shifting down</h2>
+<h2>Backbone is about shifting down</h2>
 <p>That&#39;s the shift I&#39;m interested in now.</p>
 <p>Not left.</p>
 <p>Down.</p>
@@ -96,10 +96,10 @@
 <p>They&#39;re shared engineering concerns.</p>
 <p>So why are they still treated as project work?</p>
 <p><strong>Shifting down means moving those undifferentiated engineering disciplines beneath your application into a reusable operational foundation instead of rebuilding them inside every new product.</strong></p>
-<p>That&#39;s what Forge Platform is.</p>
+<p>That&#39;s what Backbone is.</p>
 <p>Not another framework.</p>
 <p>Not another starter template.</p>
-<p>An opinionated operational backbone for modern SaaS products.</p>
+<p>An opinionated operational foundation for modern SaaS products.</p>
 <p>Authentication, users, audit, notifications, documents and a BFF orchestration layer. Infrastructure-as-code. CI/CD. Observability. Security. Everything deployed into your own AWS account, from your own GitHub repositories, remaining entirely under your control.</p>
 <p>The disciplines I spent decades shifting left don&#39;t disappear.</p>
 <p>They simply stop living inside every application.</p>
@@ -110,9 +110,9 @@
 <p>The objective was never simply to push more responsibility onto developers.</p>
 <p>It was to stop repeatedly paying for the same engineering work in every company, on every project, for every new product.</p>
 <p>Some engineering problems only need solving once.</p>
-<p>The operational backbone beneath your SaaS product is one of them.</p>
+<p>The operational foundation beneath your SaaS product is one of them.</p>
 <p>After 25 years of shifting left, that feels like the direction we&#39;ve really been heading all along.</p>
-<p>If that resonates, I&#39;d genuinely like to hear from you - you can find out more at <a href="https://forgeplatform.software/">forgeplatform.software</a>.</p>
+<p>If that resonates, I&#39;d genuinely like to hear from you - you can find out more at <a href="https://backbonehq.io/">backbonehq.io</a>.</p>
 ]]></content:encoded>
       <category>devops</category>
       <category>software-engineering</category>
@@ -122,10 +122,10 @@
     </item>
     <item>
       <title>AWS Transform and Superwerker: same vocabulary, different problems</title>
-      <link>https://forgeplatform.software/blog/aws-transform-vs-superwerker/</link>
-      <guid isPermaLink="true">https://forgeplatform.software/blog/aws-transform-vs-superwerker/</guid>
+      <link>https://backbonehq.io/blog/aws-transform-vs-superwerker/</link>
+      <guid isPermaLink="true">https://backbonehq.io/blog/aws-transform-vs-superwerker/</guid>
       <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
-      <description>AWS Transform&apos;s new landing zone agent and Superwerker both stand up governed multi-account AWS environments — but they&apos;re built for different moments in a company&apos;s cloud journey. A read-from-the-docs take, plus why Forge still points greenfield teams at Superwerker.</description>
+      <description>AWS Transform&apos;s new landing zone agent and Superwerker both stand up governed multi-account AWS environments — but they&apos;re built for different moments in a company&apos;s cloud journey. A read-from-the-docs take, plus why Backbone still points greenfield teams at Superwerker.</description>
       <content:encoded><![CDATA[<p>Most people will read <a href="https://aws.amazon.com/blogs/migration-and-modernization/automate-your-landing-zone-creation-with-aws-transform/">AWS Transform&#39;s landing zone agent</a> as Superwerker&#39;s smarter cousin. I don&#39;t think that&#39;s right.</p>
 <p>Same destination. Different problems. Treating them as substitutes is how greenfield teams buy enterprise process they don&#39;t need — and how migration teams under-buy governance they do.</p>
 <p>I saw the announcement via a LinkedIn post, and it stuck because the vocabulary overlaps heavily with a tool I&#39;ve actually used and rate highly: <a href="https://github.com/superwerker/superwerker">Superwerker</a>. I haven&#39;t run Transform myself — this is a read from the announcement and docs, not a hands-on review. I&#39;d genuinely like to hear from anyone who has.</p>
@@ -136,8 +136,8 @@
 <h2>Transform: a different problem</h2>
 <p>Transform&#39;s agent is a different shape of tool entirely. It&#39;s not a standalone landing zone builder — it&#39;s embedded in AWS Transform&#39;s end-to-end migration workflow. Transform gathers information about your organisation, migration waves, compliance requirements and account structure before proposing a landing zone.</p>
 <p>That&#39;s a fundamentally different problem from &quot;deploy me a sensible default.&quot;</p>
-<h2>Where Forge sits</h2>
-<p><a href="https://forgeplatform.software/">Forge</a> deliberately stops at the landing zone boundary. That&#39;s infrastructure governance, and every organisation has different requirements. Once that foundation exists — whether it came from Superwerker, AWS Transform or something else — that&#39;s where Forge starts.</p>
+<h2>Where Backbone sits</h2>
+<p><a href="https://backbonehq.io/">Backbone</a> deliberately stops at the landing zone boundary. That&#39;s infrastructure governance, and every organisation has different requirements. Once that foundation exists — whether it came from Superwerker, AWS Transform or something else — that&#39;s where Backbone starts.</p>
 <h2>A working rule of thumb</h2>
 <ul>
 <li><strong>Greenfield startup?</strong> Use Superwerker.</li>
@@ -154,8 +154,8 @@
     </item>
     <item>
       <title>How AI finally solved AWS architecture diagrams</title>
-      <link>https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/</link>
-      <guid isPermaLink="true">https://forgeplatform.software/blog/how-ai-finally-solved-aws-architecture-diagrams/</guid>
+      <link>https://backbonehq.io/blog/how-ai-finally-solved-aws-architecture-diagrams/</link>
+      <guid isPermaLink="true">https://backbonehq.io/blog/how-ai-finally-solved-aws-architecture-diagrams/</guid>
       <pubDate>Thu, 09 Jul 2026 00:00:00 GMT</pubDate>
       <description>CloudFormation graph tools faithfully document infrastructure, not architecture. A hybrid Cursor + Kiro workflow analysed a real CDK repository, extracted architectural intent and generated the first AWS diagram I&apos;d actually publish.</description>
       <content:encoded><![CDATA[<p>After years of fighting draw.io, CloudFormation graphs and auto-generated spaghetti, architecture diagrams felt like the final boss of platform engineering - one I&#39;d never quite beaten.</p>
@@ -167,8 +167,8 @@
 <p>In under two hours I went from...</p>
 <p>&quot;A salesperson asked if I had an architecture diagram. I said, &#39;Yes... but it&#39;s rubbish.&#39;&quot;</p>
 <p>...to publishing this.</p>
-<p><img src="https://raw.githubusercontent.com/get-forge/forge-docs/v1.0/assets/forge-architecture.png" alt="Forge Platform AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services"></p>
-<p>You can see the <a href="https://docs.forgeplatform.software/docs/welcome#architecture-and-runtime-model">live diagram on the Forge docs site</a>, with more detail in the <a href="https://docs.forgeplatform.software/docs/infrastructure">AWS platform infrastructure guide</a>.</p>
+<p><img src="https://raw.githubusercontent.com/get-backbone/forge-docs/v1.0/assets/forge-architecture.png" alt="Backbone AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services"></p>
+<p>You can see the <a href="https://docs.backbonehq.io/docs/welcome#architecture-and-runtime-model">live diagram on the Backbone docs site</a>, with more detail in the <a href="https://docs.backbonehq.io/docs/infrastructure">AWS platform infrastructure guide</a>.</p>
 <p>After literally <strong>years</strong> of trying different approaches, this is the first workflow that has produced an architecture diagram I&#39;d happily put in front of customers.</p>
 <h2>The problem with architecture diagrams</h2>
 <p>Anyone building on <a href="https://aws.amazon.com/">AWS</a> has probably been here.</p>
@@ -304,7 +304,7 @@
 <li>PostgreSQL, Redis and Cognito deserve first-class representation</li>
 </ul>
 <p>None of that existed in a single file.</p>
-<p>It emerged from analysing thousands of lines of CDK spread across stacks, constructs and configuration - including constructs like <code>ForgeStaticEdgeDeliveryConstruct</code>, which encodes the CloudFront → S3 static UI + API path proxying story as a single architectural unit rather than a pile of distribution behaviours and origin policies.</p>
+<p>It emerged from analysing thousands of lines of CDK spread across stacks, constructs and configuration - including constructs like <code>BackboneStaticEdgeDeliveryConstruct</code>, which encodes the CloudFront → S3 static UI + API path proxying story as a single architectural unit rather than a pile of distribution behaviours and origin policies.</p>
 <p>That&#39;s genuinely impressive.</p>
 <h2>Was it perfect first time?</h2>
 <p>No.</p>
@@ -347,9 +347,9 @@ Published AWS architecture diagram
 <p>My CDK constructs already encode that intent.</p>
 <p>They have names like:</p>
 <ul>
-<li><code>ForgeStaticEdgeDeliveryConstruct</code></li>
-<li><code>ForgeEcsWorkloadConstruct</code></li>
-<li><code>ForgeCognitoIdpStack</code></li>
+<li><code>BackboneStaticEdgeDeliveryConstruct</code></li>
+<li><code>BackboneEcsWorkloadConstruct</code></li>
+<li><code>BackboneCognitoIdpStack</code></li>
 </ul>
 <p>Those are architectural concepts.</p>
 <p>CloudFormation is an implementation detail.</p>
@@ -368,7 +368,7 @@ Published AWS architecture diagram
 <p>It accepted feedback.</p>
 <p>It refined the output.</p>
 <p>The AI wasn&#39;t designing my platform.</p>
-<p>But it did an excellent job of documenting a platform that already exists - the same platform I write about when debugging <a href="https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/">AMP remote write failures</a> or explaining <a href="https://forgeplatform.software/blog/what-production-ready-actually-means/">what production-ready actually means</a>.</p>
+<p>But it did an excellent job of documenting a platform that already exists - the same platform I write about when debugging <a href="https://backbonehq.io/blog/when-amp-returns-400-check-discarded-samples/">AMP remote write failures</a> or explaining <a href="https://backbonehq.io/blog/what-production-ready-actually-means/">what production-ready actually means</a>.</p>
 <h2>Would I trust it blindly?</h2>
 <p>Absolutely not.</p>
 <p>The architecture still belongs to the engineers who built the system.</p>
@@ -395,7 +395,7 @@ Published AWS architecture diagram
 <p>The interesting part isn&#39;t the PNG. It&#39;s the intermediate model - a curated, solutions-architect view derived from CDK constructs, not from the synthesized CloudFormation dependency graph.</p>
 <p>The model header explains the intent:</p>
 <pre><code class="language-yaml">---
-# Forge Platform - curated architecture model
+# Backbone - curated architecture model
 #
 # Derived from CDK constructs under infra/src/lib (NOT from the synthesized
 # CloudFormation dependency graph). Low-level noise (IAM roles/policies,
@@ -403,15 +403,15 @@ Published AWS architecture diagram
 # groups, listener rules) is deliberately omitted.
 #
 # Source of truth mapping:
-#   - Edge / CloudFront .......... forge-static-edge-delivery-construct.ts
-#   - Ingress (ALBs) ............. forge-ecs-ingress-construct.ts
-#   - Compute (Fargate) .......... forge-ecs-workload-construct.ts
+#   - Edge / CloudFront .......... backbone-static-edge-delivery-construct.ts
+#   - Ingress (ALBs) ............. backbone-ecs-ingress-construct.ts
+#   - Compute (Fargate) .......... backbone-ecs-workload-construct.ts
 #   ...
 </code></pre>
 <p>Nested groups encode the VPC security boundary:</p>
 <pre><code class="language-yaml">groups:
   - id: vpc
-    label: VPC (ForgePlatformVpc)
+    label: VPC (BackbonePlatformVpc)
   - id: public_subnets
     label: Public Subnets
     parent: vpc
@@ -474,8 +474,8 @@ kiro-cli chat --no-interactive --trust-all-tools &quot;$(cat diagram-prompt.md)&
     </item>
     <item>
       <title>AMP Remote Write HTTP 400: The CloudWatch Metric That Solved It</title>
-      <link>https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/</link>
-      <guid isPermaLink="true">https://forgeplatform.software/blog/when-amp-returns-400-check-discarded-samples/</guid>
+      <link>https://backbonehq.io/blog/when-amp-returns-400-check-discarded-samples/</link>
+      <guid isPermaLink="true">https://backbonehq.io/blog/when-amp-returns-400-check-discarded-samples/</guid>
       <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
       <description>Intermittent Amazon Managed Prometheus remote-write failures looked like encoding or signing bugs. The real signal was CloudWatch DiscardedSamples — and the fix was embarrassingly familiar if you&apos;ve operated Prometheus at scale.</description>
       <content:encoded><![CDATA[<p>AMP said 400. CloudWatch said why.</p>
@@ -485,7 +485,7 @@ kiro-cli chat --no-interactive --trust-all-tools &quot;$(cat diagram-prompt.md)&
 <p>HTTP 400 with an empty body is a frustrating place to start.</p>
 <p>This post is how we narrowed it down, why the obvious suspects weren&#39;t the culprit, and the CloudWatch metric that finally made the failure mode obvious.</p>
 <h2>The setup</h2>
-<p>Forge pushes application metrics in-process:</p>
+<p>Backbone pushes application metrics in-process:</p>
 <ul>
 <li><strong>Micrometer</strong> with the Prometheus v1 registry (<code>/q/metrics</code> for local scrape, <code>MetricSnapshots</code> for export)</li>
 <li><strong>Remote write</strong> to AMP over HTTPS with <code>Content-Encoding: snappy</code> and AWS SigV4 (<code>aps</code> signing name)</li>
@@ -612,8 +612,8 @@ awscurl --service aps --region us-west-2 \
     </item>
     <item>
       <title>The software nobody plans to build - but every successful team eventually does...</title>
-      <link>https://forgeplatform.software/blog/the-software-nobody-plans-to-build/</link>
-      <guid isPermaLink="true">https://forgeplatform.software/blog/the-software-nobody-plans-to-build/</guid>
+      <link>https://backbonehq.io/blog/the-software-nobody-plans-to-build/</link>
+      <guid isPermaLink="true">https://backbonehq.io/blog/the-software-nobody-plans-to-build/</guid>
       <pubDate>Fri, 26 Jun 2026 00:00:00 GMT</pubDate>
       <description>Every software company starts with one product. Given enough time, almost every successful team ends up building a second one they never planned for.</description>
       <content:encoded><![CDATA[<p>Every software company starts with one product.</p>
@@ -697,9 +697,9 @@ awscurl --service aps --region us-west-2 \
 <p>It&#39;s repeatedly rebuilding the same engineering foundations.</p>
 <p>Not because they&#39;re unique.</p>
 <p>But because every organisation assumes it has to start from scratch.</p>
-<p>That realisation is ultimately what led me to build Forge Platform.</p>
+<p>That realisation is ultimately what led me to build Backbone.</p>
 <p>After spending more than two decades repeatedly building the same operational capabilities across startups and enterprise programmes, I wanted to create something that lets engineering teams begin with mature foundations already in place - so more of their time is spent building the product they&#39;re actually in business to create.</p>
-<p>If that resonates, you can learn more at <a href="https://forgeplatform.software/">forgeplatform.software</a>.</p>
+<p>If that resonates, you can learn more at <a href="https://backbonehq.io/">backbonehq.io</a>.</p>
 ]]></content:encoded>
       <category>saas</category>
       <category>aws</category>
@@ -707,8 +707,8 @@ awscurl --service aps --region us-west-2 \
     </item>
     <item>
       <title>What &quot;production-ready&quot; actually means - and why most teams discover it too late.</title>
-      <link>https://forgeplatform.software/blog/what-production-ready-actually-means/</link>
-      <guid isPermaLink="true">https://forgeplatform.software/blog/what-production-ready-actually-means/</guid>
+      <link>https://backbonehq.io/blog/what-production-ready-actually-means/</link>
+      <guid isPermaLink="true">https://backbonehq.io/blog/what-production-ready-actually-means/</guid>
       <pubDate>Sat, 06 Jun 2026 00:00:00 GMT</pubDate>
       <description>Production readiness isn&apos;t about whether a system runs. It&apos;s about how it behaves under failure, change, and scale - and most teams discover the gap too late.</description>
       <content:encoded><![CDATA[<p>&quot;Production-ready&quot; is one of the most misused phrases in software engineering.</p>
@@ -802,7 +802,7 @@ awscurl --service aps --region us-west-2 \
 <blockquote>
 <p>&quot;Why are we rebuilding production readiness every time?&quot;</p>
 </blockquote>
-<p>This is the problem space I&#39;ve been focused on with Forge: creating a reusable foundation so teams don&#39;t rediscover production-readiness under pressure.</p>
+<p>This is the problem space I&#39;ve been focused on with Backbone: creating a reusable foundation so teams don&#39;t rediscover production-readiness under pressure.</p>
 ]]></content:encoded>
       <category>startup</category>
       <category>devops</category>
@@ -811,8 +811,8 @@ awscurl --service aps --region us-west-2 \
     </item>
     <item>
       <title>The real startup killer isn&apos;t product - it&apos;s building platform foundations from scratch.</title>
-      <link>https://forgeplatform.software/blog/the-real-startup-killer/</link>
-      <guid isPermaLink="true">https://forgeplatform.software/blog/the-real-startup-killer/</guid>
+      <link>https://backbonehq.io/blog/the-real-startup-killer/</link>
+      <guid isPermaLink="true">https://backbonehq.io/blog/the-real-startup-killer/</guid>
       <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
       <description>Most early-stage teams think they&apos;re building one product. They&apos;re actually building two - and the second one quietly consumes man-years of engineering time.</description>
       <content:encoded><![CDATA[<p>There&#39;s a pattern I&#39;ve seen repeat a few times over 20 years building software systems in both startup and enterprise environments.</p>
@@ -897,7 +897,7 @@ awscurl --service aps --region us-west-2 \
 <li>architecture stops diverging across services</li>
 <li>engineering focus returns to product domain logic</li>
 </ul>
-<p>This is the problem I&#39;ve been formalising into an opinionated bootstrap approach with Forge Platform.</p>
+<p>This is the problem I&#39;ve been formalising into an opinionated bootstrap approach with Backbone.</p>
 <p>It enables production-grade microservices from day one with enterprise foundations at startup speed.</p>
 <p>Not because teams cannot build these things.</p>
 <p>But because they keep building them repeatedly, under pressure, in slightly different ways, everywhere.</p>

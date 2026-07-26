@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>FAQ | Forge Platform</title>
+    <title>FAQ | Backbone</title>
     <meta
       name="description"
-      content="Frequently asked questions about Forge Platform: fit, ownership, AWS architecture, running costs, extensibility, licensing, comparisons to DIY and adjacent tools, and technical documentation." />
-    <link href="https://forgeplatform.software/faq/" rel="canonical" />
+      content="Frequently asked questions about Backbone: fit, ownership, AWS architecture, running costs, extensibility, licensing, comparisons to DIY and adjacent tools, and technical documentation." />
+    <link href="https://backbonehq.io/faq/" rel="canonical" />
     <link rel="stylesheet" href="/assets/css/main.css" media="all" />
     <link rel="stylesheet" href="/assets/css/vendor/accordion.min.css" media="all" />
     <link rel="stylesheet" href="/assets/css/faq.css" media="all" />
@@ -19,15 +19,15 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is Forge Platform?",
+            "name": "What is Backbone?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Forge is an enterprise-grade, operational foundation for SaaS product companies that want to scale securely."
+              "text": "Backbone is an enterprise-grade, operational foundation for SaaS product companies that want to scale securely."
             }
           },
           {
             "@type": "Question",
-            "name": "Is Forge a framework, boilerplate, or hosted platform?",
+            "name": "Is Backbone a framework, boilerplate, or hosted platform?",
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "None of the above. It's a top-to-bottom production platform foundation - infrastructure, shared services, deployment workflows, and conventions you can deploy immediately."
@@ -35,10 +35,10 @@
           },
           {
             "@type": "Question",
-            "name": "Is Forge right for my team?",
+            "name": "Is Backbone right for my team?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "If you're building something that needs to run at scale in production - not a throwaway MVP - Forge is built for you. Typical adopters are startups scaling up, founding teams hiring their first senior engineers, and greenfield enterprise projects."
+              "text": "If you're building something that needs to run at scale in production - not a throwaway MVP - Backbone is built for you. Typical adopters are startups scaling up, founding teams hiring their first senior engineers, and greenfield enterprise projects."
             }
           },
           {
@@ -46,15 +46,15 @@
             "name": "Do we own the code and environments?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Forge is forked into your GitHub org and runs in your AWS account. You own the code, infrastructure, pipelines, and data. We don't host your runtime."
+              "text": "Yes. Backbone is forked into your GitHub org and runs in your AWS account. You own the code, infrastructure, pipelines, and data. We don't host your runtime."
             }
           },
           {
             "@type": "Question",
-            "name": "How does Forge compare to building it ourselves?",
+            "name": "How does Backbone compare to building it ourselves?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "You can build it yourselves - and most teams eventually assemble something similar. Direct cost is typically ~$200k-$500k over 2-3 years, plus the larger cost of seniors off product. Forge ships Year 3 operational maturity on Day 1 as one coherent operating model. Compare Forge to building an engineering capability, not to a single developer tool. See https://forgeplatform.software/compare/."
+              "text": "You can build it yourselves - and most teams eventually assemble something similar. Direct cost is typically ~$200k-$500k over 2-3 years, plus the larger cost of seniors off product. Backbone ships Year 3 operational maturity on Day 1 as one coherent operating model. Compare Backbone to building an engineering capability, not to a single developer tool. See https://backbonehq.io/compare/."
             }
           },
           {
@@ -62,7 +62,7 @@
             "name": "Why not Backstage or an Internal Developer Platform?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "IDPs and portals like Backstage assume a platform team already exists and make developers faster on top of it. Forge assumes there isn't one yet - it is the operational foundation that team would otherwise spend years creating. See https://forgeplatform.software/compare/."
+              "text": "IDPs and portals like Backstage assume a platform team already exists and make developers faster on top of it. Backbone assumes there isn't one yet - it is the operational foundation that team would otherwise spend years creating. See https://backbonehq.io/compare/."
             }
           },
           {
@@ -70,7 +70,7 @@
             "name": "Why not Render or a PaaS?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "PaaS platforms are a good fit when a simple monolith covers the next two years. Forge is for teams that need audit trails, multi-service shape, predictable scale, enterprise diligence, and ownership inside your AWS account. See https://forgeplatform.software/compare/."
+              "text": "PaaS platforms are a good fit when a simple monolith covers the next two years. Backbone is for teams that need audit trails, multi-service shape, predictable scale, enterprise diligence, and ownership inside your AWS account. See https://backbonehq.io/compare/."
             }
           },
           {
@@ -78,20 +78,20 @@
             "name": "Do I still need Vanta?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Often no. Forge is not a GRC monitoring product, but it ships a broad technical compliance foundation - identity, audit, edge controls, secrets, observability, and governance evidence. The Forge compliance guide maps that baseline to common SOC 2-style objectives. For many teams, that is why they never need Vanta. Formal attestation is still an operator process when you pursue it; it is not a reason to assume you must add another compliance suite after adopting Forge. See https://docs.forgeplatform.software/docs/compliance and https://forgeplatform.software/compare/."
+              "text": "Often no. Backbone is not a GRC monitoring product, but it ships a broad technical compliance foundation - identity, audit, edge controls, secrets, observability, and governance evidence. The Backbone compliance guide maps that baseline to common SOC 2-style objectives. For many teams, that is why they never need Vanta. Formal attestation is still an operator process when you pursue it; it is not a reason to assume you must add another compliance suite after adopting Backbone. See https://docs.backbonehq.io/docs/compliance and https://backbonehq.io/compare/."
             }
           },
           {
             "@type": "Question",
-            "name": "How many users can Forge support?",
+            "name": "How many users can Backbone support?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Published benchmarks show ~222 req/s at 200 concurrent users on two minimal ECS tasks, with near-linear scaling as you add capacity. Your limits depend on workload. See https://docs.forgeplatform.software/docs/performance for methodology and numbers."
+              "text": "Published benchmarks show ~222 req/s at 200 concurrent users on two minimal ECS tasks, with near-linear scaling as you add capacity. Your limits depend on workload. See https://docs.backbonehq.io/docs/performance for methodology and numbers."
             }
           },
           {
             "@type": "Question",
-            "name": "Does Forge support multi-cloud or Kubernetes?",
+            "name": "Does Backbone support multi-cloud or Kubernetes?",
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "AWS only today. No Kubernetes complexity required. Opinionated on purpose - simpler ops, faster delivery."
@@ -99,15 +99,15 @@
           },
           {
             "@type": "Question",
-            "name": "What AWS services does Forge use?",
+            "name": "What AWS services does Backbone use?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "VPC, IAM, Cognito, ECS, ALB, RDS, S3, and CloudWatch. See https://docs.forgeplatform.software for the full picture."
+              "text": "VPC, IAM, Cognito, ECS, ALB, RDS, S3, and CloudWatch. See https://docs.backbonehq.io for the full picture."
             }
           },
           {
             "@type": "Question",
-            "name": "What does Forge typically cost to run?",
+            "name": "What does Backbone typically cost to run?",
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "About $150/month in AWS before significant traffic. After that, cost follows usage."
@@ -115,18 +115,18 @@
           },
           {
             "@type": "Question",
-            "name": "Can we extend or replace parts of Forge?",
+            "name": "Can we extend or replace parts of Backbone?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. You'll add your domain services - and you're free to replace components, change workflows, or code as needed. You'll also get updates from the upstream Forge repo."
+              "text": "Yes. You'll add your domain services - and you're free to replace components, change workflows, or code as needed. You'll also get updates from the upstream Backbone repo."
             }
           },
           {
             "@type": "Question",
-            "name": "Are we locked into Forge long term?",
+            "name": "Are we locked into Backbone long term?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "You control your AWS account, code, and data. Forge platform components are commercially licensed - you keep a subscription for those. Longer-term licensing options may become available as the platform matures."
+              "text": "You control your AWS account, code, and data. Backbone platform components are commercially licensed - you keep a subscription for those. Longer-term licensing options may become available as the platform matures."
             }
           }
         ]
@@ -146,26 +146,26 @@
             Frequently asked questions
           </h1>
 
-          <div id="forge-faq-accordion" class="mt-10 w-full max-w-[820px]">
-            <div class="ac forge-faq-accordion">
+          <div id="backbone-faq-accordion" class="mt-10 w-full max-w-[820px]">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">What is Forge Platform?</button>
+                <button type="button" class="ac-trigger">What is Backbone?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
-                    Forge is an enterprise-grade, operational foundation for SaaS product companies that want to scale securely.
+                    Backbone is an enterprise-grade, operational foundation for SaaS product companies that want to scale securely.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">Is Forge a framework, boilerplate, or hosted platform?</button>
+                <button type="button" class="ac-trigger">Is Backbone a framework, boilerplate, or hosted platform?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
                     None of the above. It's a top-to-bottom production platform foundation — infrastructure, shared services, deployment
                     workflows, and conventions you can deploy immediately.
@@ -174,14 +174,14 @@
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">Is Forge right for my team?</button>
+                <button type="button" class="ac-trigger">Is Backbone right for my team?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
-                    If you're building something that needs to run at scale in production — not a throwaway MVP — Forge is built
+                    If you're building something that needs to run at scale in production — not a throwaway MVP — Backbone is built
                     for you. Typical adopters are startups scaling up, founding teams hiring their first senior engineers, and
                     greenfield enterprise projects.
                   </p>
@@ -189,62 +189,62 @@
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
                 <button type="button" class="ac-trigger">Do we own the code and environments?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
-                    Yes. Forge is forked into your GitHub org and runs in your AWS account. You own the code, infrastructure,
+                    Yes. Backbone is forked into your GitHub org and runs in your AWS account. You own the code, infrastructure,
                     pipelines, and data. We don't host your runtime.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">How does Forge compare to building it ourselves?</button>
+                <button type="button" class="ac-trigger">How does Backbone compare to building it ourselves?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
                     You can build it yourselves - and most teams eventually assemble something similar. Direct cost is typically
                     ~$200k-$500k over 2-3 years, plus the larger cost of seniors off product while inventing plumbing.
                   </p>
                   <p>
-                    Forge ships Year 3 operational maturity on Day 1 as one coherent operating model. Compare Forge to building an
+                    Backbone ships Year 3 operational maturity on Day 1 as one coherent operating model. Compare Backbone to building an
                     engineering capability, not to a single developer tool.
-                    <a href="/compare/">See how Forge compares</a>.
+                    <a href="/compare/">See how Backbone compares</a>.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
                 <button type="button" class="ac-trigger">Why not Backstage or an Internal Developer Platform?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
-                    IDPs and portals like Backstage assume a platform team already exists and make developers faster on top of it. Forge
+                    IDPs and portals like Backstage assume a platform team already exists and make developers faster on top of it. Backbone
                     assumes there isn't one yet - it is the operational foundation that team would otherwise spend years creating.
-                    <a href="/compare/">Compare Forge to adjacent tools</a>.
+                    <a href="/compare/">Compare Backbone to adjacent tools</a>.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
                 <button type="button" class="ac-trigger">Why not Render or a PaaS?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
-                    PaaS platforms are a good fit when a simple monolith covers the next two years. Forge is for teams that need audit
+                    PaaS platforms are a good fit when a simple monolith covers the next two years. Backbone is for teams that need audit
                     trails, multi-service shape, predictable scale, enterprise diligence, and ownership inside your AWS account.
                     <a href="/compare/">See the full comparison</a>.
                   </p>
@@ -252,45 +252,45 @@
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
                 <button type="button" class="ac-trigger">Do I still need Vanta?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
-                    Often no. Forge is not a GRC monitoring product like Vanta - it does not run continuous control tests in a compliance
+                    Often no. Backbone is not a GRC monitoring product like Vanta - it does not run continuous control tests in a compliance
                     dashboard. It does ship a broad technical compliance foundation: identity, audit trails, network and edge baselines,
                     secrets handling, observability hooks, and governance evidence.
                   </p>
                   <p>
                     The
                     <a
-                      href="https://docs.forgeplatform.software/docs/compliance"
+                      href="https://docs.backbonehq.io/docs/compliance"
                       rel="noopener noreferrer"
                       target="_blank"
-                      >Forge compliance guide</a
+                      >Backbone compliance guide</a
                     >
                     maps that baseline to common SOC 2-style objectives, what ships in the platform, and what operators still own. For many
-                    teams, Forge is why they never need Vanta. Formal attestation remains an organizational process when you pursue it - not
-                    a requirement to bolt on another compliance suite after adopting Forge.
-                    <a href="/compare/">Forge vs compliance tooling</a>.
+                    teams, Backbone is why they never need Vanta. Formal attestation remains an organizational process when you pursue it - not
+                    a requirement to bolt on another compliance suite after adopting Backbone.
+                    <a href="/compare/">Backbone vs compliance tooling</a>.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">How many users can Forge support?</button>
+                <button type="button" class="ac-trigger">How many users can Backbone support?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
                     Published benchmarks show ~222 req/s at 200 concurrent users on two minimal ECS tasks, with near-linear
                     scaling as you add capacity. Your limits depend on workload.
                     <a
-                      href="https://docs.forgeplatform.software/docs/performance"
+                      href="https://docs.backbonehq.io/docs/performance"
                       rel="noopener noreferrer"
                       target="_blank"
                       >Performance docs</a
@@ -301,65 +301,65 @@
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">Does Forge support multi-cloud or Kubernetes?</button>
+                <button type="button" class="ac-trigger">Does Backbone support multi-cloud or Kubernetes?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>AWS only today. No Kubernetes complexity required. Opinionated on purpose — simpler ops, faster delivery.</p>
                 </div>
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">What AWS services does Forge use?</button>
+                <button type="button" class="ac-trigger">What AWS services does Backbone use?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
                     VPC, IAM, Cognito, ECS, ALB, RDS, S3, and CloudWatch.
-                    <a href="https://docs.forgeplatform.software" rel="noopener noreferrer" target="_blank">Docs</a>
+                    <a href="https://docs.backbonehq.io" rel="noopener noreferrer" target="_blank">Docs</a>
                     have the full picture.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">What does Forge typically cost to run?</button>
+                <button type="button" class="ac-trigger">What does Backbone typically cost to run?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>About $150/month in AWS before significant traffic. After that, cost follows usage.</p>
                 </div>
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">Can we extend or replace parts of Forge?</button>
+                <button type="button" class="ac-trigger">Can we extend or replace parts of Backbone?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
                     Yes. You'll add your domain services — and you're free to replace components, change workflows, or code as needed.
-                    You'll also get updates from the upstream Forge repo.
+                    You'll also get updates from the upstream Backbone repo.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div class="ac forge-faq-accordion">
+            <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">Are we locked into Forge long term?</button>
+                <button type="button" class="ac-trigger">Are we locked into Backbone long term?</button>
               </h2>
               <div class="ac-panel">
-                <div class="ac-text forge-faq-panel">
+                <div class="ac-text backbone-faq-panel">
                   <p>
-                    You control your AWS account, code, and data. Forge platform components are commercially licensed — you keep
+                    You control your AWS account, code, and data. Backbone platform components are commercially licensed — you keep
                     a subscription for those. Longer-term licensing options may become available as the platform matures.
                   </p>
                 </div>

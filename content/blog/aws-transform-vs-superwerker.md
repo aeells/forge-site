@@ -1,8 +1,8 @@
 ---
 title: "AWS Transform and Superwerker: same vocabulary, different problems"
 slug: aws-transform-vs-superwerker
-summary: "AWS Transform's new landing zone agent and Superwerker both stand up governed multi-account AWS environments — but they're built for different moments in a company's cloud journey. A read-from-the-docs take, plus why Forge still points greenfield teams at Superwerker."
-description: "AWS Transform's landing zone agent and Superwerker both create governed AWS environments, but they solve different problems. A practitioner's comparison — including hands-on Superwerker experience — and where Forge fits."
+summary: "AWS Transform's new landing zone agent and Superwerker both stand up governed multi-account AWS environments — but they're built for different moments in a company's cloud journey. A read-from-the-docs take, plus why Backbone still points greenfield teams at Superwerker."
+description: "AWS Transform's landing zone agent and Superwerker both create governed AWS environments, but they solve different problems. A practitioner's comparison — including hands-on Superwerker experience — and where Backbone fits."
 published: 2026-07-11
 updated: 2026-07-11
 author: Andrew Eells
@@ -29,9 +29,9 @@ Transform's agent is a different shape of tool entirely. It's not a standalone l
 
 That's a fundamentally different problem from "deploy me a sensible default."
 
-## Where Forge sits
+## Where Backbone sits
 
-[Forge](https://forgeplatform.software/) deliberately stops at the landing zone boundary. That's infrastructure governance, and every organisation has different requirements. Once that foundation exists — whether it came from Superwerker, AWS Transform or something else — that's where Forge starts.
+[Backbone](https://backbonehq.io/) deliberately stops at the landing zone boundary. That's infrastructure governance, and every organisation has different requirements. Once that foundation exists — whether it came from Superwerker, AWS Transform or something else — that's where Backbone starts.
 
 ## A working rule of thumb
 
