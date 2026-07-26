@@ -6032,21 +6032,21 @@ html {
   }
 }
 
-/* Audience section: crossed-hammers watermark behind copy */
+/* Audience section: backbone logo watermark behind copy */
 .audience-section-watermark {
   position: relative;
   isolation: isolate;
 }
 .audience-section-watermark__img {
   position: absolute;
-  right: 0;
+  right: 80px;
   top: 50%;
   z-index: 0;
-  width: min(300px, 40vw);
+  width: min(140px, 19vw);
   height: auto;
   max-height: 75%;
   object-fit: contain;
-  object-position: right center;
+  object-position: center center;
   opacity: 0.11;
   transform: translateY(-50%);
   pointer-events: none;
