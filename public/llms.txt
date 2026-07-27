@@ -19,6 +19,7 @@ Backbone provides opinionated infrastructure, service patterns, operational tool
 ## Community and contact
 
 - [Book a discovery call](https://calendly.com/backbonehq/discovery-call)
-- [LinkedIn](https://www.linkedin.com/company/forgeplatform-software/)
+- [LinkedIn](https://www.linkedin.com/company/get-backbone/)
 - [GitHub](https://github.com/get-backbone/)
 - [X](https://x.com/_backbonehq)
+- [Reddit](https://www.reddit.com/user/backbonehq/)
