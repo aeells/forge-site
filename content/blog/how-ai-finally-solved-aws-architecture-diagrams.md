@@ -27,7 +27,7 @@ In under two hours I went from...
 
 ...to publishing this.
 
-![Backbone AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services](https://raw.githubusercontent.com/get-backbone/forge-docs/v1.0/assets/forge-architecture.png)
+![Backbone AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services](https://raw.githubusercontent.com/get-backbone/backbone-docs/v1.0/assets/forge-architecture.png)
 
 You can see the [live diagram on the Backbone docs site](https://docs.backbonehq.io/docs/welcome#architecture-and-runtime-model), with more detail in the [AWS platform infrastructure guide](https://docs.backbonehq.io/docs/infrastructure).
 

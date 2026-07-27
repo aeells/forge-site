@@ -167,7 +167,7 @@
 <p>In under two hours I went from...</p>
 <p>&quot;A salesperson asked if I had an architecture diagram. I said, &#39;Yes... but it&#39;s rubbish.&#39;&quot;</p>
 <p>...to publishing this.</p>
-<p><img src="https://raw.githubusercontent.com/get-backbone/forge-docs/v1.0/assets/forge-architecture.png" alt="Backbone AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services"></p>
+<p><img src="https://raw.githubusercontent.com/get-backbone/backbone-docs/v1.0/assets/forge-architecture.png" alt="Backbone AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services"></p>
 <p>You can see the <a href="https://docs.backbonehq.io/docs/welcome#architecture-and-runtime-model">live diagram on the Backbone docs site</a>, with more detail in the <a href="https://docs.backbonehq.io/docs/infrastructure">AWS platform infrastructure guide</a>.</p>
 <p>After literally <strong>years</strong> of trying different approaches, this is the first workflow that has produced an architecture diagram I&#39;d happily put in front of customers.</p>
 <h2>The problem with architecture diagrams</h2>
