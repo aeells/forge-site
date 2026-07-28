@@ -188,13 +188,40 @@ async function ensurePrice(stripe, key, productId, spec, currency, dryRun) {
 }
 
 async function ensurePaymentLink(stripe, key, priceId, defaults, dryRun) {
+  const pl = defaults.payment_link || {};
+  const desired = {
+    allow_promotion_codes: !!pl.allow_promotion_codes,
+    billing_address_collection: pl.billing_address_collection || "auto",
+    phone_number_collection: { enabled: !!pl.phone_number_collection },
+    tax_id_collection: { enabled: !!pl.tax_id_collection },
+    automatic_tax: { enabled: !!pl.automatic_tax },
+  };
+
   const existing = await findByMeta(stripe, "payment_link", key);
   if (existing) {
     const linePrice = existing.line_items?.data?.[0]?.price;
     const linePriceId = typeof linePrice === "string" ? linePrice : linePrice?.id;
     if (linePriceId === priceId) {
-      console.log(`  payment_link ${key}: ok (${existing.id}) ${existing.url}`);
-      return existing;
+      const settingsDrift =
+        !!existing.automatic_tax?.enabled !== desired.automatic_tax.enabled ||
+        !!existing.tax_id_collection?.enabled !== desired.tax_id_collection.enabled ||
+        (existing.billing_address_collection || "auto") !==
+          desired.billing_address_collection ||
+        !!existing.allow_promotion_codes !== desired.allow_promotion_codes ||
+        !!existing.phone_number_collection?.enabled !==
+          desired.phone_number_collection.enabled;
+
+      if (!settingsDrift) {
+        console.log(`  payment_link ${key}: ok (${existing.id}) ${existing.url}`);
+        return existing;
+      }
+
+      console.log(
+        `  payment_link ${key}: update ${existing.id}` +
+          (desired.automatic_tax.enabled ? " automatic_tax=on" : " automatic_tax=off"),
+      );
+      if (dryRun) return existing;
+      return stripe.paymentLinks.update(existing.id, desired);
     }
     console.log(`  payment_link ${key}: deactivate ${existing.id} (price changed) → create new`);
     if (!dryRun) await stripe.paymentLinks.update(existing.id, { active: false });
@@ -206,15 +233,10 @@ async function ensurePaymentLink(stripe, key, priceId, defaults, dryRun) {
     return { id: `dry_plink_${key}`, url: `https://buy.stripe.com/dry_${key}` };
   }
 
-  const pl = defaults.payment_link || {};
   return stripe.paymentLinks.create({
     line_items: [{ price: priceId, quantity: 1 }],
     metadata: { [META_KEY]: key },
-    allow_promotion_codes: !!pl.allow_promotion_codes,
-    billing_address_collection: pl.billing_address_collection || "auto",
-    phone_number_collection: { enabled: !!pl.phone_number_collection },
-    tax_id_collection: { enabled: !!pl.tax_id_collection },
-    automatic_tax: { enabled: !!pl.automatic_tax },
+    ...desired,
     after_completion: {
       type: "hosted_confirmation",
       hosted_confirmation: {

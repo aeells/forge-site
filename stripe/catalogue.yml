@@ -20,7 +20,7 @@ defaults:
   tax_code: txcd_10202003
   payment_link:
     # Turn on after Stripe Tax is enabled in the Dashboard.
-    automatic_tax: false
+    automatic_tax: true
     tax_id_collection: true
     billing_address_collection: required
     # customer_creation is not allowed on subscription Payment Links —
