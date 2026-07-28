@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Transparent outside; dark fill inside the mark -->
+  <g transform="translate(256,256)">
+    <circle cx="0" cy="0" r="182" fill="#0B0C14"/>
+    <circle cx="0" cy="0" r="168" fill="none" stroke="#ffffff" stroke-width="28"/>
+    <g fill="#ffffff">
+      <rect x="-72" y="-84" width="144" height="28" rx="14"/>
+      <rect x="-100" y="-14" width="200" height="28" rx="14"/>
+      <rect x="-72" y="56" width="144" height="28" rx="14"/>
+    </g>
+  </g>
+</svg>
