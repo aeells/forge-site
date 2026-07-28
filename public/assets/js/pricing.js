@@ -4,17 +4,17 @@
 
   // Annual totals are the published list prices ($15k / $30k).
   // Monthly stickers are rounded clean numbers (~17% above annual effective).
-  // Stripe checkout URLs left unchanged until new Payment Links are provided.
+  // Checkout URLs come from stripe/catalogue.yml via: npm run stripe:sync -- --apply
   var STRIPE = {
-    builder: {
-      monthly: "https://buy.stripe.com/5kQ28q5gBbjPgxX0vXaMU04",
-      annual: "https://buy.stripe.com/8x29AS9wRbjP0yZceFaMU05",
+    foundation: {
+      monthly: "https://buy.stripe.com/14AbJ09wRgE93Lb5QhaMU06",
+      annual: "https://buy.stripe.com/cNidR8cJ31JfepP2E5aMU07",
       monthlyPrice: 1500,
       annualTotal: 15000,
     },
-    scale: {
-      monthly: "https://buy.stripe.com/cNi9AScJ3fA52H7diJaMU01",
-      annual: "https://buy.stripe.com/7sYeVc7oJgE93Lb5QhaMU03",
+    growth: {
+      monthly: "https://buy.stripe.com/4gMbJ010l5Zva9zceFaMU08",
+      annual: "https://buy.stripe.com/28E00i10l3RnbdDbaBaMU09",
       monthlyPrice: 3000,
       annualTotal: 30000,
     },

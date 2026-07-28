@@ -1,0 +1,59 @@
+{
+  "synced_at": "2026-07-28T07:36:07.467Z",
+  "mode": "live",
+  "currency": "usd",
+  "dry_run": false,
+  "products": {
+    "foundation": {
+      "id": "prod_Uy1aqPTkg2Mk2E",
+      "name": "Backbone Foundation",
+      "site_key": "foundation",
+      "invoice_only": false,
+      "prices": {
+        "monthly": {
+          "id": "price_1Ty5XFCPU4np0S0qMgKzjcew",
+          "unit_amount": 150000,
+          "interval": "month",
+          "payment_link_id": "plink_1Ty5YaCPU4np0S0qS2NaCjYK",
+          "payment_link_url": "https://buy.stripe.com/14AbJ09wRgE93Lb5QhaMU06"
+        },
+        "annual": {
+          "id": "price_1Ty5YaCPU4np0S0qr1x9kCmZ",
+          "unit_amount": 1500000,
+          "interval": "year",
+          "payment_link_id": "plink_1Ty5YbCPU4np0S0qAy1mu2Xc",
+          "payment_link_url": "https://buy.stripe.com/cNidR8cJ31JfepP2E5aMU07"
+        }
+      }
+    },
+    "growth": {
+      "id": "prod_Uy1blprxLXmnc0",
+      "name": "Backbone Growth",
+      "site_key": "growth",
+      "invoice_only": false,
+      "prices": {
+        "monthly": {
+          "id": "price_1Ty5YbCPU4np0S0qI7m12Txj",
+          "unit_amount": 300000,
+          "interval": "month",
+          "payment_link_id": "plink_1Ty5YcCPU4np0S0qgcdeignV",
+          "payment_link_url": "https://buy.stripe.com/4gMbJ010l5Zva9zceFaMU08"
+        },
+        "annual": {
+          "id": "price_1Ty5YcCPU4np0S0qahklgsjs",
+          "unit_amount": 3000000,
+          "interval": "year",
+          "payment_link_id": "plink_1Ty5YdCPU4np0S0qp9TSDcvV",
+          "payment_link_url": "https://buy.stripe.com/28E00i10l3RnbdDbaBaMU09"
+        }
+      }
+    },
+    "enterprise": {
+      "id": "prod_Uy1bUsu4vkNRl8",
+      "name": "Backbone Enterprise",
+      "site_key": null,
+      "invoice_only": true,
+      "prices": {}
+    }
+  }
+}

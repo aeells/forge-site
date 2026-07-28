@@ -1,0 +1,81 @@
+# Backbone Stripe catalogue — source of truth for list pricing.
+#
+# Commercial model:
+#   Monthly list: $1,500 / $3,000
+#   Annual list:  $15,000 / $30,000  (= 10× monthly → pay 10, receive 12)
+#   Annual UI sticker: annual ÷ 12 ($1,250 / $2,500) — display only, not a Price.
+#
+# Currency is USD for intl B2B. Canadian tax residency is handled via Stripe Tax /
+# account settings, not by pricing in CAD.
+#
+# Sync: STRIPE_SECRET_KEY=sk_... npm run stripe:sync
+# Dry-run (default): omit --apply
+# Live write + update pricing.js: npm run stripe:sync -- --apply
+
+currency: usd
+
+defaults:
+  payment_link:
+    # Turn on after Stripe Tax is enabled in the Dashboard.
+    automatic_tax: false
+    tax_id_collection: true
+    billing_address_collection: required
+    # customer_creation is not allowed on subscription Payment Links —
+    # Stripe always creates a Customer for recurring Prices.
+    allow_promotion_codes: false
+    # Collects phone optionally; leave false unless support wants it.
+    phone_number_collection: false
+
+products:
+  foundation:
+    name: Backbone Foundation
+    description: >-
+      Funded or venture-backed teams building their first production platform.
+      Full Backbone with documentation and email support.
+    # DOM / pricing.js key (data-pricing-* attributes)
+    site_key: foundation
+    metadata:
+      tier: foundation
+      contract_type: standard
+    prices:
+      monthly:
+        nickname: Foundation monthly
+        unit_amount: 150000 # $1,500.00
+        interval: month
+      annual:
+        nickname: Foundation annual
+        unit_amount: 1500000 # $15,000.00
+        interval: year
+    create_payment_links: true
+
+  growth:
+    name: Backbone Growth
+    description: >-
+      Established engineering teams launching new products or replacing legacy
+      platforms. Priority support, Slack access, and architecture guidance.
+    site_key: growth
+    metadata:
+      tier: growth
+      contract_type: standard
+    prices:
+      monthly:
+        nickname: Growth monthly
+        unit_amount: 300000 # $3,000.00
+        interval: month
+      annual:
+        nickname: Growth annual
+        unit_amount: 3000000 # $30,000.00
+        interval: year
+    create_payment_links: true
+
+  enterprise:
+    name: Backbone Enterprise
+    description: >-
+      Multi-team, portfolio, or custom commercial terms. Quote and Stripe Invoice
+      only — no self-serve Checkout.
+    metadata:
+      tier: enterprise
+      contract_type: enterprise
+    # Catalogue product only. Create Prices ad hoc on invoices / quotes.
+    invoice_only: true
+    create_payment_links: false
