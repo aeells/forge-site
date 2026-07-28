@@ -104,8 +104,9 @@ function priceMatches(existing, desired, currency) {
   );
 }
 
-async function ensureProduct(stripe, key, spec, currency, dryRun) {
+async function ensureProduct(stripe, key, spec, defaults, dryRun) {
   const existing = await findByMeta(stripe, "product", key);
+  const taxCode = spec.tax_code || defaults.tax_code || undefined;
   const payload = {
     name: spec.name,
     description: spec.description || undefined,
@@ -114,23 +115,34 @@ async function ensureProduct(stripe, key, spec, currency, dryRun) {
       [META_KEY]: key,
     },
   };
+  if (taxCode) payload.tax_code = taxCode;
 
   if (existing) {
+    const existingTax =
+      typeof existing.tax_code === "string"
+        ? existing.tax_code
+        : existing.tax_code?.id || null;
     const needsUpdate =
       existing.name !== payload.name ||
       (existing.description || "") !== (payload.description || "") ||
+      (taxCode && existingTax !== taxCode) ||
       Object.entries(payload.metadata).some(([k, v]) => existing.metadata?.[k] !== String(v));
 
     if (!needsUpdate) {
       console.log(`  product ${key}: ok (${existing.id})`);
       return existing;
     }
-    console.log(`  product ${key}: update ${existing.id}`);
+    console.log(
+      `  product ${key}: update ${existing.id}` +
+        (taxCode && existingTax !== taxCode ? ` tax_code→${taxCode}` : ""),
+    );
     if (dryRun) return existing;
     return stripe.products.update(existing.id, payload);
   }
 
-  console.log(`  product ${key}: create "${spec.name}"`);
+  console.log(
+    `  product ${key}: create "${spec.name}"` + (taxCode ? ` (${taxCode})` : ""),
+  );
   if (dryRun) return { id: `dry_prod_${key}`, metadata: payload.metadata };
   return stripe.products.create(payload);
 }
@@ -278,7 +290,13 @@ async function main() {
 
   for (const [productKey, spec] of Object.entries(catalogue.products)) {
     console.log(`${productKey}`);
-    const product = await ensureProduct(stripe, productKey, spec, currency, dryRun);
+    const product = await ensureProduct(
+      stripe,
+      productKey,
+      spec,
+      catalogue.defaults || {},
+      dryRun,
+    );
     state.products[productKey] = {
       id: product.id,
       name: spec.name,

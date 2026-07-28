@@ -11,4 +11,5 @@ STRIPE_SECRET_KEY=sk_test_... npm run stripe:sync -- --apply
 STRIPE_SECRET_KEY=sk_live_... npm run stripe:sync -- --apply --live
 
 # After enabling Stripe Tax in the Dashboard, set automatic_tax: true in catalogue.yml and re-apply
+# Product tax_code (txcd_10202003) is set on sync; change defaults.tax_code in catalogue.yml if needed
 # Then commit catalogue.yml, state.json, pricing.js, and index.html fallback hrefs

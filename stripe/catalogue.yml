@@ -15,6 +15,9 @@
 currency: usd
 
 defaults:
+  # Downloadable Software - business use (prewritten / "canned").
+  # Prefer this over General ESS (txcd_10000000) for US tax nuance.
+  tax_code: txcd_10202003
   payment_link:
     # Turn on after Stripe Tax is enabled in the Dashboard.
     automatic_tax: false
