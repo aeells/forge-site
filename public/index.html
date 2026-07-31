@@ -91,7 +91,7 @@
 
     <script src="/assets/js/turbo-before-render.js" defer data-turbo-track="reload" nonce=""></script>
 
-    <link rel="stylesheet" href="/assets/css/main.css?v=backbone-stack-callout-single" media="all" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/css/main.css?v=contact-launch-badges-v2" media="all" data-turbo-track="reload" />
     <script src="/assets/js/img-data-src.js" defer></script>
     <script src="/assets/js/vendor/marquee3k.js" defer data-turbo-track="reload"></script>
     <script src="/assets/js/marquee-init.js" defer data-turbo-track="reload"></script>
@@ -1197,56 +1197,72 @@
             </div>
           </div>
           <div id="contact" class="w-full">
-            <div class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between w-full">
-              <form
-                id="backbone-cta-formspree"
-                action="https://formspree.io/f/mreoekzn"
-                method="POST"
-                class="flex flex-col sm:flex-row gap-3 items-center">
-                <input
-                  type="email"
-                  name="email"
-                  autocomplete="email"
-                  class="appearance-none px-5 border rounded-lg backdrop-blur-2xl text-white h-12 w-full max-w-[316px] sm:max-w-full sm:w-[324px] border-[#727DA1]/20 bg-[#727DA1]/10 placeholder:text-neutral-300"
-                  data-1p-ignore=""
-                  placeholder="Your work e-mail"
-                  required="" />
-                <button
-                  class="cta-button px-6 flex items-center justify-center text-white font-medium whitespace-nowrap h-12 w-full sm:w-auto max-w-[316px]"
-                  type="submit">
-                  Is Backbone right for me?
-                </button>
-              </form>
+            <div
+              class="contact-launch-row flex flex-col gap-10 md:flex-row md:items-center md:justify-between md:gap-8 w-full">
+              <div class="relative flex flex-col items-center md:items-start w-full md:w-auto">
+                <form
+                  id="backbone-cta-formspree"
+                  action="https://formspree.io/f/mreoekzn"
+                  method="POST"
+                  class="flex flex-col sm:flex-row gap-3 items-center">
+                  <input
+                    type="email"
+                    name="email"
+                    autocomplete="email"
+                    class="appearance-none px-5 border rounded-lg backdrop-blur-2xl text-white h-12 w-full max-w-[316px] sm:max-w-full sm:w-[324px] border-[#727DA1]/20 bg-[#727DA1]/10 placeholder:text-neutral-300"
+                    data-1p-ignore=""
+                    placeholder="Your work e-mail"
+                    required="" />
+                  <button
+                    class="cta-button px-6 flex items-center justify-center text-white font-medium whitespace-nowrap h-12 w-full sm:w-auto max-w-[316px]"
+                    type="submit">
+                    Is Backbone right for me?
+                  </button>
+                </form>
+                <p
+                  id="backbone-cta-formspree-success"
+                  class="hidden mt-3 max-w-[640px] rounded-lg border border-[#939db833] bg-[#171926]/90 px-4 py-3 text-13 leading-[145%] text-neutral-200 text-center lg:ml-2 lg:text-left"
+                  role="status">
+                  Thanks - we received your email and will be in touch.
+                </p>
+                <p
+                  id="backbone-cta-formspree-error"
+                  class="hidden mt-3 max-w-[640px] rounded-lg border border-red-500/40 bg-[#171926]/90 px-4 py-3 text-13 leading-[145%] text-red-200/90 text-center lg:ml-2 lg:text-left"
+                  role="alert"></p>
+                <p class="contact-prefer-call mt-5 pb-2 text-13 text-[#646E87] text-center md:text-left lg:ml-2">
+                  Prefer a call?
+                  <a
+                    class="underline underline-offset-4 transition text-[#C9D3EE] decoration-[#C9D3EE]/20 hover:decoration-[#C9D3EE]"
+                    href="https://calendly.com/backbonehq/discovery-call"
+                    rel="nofollow noopener"
+                    target="_blank">
+                    Book a discovery
+                  </a>
+                </p>
+              </div>
               <div class="flex justify-center md:justify-end shrink-0" data-aos="fade-up" data-aos-delay="50">
-                <a href="https://kittylaunch.com/p/forge-platform" target="_blank" rel="noopener">
-                  <img
-                    src="https://kittylaunch.com/api/public/badges/launch_badge.svg?theme=dark&name=Backbone"
-                    width="280"
-                    alt="Backbone - Featured on KittyLaunch"
-                    data-kittylaunch-badge="1" />
-                </a>
+                <div class="contact-launch-badges">
+                  <a href="https://kittylaunch.com/p/forge-platform" target="_blank" rel="noopener">
+                    <img
+                      src="https://kittylaunch.com/api/public/badges/launch_badge.svg?theme=dark&name=Backbone"
+                      width="280"
+                      alt="Backbone - Featured on KittyLaunch"
+                      data-kittylaunch-badge="1" />
+                  </a>
+                  <a
+                    class="contact-launch-llama"
+                    href="https://tools.launchllama.co?utm_source=badge&utm_medium=referral"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <img
+                      src="https://tools.launchllama.co/featured-badge.png?v=2"
+                      alt="As seen on Launch Llama Newsletter"
+                      width="280"
+                      height="70" />
+                  </a>
+                </div>
               </div>
             </div>
-            <p
-              id="backbone-cta-formspree-success"
-              class="hidden mt-3 max-w-[640px] rounded-lg border border-[#939db833] bg-[#171926]/90 px-4 py-3 text-13 leading-[145%] text-neutral-200 text-center lg:ml-2 lg:text-left"
-              role="status">
-              Thanks - we received your email and will be in touch.
-            </p>
-            <p
-              id="backbone-cta-formspree-error"
-              class="hidden mt-3 max-w-[640px] rounded-lg border border-red-500/40 bg-[#171926]/90 px-4 py-3 text-13 leading-[145%] text-red-200/90 text-center lg:ml-2 lg:text-left"
-              role="alert"></p>
-            <p class="mt-5 pb-2 text-13 text-[#646E87] text-center md:text-left lg:ml-2">
-              Prefer a call?
-              <a
-                class="underline underline-offset-4 transition text-[#C9D3EE] decoration-[#C9D3EE]/20 hover:decoration-[#C9D3EE]"
-                href="https://calendly.com/backbonehq/discovery-call"
-                rel="nofollow noopener"
-                target="_blank">
-                Book a discovery
-              </a>
-            </p>
           </div>
         </div>
       </section>
