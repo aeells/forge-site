@@ -202,7 +202,7 @@ EARLY_STAGE: list[Block] = [
         [
             "Most teams spend years assembling the operational stack behind a SaaS company. With Backbone, a capable engineer can be deploying on a production-ready platform from day one.",
             "Shortcut your CTO or founding engineer's workload by ~50% - and keep them on product, not plumbing.",
-            "The entire operational stack behind a modern SaaS company - without hiring a platform team first.",
+            "The operational stack behind a modern SaaS company - without hiring a platform team first.",
             "Platform capability normally built by companies 10x your size - available from the start.",
             "Enterprise-grade foundations at a fraction of the cost of building them yourself.",
             "Early adopters: free founder-led deployment support.",
@@ -285,7 +285,7 @@ ENTERPRISE: list[Block] = [
         "hooks",
         [
             "Give a greenfield team the internal platform capability normally built by companies 10x their size - without standing up a platform engineering function.",
-            "The entire operational stack behind a modern SaaS company - with security, governance, and operational consistency built in.",
+            "The operational stack behind a modern SaaS company - with security, governance, and operational consistency built in.",
             "Standardized architecture now, not a multi-year internal platform build.",
             "Most teams spend years assembling this. Backbone puts a production-ready foundation in place from day one.",
             "Production-grade platform foundations at a fraction of the cost of building them internally.",
