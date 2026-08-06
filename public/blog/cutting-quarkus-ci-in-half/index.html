@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cutting a Quarkus Monorepo CI Pipeline in Half | Backbone</title>
+    <meta name="description" content="A walkthrough of how we cut Backbone's 02-build-test workflow roughly in half: LocalStack to Floci, fewer Quarkus boots, infrastructure-aware integration job splits, Temurin instead of Graal for non-native CI, and skipping quarkus:build when @QuarkusTest does not need a runner jar — with Maven wall-clock lines taken from real GitHub Actions logs." />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link href="https://backbonehq.io/blog/cutting-quarkus-ci-in-half/" rel="canonical" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://backbonehq.io/blog/cutting-quarkus-ci-in-half/" />
+    <meta property="og:title" content="Cutting a Quarkus Monorepo CI Pipeline in Half | Backbone" />
+    <meta property="og:description" content="A walkthrough of how we cut Backbone's 02-build-test workflow roughly in half: LocalStack to Floci, fewer Quarkus boots, infrastructure-aware integration job splits, Temurin instead of Graal for non-native CI, and skipping quarkus:build when @QuarkusTest does not need a runner jar — with Maven wall-clock lines taken from real GitHub Actions logs." />
+    <meta property="og:image" content="https://backbonehq.io/assets/images/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cutting a Quarkus Monorepo CI Pipeline in Half | Backbone" />
+    <meta name="twitter:description" content="A walkthrough of how we cut Backbone's 02-build-test workflow roughly in half: LocalStack to Floci, fewer Quarkus boots, infrastructure-aware integration job splits, Temurin instead of Graal for non-native CI, and skipping quarkus:build when @QuarkusTest does not need a runner jar — with Maven wall-clock lines taken from real GitHub Actions logs." />
+    <meta name="twitter:image" content="https://backbonehq.io/assets/images/og.png" />
+    <link rel="alternate" type="application/rss+xml" title="Backbone Engineering" href="/blog/feed.xml" />
+    <link rel="stylesheet" href="/assets/css/main.css" media="all" />
+    <link rel="stylesheet" href="/assets/css/blog.css" media="all" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Cutting a Quarkus Monorepo CI Pipeline in Half",
+  "description": "A walkthrough of how we cut Backbone's 02-build-test workflow roughly in half: LocalStack to Floci, fewer Quarkus boots, infrastructure-aware integration job splits, Temurin instead of Graal for non-native CI, and skipping quarkus:build when @QuarkusTest does not need a runner jar — with Maven wall-clock lines taken from real GitHub Actions logs.",
+  "datePublished": "2026-08-06",
+  "dateModified": "2026-08-06",
+  "articleSection": "Backbone Engineering",
+  "keywords": "devops, ci-cd, quarkus, maven, github-actions, floci",
+  "url": "https://backbonehq.io/blog/cutting-quarkus-ci-in-half/",
+  "mainEntityOfPage": "https://backbonehq.io/blog/cutting-quarkus-ci-in-half/",
+  "image": "https://backbonehq.io/assets/images/og.png",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Eells"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Backbone",
+    "url": "https://backbonehq.io/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://backbonehq.io/assets/images/og.png"
+    }
+  }
+}
+    </script>
+    <script type="module" src="/assets/js/layout-shell.js"></script>
+  </head>
+  <body class="helvetica bg-[#0B0C14] text-neutral-200">
+    <div class="main overflow-x-hidden has-top-glow">
+      <header class="z-40 top-0 left-0 right-0 flex justify-center helvetica bg-[#0B0C14]/80 fixed before:absolute before:-z-10 before:inset-0 before:backdrop-blur-2xl" id="navbar">
+  <nav
+    class="page-rail grow flex h-[52px] justify-between border-b text-[13px] leading-[100%] text-[#C9D3EE] border-[#727DA1]/15">
+    <div class="flex min-w-0 items-stretch gap-3">
+      <a aria-label="Go to homepage" class="flex shrink-0 items-center py-3" href="/">
+        <svg width="125" height="21" class="backbone-site-header-logo svg-currentcolor" aria-hidden="true" focusable="false">
+          <use href="/assets/images/brand/backbone-lockup.svg#root"></use>
+        </svg>
+      </a>
+    </div>
+    <div class="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3">
+      <div class="hidden md:flex flex-wrap items-center justify-end gap-x-1 gap-y-2 lg:gap-x-3">
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="https://docs.backbonehq.io" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap text-white" href="/blog/">Blog</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/faq/">FAQ</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/#pricing">Pricing</a>
+        <a class="px-2 py-3 lg:px-3 hover:text-white transition whitespace-nowrap" href="/#contact">Contact</a>
+      </div>
+      <div class="flex items-center sm:gap-2 whitespace-nowrap shrink-0 -mr-3 md:mr-0">
+        <button aria-label="Open menu" class="p-2 group relative md:hidden text-neutral-300" id="open-menu">
+          <svg class="w-5 h-5 inline svg-currentcolor">
+            <use href="/assets/icons/heroicons_v2/outline/bars-3-4a440a20.svg#root"></use>
+          </svg>
+        </button>
+        <button aria-label="Close menu" class="hidden p-2 group relative md:hidden text-neutral-300" id="close-menu">
+          <svg class="w-5 h-5 inline svg-currentcolor">
+            <use href="/assets/icons/heroicons_v2/outline/x-mark-1a7d1e94.svg#root"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div
+      class="hidden md:hidden p-5 fixed z-40 left-0 right-0 site-mobile-menu-top backdrop-blur-2xl bg-[#181926]/80 text-[#C9D3EE] overflow-y-scroll mobile-menu-maxh"
+      id="mobile-menu">
+      <div class="js-menu-section flex flex-col gap-1" data-section="root">
+        <a class="p-3" href="https://docs.backbonehq.io" target="_blank" rel="noopener noreferrer">Docs</a>
+        <a class="p-3 text-white" href="/blog/">Blog</a>
+        <a class="p-3" href="/faq/">FAQ</a>
+        <a class="p-3" href="/#pricing">Pricing</a>
+        <a class="p-3" href="/#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+</header>
+      <main class="page-rail pt-32 pb-24">
+        <article class="blog-article">
+          <a class="blog-back" href="/blog/">&larr; All articles</a>
+          <h1>Cutting a Quarkus Monorepo CI Pipeline in Half</h1>
+          <div class="blog-byline">
+            By Andrew Eells &middot;
+            <time datetime="2026-08-06">6 August 2026</time> &middot;
+            10 min read
+          </div>
+          <ul class="blog-tags" aria-label="Tags"><li>devops</li><li>ci-cd</li><li>quarkus</li><li>maven</li><li>github-actions</li><li>floci</li></ul>
+          <hr class="blog-rule" aria-hidden="true" />
+          <div class="blog-prose">
+<p>Our main GitHub Actions workflow — build the reactor, run unit tests, run integration tests — had settled into a stubborn <strong>9–11 minute</strong> range.</p>
+<p>After a focused optimisation pass, the same workflow now finishes in <strong>about 5 minutes 20 seconds</strong>.</p>
+<p>This was not achieved with larger runners, self-hosted agents, or a paid caching product. The workflow still runs on <strong>GitHub Actions free-tier <code>ubuntu-latest</code> hosted runners</strong>, using only the standard <code>actions/setup-java</code> Maven repository cache (<code>~/.m2/repository</code>).</p>
+<p>The interesting part is not <em>&quot;we discovered Maven parallelism&quot;</em>. The pipeline was already reasonably well tuned before we started shaving seconds off it.</p>
+<h2>The baseline was already optimised</h2>
+<p>Before touching anything, the workflow already had:</p>
+<ul>
+<li>Reactor parallelism via <code>.mvn/maven.config</code> (<code>--threads=2C</code>)</li>
+<li>Maven Build Cache extension for local incremental builds</li>
+<li>Surefire and Failsafe configured for <code>parallel=classes</code> with an explicit thread count</li>
+<li>A split <strong>build → artifact restore → test</strong> shape so test jobs did not rebuild the world</li>
+<li>Parallel composite setup where it was safe (JDK + tooling overlapping other preparation)</li>
+</ul>
+<p>That matters, because it changes the question from <em>&quot;how do we make Maven faster?&quot;</em> to <em>&quot;what is still dominating wall clock after the obvious tuning is already in place?&quot;</em>.</p>
+<p>The answer turned out to be <strong>duplicate Quarkus work</strong>: repeated augmentation, repeated application boots, and infrastructure setup that some tests did not actually need.</p>
+<h2>Where we started</h2>
+<p>Backbone&#39;s platform repository is a Maven multi-module Quarkus monorepo: shared libraries, several application services, a BFF API, UI modules, and scaffold code. The module names below (<code>actor</code>, <code>audit</code>, <code>auth-service</code>, etc.) are illustrative; the important point is the <strong>shape</strong> of the reactor rather than the specific repo layout.</p>
+<p>A rough <code>cloc</code> of the parts CI actually cares about (Java, YAML, shell; excluding <code>target</code>, <code>node_modules</code>, etc.) lands around <strong>~24k lines of code</strong>, including <strong>~14k Java</strong> across roughly <strong>300 source files</strong>. Big enough that cold Quarkus boots matter; small enough that a vanity matrix of one job per module mostly pays setup tax.</p>
+<p>The critical workflow looked like this:</p>
+<ol>
+<li><strong>build</strong> — <code>mvn install -DskipTests</code>, upload jars/classes/local <code>io.backbone</code> artifacts</li>
+<li><strong>unit-test</strong> — Surefire against the restored reactor</li>
+<li><strong>integration-test</strong> — Failsafe <code>@QuarkusTest</code> classes with local AWS emulation and/or Postgres</li>
+</ol>
+<p>A representative run before the major changes looked like this:</p>
+<table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Wall clock</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>build</td>
+<td>~2.5 min</td>
+</tr>
+<tr>
+<td>int-test</td>
+<td>~8.5 min</td>
+</tr>
+<tr>
+<td><strong>workflow</strong></td>
+<td><strong>~11.4 min</strong></td>
+</tr>
+</tbody></table>
+<p>The optimisation target was the <strong>end-to-end workflow wall clock</strong> — checkout through reporters — not a single Maven invocation in isolation.</p>
+<p>One integration-test <code>verify</code> invocation reported:</p>
+<pre><code class="language-text">[INFO] Total time:  02:09 min (Wall Clock)
+</code></pre>
+<p>If Maven itself said <strong>2 minutes</strong> while the workflow still took <strong>10–11 minutes</strong>, the missing time was clearly <strong>job setup, emulator startup, artifact restore, and Quarkus application boots</strong>. That observation ended up driving almost every useful optimisation that followed.</p>
+<h2>The wrong instinct: copy the ECS deploy matrix</h2>
+<p>We already parallelise ECS deploys with a GitHub Actions matrix, so the obvious idea was <em>&quot;one integration-test job per service&quot;</em>.</p>
+<p>That would have been a mistake.</p>
+<p>Each matrix cell would have re-paid:</p>
+<ul>
+<li>JDK and tool setup</li>
+<li>Artifact download</li>
+<li>AWS emulator startup</li>
+<li>Cognito / DynamoDB / S3 seeding where required</li>
+<li>Postgres startup where required</li>
+</ul>
+<p>We only had a handful of integration-test classes. Fixed setup cost multiplied by N shards usually loses to <strong>one job that pays setup once and parallelises the Maven reactor internally</strong>.</p>
+<p>So we kept the job count small and focused on <strong>eliminating duplicated work inside the existing jobs</strong>.</p>
+<h2>Prerequisite: LocalStack → Floci</h2>
+<p>Before this CI pass, we had already migrated from <a href="https://localstack.cloud/">LocalStack</a> to <a href="https://floci.io/floci/">Floci</a> as the local AWS emulator on <code>:4566</code>.</p>
+<p>The original motivation was <strong>Cognito support</strong>, not CI speed. LocalStack Community did not provide a credible Cognito story for our authentication flows, so auth integration tests previously required a <strong>real AWS-backed job</strong> alongside a LocalStack-backed job for the other services.</p>
+<p>Floci supports enough of Cognito for our password, refresh-token, and JWT flows that we could collapse those two worlds into a <strong>single local emulator</strong>.</p>
+<p>It was also noticeably lighter in CI.</p>
+<h3>LocalStack startup (older run)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Wall clock</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>./.github/actions/localstack</code></td>
+<td>~49 s</td>
+</tr>
+</tbody></table>
+<h3>Floci startup (current run)</h3>
+<pre><code class="language-text">floci start --detach --image floci/floci:1.5.34
+floci wait --timeout 2m
+...
+Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
+</code></pre>
+<p>The entire start-and-wait sequence completed in <strong>about 16 seconds</strong>.</p>
+<p>Smaller footprint, no auth-token tax for CI, and Cognito in the same process that already emulates DynamoDB, S3, and SES. That consolidation mattered more than the raw startup-time improvement.</p>
+<p>The migration was not entirely frictionless. Floci&#39;s <code>InitiateAuth</code> + <code>REFRESH_TOKEN_AUTH</code> path initially accepted invalid refresh tokens and minted new JWTs, which broke our negative-path authentication tests. We filed <a href="https://github.com/floci-io/floci/issues/2113">floci-io/floci#2113</a>, and it quickly attracted two fix PRs (<a href="https://github.com/floci-io/floci/pull/2132">#2132</a> and <a href="https://github.com/floci-io/floci/pull/2135">#2135</a>). That kind of maintainer response is exactly what makes an emulator migration feel safe rather than lonely.</p>
+<h2>Step 1: actually forward the Maven flags</h2>
+<p>CI had been invoking:</p>
+<pre><code class="language-bash">task test:integration -- -Dtest.thread.count=2
+</code></pre>
+<p>but the Task definition never forwarded <code>{{.CLI_ARGS}}</code>, so Failsafe never saw the thread-count override.</p>
+<p>After fixing that, we enabled reactor parallelism for the integration-test invocation:</p>
+<pre><code class="language-bash">task test:integration -- -Dtest.thread.count=2 -T 1C
+</code></pre>
+<p>This helped, but only modestly. The dominant cost was still <strong>Quarkus application startup</strong>, not Maven&#39;s ability to schedule modules concurrently.</p>
+<h2>Step 2: treat Quarkus boots as a budget</h2>
+<p>Every <code>@QuarkusTest</code> class pays for an application start. Once we started looking at boots as a <strong>finite budget</strong>, several easy wins appeared.</p>
+<h3>What changed</h3>
+<ul>
+<li><strong>Excluded scaffold integration tests from CI</strong> — <code>template-service</code> remains in-tree as a scaffold, but CI no longer boots Quarkus for a module that rarely changes.</li>
+<li><strong>Merged overlapping integration tests</strong> — notification unsubscribe coverage moved into <code>NotificationResourceIT</code>; Cognito user and service cases became nested tests under a single <code>CognitoAuthenticationProviderIT</code> so they share one application boot.</li>
+<li><strong>Demoted thin HTTP integration tests to unit tests</strong> — <code>DocumentResourceIT</code> became focused unit tests around the Tika, S3, and DynamoDB behaviour we actually cared about.</li>
+</ul>
+<p>The suite still provided meaningful coverage, but we were no longer starting Quarkus for every historical convenience test class.</p>
+<p>At this point the full workflow was down to <strong>roughly 9.5 minutes</strong> — an improvement, but nowhere near the eventual 5-minute target.</p>
+<h2>Step 3: split integration tests by infrastructure</h2>
+<p>The remaining integration tests naturally separated into two infrastructure groups:</p>
+<table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Infrastructure</th>
+<th>Modules</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>int-auth-test</code></td>
+<td>Floci + Cognito seed</td>
+<td><code>auth-service</code></td>
+</tr>
+<tr>
+<td><code>int-rest-test</code></td>
+<td>Postgres</td>
+<td><code>actor</code>, <code>audit</code>, <code>notification</code></td>
+</tr>
+</tbody></table>
+<p>The important observation was that <strong>auth tests did not need Postgres</strong>, and the REST-resource tests did not need DynamoDB template seeds or Cognito setup.</p>
+<p>So we stopped starting <strong>Floci and Postgres in the same job</strong>, and we stopped seeding notification templates when nothing in the test suite actually read them.</p>
+<p>The critical-path shape changed from:</p>
+<pre><code class="language-text">build + (Floci + Postgres + all ITs serially)
+</code></pre>
+<p>to:</p>
+<pre><code class="language-text">build + max(unit, int-auth, int-rest)
+</code></pre>
+<p>That was the first optimisation that made the workflow feel <strong>dramatically</strong> shorter, bringing it down to <strong>around 6.5 minutes</strong>.</p>
+<p>A useful side note: avoid parallelising <code>shell-tools</code> (which uses <code>apt</code>) with <code>postgres</code> (which also uses <code>apt</code>). That turned into a classic package-manager lock race. Floci was safe to overlap with Temurin and shell-tool setup because it does not compete for <code>apt</code> locks.</p>
+<h2>Step 4: stop using Graal where you are not building native images</h2>
+<p>Native-image builds still require GraalVM. Unit tests and <code>@QuarkusTest</code> do not.</p>
+<p>We introduced a <strong>Temurin 25 composite action</strong> for all non-native workflows and kept GraalVM only on the ECR native-image pipeline.</p>
+<p>This was not a massive wall-clock win — roughly <strong>20 seconds</strong> — but it reduced runner setup overhead and removed a surprising amount of cognitive noise from the workflow definitions.</p>
+<h2>Step 5: make CI install skip <code>quarkus:build</code></h2>
+<p>This was the cleanest Maven optimisation in the entire exercise.</p>
+<p>A normal Quarkus <code>mvn install</code> performs <strong>package-time augmentation</strong>. Our test jobs restore artifacts and then run <code>@QuarkusTest</code>, which boots directly from the <strong>test classpath</strong>. They do <strong>not</strong> need the production runner jar produced by the build job.</p>
+<p>So the CI install step became:</p>
+<pre><code class="language-bash">mvn install -Dmaven.test.skip -Dquarkus.build.skip=true \
+  -pl &#39;!libs/reactor,!ui,!ui/web-actor,!services/template-service&#39; -am
+</code></pre>
+<p>The logs changed from multi-minute Quarkus augmentation phases to a stream of:</p>
+<pre><code class="language-text">[INFO] Skipping Quarkus build
+[INFO] Skipping Quarkus build
+...
+[INFO] Total time:  31.650 s (Wall Clock)
+</code></pre>
+<p>The <strong>build job</strong> dropped from roughly <strong>2 minutes</strong> to about <strong>80 seconds</strong>, which removed a substantial chunk of the remaining critical path.</p>
+<p>Excluding <code>ui</code>, <code>web-actor</code>, and <code>template-service</code> from the CI install reactor also mattered. Those modules were simply <strong>not what <code>02-build-test</code> was trying to validate on every push</strong>. One small Maven quirk worth noting: excluding <code>!ui</code> alone is insufficient; Maven will still include the child module unless you also exclude <code>!ui/web-actor</code>.</p>
+<h2>Step 6: run Failsafe without packaging again</h2>
+<p>After the install phase stopped producing runner jars, the integration-test jobs were still invoking <code>verify</code>, which re-entered <code>package</code> and <code>quarkus:build</code> for the service modules.</p>
+<p>For <code>@QuarkusTest</code>, that was pure wasted heat.</p>
+<p>The integration-test invocation became:</p>
+<pre><code class="language-bash">mvn -pl services/auth-service \
+  test-compile \
+  failsafe:integration-test failsafe:verify \
+  -DskipUnitTests
+</code></pre>
+<p>A recent auth-job run reported:</p>
+<pre><code class="language-text">[INFO] BUILD SUCCESS
+[INFO] Total time:  01:21 min (Wall Clock)
+</code></pre>
+<p>We experimented with dropping <code>-am</code> after artifact restore first. That cleaned up the reactor graph, but it barely moved wall clock because the upstream jars were relatively cheap.</p>
+<p>The <strong>real lever</strong> was skipping package-time augmentation during <code>install</code>; <strong>Failsafe-without-package</strong> was the complementary optimisation on the test side.</p>
+<h2>The finish line</h2>
+<p>A current green run of <code>02-build-test</code> on <code>main</code> looks roughly like this:</p>
+<table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Wall clock</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>build</td>
+<td>~1.3 min</td>
+</tr>
+<tr>
+<td>int-rest-test</td>
+<td>~2.8 min</td>
+</tr>
+<tr>
+<td>int-auth-test</td>
+<td>~3.7 min</td>
+</tr>
+<tr>
+<td>unit-test</td>
+<td>~3.1 min</td>
+</tr>
+<tr>
+<td><strong>workflow</strong></td>
+<td><strong>~5.5 min</strong></td>
+</tr>
+</tbody></table>
+<p>That is <strong>roughly half of where we started</strong>, and the number developers actually experience day-to-day is <strong>&quot;about five minutes twenty&quot;</strong>.</p>
+<h2>What barely moved the needle</h2>
+<p>This is the section I wish more CI optimisation posts included. These ideas sounded promising during planning, but they were <strong>not</strong> the reason the pipeline got fast:</p>
+<ul>
+<li><strong>Maven <code>-T</code> by itself</strong> — useful, but not transformative once Quarkus boots dominate.</li>
+<li><strong>Dropping <code>-am</code> after artifact restore</strong> — cleaner reactor hygiene, only a few seconds of savings.</li>
+<li><strong>Failsafe-without-package after install already skipped <code>quarkus:build</code></strong> — a real improvement, but smaller than the install-phase optimisation.</li>
+<li><strong>Persisting Maven Build Cache in GitHub Actions</strong> — still on the shelf; <code>actions/setup-java</code> caches <code>~/.m2/repository</code>, not <code>~/.m2/build-cache</code>, so the extension kept writing cache entries without ever reading them across workflow runs.</li>
+</ul>
+<p>We stopped when the next ideas started looking like <strong>&quot;fewer services&quot;</strong> or <strong>&quot;don&#39;t boot Quarkus at all&quot;</strong>, which would have traded away the confidence the pipeline exists to provide.</p>
+<h2>The patterns worth stealing</h2>
+<p>If I had to compress the whole exercise into five transferable lessons:</p>
+<ol>
+<li><strong>Budget Quarkus boots.</strong> Merge overlapping tests, demote HTTP-thin integration tests, and exclude scaffold modules from CI.</li>
+<li><strong>Split jobs by infrastructure requirements, not by module count.</strong> Auth + Floci versus REST + Postgres beat six tiny jobs that each restarted the world.</li>
+<li><strong>Match the JDK to the work.</strong> GraalVM for native-image builds; Temurin for everything else.</li>
+<li><strong>Do not package what <code>@QuarkusTest</code> will rebuild anyway.</strong> <code>-Dquarkus.build.skip=true</code> during CI install is boring, reliable, and surprisingly effective.</li>
+<li><strong>Choose an emulator that covers the awkward service.</strong> Floci&#39;s Cognito support let us delete an entire AWS-shaped CI job category, not merely shave a few seconds off container startup.</li>
+</ol>
+<p>The final result was less about discovering a clever Maven flag and more about <strong>refusing to pay for the same Quarkus application three times on the way to asserting a single HTTP status code</strong>.</p>
+<p>We&#39;ll happily take <strong>five minutes twenty</strong>.</p>
+
+          </div>
+        </article>
+
+        <section class="blog-related" aria-labelledby="related-heading">
+          <h2 id="related-heading">Related articles</h2>
+          <ul>
+            <li><a href="/blog/twenty-five-years-of-shifting-left/">We've Spent 25 Years Shifting Left. The Next Shift Is Down.</a><span class="blog-related-meta">24 July 2026 · 4 min read</span></li>
+            <li><a href="/blog/aws-transform-vs-superwerker/">AWS Transform and Superwerker: same vocabulary, different problems</a><span class="blog-related-meta">11 July 2026 · 2 min read</span></li>
+            <li><a href="/blog/how-ai-finally-solved-aws-architecture-diagrams/">How AI finally solved AWS architecture diagrams</a><span class="blog-related-meta">9 July 2026 · 9 min read</span></li>
+          </ul>
+        </section>
+
+        <section class="blog-cta">
+          <div class="prose-cta-box rounded-xl border border-[#939DB8]/10 bg-[#0F101A]">
+            <h2 class="text-white font-semibold text-[18px] md:text-[20px]">Building production software at scale?</h2>
+            <p class="mt-3 text-neutral-300 leading-[165%]">
+              Backbone is an opinionated runtime foundation for modern SaaS systems - designed to handle deployment,
+              observability, security, and cloud-native operations as a coherent whole.
+            </p>
+            <p class="mt-2 text-neutral-300 leading-[165%]">
+              So your team can focus on business value rather than undifferentiated effort.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a class="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 hover:bg-[#727DA1]/20 transition-colors" href="/">Explore Backbone</a>
+              <a class="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 hover:bg-[#727DA1]/20 transition-colors" href="/faq/">Read the FAQ</a>
+            </div>
+          </div>
+        </section>
+      </main>
+      <div class="dark">
+  <footer class="bg-[#F3F4F7] dark:bg-[#0B0C14]">
+    <div class="page-rail text-base text-[#363D4E] dark:text-neutral-200">
+      <div
+        class="pt-7 flex flex-col lg:flex-row justify-between items-center lg:items-end border-t border-neutral-300/10">
+        <div>
+          <svg width="125" height="21" alt="" class="text-black dark:text-white scale-75 lg:scale-100 svg-currentcolor">
+            <use href="/assets/images/brand/backbone-lockup.svg#root"></use>
+          </svg>
+          <p class="mt-3 hidden lg:block max-w-[342px]">
+            Production-grade bootstrapping.
+            <br />
+            Enterprise foundations. Startup speed.
+          </p>
+        </div>
+        <div class="flex items-center gap-6 whitespace-nowrap">
+          <a
+            class="hidden lg:block -mx-1 px-1 js-obfuscated-phone"
+            href="#"
+            data-phone-country="1"
+            data-phone-area="604"
+            data-phone-prefix="932"
+            data-phone-line="8674"
+            aria-label="Call Backbone"></a>
+          <a class="hidden lg:block -mx-1 px-1" href="mailto:hello@backbonehq.io">hello@backbonehq.io</a>
+          <div class="hidden lg:block h-4 border-l border-neutral-300/10"></div>
+          <div class="hidden lg:flex">
+            <div class="flex gap-4 text-neutral-300">
+              <a
+                aria-label="Backbone on LinkedIn"
+                href="https://www.linkedin.com/company/get-backbone/"
+                rel="nofollow noopener"
+                target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/linkedin-143ab64c.svg#root"></use>
+                </svg>
+              </a>
+              <a aria-label="Get Backbone on Github" href="https://github.com/get-backbone/" rel="nofollow noopener" target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
+                </svg>
+              </a>
+              <a aria-label="Backbone on X" href="https://x.com/_backbonehq" rel="nofollow noopener" target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/twitter-x.svg#root"></use>
+                </svg>
+              </a>
+              <a
+                aria-label="Backbone on Reddit"
+                href="https://www.reddit.com/user/backbonehq/"
+                rel="nofollow noopener"
+                target="_blank">
+                <svg width="16" height="17" class="svg-currentcolor">
+                  <use href="/assets/images/social/reddit.svg#root"></use>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-5 py-3 lg:border-t flex flex-col lg:flex-row justify-between items-center border-neutral-300/10 text-[12px] leading-[18px]">
+        <div class="flex items-center gap-6 whitespace-nowrap dark:text-neutral-300">
+          <a class="-mx-1 px-1" href="/terms">Terms of Use</a>
+          <a class="-mx-1 px-1" href="/privacy">Privacy Policy</a>
+          <a class="-mx-1 px-1" href="/licence">Commercial Licence</a>
+          <a
+            class="js-demo-site-link hidden sm:block -mx-1 px-1"
+            href="https://int.backbonehq.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Demo environment status unknown">
+            <svg width="14" height="15" class="js-demo-site-status mr-1 hidden lg:inline svg-currentcolor" aria-hidden="true">
+              <use href="/assets/images/social/status-green-4e79760e.svg#root"></use>
+            </svg>
+            Demo site
+          </a>
+        </div>
+        <div class="mt-8 mb-2 flex lg:hidden">
+          <div class="flex gap-4 text-neutral-300">
+            <a
+              aria-label="Backbone on LinkedIn"
+              href="https://www.linkedin.com/company/get-backbone/"
+              rel="nofollow noopener"
+              target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/linkedin-143ab64c.svg#root"></use>
+              </svg>
+            </a>
+            <a aria-label="Get Backbone on Github" href="https://github.com/get-backbone/" rel="nofollow noopener" target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/github-8e0718fe.svg#root"></use>
+              </svg>
+            </a>
+            <a aria-label="Backbone on X" href="https://x.com/_backbonehq" rel="nofollow noopener" target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/twitter-x.svg#root"></use>
+              </svg>
+            </a>
+            <a
+              aria-label="Backbone on Reddit"
+              href="https://www.reddit.com/user/backbonehq/"
+              rel="nofollow noopener"
+              target="_blank">
+              <svg width="16" height="17" class="svg-currentcolor">
+                <use href="/assets/images/social/reddit.svg#root"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="flex items-center text-neutral-300">© 2026 Andrew Eells. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+</div>
+    </div>
+  </body>
+</html>

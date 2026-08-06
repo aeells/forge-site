@@ -1,5 +1,22 @@
 [
   {
+    "title": "Cutting a Quarkus Monorepo CI Pipeline in Half",
+    "slug": "cutting-quarkus-ci-in-half",
+    "url": "/blog/cutting-quarkus-ci-in-half/",
+    "summary": "Our GitHub Actions build-and-test workflow went from ~9–11 minutes to about 5:20. Here is what actually moved the needle on a Quarkus multi-module monorepo — and what looked clever but barely helped.",
+    "published": "2026-08-06",
+    "updated": "2026-08-06",
+    "tags": [
+      "devops",
+      "ci-cd",
+      "quarkus",
+      "maven",
+      "github-actions",
+      "floci"
+    ],
+    "readingTime": 10
+  },
+  {
     "title": "We've Spent 25 Years Shifting Left. The Next Shift Is Down.",
     "slug": "twenty-five-years-of-shifting-left",
     "url": "/blog/twenty-five-years-of-shifting-left/",
