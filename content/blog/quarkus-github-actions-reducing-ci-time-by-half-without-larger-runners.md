@@ -1,8 +1,8 @@
 ---
-title: "Quarkus + GitHub Actions: Reducing CI Time by Half Without Larger Runners"
+title: "Quarkus + GitHub Actions: Reducing CI Time by 50% Without Larger Runners"
 slug: quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners
-summary: "Our GitHub Actions build-and-test workflow went from ~9–11 minutes to about 5:20. Here is what actually moved the needle on a Quarkus multi-module monorepo — and what looked clever but barely helped."
-description: "A walkthrough of how we cut Backbone's 02-build-test workflow roughly in half: LocalStack to Floci, fewer Quarkus boots, infrastructure-aware integration job splits, Temurin instead of Graal for non-native CI, and skipping quarkus:build when @QuarkusTest does not need a runner jar — with Maven wall-clock lines taken from real GitHub Actions logs."
+summary: "Our GitHub Actions build-and-test workflow went from ~9–11 minutes to about 5:20. Here is what actually moved the needle on a Quarkus multi-module monorepo, and what looked clever but barely helped."
+description: "A walkthrough of how we cut Backbone's 02-build-test workflow roughly in half: LocalStack to Floci, fewer Quarkus boots, infrastructure-aware integration job splits, Temurin instead of Graal for non-native CI, and skipping quarkus:build when @QuarkusTest does not need a runner jar, with Maven wall-clock lines taken from real GitHub Actions logs."
 published: 2026-08-06
 updated: 2026-08-06
 author: Andrew Eells
@@ -11,7 +11,7 @@ tags: [devops, ci-cd, quarkus, maven, github-actions, floci]
 
 Our Quarkus monorepo CI pipeline had plateaued at **9–11 minutes** on GitHub Actions free-tier hosted runners.
 
-After a focused optimisation pass, it now completes in **about 5 minutes 20 seconds** — **without** self-hosted runners, larger GitHub runners, or paid caching products.
+After a focused optimisation pass, it now completes in **about 5 minutes 20 seconds**, **without** self-hosted runners, larger GitHub runners, or paid caching products.
 
 The key discovery was that the remaining time was **not** in dependency downloads or Maven compilation. It was in **duplicate Quarkus work**: repeated augmentation, repeated application boots, and infrastructure startup that some test suites did not actually need.
 
@@ -37,9 +37,9 @@ A rough `cloc` of the parts CI actually cares about (Java, YAML, shell; excludin
 
 The critical workflow looked like this:
 
-1. **build** — `mvn install -DskipTests`, upload jars/classes/local `io.backbone` artifacts
-2. **unit-test** — Surefire against the restored reactor
-3. **integration-test** — Failsafe `@QuarkusTest` classes with local AWS emulation and/or Postgres
+1. **build**: `mvn install -DskipTests`, upload jars/classes/local `io.backbone` artifacts
+2. **unit-test**: Surefire against the restored reactor
+3. **integration-test**: Failsafe `@QuarkusTest` classes with local AWS emulation and/or Postgres
 
 A representative run before the major changes looked like this:
 
@@ -49,7 +49,7 @@ A representative run before the major changes looked like this:
 | int-test | ~8.5 min |
 | **workflow** | **~11.4 min** |
 
-The optimisation target was the **end-to-end workflow wall clock** — checkout through reporters — not a single Maven invocation in isolation.
+The optimisation target was the **end-to-end workflow wall clock** (checkout through reporters), not a single Maven invocation in isolation.
 
 One integration-test `verify` invocation reported:
 
@@ -132,13 +132,13 @@ Every `@QuarkusTest` class pays for an application start. Once we started lookin
 
 ### What changed
 
-- **Excluded scaffold integration tests from CI** — `template-service` remains in-tree as a scaffold, but CI no longer boots Quarkus for a module that rarely changes.
-- **Merged overlapping integration tests** — notification unsubscribe coverage moved into `NotificationResourceIT`; Cognito user and service cases became nested tests under a single `CognitoAuthenticationProviderIT` so they share one application boot.
-- **Demoted thin HTTP integration tests to unit tests** — `DocumentResourceIT` became focused unit tests around the Tika, S3, and DynamoDB behaviour we actually cared about.
+- **Excluded scaffold integration tests from CI**: `template-service` remains in-tree as a scaffold, but CI no longer boots Quarkus for a module that rarely changes.
+- **Merged overlapping integration tests**: notification unsubscribe coverage moved into `NotificationResourceIT`; Cognito user and service cases became nested tests under a single `CognitoAuthenticationProviderIT` so they share one application boot.
+- **Demoted thin HTTP integration tests to unit tests**: `DocumentResourceIT` became focused unit tests around the Tika, S3, and DynamoDB behaviour we actually cared about.
 
 The suite still provided meaningful coverage, but we were no longer starting Quarkus for every historical convenience test class.
 
-At this point the full workflow was down to **roughly 9.5 minutes** — an improvement, but nowhere near the eventual 5-minute target.
+At this point the full workflow was down to **roughly 9.5 minutes**: an improvement, but nowhere near the eventual 5-minute target.
 
 ## Step 3: split integration tests by infrastructure
 
@@ -175,7 +175,7 @@ Native-image builds still require GraalVM. Unit tests and `@QuarkusTest` do not.
 
 We introduced a **Temurin 25 composite action** for all non-native workflows and kept GraalVM only on the ECR native-image pipeline.
 
-This was not a massive wall-clock win — roughly **20 seconds** — but it reduced runner setup overhead and removed a surprising amount of cognitive noise from the workflow definitions.
+This was not a massive wall-clock win (roughly **20 seconds**), but it reduced runner setup overhead and removed a surprising amount of cognitive noise from the workflow definitions.
 
 ## Step 5: make CI install skip `quarkus:build`
 
@@ -247,10 +247,10 @@ That is **roughly half of where we started**, and the number developers actually
 
 This is the section I wish more CI optimisation posts included. These ideas sounded promising during planning, but they were **not** the reason the pipeline got fast:
 
-- **Maven `-T` by itself** — useful, but not transformative once Quarkus boots dominate.
-- **Dropping `-am` after artifact restore** — cleaner reactor hygiene, only a few seconds of savings.
-- **Failsafe-without-package after install already skipped `quarkus:build`** — a real improvement, but smaller than the install-phase optimisation.
-- **Persisting Maven Build Cache in GitHub Actions** — still on the shelf; `actions/setup-java` caches `~/.m2/repository`, not `~/.m2/build-cache`, so the extension kept writing cache entries without ever reading them across workflow runs.
+- **Maven `-T` by itself**: useful, but not transformative once Quarkus boots dominate.
+- **Dropping `-am` after artifact restore**: cleaner reactor hygiene, only a few seconds of savings.
+- **Failsafe-without-package after install already skipped `quarkus:build`**: a real improvement, but smaller than the install-phase optimisation.
+- **Persisting Maven Build Cache in GitHub Actions**: still on the shelf; `actions/setup-java` caches `~/.m2/repository`, not `~/.m2/build-cache`, so the extension kept writing cache entries without ever reading them across workflow runs.
 
 We stopped when the next ideas started looking like **"fewer services"** or **"don't boot Quarkus at all"**, which would have traded away the confidence the pipeline exists to provide.
 
