@@ -6,17 +6,17 @@
     <title>Backbone vs DIY and Adjacent Tools | Backbone</title>
     <meta
       name="description"
-      content="How Backbone compares to DIY builds and adjacent tools like Backstage, Humanitec, Qovery, Syntasso, Render, and Vanta. Ops maturity on day one - not a single-layer tool." />
+      content="How Backbone compares to DIY, DuploCloud, Coherence, Encore, and adjacent tools. Ops maturity on day one - not a single-layer tool." />
     <link href="https://backbonehq.io/compare/" rel="canonical" />
     <meta property="og:title" content="Backbone vs DIY and Adjacent Tools | Backbone" />
     <meta
       property="og:description"
-      content="Most vendors sell one layer. Backbone sells the ops maturity those layers converge into. Compare Backbone to DIY, IDPs, PaaS, and compliance tooling." />
+      content="Most vendors sell one layer. Backbone sells the ops maturity those layers converge into. Compare Backbone to DIY, DuploCloud, Coherence, Encore, and adjacent tools." />
     <meta property="og:url" content="https://backbonehq.io/compare/" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="/assets/css/main.css" media="all" />
-    <link rel="stylesheet" href="/assets/css/compare.css?v=6" media="all" />
+    <link rel="stylesheet" href="/assets/css/compare.css?v=9" media="all" />
     <script type="module" src="/assets/js/layout-shell.js"></script>
     <script src="/assets/js/compare.js" defer></script>
   </head>
@@ -108,16 +108,79 @@
           class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
           aria-hidden="true" />
 
-        <!-- Desktop / tablet matrix -->
+        <!-- Hierarchy: real decision + closest, then matrix -->
+        <section aria-labelledby="closest-heading">
+          <h2 id="closest-heading" class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">
+            The real decision, then the closest
+          </h2>
+          <p class="mt-3 backbone-compare-section-lead">
+            DIY is the live alternative. DuploCloud, Coherence, and Encore are the nearest named products. Everything else is adjacent.
+          </p>
+
+          <div class="mt-6 backbone-compare-card" style="border-color: rgba(91, 99, 211, 0.35)">
+            <span class="backbone-compare-card__tag">Primary</span>
+            <h3>Backbone vs DIY</h3>
+            <ul class="mt-3 space-y-2 list-disc pl-5">
+              <li>
+                <strong class="text-white">Backbone:</strong>
+                full foundation ~2 days on your AWS; $15k-$30k/year
+              </li>
+              <li>
+                <strong class="text-white">DIY:</strong>
+                ~$200k-$500k over 2-3 years + seniors off product
+              </li>
+              <li>One operating model vs an assembly project with rewrite risk.</li>
+            </ul>
+            <p class="mt-3">
+              <a class="backbone-compare-link" href="/compare/diy/">Full DIY comparison →</a>
+            </p>
+          </div>
+
+          <div class="mt-4 backbone-compare-grid backbone-compare-grid--3">
+            <article class="backbone-compare-card">
+              <span class="backbone-compare-card__tag">Closest</span>
+              <h3>DuploCloud</h3>
+              <p class="mt-2">
+                Your cloud, governance day one - via DevOps automation, not forkable app services.
+              </p>
+              <p class="mt-3">
+                <a class="backbone-compare-link" href="/compare/duplocloud/">vs DuploCloud →</a>
+              </p>
+            </article>
+            <article class="backbone-compare-card">
+              <span class="backbone-compare-card__tag">Closest</span>
+              <h3>Coherence</h3>
+              <p class="mt-2">
+                PaaS-style delivery in your AWS/GCP. Overlaps on pipelines and envs; no app-services foundation.
+              </p>
+              <p class="mt-3">
+                <a class="backbone-compare-link" href="/compare/coherence/">vs Coherence →</a>
+              </p>
+            </article>
+            <article class="backbone-compare-card">
+              <span class="backbone-compare-card__tag">Closest</span>
+              <h3>Encore</h3>
+              <p class="mt-2">
+                Backend framework with strong DX and observability. You build into it; Backbone is services you fork.
+              </p>
+              <p class="mt-3">
+                <a class="backbone-compare-link" href="/compare/encore/">vs Encore →</a>
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <!-- Desktop / tablet matrix (trimmed) -->
         <section class="hidden md:block" aria-labelledby="matrix-heading">
           <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div class="min-w-0">
               <h2 id="matrix-heading" class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">
                 Comparison matrix
               </h2>
-              <p class="mt-3 backbone-compare-section-lead">
-                What buyers actually weigh. Not a feature tour of products we do not replace.
-              </p>
             </div>
             <div class="flex shrink-0 items-center self-end sm:self-auto" data-compare-nav>
               <button
@@ -148,13 +211,10 @@
                 <tr>
                   <th scope="col">Capability</th>
                   <th scope="col" class="is-backbone">Backbone</th>
-                  <th scope="col">DIY / consultancy</th>
-                  <th scope="col">Syntasso</th>
-                  <th scope="col">Qovery</th>
-                  <th scope="col">Humanitec</th>
-                  <th scope="col">Backstage</th>
-                  <th scope="col">Render</th>
-                  <th scope="col">Vanta</th>
+                  <th scope="col">DIY</th>
+                  <th scope="col">DuploCloud</th>
+                  <th scope="col">Coherence</th>
+                  <th scope="col">Encore</th>
                 </tr>
               </thead>
               <tbody>
@@ -162,134 +222,98 @@
                   <th scope="row">What you buy</th>
                   <td class="is-backbone">Forkable SaaS foundation - workflow through prod ops</td>
                   <td>Custom platform over years (in-house or SI)</td>
-                  <td>IDP orchestration</td>
-                  <td>K8s IDP / deploy control plane</td>
-                  <td>IDP golden paths + self-service deploys</td>
-                  <td>Developer portal + service catalog</td>
-                  <td>Managed PaaS</td>
-                  <td>Compliance monitoring</td>
-                </tr>
+                  <td>DevOps / compliance automation in your cloud</td>
+                  <td>PaaS-style delivery in your cloud</td>
+                  <td>Backend framework + cloud platform</td>
+                  </tr>
                 <tr>
                   <th scope="row">Full ops foundation</th>
                   <td class="is-backbone">App services, delivery, security, observability, IaC, evidence - one design</td>
                   <td>Same end state eventually; every layer a project</td>
-                  <td>Orchestration only</td>
-                  <td>Deploy + K8s fleets; not a SaaS product</td>
-                  <td>Infra orchestration; not a SaaS product</td>
-                  <td>Portal UX only</td>
-                  <td>Hosting + deploy</td>
-                  <td>Compliance program mgmt</td>
-                </tr>
+                  <td>Infra + governance automation; you bring the product layer</td>
+                  <td>Delivery + envs; not a SaaS product foundation</td>
+                  <td>Strong DX rails; you still design the product</td>
+                  </tr>
                 <tr>
                   <th scope="row">App runtime services</th>
                   <td class="is-backbone">Auth, users, audit, documents, notifications, BFF</td>
                   <td>Build and maintain each</td>
                   <td>Not included</td>
                   <td>Not included</td>
-                  <td>Not included</td>
-                  <td>Catalog metadata only</td>
-                  <td>Managed Postgres / Redis only</td>
-                  <td>Not included</td>
-                </tr>
+                  <td>You implement (framework help)</td>
+                  </tr>
                 <tr>
                   <th scope="row">CI/CD</th>
                   <td class="is-backbone">Full spine: build/test, version, publish, ECS deploy, infra, coverage</td>
                   <td>Often 6-18 months to match</td>
-                  <td>Coordinates; you still design pipelines</td>
-                  <td>Built-in K8s deploy pipelines</td>
-                  <td>Hooks into existing CI/CD</td>
-                  <td>Plugins; you own pipelines</td>
-                  <td>Git deploys + rollbacks</td>
-                  <td>Monitors evidence; does not run pipelines</td>
-                </tr>
+                  <td>CI/CD integration + automation</td>
+                  <td>Core strength - pipelines + preview envs</td>
+                  <td>Infra derived from app code</td>
+                  </tr>
                 <tr>
                   <th scope="row">Security / identity</th>
                   <td class="is-backbone">Zero-trust, secrets, WAF, rate limits, private compute day one</td>
                   <td>Doable; usually retrofit after MVP</td>
-                  <td>Policy in platform workflows</td>
-                  <td>RBAC on platform actions</td>
-                  <td>RBAC on provisioning</td>
-                  <td>No security runtime</td>
-                  <td>TLS, private net; shared multi-tenant runtime</td>
-                  <td>Tests controls; does not implement them</td>
-                </tr>
+                  <td>RBAC + compliance-mapped controls</td>
+                  <td>Not the product outcome</td>
+                  <td>You own posture; framework helps</td>
+                  </tr>
                 <tr>
                   <th scope="row">Observability</th>
                   <td class="is-backbone">Metrics, logs, tracing, health, dashboards</td>
                   <td>Major workstream; often late</td>
-                  <td>Not a focus</td>
-                  <td>Monitoring / log integrations</td>
-                  <td>Not a focus</td>
-                  <td>External tool integrations</td>
-                  <td>Basic metrics + logs</td>
-                  <td>Not observability</td>
-                </tr>
+                  <td>Ops / audit trails focus</td>
+                  <td>Env and deploy visibility</td>
+                  <td>Core strength - tracing, catalog, diagrams</td>
+                  </tr>
                 <tr>
                   <th scope="row">Your AWS account</th>
                   <td class="is-backbone">Yes - fork GitHub, deploy to your accounts; you own code, infra, data</td>
                   <td>Yes</td>
-                  <td>Orchestrates your infra</td>
-                  <td>Yes - data plane in your cloud</td>
-                  <td>SaaS control plane → your infra</td>
-                  <td>You host the portal</td>
-                  <td>No - Render-managed</td>
-                  <td>Read-only evidence integrations</td>
-                </tr>
+                  <td>Yes - agent + automation in your cloud</td>
+                  <td>Yes - data plane in your AWS/GCP</td>
+                  <td>Can deploy to your AWS/GCP</td>
+                  </tr>
                 <tr>
                   <th scope="row">Documented decisions</th>
                   <td class="is-backbone">27+ ADRs</td>
                   <td>Rare until audit or crisis</td>
+                  <td>Product controls / audit trails</td>
                   <td>Yours to write</td>
-                  <td>Yours to write</td>
-                  <td>Yours to write</td>
-                  <td>Templates / catalog entries</td>
-                  <td>Blueprints; limited ADRs</td>
-                  <td>Policy templates</td>
-                </tr>
+                  <td>Architecture diagrams from code</td>
+                  </tr>
                 <tr>
                   <th scope="row">Needs a platform team?</th>
                   <td class="is-backbone">No - Year 3 maturity before Year 3 headcount</td>
                   <td>N/A</td>
-                  <td>Yes</td>
-                  <td>Yes</td>
-                  <td>Yes</td>
-                  <td>Yes</td>
+                  <td>No - but ops/automation is the job</td>
                   <td>No</td>
-                  <td>No - but someone owns compliance</td>
-                </tr>
+                  <td>No</td>
+                  </tr>
                 <tr>
                   <th scope="row">Time to baseline</th>
                   <td class="is-backbone">~2 days on AWS with pipeline + visibility</td>
                   <td>2-3 years senior time</td>
-                  <td>Months; foundation still separate</td>
-                  <td>Weeks-months on existing K8s</td>
-                  <td>Weeks; foundation still separate</td>
-                  <td>Months; everything else separate</td>
-                  <td>Hours to days for an app</td>
-                  <td>Weeks-months for audit readiness</td>
-                </tr>
+                  <td>Weeks for automation / governance</td>
+                  <td>Days to weeks for delivery rails</td>
+                  <td>Days to weeks to adopt framework</td>
+                  </tr>
                 <tr>
                   <th scope="row">Compliance / audit</th>
                   <td class="is-backbone">Audit trail, identity evidence, security baseline built in</td>
                   <td>Retrofit expensive; evidence scattered</td>
+                  <td>Mapped to SOC 2 / HIPAA / PCI / GDPR</td>
                   <td>Not a compliance product</td>
-                  <td>Not a compliance product</td>
-                  <td>Not a compliance product</td>
-                  <td>Not a compliance product</td>
-                  <td>Vendor SOC 2/ISO; your app is yours</td>
-                  <td>Core product - monitoring + auditor workflows</td>
-                </tr>
+                  <td>Not sold as primary outcome</td>
+                  </tr>
                 <tr>
                   <th scope="row">Best fit</th>
                   <td class="is-backbone">Funded B2B SaaS; need credibility without a platform team first</td>
                   <td>Invent in-house; spare senior bandwidth</td>
-                  <td>Mature org with a platform team</td>
-                  <td>Already on K8s; want self-service deploys</td>
-                  <td>Platform team wants golden paths</td>
-                  <td>Large eng org; catalog on existing platform</td>
-                  <td>Simple MVP; light buyer pressure</td>
-                  <td>Running product needing SOC 2 / ISO / HIPAA attestation</td>
-                </tr>
+                  <td>Infra automation + compliance orchestration is the job</td>
+                  <td>Need delivery in your cloud; build product layer yourself</td>
+                  <td>Want a backend framework; own product architecture</td>
+                  </tr>
               </tbody>
             </table>
             </div>
@@ -301,62 +325,6 @@
           </div>
         </section>
 
-        <!-- Mobile -->
-        <section class="md:hidden" aria-labelledby="mobile-matrix-heading">
-          <h2 id="mobile-matrix-heading" class="text-white font-semibold text-[20px] leading-[120%]">How Backbone stacks up</h2>
-          <p class="mt-3 backbone-compare-section-lead">DIY first. Then adjacent tools.</p>
-
-          <div class="mt-6 backbone-compare-card" style="border-color: rgba(91, 99, 211, 0.35)">
-            <span class="backbone-compare-card__tag">Primary</span>
-            <h3>Backbone vs DIY</h3>
-            <ul class="mt-3 space-y-2 list-disc pl-5">
-              <li>
-                <strong class="text-white">Backbone:</strong>
-                full foundation ~2 days on your AWS; $15k-$30k/year
-              </li>
-              <li>
-                <strong class="text-white">DIY:</strong>
-                ~$200k-$500k over 2-3 years + seniors off product
-              </li>
-              <li>One operating model vs an assembly project with rewrite risk.</li>
-            </ul>
-            <p class="mt-3">
-              <a class="backbone-compare-link" href="/compare/diy/">Full DIY comparison →</a>
-            </p>
-          </div>
-
-          <div class="mt-4 backbone-compare-grid">
-            <article class="backbone-compare-card">
-              <span class="backbone-compare-card__tag">IDP</span>
-              <h3>Syntasso / Humanitec / Qovery</h3>
-              <p class="mt-2">
-                Orchestrate golden paths when you already have a platform crew. Do not ship auth, audit, or app services.
-              </p>
-            </article>
-            <article class="backbone-compare-card">
-              <span class="backbone-compare-card__tag">Portal</span>
-              <h3>Backstage</h3>
-              <p class="mt-2">
-                Catalog UX on top of a platform. Backbone is that platform when you do not have one yet.
-              </p>
-            </article>
-            <article class="backbone-compare-card">
-              <span class="backbone-compare-card__tag">PaaS</span>
-              <h3>Render</h3>
-              <p class="mt-2">
-                Fast hosted deploys. Fine for simple MVPs. Not audit trails + tenant isolation in your AWS.
-              </p>
-            </article>
-            <article class="backbone-compare-card">
-              <span class="backbone-compare-card__tag">Compliance</span>
-              <h3>Vanta</h3>
-              <p class="mt-2">
-                Monitors controls. Backbone ships them - identity, audit, edge, secrets, evidence. Many teams never need Vanta after.
-              </p>
-            </article>
-          </div>
-        </section>
-
         <hr
           class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
           aria-hidden="true" />
@@ -365,8 +333,8 @@
           <div>
             <h2 class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">Adjacent, briefly</h2>
             <p class="mt-3 text-neutral-300 leading-[160%]">
-              <strong class="text-white">Humanitec / Syntasso / Qovery</strong>
-              - for teams that already build an IDP. Backbone assumes that team does not exist yet.
+              <strong class="text-white">Syntasso / Qovery</strong>
+              - same cluster as Humanitec: IDP orchestration when you already have a platform crew.
             </p>
             <p class="mt-3 text-neutral-300 leading-[160%]">
               <strong class="text-white">Backstage / Port</strong>
@@ -374,12 +342,12 @@
             </p>
             <p class="mt-3 text-neutral-300 leading-[160%]">
               <strong class="text-white">Render / Railway / Heroku / Fly.io</strong>
-              - ship-fast hosting. Right when a monolith covers two years. Wrong when you need diligence, audit, and
-              your AWS account.
+              - ship-fast hosting. Fine for a hosted monolith when you don't need data ownership in your AWS account or full control of
+              observability, security, and compliance. Painful to leave once the data and runtime live there.
             </p>
             <p class="mt-3 text-neutral-300 leading-[160%]">
-              <strong class="text-white">Vanta / Drata / Secureframe</strong>
-              - compliance monitoring. Backbone implements the controls they observe.
+              <strong class="text-white">Drata / Secureframe</strong>
+              - same category as Vanta. Backbone implements the controls they observe.
               <a
                 class="backbone-compare-link"
                 href="https://docs.backbonehq.io/docs/compliance"
@@ -389,22 +357,13 @@
               >
               maps what ships. Attestation is still an org process - not a reason to bolt on another vendor by default.
             </p>
-          </div>
-
-          <div>
-            <h2 class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">Also worth knowing</h2>
             <p class="mt-3 text-neutral-300 leading-[160%]">
               <strong class="text-white">AWS-native assembly</strong>
               (Cognito + ECS + CDK + Actions) - strong parts; glue and decision debt are yours.
+            </p>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
               <strong class="text-white">Consultancies / SIs</strong>
               - DIY with a bigger invoice.
-              <a class="backbone-compare-link" href="/compare/diy/">DIY deep dive</a>
-              ·
-              <a class="backbone-compare-link" href="/compare/duplocloud/">vs DuploCloud</a>
-              ·
-              <a class="backbone-compare-link" href="/compare/coherence/">vs Coherence</a>
-              ·
-              <a class="backbone-compare-link" href="/compare/encore/">vs Encore</a>
             </p>
           </div>
         </section>
@@ -429,14 +388,15 @@
                 >. Formal attestation is still on you.
               </li>
               <li>
-                Not a PaaS. Simple monolith on Render for two years? Skip Backbone.
+                Not a PaaS. Render / Railway / Heroku are fine when a hosted monolith is enough and you don't need data ownership in your AWS
+                account or full control of observability, security, and compliance. If you might, starting there usually costs more when migrating later than two years of licence.
               </li>
               <li>
                 Not an IDP portal. We are the foundation a platform team would otherwise build.
               </li>
               <li>
                 <strong class="text-white">Greenfield-first</strong>.
-                Also fits rewrites with a deliberate migration plan.
+                But legacy platform migration or consolidation is also a valid use case, with a deliberate migration plan.
               </li>
             </ul>
           </div>
