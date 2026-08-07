@@ -1,6 +1,6 @@
 ---
 title: "Quarkus + GitHub Actions: Reducing CI Time by 50% Without Larger Runners"
-slug: quarkus-github-actions-reducing-ci-time-by-50-without-larger-runners
+slug: quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners
 summary: "Our GitHub Actions build-and-test workflow went from ~9–11 minutes to about 5:20. Here is what actually moved the needle on a Quarkus multi-module monorepo — and what looked clever but barely helped."
 description: "A walkthrough of how we cut Backbone's 02-build-test workflow roughly in half: LocalStack to Floci, fewer Quarkus boots, infrastructure-aware integration job splits, Temurin instead of Graal for non-native CI, and skipping quarkus:build when @QuarkusTest does not need a runner jar — with Maven wall-clock lines taken from real GitHub Actions logs."
 published: 2026-08-06

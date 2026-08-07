@@ -3,17 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Cutting a Quarkus Monorepo CI Pipeline in Half | Backbone</title>
+    <title>Quarkus + GitHub Actions: Reducing CI Time by 50% Without Larger Runners | Backbone</title>
     <meta name="description" content="A walkthrough of how we cut Backbone's 02-build-test workflow roughly in half: LocalStack to Floci, fewer Quarkus boots, infrastructure-aware integration job splits, Temurin instead of Graal for non-native CI, and skipping quarkus:build when @QuarkusTest does not need a runner jar — with Maven wall-clock lines taken from real GitHub Actions logs." />
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link href="https://backbonehq.io/blog/cutting-quarkus-ci-in-half/" rel="canonical" />
+    <link href="https://backbonehq.io/blog/quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners/" rel="canonical" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://backbonehq.io/blog/cutting-quarkus-ci-in-half/" />
-    <meta property="og:title" content="Cutting a Quarkus Monorepo CI Pipeline in Half | Backbone" />
+    <meta property="og:url" content="https://backbonehq.io/blog/quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners/" />
+    <meta property="og:title" content="Quarkus + GitHub Actions: Reducing CI Time by 50% Without Larger Runners | Backbone" />
     <meta property="og:description" content="A walkthrough of how we cut Backbone's 02-build-test workflow roughly in half: LocalStack to Floci, fewer Quarkus boots, infrastructure-aware integration job splits, Temurin instead of Graal for non-native CI, and skipping quarkus:build when @QuarkusTest does not need a runner jar — with Maven wall-clock lines taken from real GitHub Actions logs." />
     <meta property="og:image" content="https://backbonehq.io/assets/images/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Cutting a Quarkus Monorepo CI Pipeline in Half | Backbone" />
+    <meta name="twitter:title" content="Quarkus + GitHub Actions: Reducing CI Time by 50% Without Larger Runners | Backbone" />
     <meta name="twitter:description" content="A walkthrough of how we cut Backbone's 02-build-test workflow roughly in half: LocalStack to Floci, fewer Quarkus boots, infrastructure-aware integration job splits, Temurin instead of Graal for non-native CI, and skipping quarkus:build when @QuarkusTest does not need a runner jar — with Maven wall-clock lines taken from real GitHub Actions logs." />
     <meta name="twitter:image" content="https://backbonehq.io/assets/images/og.png" />
     <link rel="alternate" type="application/rss+xml" title="Backbone Engineering" href="/blog/feed.xml" />
@@ -23,14 +23,14 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Cutting a Quarkus Monorepo CI Pipeline in Half",
+  "headline": "Quarkus + GitHub Actions: Reducing CI Time by 50% Without Larger Runners",
   "description": "A walkthrough of how we cut Backbone's 02-build-test workflow roughly in half: LocalStack to Floci, fewer Quarkus boots, infrastructure-aware integration job splits, Temurin instead of Graal for non-native CI, and skipping quarkus:build when @QuarkusTest does not need a runner jar — with Maven wall-clock lines taken from real GitHub Actions logs.",
   "datePublished": "2026-08-06",
   "dateModified": "2026-08-06",
   "articleSection": "Backbone Engineering",
   "keywords": "devops, ci-cd, quarkus, maven, github-actions, floci",
-  "url": "https://backbonehq.io/blog/cutting-quarkus-ci-in-half/",
-  "mainEntityOfPage": "https://backbonehq.io/blog/cutting-quarkus-ci-in-half/",
+  "url": "https://backbonehq.io/blog/quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners/",
+  "mainEntityOfPage": "https://backbonehq.io/blog/quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners/",
   "image": "https://backbonehq.io/assets/images/og.png",
   "author": {
     "@type": "Person",
@@ -98,7 +98,7 @@
       <main class="page-rail pt-32 pb-24">
         <article class="blog-article">
           <a class="blog-back" href="/blog/">&larr; All articles</a>
-          <h1>Cutting a Quarkus Monorepo CI Pipeline in Half</h1>
+          <h1>Quarkus + GitHub Actions: Reducing CI Time by 50% Without Larger Runners</h1>
           <div class="blog-byline">
             By Andrew Eells &middot;
             <time datetime="2026-08-06">6 August 2026</time> &middot;
@@ -107,11 +107,11 @@
           <ul class="blog-tags" aria-label="Tags"><li>devops</li><li>ci-cd</li><li>quarkus</li><li>maven</li><li>github-actions</li><li>floci</li></ul>
           <hr class="blog-rule" aria-hidden="true" />
           <div class="blog-prose">
-<p>Our main GitHub Actions workflow — build the reactor, run unit tests, run integration tests — had settled into a stubborn <strong>9–11 minute</strong> range.</p>
-<p>After a focused optimisation pass, the same workflow now finishes in <strong>about 5 minutes 20 seconds</strong>.</p>
-<p>This was not achieved with larger runners, self-hosted agents, or a paid caching product. The workflow still runs on <strong>GitHub Actions free-tier <code>ubuntu-latest</code> hosted runners</strong>, using only the standard <code>actions/setup-java</code> Maven repository cache (<code>~/.m2/repository</code>).</p>
-<p>The interesting part is not <em>&quot;we discovered Maven parallelism&quot;</em>. The pipeline was already reasonably well tuned before we started shaving seconds off it.</p>
-<h2>The baseline was already optimised</h2>
+<p>Our Quarkus monorepo CI pipeline had plateaued at <strong>9–11 minutes</strong> on GitHub Actions free-tier hosted runners.</p>
+<p>After a focused optimisation pass, it now completes in <strong>about 5 minutes 20 seconds</strong> — <strong>without</strong> self-hosted runners, larger GitHub runners, or paid caching products.</p>
+<p>The key discovery was that the remaining time was <strong>not</strong> in dependency downloads or Maven compilation. It was in <strong>duplicate Quarkus work</strong>: repeated augmentation, repeated application boots, and infrastructure startup that some test suites did not actually need.</p>
+<p>This post walks through the changes that produced the biggest gains, the ones that barely moved the needle, and the final workflow shape.</p>
+<h2>The baseline was already heavily optimised</h2>
 <p>Before touching anything, the workflow already had:</p>
 <ul>
 <li>Reactor parallelism via <code>.mvn/maven.config</code> (<code>--threads=2C</code>)</li>
@@ -121,7 +121,6 @@
 <li>Parallel composite setup where it was safe (JDK + tooling overlapping other preparation)</li>
 </ul>
 <p>That matters, because it changes the question from <em>&quot;how do we make Maven faster?&quot;</em> to <em>&quot;what is still dominating wall clock after the obvious tuning is already in place?&quot;</em>.</p>
-<p>The answer turned out to be <strong>duplicate Quarkus work</strong>: repeated augmentation, repeated application boots, and infrastructure setup that some tests did not actually need.</p>
 <h2>Where we started</h2>
 <p>Backbone&#39;s platform repository is a Maven multi-module Quarkus monorepo: shared libraries, several application services, a BFF API, UI modules, and scaffold code. The module names below (<code>actor</code>, <code>audit</code>, <code>auth-service</code>, etc.) are illustrative; the important point is the <strong>shape</strong> of the reactor rather than the specific repo layout.</p>
 <p>A rough <code>cloc</code> of the parts CI actually cares about (Java, YAML, shell; excluding <code>target</code>, <code>node_modules</code>, etc.) lands around <strong>~24k lines of code</strong>, including <strong>~14k Java</strong> across roughly <strong>300 source files</strong>. Big enough that cold Quarkus boots matter; small enough that a vanity matrix of one job per module mostly pays setup tax.</p>
