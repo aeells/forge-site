@@ -8,13 +8,13 @@
     <language>en</language>
     <lastBuildDate>Thu, 06 Aug 2026 00:00:00 GMT</lastBuildDate>
     <item>
-      <title>Quarkus + GitHub Actions: Reducing CI Time by Half Without Larger Runners</title>
+      <title>Quarkus + GitHub Actions: Reducing CI Time by 50% Without Larger Runners</title>
       <link>https://backbonehq.io/blog/quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners/</link>
       <guid isPermaLink="true">https://backbonehq.io/blog/quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners/</guid>
       <pubDate>Thu, 06 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Our GitHub Actions build-and-test workflow went from ~9–11 minutes to about 5:20. Here is what actually moved the needle on a Quarkus multi-module monorepo — and what looked clever but barely helped.</description>
+      <description>Our GitHub Actions build-and-test workflow went from ~9–11 minutes to about 5:20. Here is what actually moved the needle on a Quarkus multi-module monorepo, and what looked clever but barely helped.</description>
       <content:encoded><![CDATA[<p>Our Quarkus monorepo CI pipeline had plateaued at <strong>9–11 minutes</strong> on GitHub Actions free-tier hosted runners.</p>
-<p>After a focused optimisation pass, it now completes in <strong>about 5 minutes 20 seconds</strong> — <strong>without</strong> self-hosted runners, larger GitHub runners, or paid caching products.</p>
+<p>After a focused optimisation pass, it now completes in <strong>about 5 minutes 20 seconds</strong>, <strong>without</strong> self-hosted runners, larger GitHub runners, or paid caching products.</p>
 <p>The key discovery was that the remaining time was <strong>not</strong> in dependency downloads or Maven compilation. It was in <strong>duplicate Quarkus work</strong>: repeated augmentation, repeated application boots, and infrastructure startup that some test suites did not actually need.</p>
 <p>This post walks through the changes that produced the biggest gains, the ones that barely moved the needle, and the final workflow shape.</p>
 <h2>The baseline was already heavily optimised</h2>
@@ -32,9 +32,9 @@
 <p>A rough <code>cloc</code> of the parts CI actually cares about (Java, YAML, shell; excluding <code>target</code>, <code>node_modules</code>, etc.) lands around <strong>~24k lines of code</strong>, including <strong>~14k Java</strong> across roughly <strong>300 source files</strong>. Big enough that cold Quarkus boots matter; small enough that a vanity matrix of one job per module mostly pays setup tax.</p>
 <p>The critical workflow looked like this:</p>
 <ol>
-<li><strong>build</strong> — <code>mvn install -DskipTests</code>, upload jars/classes/local <code>io.backbone</code> artifacts</li>
-<li><strong>unit-test</strong> — Surefire against the restored reactor</li>
-<li><strong>integration-test</strong> — Failsafe <code>@QuarkusTest</code> classes with local AWS emulation and/or Postgres</li>
+<li><strong>build</strong>: <code>mvn install -DskipTests</code>, upload jars/classes/local <code>io.backbone</code> artifacts</li>
+<li><strong>unit-test</strong>: Surefire against the restored reactor</li>
+<li><strong>integration-test</strong>: Failsafe <code>@QuarkusTest</code> classes with local AWS emulation and/or Postgres</li>
 </ol>
 <p>A representative run before the major changes looked like this:</p>
 <table>
@@ -57,7 +57,7 @@
 <td><strong>~11.4 min</strong></td>
 </tr>
 </tbody></table>
-<p>The optimisation target was the <strong>end-to-end workflow wall clock</strong> — checkout through reporters — not a single Maven invocation in isolation.</p>
+<p>The optimisation target was the <strong>end-to-end workflow wall clock</strong> (checkout through reporters), not a single Maven invocation in isolation.</p>
 <p>One integration-test <code>verify</code> invocation reported:</p>
 <pre><code class="language-text">[INFO] Total time:  02:09 min (Wall Clock)
 </code></pre>
@@ -115,12 +115,12 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <p>Every <code>@QuarkusTest</code> class pays for an application start. Once we started looking at boots as a <strong>finite budget</strong>, several easy wins appeared.</p>
 <h3>What changed</h3>
 <ul>
-<li><strong>Excluded scaffold integration tests from CI</strong> — <code>template-service</code> remains in-tree as a scaffold, but CI no longer boots Quarkus for a module that rarely changes.</li>
-<li><strong>Merged overlapping integration tests</strong> — notification unsubscribe coverage moved into <code>NotificationResourceIT</code>; Cognito user and service cases became nested tests under a single <code>CognitoAuthenticationProviderIT</code> so they share one application boot.</li>
-<li><strong>Demoted thin HTTP integration tests to unit tests</strong> — <code>DocumentResourceIT</code> became focused unit tests around the Tika, S3, and DynamoDB behaviour we actually cared about.</li>
+<li><strong>Excluded scaffold integration tests from CI</strong>: <code>template-service</code> remains in-tree as a scaffold, but CI no longer boots Quarkus for a module that rarely changes.</li>
+<li><strong>Merged overlapping integration tests</strong>: notification unsubscribe coverage moved into <code>NotificationResourceIT</code>; Cognito user and service cases became nested tests under a single <code>CognitoAuthenticationProviderIT</code> so they share one application boot.</li>
+<li><strong>Demoted thin HTTP integration tests to unit tests</strong>: <code>DocumentResourceIT</code> became focused unit tests around the Tika, S3, and DynamoDB behaviour we actually cared about.</li>
 </ul>
 <p>The suite still provided meaningful coverage, but we were no longer starting Quarkus for every historical convenience test class.</p>
-<p>At this point the full workflow was down to <strong>roughly 9.5 minutes</strong> — an improvement, but nowhere near the eventual 5-minute target.</p>
+<p>At this point the full workflow was down to <strong>roughly 9.5 minutes</strong>: an improvement, but nowhere near the eventual 5-minute target.</p>
 <h2>Step 3: split integration tests by infrastructure</h2>
 <p>The remaining integration tests naturally separated into two infrastructure groups:</p>
 <table>
@@ -155,7 +155,7 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <h2>Step 4: stop using Graal where you are not building native images</h2>
 <p>Native-image builds still require GraalVM. Unit tests and <code>@QuarkusTest</code> do not.</p>
 <p>We introduced a <strong>Temurin 25 composite action</strong> for all non-native workflows and kept GraalVM only on the ECR native-image pipeline.</p>
-<p>This was not a massive wall-clock win — roughly <strong>20 seconds</strong> — but it reduced runner setup overhead and removed a surprising amount of cognitive noise from the workflow definitions.</p>
+<p>This was not a massive wall-clock win (roughly <strong>20 seconds</strong>), but it reduced runner setup overhead and removed a surprising amount of cognitive noise from the workflow definitions.</p>
 <h2>Step 5: make CI install skip <code>quarkus:build</code></h2>
 <p>This was the cleanest Maven optimisation in the entire exercise.</p>
 <p>A normal Quarkus <code>mvn install</code> performs <strong>package-time augmentation</strong>. Our test jobs restore artifacts and then run <code>@QuarkusTest</code>, which boots directly from the <strong>test classpath</strong>. They do <strong>not</strong> need the production runner jar produced by the build job.</p>
@@ -220,10 +220,10 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <h2>What barely moved the needle</h2>
 <p>This is the section I wish more CI optimisation posts included. These ideas sounded promising during planning, but they were <strong>not</strong> the reason the pipeline got fast:</p>
 <ul>
-<li><strong>Maven <code>-T</code> by itself</strong> — useful, but not transformative once Quarkus boots dominate.</li>
-<li><strong>Dropping <code>-am</code> after artifact restore</strong> — cleaner reactor hygiene, only a few seconds of savings.</li>
-<li><strong>Failsafe-without-package after install already skipped <code>quarkus:build</code></strong> — a real improvement, but smaller than the install-phase optimisation.</li>
-<li><strong>Persisting Maven Build Cache in GitHub Actions</strong> — still on the shelf; <code>actions/setup-java</code> caches <code>~/.m2/repository</code>, not <code>~/.m2/build-cache</code>, so the extension kept writing cache entries without ever reading them across workflow runs.</li>
+<li><strong>Maven <code>-T</code> by itself</strong>: useful, but not transformative once Quarkus boots dominate.</li>
+<li><strong>Dropping <code>-am</code> after artifact restore</strong>: cleaner reactor hygiene, only a few seconds of savings.</li>
+<li><strong>Failsafe-without-package after install already skipped <code>quarkus:build</code></strong>: a real improvement, but smaller than the install-phase optimisation.</li>
+<li><strong>Persisting Maven Build Cache in GitHub Actions</strong>: still on the shelf; <code>actions/setup-java</code> caches <code>~/.m2/repository</code>, not <code>~/.m2/build-cache</code>, so the extension kept writing cache entries without ever reading them across workflow runs.</li>
 </ul>
 <p>We stopped when the next ideas started looking like <strong>&quot;fewer services&quot;</strong> or <strong>&quot;don&#39;t boot Quarkus at all&quot;</strong>, which would have traded away the confidence the pipeline exists to provide.</p>
 <h2>The patterns worth stealing</h2>

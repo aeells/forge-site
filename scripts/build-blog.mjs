@@ -84,6 +84,7 @@ function readPartial(name) {
 }
 const headerPartial = readPartial("header");
 const footerPartial = readPartial("footer");
+const pagePulsePartial = readPartial("page-pulse");
 
 // Mark the /blog/ nav links as active in the inlined header.
 function headerWithActiveBlog() {
@@ -169,6 +170,7 @@ ${jsonLd}    <script type="module" src="/assets/js/layout-shell.js"></script>
 
 const pageFoot = () => `      ${footerPartial}
     </div>
+${pagePulsePartial}
   </body>
 </html>
 `;

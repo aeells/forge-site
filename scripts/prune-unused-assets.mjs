@@ -105,6 +105,7 @@ function collectHtmlAssetRefs() {
     "index.html",
     "partials/header.html",
     "partials/footer.html",
+    "partials/page-pulse.html",
     "faq/index.html",
   ];
   // Generated blog pages bake in their own asset references.
