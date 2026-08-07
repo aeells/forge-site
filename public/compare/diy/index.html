@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Backbone vs DIY / Consultancy | Backbone</title>
+    <meta name="description" content="Backbone vs building it yourself or hiring a consultancy. Cost, AWS SaaS Builder Toolkit, AI agents, and when DIY still wins." />
+    <link href="https://backbonehq.io/compare/diy/" rel="canonical" />
+    <meta property="og:title" content="Backbone vs DIY / Consultancy | Backbone" />
+    <meta property="og:description" content="The real decision: Backbone or DIY. Direct cost, opportunity cost, SBT, and AI agents - straight comparison." />
+    <meta property="og:url" content="https://backbonehq.io/compare/diy/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="/assets/css/main.css" media="all" />
+    <link rel="stylesheet" href="/assets/css/compare.css?v=6" media="all" />
+    <script type="module" src="/assets/js/layout-shell.js"></script>
+  </head>
+  <body class="helvetica bg-[#0B0C14] text-neutral-200">
+    <div class="main overflow-x-hidden has-top-glow">
+      <div id="site-header"></div>
+
+      <main class="relative z-10 page-rail pt-32 pb-24">
+        <header class="max-w-[820px]" style="text-wrap: pretty">
+          <p class="text-[12px] uppercase tracking-[0.04em] font-semibold text-[#98A4F7]">Compare</p>
+          <h1 class="mt-3 font-helveticaDisplay text-white font-bold text-[32px] md:text-[40px] leading-[110%]">
+            Backbone vs DIY / Consultancy
+          </h1>
+          <p class="mt-4 text-neutral-200 text-lg leading-[145%]">
+            This is the real decision. Ship on a finished foundation, or spend years wiring Cognito, Actions, Terraform, auth, audit, and
+            observability while seniors are off the product.
+          </p>
+          <div class="backbone-compare-pill-row" aria-label="Related comparisons">
+            <a class="backbone-compare-pill" href="/compare/duplocloud/">vs DuploCloud</a>
+            <a class="backbone-compare-pill" href="/compare/coherence/">vs Coherence</a>
+            <a class="backbone-compare-pill" href="/compare/encore/">vs Encore</a>
+            <a class="backbone-compare-pill" href="/compare/">Full comparison</a>
+          </div>
+        </header>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <section class="max-w-[820px] backbone-compare-narrative" style="text-wrap: pretty">
+          <div>
+            <h2 class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">What you buy</h2>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              <strong class="text-white">DIY / consultancy</strong>
+              means building identity, pipelines, security, observability, and app services yourself - or paying an SI to do it. You keep full
+              control. You also own every seam, every undocumented call, and the rewrite when MVP shortcuts hit buyer diligence.
+            </p>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              <strong class="text-white">Backbone</strong>
+              is Year 3 ops maturity on Day 1: forkable services (auth, users, audit, documents, notifications, BFF), zero-trust, CI/CD,
+              observability, IaC, and mapped compliance evidence - in
+              <strong class="text-white">your</strong>
+              AWS account, as one design.
+            </p>
+          </div>
+        </section>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <section class="max-w-[820px]" style="text-wrap: pretty" aria-labelledby="cost-heading">
+          <div class="backbone-compare-callout">
+            <p class="backbone-compare-callout__eyebrow">The real cost</p>
+            <h2 id="cost-heading" class="backbone-compare-callout__title">
+              Direct build cost is six figures. Lost opportunity is larger.
+            </h2>
+            <p class="backbone-compare-callout__body">
+              A comparable build is usually
+              <strong class="text-white font-semibold">~$200k-$500k</strong>
+              over 2-3 years. The bigger hit: seniors off product, delayed launches, deals stuck on security review, and a year-2 rewrite when
+              shortcuts meet production.
+            </p>
+          </div>
+
+          <div class="backbone-compare-tco mt-6 overflow-x-auto">
+            <table>
+              <caption class="sr-only">Cost types for DIY versus Backbone</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Cost type</th>
+                  <th scope="col">DIY / consultancy</th>
+                  <th scope="col">Backbone</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Direct engineering</th>
+                  <td>~$200k-$500k over 2-3 years</td>
+                  <td class="is-backbone">$15k-$30k/year licence</td>
+                </tr>
+                <tr>
+                  <th scope="row">Senior time off product</th>
+                  <td>1-2 engineers x 18-36 months</td>
+                  <td class="is-backbone">Baseline in ~2 days; team on domain from week one</td>
+                </tr>
+                <tr>
+                  <th scope="row">Delayed revenue / fundraising</th>
+                  <td>Features and pilots wait on plumbing</td>
+                  <td class="is-backbone">Production credibility earlier</td>
+                </tr>
+                <tr>
+                  <th scope="row">Rework at scale</th>
+                  <td>Common when MVP shortcuts hit buyer pressure</td>
+                  <td class="is-backbone">One architecture from the start</td>
+                </tr>
+                <tr>
+                  <th scope="row">Tool assembly tax</th>
+                  <td>Many subscriptions + glue work</td>
+                  <td class="is-backbone">One operating model, one fork</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <section class="max-w-[820px] backbone-compare-narrative" style="text-wrap: pretty">
+          <div>
+            <h2 class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">
+              "But AWS gives you the SaaS Builder Toolkit for free"
+            </h2>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              SBT and SaaS Factory refs are real. In 2026 they are the honest DIY start - not a blank repo. They cover control-plane patterns
+              (tenants, auth shapes, control vs app plane) and sample stacks on ECS, EKS, and serverless in
+              <strong class="text-white">your</strong>
+              account.
+            </p>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              What they still are not: a hardened product someone owns, Backbone's app-services layer, zero-trust as a designed outcome, ADRs,
+              a full CI/CD spine, or compliance evidence beyond samples AWS tells you to harden yourself. SBT saves blank-page time. It does not
+              remove senior time or rewrite risk.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">
+              "Can't I just vibe-code this with AI agents now?"
+            </h2>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              Agents speed up typing. They do not own architecture, keep services consistent, or take the pen-test hit when auth, tenancy, or
+              secrets are wrong. A strong engineer scaffolds faster than in 2022 - and still spends months on how the pieces fit and who is
+              accountable when production breaks.
+            </p>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              Backbone is the other bet: one foundation, documented decisions, seniors on product instead of rebuilding Year 3 ops under
+              deadline.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">When DIY wins</h2>
+            <p class="mt-3 text-neutral-300 leading-[160%]">
+              You want to invent everything, have spare senior bandwidth, or need a shape so odd a product foundation would fight you. Then DIY
+              (or a consultancy on your spec) is honest. Backbone is for funded teams that need production credibility without hiring a platform
+              team first.
+            </p>
+          </div>
+        </section>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <section class="max-w-[820px]" style="text-wrap: pretty" aria-labelledby="caveats-heading">
+          <h2 id="caveats-heading" class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">Honest caveats</h2>
+          <div class="mt-4 list-primary-discs">
+            <ul class="space-y-3 text-neutral-300 leading-[160%]">
+              <li>
+                DIY can reach the same end state. The question is senior time, coherence, and opportunity cost - not whether AWS sells the parts.
+              </li>
+              <li>
+                A consultancy speeds DIY. It rarely leaves you a forkable product with ADRs and shared service patterns.
+              </li>
+              <li>
+                WorkOS + a delivery layer + a compliance tool is the sharp DIY path today. Still many vendors, many seams, no single owner in
+                your AWS account.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <hr
+          class="page-rail-separator separator-margin-y-compact border-0 border-t border-image-t border-separator-gradient"
+          aria-hidden="true" />
+
+        <section class="w-full" style="text-wrap: pretty" aria-labelledby="next-step-heading">
+          <h2 id="next-step-heading" class="text-white font-semibold text-[20px] md:text-[24px] leading-[120%]">Next step</h2>
+          <p class="mt-3 max-w-[820px] text-neutral-300 leading-[160%]">
+            Want a short fit call, not a feature tour?
+            <br />
+            Judge Backbone against building the capability - not against one tool.
+          </p>
+          <div id="contact" class="mt-8 w-full">
+            <div class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between w-full">
+              <form
+                id="backbone-compare-diy-formspree"
+                action="https://formspree.io/f/mreoekzn"
+                method="POST"
+                class="flex flex-col sm:flex-row gap-3 items-center">
+                <input type="hidden" name="compare_page" value="diy" />
+                <input
+                  type="email"
+                  name="email"
+                  autocomplete="email"
+                  class="appearance-none px-5 border rounded-lg backdrop-blur-2xl text-white h-12 w-full max-w-[316px] sm:max-w-full sm:w-[324px] border-[#727DA1]/20 bg-[#727DA1]/10 placeholder:text-neutral-300"
+                  data-1p-ignore=""
+                  placeholder="Your work e-mail"
+                  required="" />
+                <button
+                  class="cta-button px-6 flex items-center justify-center text-white font-medium whitespace-nowrap h-12 w-full sm:w-auto max-w-[316px]"
+                  type="submit">
+                  Is Backbone right for me?
+                </button>
+              </form>
+            </div>
+            <p
+              id="backbone-compare-diy-formspree-success"
+              class="hidden mt-3 max-w-[640px] rounded-lg border border-[#939db833] bg-[#171926]/90 px-4 py-3 text-13 leading-[145%] text-neutral-200 text-center lg:ml-2 lg:text-left"
+              role="status">
+              Thanks - we received your email and will be in touch.
+            </p>
+            <p
+              id="backbone-compare-diy-formspree-error"
+              class="hidden mt-3 max-w-[640px] rounded-lg border border-red-500/40 bg-[#171926]/90 px-4 py-3 text-13 leading-[145%] text-red-200/90 text-center lg:ml-2 lg:text-left"
+              role="alert"></p>
+            <p class="mt-5 pb-2 text-13 text-[#646E87] text-center md:text-left lg:ml-2">
+              Prefer a call?
+              <a
+                class="underline underline-offset-4 transition text-[#C9D3EE] decoration-[#C9D3EE]/20 hover:decoration-[#C9D3EE]"
+                href="https://calendly.com/backbonehq/discovery-call"
+                rel="nofollow noopener"
+                target="_blank">
+                Book a discovery
+              </a>
+              ·
+              <a class="backbone-compare-link" href="/compare/">See full comparison</a>
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <div id="site-footer"></div>
+    </div>
+    <script src="/assets/js/formspree.js" defer></script>
+    <script src="/assets/js/formspree.js" defer></script>
+<!-- Page Pulse Tracking Script -->
+<script>
+(function(){
+  if(window.self!==window.top)return;
+  var pid="3a4fef70-c3d3-4aa9-9865-c50dff3d9c89";
+  var tk="24a78f50-2db9-49b2-920f-206c1c6edb6d";
+  var ep="https://esnubozrjxrbegatzusu.supabase.co/functions/v1/track";
+  var sid=sessionStorage.getItem("_pp_sid")||Math.random().toString(36).slice(2);
+  sessionStorage.setItem("_pp_sid",sid);
+  var vid=localStorage.getItem("_pp_vid")||Math.random().toString(36).slice(2);
+  localStorage.setItem("_pp_vid",vid);
+  var lastUrl=location.href;
+  function send(t,n){
+    fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({page_id:pid,token:tk,url:location.href,referrer:document.referrer,
+        user_agent:navigator.userAgent,screen_width:screen.width,
+        session_id:sid,visitor_id:vid,event_type:t,element_name:n||null})});
+  }
+  send("pageview");
+  document.addEventListener("click",function(e){
+    var el=e.target.closest("a,button,[role='button'],input[type='submit']");
+    if(!el)return;
+    var p=el;while(p){var s=getComputedStyle(p);if(s.position==="fixed"||s.position==="sticky"){var r=p.getBoundingClientRect();if(r.width>window.innerWidth*0.4&&r.height>window.innerHeight*0.3)return;}p=p.parentElement;}
+    var name=el.getAttribute("data-pp")||el.innerText||el.getAttribute("aria-label")||el.tagName;
+    if(name)send("click",name.trim().substring(0,100));
+  });
+  function checkUrl(){if(location.href!==lastUrl){lastUrl=location.href;send("pageview");}}
+  var origPush=history.pushState;history.pushState=function(){origPush.apply(this,arguments);checkUrl();};
+  var origReplace=history.replaceState;history.replaceState=function(){origReplace.apply(this,arguments);checkUrl();};
+  window.addEventListener("popstate",checkUrl);
+  setInterval(function(){if(!document.hidden)send("ping");},15000);
+  var _cc={};
+  function trackConversion(label){var k=label||"_";if(_cc[k])return;_cc[k]=1;send("conversion",label||null);}
+  window.PagePulse=window.PagePulse||{};
+  window.PagePulse.trackConversion=trackConversion;
+  window.pagePulse=window.PagePulse;
+  /* Web Vitals: LCP, CLS, INP, page load time */
+  var _v={cls:0,inp:0};
+  try{
+    if(window.PerformanceObserver){
+      try{new PerformanceObserver(function(l){var e=l.getEntries();if(e.length)_v.lcp=Math.round(e[e.length-1].startTime);}).observe({type:"largest-contentful-paint",buffered:true});}catch(e){}
+      try{new PerformanceObserver(function(l){l.getEntries().forEach(function(e){if(!e.hadRecentInput)_v.cls+=e.value;});}).observe({type:"layout-shift",buffered:true});}catch(e){}
+      try{new PerformanceObserver(function(l){l.getEntries().forEach(function(e){if(e.duration>_v.inp)_v.inp=Math.round(e.duration);});}).observe({type:"event",buffered:true,durationThreshold:40});}catch(e){}
+    }
+  }catch(e){}
+  function flushVitals(){
+    if(_v._sent)return;_v._sent=1;
+    try{var nt=performance.getEntriesByType&&performance.getEntriesByType("navigation")[0];if(nt&&nt.loadEventEnd)_v.load=Math.round(nt.loadEventEnd);}catch(e){}
+    var dt=(screen.width&&screen.width<768)?"mobile":"desktop";
+    var payload={page_id:pid,token:tk,url:location.href,session_id:sid,event_type:"vitals",vitals:{lcp:_v.lcp||null,cls:_v.cls?Math.round(_v.cls*1000)/1000:null,inp:_v.inp||null,load_time:_v.load||null,device_type:dt}};
+    try{if(navigator.sendBeacon){navigator.sendBeacon(ep,new Blob([JSON.stringify(payload)],{type:"application/json"}));}else{fetch(ep,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),keepalive:true});}}catch(e){}
+  }
+  addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")flushVitals();});
+  addEventListener("pagehide",flushVitals);
+})();
+</script>
+<!-- End Page Pulse Tracking Script -->
+  </body>
+</html>

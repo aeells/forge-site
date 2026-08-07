@@ -327,6 +327,14 @@
   font-size: 12px;
   line-height: 100%;
   padding: 0.45rem 0.75rem;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+a.backbone-compare-pill:hover {
+  background-color: #222330;
+  border-color: rgba(147, 157, 184, 0.35);
+  color: #fff;
 }
 
 .backbone-compare-section-lead {
