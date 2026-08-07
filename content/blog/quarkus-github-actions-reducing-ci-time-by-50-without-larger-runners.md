@@ -9,15 +9,15 @@ author: Andrew Eells
 tags: [devops, ci-cd, quarkus, maven, github-actions, floci]
 ---
 
-Our main GitHub Actions workflow — build the reactor, run unit tests, run integration tests — had settled into a stubborn **9–11 minute** range.
+Our Quarkus monorepo CI pipeline had plateaued at **9–11 minutes** on GitHub Actions free-tier hosted runners.
 
-After a focused optimisation pass, the same workflow now finishes in **about 5 minutes 20 seconds**.
+After a focused optimisation pass, it now completes in **about 5 minutes 20 seconds** — **without** self-hosted runners, larger GitHub runners, or paid caching products.
 
-This was not achieved with larger runners, self-hosted agents, or a paid caching product. The workflow still runs on **GitHub Actions free-tier `ubuntu-latest` hosted runners**, using only the standard `actions/setup-java` Maven repository cache (`~/.m2/repository`).
+The key discovery was that the remaining time was **not** in dependency downloads or Maven compilation. It was in **duplicate Quarkus work**: repeated augmentation, repeated application boots, and infrastructure startup that some test suites did not actually need.
 
-The interesting part is not *"we discovered Maven parallelism"*. The pipeline was already reasonably well tuned before we started shaving seconds off it.
+This post walks through the changes that produced the biggest gains, the ones that barely moved the needle, and the final workflow shape.
 
-## The baseline was already optimised
+## The baseline was already heavily optimised
 
 Before touching anything, the workflow already had:
 
@@ -28,8 +28,6 @@ Before touching anything, the workflow already had:
 - Parallel composite setup where it was safe (JDK + tooling overlapping other preparation)
 
 That matters, because it changes the question from *"how do we make Maven faster?"* to *"what is still dominating wall clock after the obvious tuning is already in place?"*.
-
-The answer turned out to be **duplicate Quarkus work**: repeated augmentation, repeated application boots, and infrastructure setup that some tests did not actually need.
 
 ## Where we started
 
