@@ -4,6 +4,18 @@ async function fetchText(url) {
   return await res.text();
 }
 
+function loadPagePulse() {
+  if (document.getElementById("page-pulse-script") || window.__pagePulseInit) return;
+  const script = document.createElement("script");
+  script.id = "page-pulse-script";
+  script.src = "/assets/js/page-pulse.js";
+  script.async = true;
+  (document.body || document.head).appendChild(script);
+}
+
+loadPagePulse();
+
+
 function initMobileMenu(root = document) {
   const openBtn = root.getElementById("open-menu");
   const closeBtn = root.getElementById("close-menu");
