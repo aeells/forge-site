@@ -91,10 +91,8 @@
 
     <script src="/assets/js/turbo-before-render.js" defer data-turbo-track="reload" nonce=""></script>
 
-    <link rel="stylesheet" href="/assets/css/main.css?v=homepage-hero-mobile-show-v2" media="all" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/css/main.css?v=homepage-marquee-css-v2" media="all" data-turbo-track="reload" />
     <script src="/assets/js/img-data-src.js" defer></script>
-    <script src="/assets/js/vendor/marquee3k.js" defer data-turbo-track="reload"></script>
-    <script src="/assets/js/marquee-init.js" defer data-turbo-track="reload"></script>
     <script type="importmap" data-turbo-track="reload" nonce="">
       {
         "imports": {
@@ -270,27 +268,18 @@
       </section>
 
       <div class="mt-10 md:mt-12">
-        <section class="relative flex flex-col items-center overflow-hidden">
-          <div class="mx-auto max-w-[1684px]"></div>
-          <div class="w-full">
-            <div
-              class="marquee3k text-neutral-100/90 tracking-[-0.01em] leading-[145%]"
-              data-speed="0.7">
-              <div>
+        <section class="relative overflow-hidden" aria-label="Early adopters">
+          <div class="early-adopters-marquee">
+            <div class="early-adopters-marquee__track">
+              <p class="early-adopters-marquee__group">
                 <span class="font-semibold text-white">Early adopters:</span>
-                <span> Backbone includes a Fractional CTO engagement</span>
-              </div>
+                <span class="text-neutral-100/90">Backbone includes a Fractional CTO engagement</span>
+              </p>
+              <p class="early-adopters-marquee__group" aria-hidden="true">
+                <span class="font-semibold text-white">Early adopters:</span>
+                <span class="text-neutral-100/90">Backbone includes a Fractional CTO engagement</span>
+              </p>
             </div>
-          </div>
-          <div class="absolute inset-0 flex justify-center pointer-events-none">
-            <div class="grow h-full bg-linear-to-r from-[#0B0C14] md:from-50%"></div>
-            <div class="min-w-[200px] md:min-w-[1000px]"></div>
-            <div class="grow h-full bg-linear-to-l from-[#0B0C14] md:from-50%"></div>
-          </div>
-          <div class="absolute inset-0 flex justify-center pointer-events-none">
-            <div class="grow mask-gradient-to-l backdrop-blur-[2px]"></div>
-            <div class="w-[710px]"></div>
-            <div class="grow mask-gradient-to-r backdrop-blur-[2px]"></div>
           </div>
         </section>
       </div>

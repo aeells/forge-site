@@ -5897,6 +5897,50 @@ html {
   scroll-padding-top: 52px;
 }
 
+/* Early adopters: CSS marquee (JS rAF + backdrop-blur overlays freeze on iOS Chrome/WebKit). */
+.early-adopters-marquee {
+  overflow: hidden;
+  width: 100%;
+  font-size: 20px;
+  line-height: 145%;
+  letter-spacing: -0.01em;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.early-adopters-marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: early-adopters-marquee 22s linear infinite;
+}
+.early-adopters-marquee__group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: baseline;
+  gap: 0.35em;
+  white-space: nowrap;
+  padding-inline: 3rem;
+  margin: 0;
+}
+@media (width >= 768px) {
+  .early-adopters-marquee__group {
+    padding-inline: 4.5rem;
+  }
+}
+@keyframes early-adopters-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .early-adopters-marquee__track {
+    animation: none;
+  }
+}
+
 /*
  * Pricing billing toggle: prebuilt Tailwind omits peer-checked + arbitrary bg on the same
  * utilities we used, and has no after:* variants — the switch had no visible track or knob.
