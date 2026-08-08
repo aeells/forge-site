@@ -5812,20 +5812,32 @@
 }
 
 /*
- * Home hero illustration: desktop-only. Hidden below md with the art column in index.html.
- * Size/mask must live here — the shipped Tailwind bundle does not include arbitrary utilities
- * added only in index.html.
+ * Home hero illustration. Size/mask live here — the shipped Tailwind bundle does not
+ * include arbitrary utilities added only in index.html.
  */
 .hero-home-art-wrap {
   position: relative;
   display: block;
   width: fit-content;
-  max-width: 32rem;
+  max-width: min(20rem, 100%);
+  margin-top: 2rem;
   margin-left: auto;
-  margin-right: 0;
-  /* Match img translate so overlay tracks the art. */
-  transform: translate(1.25rem, 6.75rem);
+  margin-right: auto;
+  transform: none;
   pointer-events: none;
+}
+@media (width >= 768px) {
+  .hero-home-art-wrap {
+    max-width: 32rem;
+    min-height: 0;
+    margin-top: 0;
+    margin-right: 0;
+    /* y: image top ~ to “P” cap, not the h1 line box (see md:text-[53px] + leading) */
+    transform: translate(1.25rem, 6.75rem);
+  }
+  .hero-home-art-column {
+    min-height: 26rem;
+  }
 }
 .hero-home-art-wrap::after {
   content: "";
@@ -5846,7 +5858,7 @@ img.hero-home-art--desktop {
   max-width: 100%;
   height: auto;
   object-fit: contain;
-  object-position: center right;
+  object-position: center;
   pointer-events: none;
   margin: 0;
   transform: none;
@@ -5874,6 +5886,11 @@ img.hero-home-art--desktop {
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
   filter: drop-shadow(0 0 1.25rem rgba(11, 12, 20, 0.65)) drop-shadow(0 0 2.5rem rgba(11, 12, 20, 0.4));
+}
+@media (width >= 768px) {
+  img.hero-home-art--desktop {
+    object-position: center right;
+  }
 }
 
 html {
