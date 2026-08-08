@@ -979,6 +979,7 @@
   }
   .marquee3k {
     overflow: hidden;
+    font-size: 20px;
     -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
     mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
   }
@@ -5811,95 +5812,68 @@
 }
 
 /*
- * Home hero illustration: size/visibility must live here. The shipped Tailwind bundle does not
- * include arbitrary classes we add only in index.html, so utilities like max-w-[30rem] never
- * generated — the image kept full column width.
+ * Home hero illustration: desktop-only. Hidden below md with the art column in index.html.
+ * Size/mask must live here — the shipped Tailwind bundle does not include arbitrary utilities
+ * added only in index.html.
  */
-img.hero-home-art--mobile {
+.hero-home-art-wrap {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: 0;
+  /* Match img translate so overlay tracks the art. */
+  transform: translate(1.25rem, 6.75rem);
+  pointer-events: none;
+}
+.hero-home-art-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* Page-bg edge washes — stronger on left/top where bright streaks clip hard. */
+  background:
+    linear-gradient(90deg, #0b0c14 0%, #0b0c14 4%, rgba(11, 12, 20, 0.92) 10%, rgba(11, 12, 20, 0.55) 18%, rgba(11, 12, 20, 0.2) 28%, transparent 40%),
+    linear-gradient(270deg, #0b0c14 0%, rgba(11, 12, 20, 0.7) 10%, transparent 26%),
+    linear-gradient(180deg, #0b0c14 0%, #0b0c14 3%, rgba(11, 12, 20, 0.9) 10%, rgba(11, 12, 20, 0.45) 20%, transparent 36%),
+    linear-gradient(0deg, #0b0c14 0%, rgba(11, 12, 20, 0.65) 12%, transparent 28%);
+}
+img.hero-home-art--desktop {
   display: block;
   width: auto;
-  max-width: min(18rem, 100%);
+  max-width: 100%;
   height: auto;
   object-fit: contain;
-  margin-left: auto;
-  margin-right: auto;
+  object-position: center right;
   pointer-events: none;
+  margin: 0;
+  transform: none;
+  /* Soft radial focus on top of edge washes. */
   -webkit-mask-image: radial-gradient(
-    ellipse 92% 98% at 50% 45%,
+    ellipse 82% 84% at 60% 48%,
     #000 28%,
     #000 45%,
-    rgba(0, 0, 0, 0.4) 54%,
-    rgba(0, 0, 0, 0.2) 68%,
-    rgba(0, 0, 0, 0.08) 80%,
-    rgba(0, 0, 0, 0.03) 92%,
+    rgba(0, 0, 0, 0.55) 60%,
+    rgba(0, 0, 0, 0.2) 78%,
+    rgba(0, 0, 0, 0.05) 90%,
     transparent 100%
   );
   mask-image: radial-gradient(
-    ellipse 92% 98% at 50% 45%,
+    ellipse 82% 84% at 60% 48%,
     #000 28%,
     #000 45%,
-    rgba(0, 0, 0, 0.4) 54%,
-    rgba(0, 0, 0, 0.2) 68%,
-    rgba(0, 0, 0, 0.08) 80%,
-    rgba(0, 0, 0, 0.03) 92%,
+    rgba(0, 0, 0, 0.55) 60%,
+    rgba(0, 0, 0, 0.2) 78%,
+    rgba(0, 0, 0, 0.05) 90%,
     transparent 100%
   );
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
-  filter: drop-shadow(0 0 1.5rem rgba(11, 12, 20, 0.7));
-}
-img.hero-home-art--desktop {
-  display: none;
-  width: auto;
-  max-width: 40rem;
-  height: auto;
-  object-fit: contain;
-  object-position: center right;
-  pointer-events: none;
-  margin-left: auto;
-  margin-right: 0;
-  /* y: image top ~ to “P” cap, not the h1 line box (see md:text-[53px] + leading) */
-  transform: translate(1.25rem, 6.75rem);
-  /* Mid between soft (single radial) and strong 2-layer: light side dim + moderate ellipse. */
-  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.18) 0%, #000 1.5%, #000 98.5%, rgba(0, 0, 0, 0.18) 100%),
-    radial-gradient(
-      ellipse 85% 96% at 57% 41%,
-      #000 25%,
-      #000 40%,
-      rgba(0, 0, 0, 0.48) 50%,
-      rgba(0, 0, 0, 0.22) 64%,
-      rgba(0, 0, 0, 0.1) 78%,
-      rgba(0, 0, 0, 0.04) 90%,
-      rgba(0, 0, 0, 0) 100%
-    );
-  -webkit-mask-repeat: no-repeat, no-repeat;
-  -webkit-mask-size: 100% 100%, 100% 100%;
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.18) 0%, #000 1.5%, #000 98.5%, rgba(0, 0, 0, 0.18) 100%),
-    radial-gradient(
-      ellipse 85% 96% at 57% 41%,
-      #000 25%,
-      #000 40%,
-      rgba(0, 0, 0, 0.48) 50%,
-      rgba(0, 0, 0, 0.22) 64%,
-      rgba(0, 0, 0, 0.1) 78%,
-      rgba(0, 0, 0, 0.04) 90%,
-      rgba(0, 0, 0, 0) 100%
-    );
-  mask-repeat: no-repeat, no-repeat;
-  mask-size: 100% 100%, 100% 100%;
-  mask-composite: intersect;
   filter: drop-shadow(0 0 1.25rem rgba(11, 12, 20, 0.65)) drop-shadow(0 0 2.5rem rgba(11, 12, 20, 0.4));
-}
-@media (width >= 640px) {
-  img.hero-home-art--mobile {
-    display: none;
-  }
-  img.hero-home-art--desktop {
-    display: block;
-  }
 }
 
 html {
@@ -6074,6 +6048,60 @@ html {
   flex-direction: column;
   gap: 0.85rem;
   max-width: 43.75rem;
+}
+
+/* Compact: intro left, "You build this" product box right */
+.backbone-stack--compact .backbone-stack__top {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+.backbone-stack--compact .backbone-stack__product-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+.backbone-stack--compact .backbone-stack__product {
+  margin: 0;
+  width: 100%;
+  max-width: 22rem;
+}
+.backbone-stack--compact .backbone-stack__connector {
+  height: 48px;
+}
+.backbone-stack--compact .backbone-stack__diagram {
+  margin-top: 0;
+}
+@media (width >= 940px) {
+  .backbone-stack--compact .backbone-stack__top {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .backbone-stack--compact .backbone-stack__intro {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 42rem;
+    padding-bottom: 1.25rem;
+  }
+  .backbone-stack--compact .backbone-stack__product-col {
+    flex: 0 0 auto;
+    align-self: stretch;
+    width: 17.5rem;
+    margin: 0;
+  }
+  .backbone-stack--compact .backbone-stack__product {
+    width: 100%;
+    max-width: none;
+  }
+  .backbone-stack--compact .backbone-stack__connector {
+    flex: 1 0 48px;
+    height: auto;
+    min-height: 48px;
+  }
 }
 .backbone-stack__headline {
   font-weight: 700;
@@ -6326,5 +6354,62 @@ html {
     top: 100%;
     left: 0;
     margin-top: 0.75rem;
+  }
+}
+
+/* How it works: steps left, CTA + launch badges right */
+#how-it-works .how-it-works__copy {
+  max-width: 44rem;
+}
+#how-it-works ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  line-height: 1.5;
+}
+#how-it-works ol li {
+  padding-left: 0.35rem;
+}
+@media (min-width: 768px) {
+  #how-it-works .how-it-works__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    align-self: stretch;
+    width: 280px;
+  }
+  #how-it-works .contact-launch-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+    width: 280px;
+    margin-top: auto;
+  }
+  #how-it-works .contact-launch-badges .contact-launch-llama {
+    position: static;
+    top: auto;
+    left: auto;
+    margin-top: 0;
+  }
+}
+
+/* The proof: match How it works copy width; stats on the right */
+#proof .proof__copy {
+  max-width: 44rem;
+}
+#proof .proof__stats {
+  gap: 2rem;
+}
+#proof .proof__stats .proof__stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 117%;
+  color: #fff;
+}
+@media (min-width: 768px) {
+  #proof .proof__stats {
+    width: 280px;
+    align-self: center;
   }
 }

@@ -54,7 +54,15 @@
             "name": "How does Backbone compare to building it ourselves?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "You can build it yourselves - and most teams eventually assemble something similar. Direct cost is typically ~$200k-$500k over 2-3 years, plus the larger cost of seniors off product. Backbone ships Year 3 operational maturity on Day 1 as one coherent operating model. Compare Backbone to building an engineering capability, not to a single developer tool. See https://backbonehq.io/compare/."
+              "text": "You can build it yourselves - and most teams eventually assemble something similar. Direct cost is typically ~$200k-$500k over 2-3 years, plus the larger cost of seniors off product while inventing plumbing. Backbone ships Year 3 operational maturity on Day 1 as one coherent operating model. Compare Backbone to building an engineering capability, not to a single developer tool. See https://backbonehq.io/compare/."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why not DuploCloud?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "DuploCloud makes almost the same pitch: automate your AWS, Azure, or GCP account, with compliance mapped to SOC 2, HIPAA, PCI-DSS, and GDPR baked in. It's the one name here worth taking seriously as a real alternative. But it's an automation layer over infrastructure you still design - no application services shipped as running code you own. And it's priced by node, not by team: public pricing runs roughly $2,000 to $6,500+ a month depending on scale, against Backbone's flat $15k-$30k a year. If your product already exists and the job is governing the infrastructure under it, DuploCloud's a strong option. If you still need the application foundation, Backbone gives you both in one license. See https://backbonehq.io/compare/duplocloud/."
             }
           },
           {
@@ -62,7 +70,7 @@
             "name": "Why not Backstage or an Internal Developer Platform?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "IDPs and portals like Backstage assume a platform team already exists and make developers faster on top of it. Backbone assumes there isn't one yet - it is the operational foundation that team would otherwise spend years creating. See https://backbonehq.io/compare/."
+              "text": "IDPs and portals like Backstage assume a platform team already exists and make developers faster on top of it. Backbone assumes there isn't one yet - it's the operational foundation that team would otherwise spend years creating. See https://backbonehq.io/compare/."
             }
           },
           {
@@ -70,15 +78,15 @@
             "name": "Why not Render or a PaaS?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "PaaS platforms are a good fit when a simple monolith covers the next two years. Backbone is for teams that need audit trails, multi-service shape, predictable scale, enterprise diligence, and ownership inside your AWS account. See https://backbonehq.io/compare/."
+              "text": "Render, Railway, Heroku, Fly.io - ship-fast hosting. Fine for a hosted monolith when you don't need data ownership in your AWS account or full control of observability, security, and compliance. Painful to leave once the data and runtime live there. See https://backbonehq.io/compare/."
             }
           },
           {
             "@type": "Question",
-            "name": "Do I still need Vanta?",
+            "name": "Is Backbone SOC 2, HIPAA, or GDPR compliant?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Often no. Backbone is not a GRC monitoring product, but it ships a broad technical compliance foundation - identity, audit, edge controls, secrets, observability, and governance evidence. The Backbone compliance guide maps that baseline to common SOC 2-style objectives. For many teams, that is why they never need Vanta. Formal attestation is still an operator process when you pursue it; it is not a reason to assume you must add another compliance suite after adopting Backbone. See https://docs.backbonehq.io/docs/compliance and https://backbonehq.io/compare/."
+              "text": "No - and no vendor shipping infrastructure that runs inside your AWS account can honestly say yes. Compliance certifications attest to how a system is operated in production: policies, personnel, vendor management, monitoring, evidence over time. Because Backbone deploys into your account and you run it, you're the entity being audited, not us. Same logic as owning your data and runtime - compliance ownership follows the same model. What we do ship: a compliance-mapped technical foundation. Identity, audit trails, network and edge baselines, secrets handling, and observability hooks are built in from day one, mapped explicitly against SOC 2, HIPAA, PCI-DSS, and GDPR control objectives in the Backbone compliance matrix (https://docs.backbonehq.io/docs/compliance) - what ships in the platform, and what you still own as the operator. Most teams get to their own attestation faster starting from that baseline than starting from zero."
             }
           },
           {
@@ -224,13 +232,37 @@
 
             <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
+                <button type="button" class="ac-trigger">Why not DuploCloud?</button>
+              </h2>
+              <div class="ac-panel">
+                <div class="ac-text backbone-faq-panel">
+                  <p>
+                    DuploCloud makes almost the same pitch: automate your AWS, Azure, or GCP account, with compliance mapped to SOC 2,
+                    HIPAA, PCI-DSS, and GDPR baked in. It's the one name here worth taking seriously as a real alternative.
+                  </p>
+                  <p>
+                    But it's an automation layer over infrastructure you still design - no application services shipped
+                    as running code you own. And it's priced by node, not by team: public pricing runs roughly $2,000 to
+                    $6,500+ a month depending on scale, against Backbone's flat $15k-$30k a year.
+                  </p>
+                  <p>
+                    If your product already exists and the job is governing the infrastructure under it, DuploCloud's a strong option. If
+                    you still need the application foundation, Backbone gives you both in one license.
+                    <a href="/compare/duplocloud/">Backbone vs DuploCloud</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="ac backbone-faq-accordion">
+              <h2 class="ac-header">
                 <button type="button" class="ac-trigger">Why not Backstage or an Internal Developer Platform?</button>
               </h2>
               <div class="ac-panel">
                 <div class="ac-text backbone-faq-panel">
                   <p>
                     IDPs and portals like Backstage assume a platform team already exists and make developers faster on top of it. Backbone
-                    assumes there isn't one yet - it is the operational foundation that team would otherwise spend years creating.
+                    assumes there isn't one yet - it's the operational foundation that team would otherwise spend years creating.
                     <a href="/compare/">Compare Backbone to adjacent tools</a>.
                   </p>
                 </div>
@@ -244,8 +276,9 @@
               <div class="ac-panel">
                 <div class="ac-text backbone-faq-panel">
                   <p>
-                    PaaS platforms are a good fit when a simple monolith covers the next two years. Backbone is for teams that need audit
-                    trails, multi-service shape, predictable scale, enterprise diligence, and ownership inside your AWS account.
+                    Render, Railway, Heroku, Fly.io - ship-fast hosting. Fine for a hosted monolith when you don't need data ownership in
+                    your AWS account or full control of observability, security, and compliance. Painful to leave once the data and runtime
+                    live there.
                     <a href="/compare/">See the full comparison</a>.
                   </p>
                 </div>
@@ -254,27 +287,28 @@
 
             <div class="ac backbone-faq-accordion">
               <h2 class="ac-header">
-                <button type="button" class="ac-trigger">Do I still need Vanta?</button>
+                <button type="button" class="ac-trigger">Is Backbone SOC 2, HIPAA, or GDPR compliant?</button>
               </h2>
               <div class="ac-panel">
                 <div class="ac-text backbone-faq-panel">
                   <p>
-                    Often no. Backbone is not a GRC monitoring product like Vanta - it does not run continuous control tests in a compliance
-                    dashboard. It does ship a broad technical compliance foundation: identity, audit trails, network and edge baselines,
-                    secrets handling, observability hooks, and governance evidence.
+                    No - and no vendor shipping infrastructure that runs inside your AWS account can honestly say yes. Compliance
+                    certifications attest to how a system is operated in production: policies, personnel, vendor management, monitoring,
+                    evidence over time. Because Backbone deploys into your account and you run it, you're the entity being audited, not us.
+                    Same logic as owning your data and runtime - compliance ownership follows the same model.
                   </p>
                   <p>
-                    The
+                    What we do ship: a compliance-mapped technical foundation. Identity, audit trails, network and edge baselines, secrets
+                    handling, and observability hooks are built in from day one, mapped explicitly against SOC 2, HIPAA, PCI-DSS, and GDPR
+                    control objectives in the
                     <a
                       href="https://docs.backbonehq.io/docs/compliance"
                       rel="noopener noreferrer"
                       target="_blank"
-                      >Backbone compliance guide</a
+                      >Backbone compliance matrix</a
                     >
-                    maps that baseline to common SOC 2-style objectives, what ships in the platform, and what operators still own. For many
-                    teams, Backbone is why they never need Vanta. Formal attestation remains an organizational process when you pursue it - not
-                    a requirement to bolt on another compliance suite after adopting Backbone.
-                    <a href="/compare/">Backbone vs compliance tooling</a>.
+                    - what ships in the platform, and what you still own as the operator. Most teams get to their own attestation faster
+                    starting from that baseline than starting from zero.
                   </p>
                 </div>
               </div>

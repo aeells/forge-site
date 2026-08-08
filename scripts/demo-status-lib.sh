@@ -3,7 +3,7 @@ set -euo pipefail
 
 # demo-status-lib.sh
 # Helpers for the offline demo marker served from the INT static-edge S3 bucket.
-# Marketing site loads demo-status.js cross-origin via a script tag.
+# Marketing site loads https://int.backbonehq.io/demo-status.js cross-origin via a script tag.
 
 PROBE_URL="https://int.backbonehq.io/auth/login"
 DEMO_STATUS_OBJECT_KEY="demo-status.js"

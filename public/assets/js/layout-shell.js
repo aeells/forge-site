@@ -43,6 +43,11 @@ function markActiveHeaderLink(root = document) {
 const DEMO_STATUS_GREEN = "/assets/images/social/status-green-4e79760e.svg#root";
 const DEMO_STATUS_RED = "/assets/images/social/status-red-e5484d.svg#root";
 const DEMO_STATUS_SCRIPT_URL = "https://int.backbonehq.io/demo-status.js";
+const DEMO_STATUS_OFFLINE = { online: false };
+
+function normalizeDemoStatus(status) {
+  return status && status.online === true ? status : DEMO_STATUS_OFFLINE;
+}
 
 function loadIntDemoStatus() {
   return new Promise((resolve) => {
@@ -50,10 +55,12 @@ function loadIntDemoStatus() {
     script.async = true;
     script.src = `${DEMO_STATUS_SCRIPT_URL}?v=${Date.now()}`;
     script.onload = () => {
-      resolve(window.__backboneDemoStatus ?? { online: true });
+      resolve(normalizeDemoStatus(window.__backboneDemoStatus));
     };
+    // DNS / network / 5xx: treat as offline. Browsers still log the failed
+    // request in DevTools; that cannot be suppressed for a live cross-origin probe.
     script.onerror = () => {
-      resolve({ online: true });
+      resolve(DEMO_STATUS_OFFLINE);
     };
     document.head.appendChild(script);
   });

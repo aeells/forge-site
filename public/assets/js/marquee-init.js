@@ -3,6 +3,10 @@
     return Boolean(document.querySelector(".marquee3k.is-init"));
   }
 
+  function canHoverPause() {
+    return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  }
+
   function initOrRefresh() {
     // Marquee3k is a global from `vendor/marquee3k.js`.
     if (!window.Marquee3k) return;
@@ -11,6 +15,12 @@
     // init once and refresh thereafter.
     if (hasInitializedMarquee()) window.Marquee3k.refreshAll();
     else window.Marquee3k.init({ selector: "marquee3k" });
+
+    // iOS synthesizes mouseenter on tap and often never mouseleave, which leaves
+    // data-pausable marquees stuck paused. Only allow pause on fine pointers.
+    if (!canHoverPause() && window.Marquee3k.playAll) {
+      window.Marquee3k.playAll();
+    }
   }
 
   async function initAfterFonts() {
@@ -21,6 +31,11 @@
       // ignore
     }
     initOrRefresh();
+    // Re-measure after layout/scale settles (important on mobile + scaled wrappers).
+    requestAnimationFrame(() => {
+      if (window.Marquee3k?.refreshAll) window.Marquee3k.refreshAll();
+      if (!canHoverPause() && window.Marquee3k?.playAll) window.Marquee3k.playAll();
+    });
   }
 
   // Initial load
