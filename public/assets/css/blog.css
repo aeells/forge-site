@@ -163,6 +163,39 @@
   border: 0;
   border-top: 1px solid rgba(114, 125, 161, 0.2);
 }
+.blog-prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Text + aside media (e.g. LinkedIn graphic beside intro copy) */
+.blog-split {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+.blog-split-copy > * + * {
+  margin-top: 1.25rem;
+}
+.blog-split-media {
+  margin: 0;
+  width: 78.75%;
+  justify-self: end;
+}
+.blog-prose .blog-split-media img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+@media (min-width: 768px) {
+  .blog-split {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 0;
+  }
+}
 
 /* ---------- related articles ---------- */
 .blog-related {
@@ -205,6 +238,46 @@
 }
 .blog-cta .prose-cta-box {
   padding: 1.75rem;
+}
+
+/* Mid-article CTA (inside .blog-prose) — same box language as page CTAs */
+.blog-prose .blog-inline-cta {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.blog-prose .blog-inline-cta-title {
+  margin: 0;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 130%;
+}
+.blog-prose .blog-inline-cta-body {
+  margin-top: 0.75rem;
+  color: #d4d4d4;
+  line-height: 165%;
+}
+.blog-prose .blog-inline-cta-actions {
+  margin-top: 1.5rem;
+}
+.blog-prose .blog-inline-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(147, 157, 184, 0.2);
+  background-color: rgba(114, 125, 161, 0.1);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.blog-prose .blog-inline-cta-button:hover {
+  background-color: rgba(114, 125, 161, 0.2);
+  text-decoration: none;
+  color: #fff;
 }
 
 /* ---------- index card list ---------- */

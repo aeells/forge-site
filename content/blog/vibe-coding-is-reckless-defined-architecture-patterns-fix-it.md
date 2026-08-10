@@ -9,13 +9,24 @@ author: Andrew Eells
 tags: [ai, architecture, software-engineering, devops]
 ---
 
-Andreas Horn leads AIOps work at BLP - real enterprise IT. A while back he [posted something](https://www.linkedin.com/posts/andreashorn1_unpopular-opinion-most-of-the-people-confidently-activity-7471821090412138496-QfVi) that stuck with me: most people calling vibe coding the future have never sat through a 2 a.m. call after a misconfigured permission policy or firewall rule took production down. Demos look great. Small projects hold up. None of it survives a real enterprise, where system complexity and constraints are the default.
+Andreas Horn leads AIOps work at BLP - real enterprise IT. A while back he [posted something](https://www.linkedin.com/posts/andreashorn1_unpopular-opinion-most-of-the-people-confidently-activity-7471821090412138496-QfVi) that stuck with me: most people calling vibe coding the future have never sat through a 2 a.m. call after a misconfigured permission policy or firewall rule took production down.
 
-![LinkedIn post graphic by Andreas Horn arguing that vibe coding fails in real enterprise IT](/assets/images/blog/andreas-horn-vibe-coding.jpeg)
+<div class="blog-split">
+<div class="blog-split-copy">
+
+Demos look great. Small projects hold up. None of it survives a real enterprise, where system complexity and constraints are the default.
 
 He's right. He's also spent a decade watching AI initiatives succeed or fail inside real companies.
 
-Here's the sharper point: this isn't a talent problem, and it isn't a caution problem. It's a constraint problem. The [architectural "-ilities"](https://nimblegravity.com/blog/ilities-in-software-engineering) - scalability, security, maintainability, observability, and the rest - are exactly the properties teams reinvent under deadline when no convention exists. [The twelve-factor app](https://12factor.net/) made this same bet well over a decade ago: a fixed convention for how a SaaS app runs in production, not something every team invents from scratch. That bet gets sharper once the thing touching your system is an agent, not a person.
+Here's the sharper point: this isn't a talent problem, and it isn't a caution problem. It's a constraint problem. The [architectural "-ilities"](https://en.wikipedia.org/wiki/List_of_system_quality_attributes) - scalability, security, maintainability, observability, and the rest - are exactly the properties teams reinvent under deadline when no convention exists.
+
+</div>
+<figure class="blog-split-media">
+<img src="/assets/images/blog/andreas-horn-vibe-coding.jpeg" alt="LinkedIn post graphic by Andreas Horn arguing that vibe coding fails in real enterprise IT" width="800" height="1200" loading="lazy" />
+</figure>
+</div>
+
+[The twelve-factor app](https://12factor.net/) made this same bet well over a decade ago: a fixed convention for how a SaaS app runs in production, not something every team invents from scratch. That bet gets sharper once the thing touching your system is an agent, not a person.
 
 ## Why vibe coding breaks
 
@@ -32,6 +43,12 @@ On a blank project, the agent invents those concerns as it goes: where identity 
 On Backbone, those decisions already exist. Authentication is wired to Cognito and OAuth2. Authorization runs through an existing identity model. Audit events already have a schema, cross-cutting wiring, and a destination. Deployment, configuration, health checks, observability, and rate limiting are already established. The agent isn't designing the -ilities. It's adhering to them - extending a system with known scalability, reliability, and security characteristics rather than inventing those characteristics feature by feature.
 
 That's the bet behind Backbone: agents are better at extending an established pattern than inventing production architecture from scratch. Service-to-service calls use explicit AWS IAM identities and policies, not credentials embedded in application code - one more decision that's already made, not one your agent has to guess at.
+
+<aside class="blog-inline-cta prose-cta-box rounded-xl border border-[#939DB8]/10 bg-[#0F101A]" aria-label="Architecture Decision Records">
+<p class="blog-inline-cta-title">Architecture Decision Records</p>
+<p class="blog-inline-cta-body">Backbone's published ADRs capture the constraints behind those patterns - why Cognito, why IAM for service auth, why the observability stack looks the way it does. Not marketing. The trade-offs.</p>
+<p class="blog-inline-cta-actions"><a class="blog-inline-cta-button" href="https://docs.backbonehq.io/docs/adrs" target="_blank" rel="noopener noreferrer">Read the ADRs</a></p>
+</aside>
 
 ## Where this stops working
 

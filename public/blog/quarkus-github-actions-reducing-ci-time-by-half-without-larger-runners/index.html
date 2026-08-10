@@ -170,7 +170,7 @@
 <p>We only had a handful of integration-test classes. Fixed setup cost multiplied by N shards usually loses to <strong>one job that pays setup once and parallelises the Maven reactor internally</strong>.</p>
 <p>So we kept the job count small and focused on <strong>eliminating duplicated work inside the existing jobs</strong>.</p>
 <h2>Prerequisite: LocalStack → Floci</h2>
-<p>Before this CI pass, we had already migrated from <a href="https://localstack.cloud/">LocalStack</a> to <a href="https://floci.io/floci/">Floci</a> as the local AWS emulator on <code>:4566</code>.</p>
+<p>Before this CI pass, we had already migrated from <a href="https://localstack.cloud/" target="_blank" rel="noopener noreferrer">LocalStack</a> to <a href="https://floci.io/floci/" target="_blank" rel="noopener noreferrer">Floci</a> as the local AWS emulator on <code>:4566</code>.</p>
 <p>The original motivation was <strong>Cognito support</strong>, not CI speed. LocalStack Community did not provide a credible Cognito story for our authentication flows, so auth integration tests previously required a <strong>real AWS-backed job</strong> alongside a LocalStack-backed job for the other services.</p>
 <p>Floci supports enough of Cognito for our password, refresh-token, and JWT flows that we could collapse those two worlds into a <strong>single local emulator</strong>.</p>
 <p>It was also noticeably lighter in CI.</p>
@@ -195,7 +195,7 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 </code></pre>
 <p>The entire start-and-wait sequence completed in <strong>about 16 seconds</strong>.</p>
 <p>Smaller footprint, no auth-token tax for CI, and Cognito in the same process that already emulates DynamoDB, S3, and SES. That consolidation mattered more than the raw startup-time improvement.</p>
-<p>The migration was not entirely frictionless. Floci&#39;s <code>InitiateAuth</code> + <code>REFRESH_TOKEN_AUTH</code> path initially accepted invalid refresh tokens and minted new JWTs, which broke our negative-path authentication tests. We filed <a href="https://github.com/floci-io/floci/issues/2113">floci-io/floci#2113</a>, and it quickly attracted two fix PRs (<a href="https://github.com/floci-io/floci/pull/2132">#2132</a> and <a href="https://github.com/floci-io/floci/pull/2135">#2135</a>). That kind of maintainer response is exactly what makes an emulator migration feel safe rather than lonely.</p>
+<p>The migration was not entirely frictionless. Floci&#39;s <code>InitiateAuth</code> + <code>REFRESH_TOKEN_AUTH</code> path initially accepted invalid refresh tokens and minted new JWTs, which broke our negative-path authentication tests. We filed <a href="https://github.com/floci-io/floci/issues/2113" target="_blank" rel="noopener noreferrer">floci-io/floci#2113</a>, and it quickly attracted two fix PRs (<a href="https://github.com/floci-io/floci/pull/2132" target="_blank" rel="noopener noreferrer">#2132</a> and <a href="https://github.com/floci-io/floci/pull/2135" target="_blank" rel="noopener noreferrer">#2135</a>). That kind of maintainer response is exactly what makes an emulator migration feel safe rather than lonely.</p>
 <h2>Step 1: actually forward the Maven flags</h2>
 <p>CI had been invoking:</p>
 <pre><code class="language-bash">task test:integration -- -Dtest.thread.count=2

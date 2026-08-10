@@ -138,7 +138,7 @@
 <p>So the metric <em>content</em> at scrape time was not inherently toxic. The encoder and Snappy path on JVM were fine.</p>
 <p>That left something about the <strong>native periodic push path</strong> or <strong>fleet-wide ingestion behaviour</strong> - not a single broken histogram hiding in auth-service.</p>
 <h2>The pivot: CloudWatch <code>DiscardedSamples</code></h2>
-<p>AMP exposes <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-CW-usage-metrics.html">vended CloudWatch metrics</a> under the <code>AWS/Prometheus</code> namespace. One of them is <strong><code>DiscardedSamples</code></strong>, with a <strong><code>Reason</code> dimension</strong> explaining why samples were dropped.</p>
+<p>AMP exposes <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-CW-usage-metrics.html" target="_blank" rel="noopener noreferrer">vended CloudWatch metrics</a> under the <code>AWS/Prometheus</code> namespace. One of them is <strong><code>DiscardedSamples</code></strong>, with a <strong><code>Reason</code> dimension</strong> explaining why samples were dropped.</p>
 <p>We listed metrics for our workspace:</p>
 <pre><code class="language-bash">aws cloudwatch list-metrics \
   --namespace &quot;AWS/Prometheus&quot; \

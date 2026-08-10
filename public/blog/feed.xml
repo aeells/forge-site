@@ -13,19 +13,29 @@
       <guid isPermaLink="true">https://backbonehq.io/blog/vibe-coding-is-reckless-defined-architecture-patterns-fix-it/</guid>
       <pubDate>Sun, 09 Aug 2026 00:00:00 GMT</pubDate>
       <description>Vibe coding fails in the enterprise not because agents are careless, but because blank-canvas codebases force them to invent the architectural &apos;ilities&apos; - scalability, security, maintainability - from scratch. Defined architecture patterns fix that.</description>
-      <content:encoded><![CDATA[<p>Andreas Horn leads AIOps work at BLP - real enterprise IT. A while back he <a href="https://www.linkedin.com/posts/andreashorn1_unpopular-opinion-most-of-the-people-confidently-activity-7471821090412138496-QfVi">posted something</a> that stuck with me: most people calling vibe coding the future have never sat through a 2 a.m. call after a misconfigured permission policy or firewall rule took production down. Demos look great. Small projects hold up. None of it survives a real enterprise, where system complexity and constraints are the default.</p>
-<p><img src="/assets/images/blog/andreas-horn-vibe-coding.jpeg" alt="LinkedIn post graphic by Andreas Horn arguing that vibe coding fails in real enterprise IT"></p>
+      <content:encoded><![CDATA[<p>Andreas Horn leads AIOps work at BLP - real enterprise IT. A while back he <a href="https://www.linkedin.com/posts/andreashorn1_unpopular-opinion-most-of-the-people-confidently-activity-7471821090412138496-QfVi" target="_blank" rel="noopener noreferrer">posted something</a> that stuck with me: most people calling vibe coding the future have never sat through a 2 a.m. call after a misconfigured permission policy or firewall rule took production down.</p>
+<div class="blog-split">
+<div class="blog-split-copy"><p>Demos look great. Small projects hold up. None of it survives a real enterprise, where system complexity and constraints are the default.</p>
 <p>He&#39;s right. He&#39;s also spent a decade watching AI initiatives succeed or fail inside real companies.</p>
-<p>Here&#39;s the sharper point: this isn&#39;t a talent problem, and it isn&#39;t a caution problem. It&#39;s a constraint problem. The <a href="https://nimblegravity.com/blog/ilities-in-software-engineering">architectural &quot;-ilities&quot;</a> - scalability, security, maintainability, observability, and the rest - are exactly the properties teams reinvent under deadline when no convention exists. <a href="https://12factor.net/">The twelve-factor app</a> made this same bet well over a decade ago: a fixed convention for how a SaaS app runs in production, not something every team invents from scratch. That bet gets sharper once the thing touching your system is an agent, not a person.</p>
+<p>Here&#39;s the sharper point: this isn&#39;t a talent problem, and it isn&#39;t a caution problem. It&#39;s a constraint problem. The <a href="https://en.wikipedia.org/wiki/List_of_system_quality_attributes" target="_blank" rel="noopener noreferrer">architectural &quot;-ilities&quot;</a> - scalability, security, maintainability, observability, and the rest - are exactly the properties teams reinvent under deadline when no convention exists.</p>
+</div>
+<figure class="blog-split-media">
+<img src="/assets/images/blog/andreas-horn-vibe-coding.jpeg" alt="LinkedIn post graphic by Andreas Horn arguing that vibe coding fails in real enterprise IT" width="800" height="1200" loading="lazy" />
+</figure>
+</div><p><a href="https://12factor.net/" target="_blank" rel="noopener noreferrer">The twelve-factor app</a> made this same bet well over a decade ago: a fixed convention for how a SaaS app runs in production, not something every team invents from scratch. That bet gets sharper once the thing touching your system is an agent, not a person.</p>
 <h2>Why vibe coding breaks</h2>
 <p>A coding agent doesn&#39;t reason about your architecture. It reads what&#39;s there and extends it. Give it a codebase where the -ilities are already expressed the same way a dozen times, and it follows those patterns reliably. Give it a blank project - which is what vibe coding usually means - and it has nothing to follow. It invents the patterns instead: how identity is checked, what gets logged, how failures propagate, where rate limits live. The result is often plausible. It is not always production-shaped.</p>
-<p>That gap shows up in public. <a href="https://www.wired.com/story/thousands-of-vibe-coded-apps-expose-corporate-and-personal-data-on-the-open-web/">WIRED reported</a> research from Red Access finding thousands of publicly accessible vibe-coded apps with effectively no authentication - and close to two thousand appearing to leak sensitive data. Security is only one -ility. The same blank-canvas pressure applies to scalability, observability, deployability, and maintainability. Agents optimise for something that works. The cross-cutting properties are what they have to guess.</p>
+<p>That gap shows up in public. <a href="https://www.wired.com/story/thousands-of-vibe-coded-apps-expose-corporate-and-personal-data-on-the-open-web/" target="_blank" rel="noopener noreferrer">WIRED reported</a> research from Red Access finding thousands of publicly accessible vibe-coded apps with effectively no authentication - and close to two thousand appearing to leak sensitive data. Security is only one -ility. The same blank-canvas pressure applies to scalability, observability, deployability, and maintainability. Agents optimise for something that works. The cross-cutting properties are what they have to guess.</p>
 <h2>Why Backbone fixes it</h2>
 <p>Two agents, same task: add a feature that touches identity, authorization, and an audit trail - the kind of change that forces several -ilities into play at once.</p>
 <p>On a blank project, the agent invents those concerns as it goes: where identity lives, how authorization is checked, what gets audited, how operational boundaries are drawn. Decisions about the architecture happen while the feature is being written.</p>
 <p>On Backbone, those decisions already exist. Authentication is wired to Cognito and OAuth2. Authorization runs through an existing identity model. Audit events already have a schema, cross-cutting wiring, and a destination. Deployment, configuration, health checks, observability, and rate limiting are already established. The agent isn&#39;t designing the -ilities. It&#39;s adhering to them - extending a system with known scalability, reliability, and security characteristics rather than inventing those characteristics feature by feature.</p>
 <p>That&#39;s the bet behind Backbone: agents are better at extending an established pattern than inventing production architecture from scratch. Service-to-service calls use explicit AWS IAM identities and policies, not credentials embedded in application code - one more decision that&#39;s already made, not one your agent has to guess at.</p>
-<h2>Where this stops working</h2>
+<aside class="blog-inline-cta prose-cta-box rounded-xl border border-[#939DB8]/10 bg-[#0F101A]" aria-label="Architecture Decision Records">
+<p class="blog-inline-cta-title">Architecture Decision Records</p>
+<p class="blog-inline-cta-body">Backbone's published ADRs capture the constraints behind those patterns - why Cognito, why IAM for service auth, why the observability stack looks the way it does. Not marketing. The trade-offs.</p>
+<p class="blog-inline-cta-actions"><a class="blog-inline-cta-button" href="https://docs.backbonehq.io/docs/adrs" target="_blank" rel="noopener noreferrer">Read the ADRs</a></p>
+</aside><h2>Where this stops working</h2>
 <p>Convention only helps if it&#39;s right. A flawed pattern gets propagated faster and more confidently by an agent than by a human - it doesn&#39;t second-guess precedent, it follows it. That&#39;s an argument for getting the pattern right once, by people who&#39;ve made the mistakes already, not for skipping review. An agent can follow a correct pattern into a situation it was never built for, and catching that is still your job.</p>
 <p>One more thing: &quot;vibe coding&quot; might not be the word anyone&#39;s using in two years. The shift underneath it - agents doing more of the typing, over bigger diffs, with less supervision - isn&#39;t going anywhere.</p>
 <h2>Architecture engineering, not prompt engineering</h2>
@@ -107,7 +117,7 @@
 <p>We only had a handful of integration-test classes. Fixed setup cost multiplied by N shards usually loses to <strong>one job that pays setup once and parallelises the Maven reactor internally</strong>.</p>
 <p>So we kept the job count small and focused on <strong>eliminating duplicated work inside the existing jobs</strong>.</p>
 <h2>Prerequisite: LocalStack → Floci</h2>
-<p>Before this CI pass, we had already migrated from <a href="https://localstack.cloud/">LocalStack</a> to <a href="https://floci.io/floci/">Floci</a> as the local AWS emulator on <code>:4566</code>.</p>
+<p>Before this CI pass, we had already migrated from <a href="https://localstack.cloud/" target="_blank" rel="noopener noreferrer">LocalStack</a> to <a href="https://floci.io/floci/" target="_blank" rel="noopener noreferrer">Floci</a> as the local AWS emulator on <code>:4566</code>.</p>
 <p>The original motivation was <strong>Cognito support</strong>, not CI speed. LocalStack Community did not provide a credible Cognito story for our authentication flows, so auth integration tests previously required a <strong>real AWS-backed job</strong> alongside a LocalStack-backed job for the other services.</p>
 <p>Floci supports enough of Cognito for our password, refresh-token, and JWT flows that we could collapse those two worlds into a <strong>single local emulator</strong>.</p>
 <p>It was also noticeably lighter in CI.</p>
@@ -132,7 +142,7 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 </code></pre>
 <p>The entire start-and-wait sequence completed in <strong>about 16 seconds</strong>.</p>
 <p>Smaller footprint, no auth-token tax for CI, and Cognito in the same process that already emulates DynamoDB, S3, and SES. That consolidation mattered more than the raw startup-time improvement.</p>
-<p>The migration was not entirely frictionless. Floci&#39;s <code>InitiateAuth</code> + <code>REFRESH_TOKEN_AUTH</code> path initially accepted invalid refresh tokens and minted new JWTs, which broke our negative-path authentication tests. We filed <a href="https://github.com/floci-io/floci/issues/2113">floci-io/floci#2113</a>, and it quickly attracted two fix PRs (<a href="https://github.com/floci-io/floci/pull/2132">#2132</a> and <a href="https://github.com/floci-io/floci/pull/2135">#2135</a>). That kind of maintainer response is exactly what makes an emulator migration feel safe rather than lonely.</p>
+<p>The migration was not entirely frictionless. Floci&#39;s <code>InitiateAuth</code> + <code>REFRESH_TOKEN_AUTH</code> path initially accepted invalid refresh tokens and minted new JWTs, which broke our negative-path authentication tests. We filed <a href="https://github.com/floci-io/floci/issues/2113" target="_blank" rel="noopener noreferrer">floci-io/floci#2113</a>, and it quickly attracted two fix PRs (<a href="https://github.com/floci-io/floci/pull/2132" target="_blank" rel="noopener noreferrer">#2132</a> and <a href="https://github.com/floci-io/floci/pull/2135" target="_blank" rel="noopener noreferrer">#2135</a>). That kind of maintainer response is exactly what makes an emulator migration feel safe rather than lonely.</p>
 <h2>Step 1: actually forward the Maven flags</h2>
 <p>CI had been invoking:</p>
 <pre><code class="language-bash">task test:integration -- -Dtest.thread.count=2
@@ -300,7 +310,7 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <p>Then came DevOps.</p>
 <p>Operations moved left too. Infrastructure, monitoring, deployments and incident response all became part of the same team&#39;s responsibility.</p>
 <p>&quot;You build it, you run it.&quot;</p>
-<p>Then security took its turn. <a href="https://medium.com/slalom-build/devsecops-in-effect-at-the-web-application-firewall-472481688f8d">DevSecOps</a> pushed security left as well - threat modelling, dependency scanning and policy checks moving out of a late-stage gate and into the pipeline itself.</p>
+<p>Then security took its turn. <a href="https://medium.com/slalom-build/devsecops-in-effect-at-the-web-application-firewall-472481688f8d" target="_blank" rel="noopener noreferrer">DevSecOps</a> pushed security left as well - threat modelling, dependency scanning and policy checks moving out of a late-stage gate and into the pipeline itself.</p>
 <p>Every few years another discipline moved closer to the developer.</p>
 <p>Testing.</p>
 <p>Delivery.</p>
@@ -381,7 +391,7 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <p>Some engineering problems only need solving once.</p>
 <p>The operational foundation beneath your SaaS product is one of them.</p>
 <p>After 25 years of shifting left, that feels like the direction we&#39;ve really been heading all along.</p>
-<p>If that resonates, I&#39;d genuinely like to hear from you - you can find out more at <a href="https://backbonehq.io/">backbonehq.io</a>.</p>
+<p>If that resonates, I&#39;d genuinely like to hear from you - you can find out more at <a href="https://backbonehq.io/" target="_blank" rel="noopener noreferrer">backbonehq.io</a>.</p>
 ]]></content:encoded>
       <category>devops</category>
       <category>software-engineering</category>
@@ -395,9 +405,9 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
       <guid isPermaLink="true">https://backbonehq.io/blog/aws-transform-vs-superwerker/</guid>
       <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
       <description>AWS Transform&apos;s new landing zone agent and Superwerker both stand up governed multi-account AWS environments - but they&apos;re built for different moments in a company&apos;s cloud journey. A read-from-the-docs take, plus why Backbone still points greenfield teams at Superwerker.</description>
-      <content:encoded><![CDATA[<p>Most people will read <a href="https://aws.amazon.com/blogs/migration-and-modernization/automate-your-landing-zone-creation-with-aws-transform/">AWS Transform&#39;s landing zone agent</a> as Superwerker&#39;s smarter cousin. I don&#39;t think that&#39;s right.</p>
+      <content:encoded><![CDATA[<p>Most people will read <a href="https://aws.amazon.com/blogs/migration-and-modernization/automate-your-landing-zone-creation-with-aws-transform/" target="_blank" rel="noopener noreferrer">AWS Transform&#39;s landing zone agent</a> as Superwerker&#39;s smarter cousin. I don&#39;t think that&#39;s right.</p>
 <p>Same destination. Different problems. Treating them as substitutes is how greenfield teams buy enterprise process they don&#39;t need - and how migration teams under-buy governance they do.</p>
-<p>I saw the announcement via a LinkedIn post, and it stuck because the vocabulary overlaps heavily with a tool I&#39;ve actually used and rate highly: <a href="https://github.com/superwerker/superwerker">Superwerker</a>. I haven&#39;t run Transform myself - this is a read from the announcement and docs, not a hands-on review. I&#39;d genuinely like to hear from anyone who has.</p>
+<p>I saw the announcement via a LinkedIn post, and it stuck because the vocabulary overlaps heavily with a tool I&#39;ve actually used and rate highly: <a href="https://github.com/superwerker/superwerker" target="_blank" rel="noopener noreferrer">Superwerker</a>. I haven&#39;t run Transform myself - this is a read from the announcement and docs, not a hands-on review. I&#39;d genuinely like to hear from anyone who has.</p>
 <h2>Superwerker: opinionated defaults, shipped</h2>
 <p>Superwerker is a free, MIT-licensed CloudFormation stack. You run it, and it stands up a multi-account baseline - Control Tower, SSO, and sensible guardrails - without a discovery workshop. We used it on a recent greenfield build and had SSO and baseline guardrails live in an afternoon. The entire decision tree is a public repo you can read end to end before you commit to anything.</p>
 <p>I&#39;m generally a fan of opinionated tooling. If there is a sensible default, I&#39;d rather spend engineering time building product than debating OU structures.</p>
@@ -406,7 +416,7 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <p>Transform&#39;s agent is a different shape of tool entirely. It&#39;s not a standalone landing zone builder - it&#39;s embedded in AWS Transform&#39;s end-to-end migration workflow. Transform gathers information about your organisation, migration waves, compliance requirements and account structure before proposing a landing zone.</p>
 <p>That&#39;s a fundamentally different problem from &quot;deploy me a sensible default.&quot;</p>
 <h2>Where Backbone sits</h2>
-<p><a href="https://backbonehq.io/">Backbone</a> deliberately stops at the landing zone boundary. That&#39;s infrastructure governance, and every organisation has different requirements. Once that foundation exists - whether it came from Superwerker, AWS Transform or something else - that&#39;s where Backbone starts.</p>
+<p><a href="https://backbonehq.io/" target="_blank" rel="noopener noreferrer">Backbone</a> deliberately stops at the landing zone boundary. That&#39;s infrastructure governance, and every organisation has different requirements. Once that foundation exists - whether it came from Superwerker, AWS Transform or something else - that&#39;s where Backbone starts.</p>
 <h2>A working rule of thumb</h2>
 <ul>
 <li><strong>Greenfield startup?</strong> Use Superwerker.</li>
@@ -437,10 +447,10 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <p>&quot;A salesperson asked if I had an architecture diagram. I said, &#39;Yes... but it&#39;s rubbish.&#39;&quot;</p>
 <p>...to publishing this.</p>
 <p><img src="https://raw.githubusercontent.com/get-backbone/backbone-docs/v1.0/assets/forge-architecture.png" alt="Backbone AWS architecture diagram showing CloudFront edge delivery, VPC public and private subnet boundaries, ECS Fargate microservices, RDS PostgreSQL, ElastiCache Redis, Cognito identity, and observability services"></p>
-<p>You can see the <a href="https://docs.backbonehq.io/docs/welcome#architecture-and-runtime-model">live diagram on the Backbone docs site</a>, with more detail in the <a href="https://docs.backbonehq.io/docs/infrastructure">AWS platform infrastructure guide</a>.</p>
+<p>You can see the <a href="https://docs.backbonehq.io/docs/welcome#architecture-and-runtime-model" target="_blank" rel="noopener noreferrer">live diagram on the Backbone docs site</a>, with more detail in the <a href="https://docs.backbonehq.io/docs/infrastructure" target="_blank" rel="noopener noreferrer">AWS platform infrastructure guide</a>.</p>
 <p>After literally <strong>years</strong> of trying different approaches, this is the first workflow that has produced an architecture diagram I&#39;d happily put in front of customers.</p>
 <h2>The problem with architecture diagrams</h2>
-<p>Anyone building on <a href="https://aws.amazon.com/">AWS</a> has probably been here.</p>
+<p>Anyone building on <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer">AWS</a> has probably been here.</p>
 <p>The architecture changes.</p>
 <p>The diagram doesn&#39;t.</p>
 <p>Eventually someone opens draw.io and spends half a day dragging icons around.</p>
@@ -449,11 +459,11 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <h3>Manual diagrams</h3>
 <p>I&#39;ve built diagrams using tools including:</p>
 <ul>
-<li><a href="https://www.drawio.com/docs/diagram-types/aws-diagrams/">draw.io AWS diagram shapes</a></li>
-<li><a href="https://www.lucidchart.com/">Lucidchart</a></li>
-<li><a href="https://www.microsoft.com/en-us/microsoft-365/visio/flowchart-software">Microsoft Visio</a></li>
-<li><a href="https://www.cloudcraft.co/">Cloudcraft</a> (live AWS/Azure scanning and visual designer)</li>
-<li><a href="https://www.eraser.io/ai/aws-diagram-generator">Eraser AI AWS Diagram Generator</a> (prompt-to-diagram)</li>
+<li><a href="https://www.drawio.com/docs/diagram-types/aws-diagrams/" target="_blank" rel="noopener noreferrer">draw.io AWS diagram shapes</a></li>
+<li><a href="https://www.lucidchart.com/" target="_blank" rel="noopener noreferrer">Lucidchart</a></li>
+<li><a href="https://www.microsoft.com/en-us/microsoft-365/visio/flowchart-software" target="_blank" rel="noopener noreferrer">Microsoft Visio</a></li>
+<li><a href="https://www.cloudcraft.co/" target="_blank" rel="noopener noreferrer">Cloudcraft</a> (live AWS/Azure scanning and visual designer)</li>
+<li><a href="https://www.eraser.io/ai/aws-diagram-generator" target="_blank" rel="noopener noreferrer">Eraser AI AWS Diagram Generator</a> (prompt-to-diagram)</li>
 </ul>
 <p>The results can look fantastic - whether you drew them by hand, scanned live infrastructure, or generated them from a written description.</p>
 <p>Until the infrastructure changes.</p>
@@ -461,9 +471,9 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <h3>CDK diagram generators</h3>
 <p>I also explored tools including:</p>
 <ul>
-<li><a href="https://github.com/pistazie/cdk-dia">cdk-dia</a></li>
-<li><a href="https://github.com/duartealexf/cdk2d2">cdk2d2</a></li>
-<li><a href="https://aws.github.io/aws-pdk/developer_guides/cdk-graph/index.html">AWS PDK CDK Graph</a> (with its <a href="https://aws.github.io/aws-pdk/developer_guides/cdk-graph-plugin-diagram/index.html">diagram plugin</a>)</li>
+<li><a href="https://github.com/pistazie/cdk-dia" target="_blank" rel="noopener noreferrer">cdk-dia</a></li>
+<li><a href="https://github.com/duartealexf/cdk2d2" target="_blank" rel="noopener noreferrer">cdk2d2</a></li>
+<li><a href="https://aws.github.io/aws-pdk/developer_guides/cdk-graph/index.html" target="_blank" rel="noopener noreferrer">AWS PDK CDK Graph</a> (with its <a href="https://aws.github.io/aws-pdk/developer_guides/cdk-graph-plugin-diagram/index.html" target="_blank" rel="noopener noreferrer">diagram plugin</a>)</li>
 </ul>
 <p>These are clever projects.</p>
 <p>They faithfully represent your infrastructure.</p>
@@ -484,7 +494,7 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 </ul>
 <p>Everything is technically correct.</p>
 <p>Nothing is architecturally useful.</p>
-<p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">CloudFormation</a> graphs answer:</p>
+<p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html" target="_blank" rel="noopener noreferrer">CloudFormation</a> graphs answer:</p>
 <blockquote>
 <p><strong>&quot;What AWS resources exist?&quot;</strong></p>
 </blockquote>
@@ -497,7 +507,7 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <p>They just weren&#39;t publishable.</p>
 <h3>AWS Workload Discovery</h3>
 <p>I even evaluated AWS&#39; own solution:</p>
-<p><a href="https://docs.aws.amazon.com/solutions/latest/workload-discovery-on-aws/solution-overview.html">AWS Workload Discovery on AWS</a></p>
+<p><a href="https://docs.aws.amazon.com/solutions/latest/workload-discovery-on-aws/solution-overview.html" target="_blank" rel="noopener noreferrer">AWS Workload Discovery on AWS</a></p>
 <p>It discovers infrastructure.</p>
 <p>It inventories resources.</p>
 <p>It builds dependency graphs.</p>
@@ -507,7 +517,7 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <p>It doesn&#39;t communicate your architecture.</p>
 <h2>The breakthrough</h2>
 <p>The breakthrough came from this AWS blog:</p>
-<p><a href="https://aws.amazon.com/blogs/machine-learning/build-aws-architecture-diagrams-using-amazon-q-cli-and-mcp/">Build AWS architecture diagrams using Kiro CLI and MCP</a></p>
+<p><a href="https://aws.amazon.com/blogs/machine-learning/build-aws-architecture-diagrams-using-amazon-q-cli-and-mcp/" target="_blank" rel="noopener noreferrer">Build AWS architecture diagrams using Kiro CLI and MCP</a></p>
 <p>At first I thought:</p>
 <blockquote>
 <p>&quot;Interesting... but they&#39;re just feeding text into an LLM.&quot;</p>
@@ -536,10 +546,10 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <p>That&#39;s architecture.</p>
 <p>Not implementation.</p>
 <p>The LLM wasn&#39;t trying to replace an architect.</p>
-<p>It was acting as an <strong>architectural abstraction layer</strong> - the same idea as a <a href="https://c4model.com/">C4 container diagram</a>: document intent at the level stakeholders actually care about.</p>
+<p>It was acting as an <strong>architectural abstraction layer</strong> - the same idea as a <a href="https://c4model.com/" target="_blank" rel="noopener noreferrer">C4 container diagram</a>: document intent at the level stakeholders actually care about.</p>
 <p>That was the lightbulb moment.</p>
 <h2>Cursor did almost all of the work</h2>
-<p>Armed with that idea, I pointed <a href="https://cursor.com/">Cursor</a> at my <a href="https://docs.aws.amazon.com/cdk/v2/guide/home.html">AWS CDK</a> repository.</p>
+<p>Armed with that idea, I pointed <a href="https://cursor.com/" target="_blank" rel="noopener noreferrer">Cursor</a> at my <a href="https://docs.aws.amazon.com/cdk/v2/guide/home.html" target="_blank" rel="noopener noreferrer">AWS CDK</a> repository.</p>
 <p>I also gave it some context from a conversation I&#39;d had with ChatGPT about why CloudFormation graphs are the wrong level of abstraction - useful for framing, but Cursor did the actual work.</p>
 <p>Then I basically let it loose.</p>
 <p>It analysed the repository.</p>
@@ -584,7 +594,7 @@ Waiting... (119s remaining)   Floci AWS is ready (http://localhost:4566)
 <li>show public/private subnet boundaries in the VPC</li>
 </ul>
 <p>The second render was immediately publishable.</p>
-<p>There was also a small tooling wrinkle: the <a href="https://github.com/awslabs/mcp/tree/main/src/aws-diagram-mcp-server">AWS Diagram MCP server</a> package has been yanked upstream, so we pinned the last published version (<code>1.0.23</code>) in a source-controlled <code>mcp.json</code>. That kind of friction is worth mentioning - this wasn&#39;t magic; we wrestled with it slightly to get it working.</p>
+<p>There was also a small tooling wrinkle: the <a href="https://github.com/awslabs/mcp/tree/main/src/aws-diagram-mcp-server" target="_blank" rel="noopener noreferrer">AWS Diagram MCP server</a> package has been yanked upstream, so we pinned the last published version (<code>1.0.23</code>) in a source-controlled <code>mcp.json</code>. That kind of friction is worth mentioning - this wasn&#39;t magic; we wrestled with it slightly to get it working.</p>
 <h2>The hybrid workflow</h2>
 <p>The workflow ended up looking like this.</p>
 <pre><code class="language-text">CDK repository
@@ -637,7 +647,7 @@ Published AWS architecture diagram
 <p>It accepted feedback.</p>
 <p>It refined the output.</p>
 <p>The AI wasn&#39;t designing my platform.</p>
-<p>But it did an excellent job of documenting a platform that already exists - the same platform I write about when debugging <a href="https://backbonehq.io/blog/when-amp-returns-400-check-discarded-samples/">AMP remote write failures</a> or explaining <a href="https://backbonehq.io/blog/what-production-ready-actually-means/">what production-ready actually means</a>.</p>
+<p>But it did an excellent job of documenting a platform that already exists - the same platform I write about when debugging <a href="https://backbonehq.io/blog/when-amp-returns-400-check-discarded-samples/" target="_blank" rel="noopener noreferrer">AMP remote write failures</a> or explaining <a href="https://backbonehq.io/blog/what-production-ready-actually-means/" target="_blank" rel="noopener noreferrer">what production-ready actually means</a>.</p>
 <h2>Would I trust it blindly?</h2>
 <p>Absolutely not.</p>
 <p>The architecture still belongs to the engineers who built the system.</p>
@@ -659,7 +669,7 @@ Published AWS architecture diagram
 <li>produce different views for developers, operations, security reviews and customer documentation</li>
 </ul>
 <p>That feels considerably more exciting than another CloudFormation graph.</p>
-<p>And I essentially have that version-controlled now - tied to a real <a href="https://docs.aws.amazon.com/AmazonECS/latest/bestpracticesguide/intro.html">ECS on Fargate</a> platform, not a toy example.</p>
+<p>And I essentially have that version-controlled now - tied to a real <a href="https://docs.aws.amazon.com/AmazonECS/latest/bestpracticesguide/intro.html" target="_blank" rel="noopener noreferrer">ECS on Fargate</a> platform, not a toy example.</p>
 <h2>Here&#39;s how Cursor did it</h2>
 <p>The interesting part isn&#39;t the PNG. It&#39;s the intermediate model - a curated, solutions-architect view derived from CDK constructs, not from the synthesized CloudFormation dependency graph.</p>
 <p>The model header explains the intent:</p>
@@ -720,7 +730,7 @@ Published AWS architecture diagram
 <pre><code class="language-bash">kiro-cli mcp import --file &quot;${mcp_config}&quot; --force global
 kiro-cli chat --no-interactive --trust-all-tools &quot;$(cat diagram-prompt.md)&quot;
 </code></pre>
-<p>The prompt tells the MCP server how to map component types to <a href="https://diagrams.mingrammer.com/">diagrams</a> nodes, nest subnet clusters, and honour aggregate edges - treating the YAML as the single source of truth.</p>
+<p>The prompt tells the MCP server how to map component types to <a href="https://diagrams.mingrammer.com/" target="_blank" rel="noopener noreferrer">diagrams</a> nodes, nest subnet clusters, and honour aggregate edges - treating the YAML as the single source of truth.</p>
 <p>That&#39;s the whole trick: <strong>deterministic extraction from code you already wrote, LLM-assisted rendering for polish.</strong></p>
 <h2>Final thoughts</h2>
 <p>This is probably the first AI workflow I&#39;ve adopted where I immediately thought:</p>
@@ -778,7 +788,7 @@ kiro-cli chat --no-interactive --trust-all-tools &quot;$(cat diagram-prompt.md)&
 <p>So the metric <em>content</em> at scrape time was not inherently toxic. The encoder and Snappy path on JVM were fine.</p>
 <p>That left something about the <strong>native periodic push path</strong> or <strong>fleet-wide ingestion behaviour</strong> - not a single broken histogram hiding in auth-service.</p>
 <h2>The pivot: CloudWatch <code>DiscardedSamples</code></h2>
-<p>AMP exposes <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-CW-usage-metrics.html">vended CloudWatch metrics</a> under the <code>AWS/Prometheus</code> namespace. One of them is <strong><code>DiscardedSamples</code></strong>, with a <strong><code>Reason</code> dimension</strong> explaining why samples were dropped.</p>
+<p>AMP exposes <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-CW-usage-metrics.html" target="_blank" rel="noopener noreferrer">vended CloudWatch metrics</a> under the <code>AWS/Prometheus</code> namespace. One of them is <strong><code>DiscardedSamples</code></strong>, with a <strong><code>Reason</code> dimension</strong> explaining why samples were dropped.</p>
 <p>We listed metrics for our workspace:</p>
 <pre><code class="language-bash">aws cloudwatch list-metrics \
   --namespace &quot;AWS/Prometheus&quot; \
@@ -968,7 +978,7 @@ awscurl --service aps --region us-west-2 \
 <p>But because every organisation assumes it has to start from scratch.</p>
 <p>That realisation is ultimately what led me to build Backbone.</p>
 <p>After spending more than two decades repeatedly building the same operational capabilities across startups and enterprise programmes, I wanted to create something that lets engineering teams begin with mature foundations already in place - so more of their time is spent building the product they&#39;re actually in business to create.</p>
-<p>If that resonates, you can learn more at <a href="https://backbonehq.io/">backbonehq.io</a>.</p>
+<p>If that resonates, you can learn more at <a href="https://backbonehq.io/" target="_blank" rel="noopener noreferrer">backbonehq.io</a>.</p>
 ]]></content:encoded>
       <category>saas</category>
       <category>aws</category>

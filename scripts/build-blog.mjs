@@ -33,6 +33,18 @@ const BLOG_DESC =
 const DEFAULT_OG = `${SITE}/assets/images/og.png`;
 const AUTHOR = "Andrew Eells";
 
+// External article links open in a new tab; relative/on-site links stay in-place.
+marked.use({
+  hooks: {
+    postprocess(html) {
+      return html.replace(
+        /<a href="((?:https?:)?\/\/[^"]+)"/g,
+        '<a href="$1" target="_blank" rel="noopener noreferrer"',
+      );
+    },
+  },
+});
+
 // Authoritative list of non-blog routes for the sitemap (mirrors the prior
 // hand-maintained sitemap so existing behaviour is preserved).
 const STATIC_ROUTES = [
