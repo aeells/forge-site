@@ -33,7 +33,7 @@
 <p>That&#39;s the bet behind Backbone: agents are better at extending an established pattern than inventing production architecture from scratch. Service-to-service calls use explicit AWS IAM identities and policies, not credentials embedded in application code - one more decision that&#39;s already made, not one your agent has to guess at.</p>
 <aside class="blog-inline-cta prose-cta-box rounded-xl border border-[#939DB8]/10 bg-[#0F101A]" aria-label="Architecture Decision Records">
 <p class="blog-inline-cta-title">Architecture Decision Records</p>
-<p class="blog-inline-cta-body">Backbone's published ADRs capture the constraints behind those patterns - why Cognito, why IAM for service auth, why the observability stack looks the way it does. Not marketing. The trade-offs.</p>
+<p class="blog-inline-cta-body">Published ADRs capture the constraints behind those patterns - why Cognito, why IAM for service auth, why the observability stack looks the way it does. Not marketing. The trade-offs.</p>
 <p class="blog-inline-cta-actions"><a class="blog-inline-cta-button" href="https://docs.backbonehq.io/docs/adrs" target="_blank" rel="noopener noreferrer">Read the ADRs</a></p>
 </aside><h2>Where this stops working</h2>
 <p>Convention only helps if it&#39;s right. A flawed pattern gets propagated faster and more confidently by an agent than by a human - it doesn&#39;t second-guess precedent, it follows it. That&#39;s an argument for getting the pattern right once, by people who&#39;ve made the mistakes already, not for skipping review. An agent can follow a correct pattern into a situation it was never built for, and catching that is still your job.</p>

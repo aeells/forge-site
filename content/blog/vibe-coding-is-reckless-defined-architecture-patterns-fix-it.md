@@ -46,7 +46,7 @@ That's the bet behind Backbone: agents are better at extending an established pa
 
 <aside class="blog-inline-cta prose-cta-box rounded-xl border border-[#939DB8]/10 bg-[#0F101A]" aria-label="Architecture Decision Records">
 <p class="blog-inline-cta-title">Architecture Decision Records</p>
-<p class="blog-inline-cta-body">Backbone's published ADRs capture the constraints behind those patterns - why Cognito, why IAM for service auth, why the observability stack looks the way it does. Not marketing. The trade-offs.</p>
+<p class="blog-inline-cta-body">Published ADRs capture the constraints behind those patterns - why Cognito, why IAM for service auth, why the observability stack looks the way it does. Not marketing. The trade-offs.</p>
 <p class="blog-inline-cta-actions"><a class="blog-inline-cta-button" href="https://docs.backbonehq.io/docs/adrs" target="_blank" rel="noopener noreferrer">Read the ADRs</a></p>
 </aside>
 
