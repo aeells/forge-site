@@ -6,7 +6,38 @@
     <atom:link href="https://backbonehq.io/blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>Opinionated engineering notes on building production SaaS platforms - from runtime architecture and platform engineering to the realities of running software at scale.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 06 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 09 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Vibe Coding Is Reckless. Defined Architecture Patterns Fix It.</title>
+      <link>https://backbonehq.io/blog/vibe-coding-is-reckless-defined-architecture-patterns-fix-it/</link>
+      <guid isPermaLink="true">https://backbonehq.io/blog/vibe-coding-is-reckless-defined-architecture-patterns-fix-it/</guid>
+      <pubDate>Sun, 09 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Vibe coding fails in the enterprise not because agents are careless, but because blank-canvas codebases force them to invent the architectural &apos;ilities&apos; - scalability, security, maintainability - from scratch. Defined architecture patterns fix that.</description>
+      <content:encoded><![CDATA[<p>Andreas Horn leads AIOps work at BLP - real enterprise IT. A while back he <a href="https://www.linkedin.com/posts/andreashorn1_unpopular-opinion-most-of-the-people-confidently-activity-7471821090412138496-QfVi">posted something</a> that stuck with me: most people calling vibe coding the future have never sat through a 2 a.m. call after a misconfigured permission policy or firewall rule took production down. Demos look great. Small projects hold up. None of it survives a real enterprise, where system complexity and constraints are the default.</p>
+<p><img src="/assets/images/blog/andreas-horn-vibe-coding.jpeg" alt="LinkedIn post graphic by Andreas Horn arguing that vibe coding fails in real enterprise IT"></p>
+<p>He&#39;s right. He&#39;s also spent a decade watching AI initiatives succeed or fail inside real companies.</p>
+<p>Here&#39;s the sharper point: this isn&#39;t a talent problem, and it isn&#39;t a caution problem. It&#39;s a constraint problem. The <a href="https://nimblegravity.com/blog/ilities-in-software-engineering">architectural &quot;-ilities&quot;</a> - scalability, security, maintainability, observability, and the rest - are exactly the properties teams reinvent under deadline when no convention exists. <a href="https://12factor.net/">The twelve-factor app</a> made this same bet well over a decade ago: a fixed convention for how a SaaS app runs in production, not something every team invents from scratch. That bet gets sharper once the thing touching your system is an agent, not a person.</p>
+<h2>Why vibe coding breaks</h2>
+<p>A coding agent doesn&#39;t reason about your architecture. It reads what&#39;s there and extends it. Give it a codebase where the -ilities are already expressed the same way a dozen times, and it follows those patterns reliably. Give it a blank project - which is what vibe coding usually means - and it has nothing to follow. It invents the patterns instead: how identity is checked, what gets logged, how failures propagate, where rate limits live. The result is often plausible. It is not always production-shaped.</p>
+<p>That gap shows up in public. <a href="https://www.wired.com/story/thousands-of-vibe-coded-apps-expose-corporate-and-personal-data-on-the-open-web/">WIRED reported</a> research from Red Access finding thousands of publicly accessible vibe-coded apps with effectively no authentication - and close to two thousand appearing to leak sensitive data. Security is only one -ility. The same blank-canvas pressure applies to scalability, observability, deployability, and maintainability. Agents optimise for something that works. The cross-cutting properties are what they have to guess.</p>
+<h2>Why Backbone fixes it</h2>
+<p>Two agents, same task: add a feature that touches identity, authorization, and an audit trail - the kind of change that forces several -ilities into play at once.</p>
+<p>On a blank project, the agent invents those concerns as it goes: where identity lives, how authorization is checked, what gets audited, how operational boundaries are drawn. Decisions about the architecture happen while the feature is being written.</p>
+<p>On Backbone, those decisions already exist. Authentication is wired to Cognito and OAuth2. Authorization runs through an existing identity model. Audit events already have a schema, cross-cutting wiring, and a destination. Deployment, configuration, health checks, observability, and rate limiting are already established. The agent isn&#39;t designing the -ilities. It&#39;s adhering to them - extending a system with known scalability, reliability, and security characteristics rather than inventing those characteristics feature by feature.</p>
+<p>That&#39;s the bet behind Backbone: agents are better at extending an established pattern than inventing production architecture from scratch. Service-to-service calls use explicit AWS IAM identities and policies, not credentials embedded in application code - one more decision that&#39;s already made, not one your agent has to guess at.</p>
+<h2>Where this stops working</h2>
+<p>Convention only helps if it&#39;s right. A flawed pattern gets propagated faster and more confidently by an agent than by a human - it doesn&#39;t second-guess precedent, it follows it. That&#39;s an argument for getting the pattern right once, by people who&#39;ve made the mistakes already, not for skipping review. An agent can follow a correct pattern into a situation it was never built for, and catching that is still your job.</p>
+<p>One more thing: &quot;vibe coding&quot; might not be the word anyone&#39;s using in two years. The shift underneath it - agents doing more of the typing, over bigger diffs, with less supervision - isn&#39;t going anywhere.</p>
+<h2>Architecture engineering, not prompt engineering</h2>
+<p>The real distinction isn&#39;t whether AI wrote the code. It&#39;s whether the agent was working inside architecture that already solved the -ilities - identity, authorization, auditing, observability, configuration, deployment - or making those calls up as it went.</p>
+<p>If those decisions don&#39;t exist, the agent invents them while it builds your feature. If they do exist, it reinforces them.</p>
+<p>As coding agents become capable of producing larger and larger changesets, that&#39;s the bet that matters: not prompt engineering, but architecture engineering.</p>
+]]></content:encoded>
+      <category>ai</category>
+      <category>architecture</category>
+      <category>software-engineering</category>
+      <category>devops</category>
+    </item>
     <item>
       <title>Quarkus + GitHub Actions: Reducing CI Time by 50% Without Larger Runners</title>
       <link>https://backbonehq.io/blog/quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners/</link>

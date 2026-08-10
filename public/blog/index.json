@@ -1,5 +1,20 @@
 [
   {
+    "title": "Vibe Coding Is Reckless. Defined Architecture Patterns Fix It.",
+    "slug": "vibe-coding-is-reckless-defined-architecture-patterns-fix-it",
+    "url": "/blog/vibe-coding-is-reckless-defined-architecture-patterns-fix-it/",
+    "summary": "Vibe coding fails in the enterprise not because agents are careless, but because blank-canvas codebases force them to invent the architectural 'ilities' - scalability, security, maintainability - from scratch. Defined architecture patterns fix that.",
+    "published": "2026-08-09",
+    "updated": "2026-08-09",
+    "tags": [
+      "ai",
+      "architecture",
+      "software-engineering",
+      "devops"
+    ],
+    "readingTime": 4
+  },
+  {
     "title": "Quarkus + GitHub Actions: Reducing CI Time by 50% Without Larger Runners",
     "slug": "quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners",
     "url": "/blog/quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners/",
