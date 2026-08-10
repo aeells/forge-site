@@ -111,6 +111,9 @@ function loadArticles() {
     const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
     const { data, content } = matter(raw);
     const slug = data.slug || file.replace(/\.md$/, "");
+    const rawTitle = String(data.title || slug);
+    const title = rawTitle.replace(/\s*\n\s*/g, " ").trim();
+    const titleHtml = escapeHtml(rawTitle).replace(/\n/g, "<br>");
     const published = toISODate(data.published);
     const updated = data.updated ? toISODate(data.updated) : published;
     const words = content.trim().split(/\s+/).filter(Boolean).length;
@@ -118,7 +121,8 @@ function loadArticles() {
     const tags = Array.isArray(data.tags) ? data.tags : [];
     return {
       slug,
-      title: String(data.title || slug),
+      title,
+      titleHtml,
       summary: String(data.summary || ""),
       description: String(data.description || data.summary || ""),
       published,
@@ -173,6 +177,7 @@ function pageHead({ title, description, canonical, extraHead = "", jsonLd = "" }
     <link rel="alternate" type="application/rss+xml" title="${escapeAttr(BLOG_TITLE)}" href="/blog/feed.xml" />
     <link rel="stylesheet" href="/assets/css/main.css" media="all" />
     <link rel="stylesheet" href="/assets/css/blog.css" media="all" />
+    <link rel="stylesheet" href="/assets/css/vendor/glightbox.min.css" media="all" />
 ${jsonLd}    <script type="module" src="/assets/js/layout-shell.js"></script>
   </head>
   <body class="helvetica bg-[#0B0C14] text-neutral-200">
@@ -183,6 +188,8 @@ ${jsonLd}    <script type="module" src="/assets/js/layout-shell.js"></script>
 const pageFoot = () => `      ${footerPartial}
     </div>
 ${pagePulsePartial}
+    <script src="/assets/js/vendor/glightbox.min.js" defer></script>
+    <script src="/assets/js/blog-lightbox.js" defer></script>
   </body>
 </html>
 `;
@@ -260,7 +267,7 @@ ${related
       <main class="page-rail pt-32 pb-24">
         <article class="blog-article">
           <a class="blog-back" href="/blog/">&larr; All articles</a>
-          <h1>${escapeHtml(article.title)}</h1>
+          <h1>${article.titleHtml}</h1>
           <div class="blog-byline">
             By ${escapeHtml(AUTHOR)} &middot;
             <time datetime="${article.published}">${displayDate(article.published)}</time> &middot;

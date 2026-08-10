@@ -41,6 +41,7 @@ async function main() {
     lazysizes: readJson(path.join(nm, "lazysizes/package.json")).version,
     "es-module-shims": readJson(path.join(nm, "es-module-shims/package.json")).version,
     "accordion-js": readJson(path.join(nm, "accordion-js/package.json")).version,
+    glightbox: readJson(path.join(nm, "glightbox/package.json")).version,
   };
 
   fs.mkdirSync(vendorDir, { recursive: true });
@@ -51,6 +52,7 @@ async function main() {
   copyFromNodeModules("lazysizes/lazysizes.min.js", "lazysizes.min.js");
   copyFromNodeModules("es-module-shims/dist/es-module-shims.js", "es-module-shims.js");
   copyFromNodeModules("accordion-js/dist/accordion.min.js", "accordion.min.js");
+  copyFromNodeModules("glightbox/dist/js/glightbox.min.js", "glightbox.min.js");
 
   const vendorCssDir = path.join(root, "public", "assets", "css", "vendor");
   fs.mkdirSync(vendorCssDir, { recursive: true });
@@ -59,6 +61,11 @@ async function main() {
     path.join(vendorCssDir, "accordion.min.css"),
   );
   console.log("copied accordion-js/dist/accordion.min.css -> css/vendor/accordion.min.css");
+  fs.copyFileSync(
+    path.join(nm, "glightbox/dist/css/glightbox.min.css"),
+    path.join(vendorCssDir, "glightbox.min.css"),
+  );
+  console.log("copied glightbox/dist/css/glightbox.min.css -> css/vendor/glightbox.min.css");
 
   /** Pin to stimulus-rails release that ships Stimulus importmap helpers. */
   const STIMULUS_RAILS_TAG = "v1.3.4";

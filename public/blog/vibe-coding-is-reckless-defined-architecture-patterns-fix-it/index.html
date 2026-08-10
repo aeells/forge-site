@@ -19,6 +19,7 @@
     <link rel="alternate" type="application/rss+xml" title="Backbone Engineering" href="/blog/feed.xml" />
     <link rel="stylesheet" href="/assets/css/main.css" media="all" />
     <link rel="stylesheet" href="/assets/css/blog.css" media="all" />
+    <link rel="stylesheet" href="/assets/css/vendor/glightbox.min.css" media="all" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -98,7 +99,7 @@
       <main class="page-rail pt-32 pb-24">
         <article class="blog-article">
           <a class="blog-back" href="/blog/">&larr; All articles</a>
-          <h1>Vibe Coding Is Reckless. Defined Architecture Patterns Fix It.</h1>
+          <h1>Vibe Coding Is Reckless.<br>Defined Architecture Patterns Fix It.</h1>
           <div class="blog-byline">
             By Andrew Eells &middot;
             <time datetime="2026-08-09">9 August 2026</time> &middot;
@@ -114,7 +115,9 @@
 <p>Here&#39;s the sharper point: this isn&#39;t a talent problem, and it isn&#39;t a caution problem. It&#39;s a constraint problem. The <a href="https://en.wikipedia.org/wiki/List_of_system_quality_attributes" target="_blank" rel="noopener noreferrer">architectural &quot;-ilities&quot;</a> - scalability, security, maintainability, observability, and the rest - are exactly the properties teams reinvent under deadline when no convention exists.</p>
 </div>
 <figure class="blog-split-media">
+<a class="blog-split-media-link glightbox" href="/assets/images/blog/andreas-horn-vibe-coding.jpeg">
 <img src="/assets/images/blog/andreas-horn-vibe-coding.jpeg" alt="LinkedIn post graphic by Andreas Horn arguing that vibe coding fails in real enterprise IT" width="800" height="1200" loading="lazy" />
+</a>
 </figure>
 </div><p><a href="https://12factor.net/" target="_blank" rel="noopener noreferrer">The twelve-factor app</a> made this same bet well over a decade ago: a fixed convention for how a SaaS app runs in production, not something every team invents from scratch. That bet gets sharper once the thing touching your system is an agent, not a person.</p>
 <h2>Why vibe coding breaks</h2>
@@ -340,5 +343,7 @@
 })();
 </script>
 <!-- End Page Pulse Tracking Script -->
+    <script src="/assets/js/vendor/glightbox.min.js" defer></script>
+    <script src="/assets/js/blog-lightbox.js" defer></script>
   </body>
 </html>

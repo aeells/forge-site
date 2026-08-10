@@ -1,5 +1,5 @@
 ---
-title: "Vibe Coding Is Reckless. Defined Architecture Patterns Fix It."
+title: "Vibe Coding Is Reckless.\nDefined Architecture Patterns Fix It."
 slug: vibe-coding-is-reckless-defined-architecture-patterns-fix-it
 summary: "Vibe coding fails in the enterprise not because agents are careless, but because blank-canvas codebases force them to invent the architectural 'ilities' - scalability, security, maintainability - from scratch. Defined architecture patterns fix that."
 description: "Most people calling vibe coding the future have never sat through a 2 a.m. production incident. The fix isn't better prompts - it's architecture agents can extend instead of invent."
@@ -22,7 +22,9 @@ Here's the sharper point: this isn't a talent problem, and it isn't a caution pr
 
 </div>
 <figure class="blog-split-media">
+<a class="blog-split-media-link glightbox" href="/assets/images/blog/andreas-horn-vibe-coding.jpeg">
 <img src="/assets/images/blog/andreas-horn-vibe-coding.jpeg" alt="LinkedIn post graphic by Andreas Horn arguing that vibe coding fails in real enterprise IT" width="800" height="1200" loading="lazy" />
+</a>
 </figure>
 </div>
 

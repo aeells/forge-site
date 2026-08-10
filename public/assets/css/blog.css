@@ -184,10 +184,22 @@
   width: 78.75%;
   justify-self: end;
 }
+.blog-prose .blog-split-media-link {
+  display: block;
+  text-decoration: none;
+}
+.blog-prose .blog-split-media-link:hover {
+  text-decoration: none;
+}
 .blog-prose .blog-split-media img {
   width: 100%;
   height: auto;
   border-radius: 10px;
+  cursor: zoom-in;
+  transition: opacity 0.2s ease;
+}
+.blog-prose .blog-split-media-link:hover img {
+  opacity: 0.92;
 }
 @media (min-width: 768px) {
   .blog-split {

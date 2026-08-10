@@ -20,7 +20,9 @@
 <p>Here&#39;s the sharper point: this isn&#39;t a talent problem, and it isn&#39;t a caution problem. It&#39;s a constraint problem. The <a href="https://en.wikipedia.org/wiki/List_of_system_quality_attributes" target="_blank" rel="noopener noreferrer">architectural &quot;-ilities&quot;</a> - scalability, security, maintainability, observability, and the rest - are exactly the properties teams reinvent under deadline when no convention exists.</p>
 </div>
 <figure class="blog-split-media">
+<a class="blog-split-media-link glightbox" href="/assets/images/blog/andreas-horn-vibe-coding.jpeg">
 <img src="/assets/images/blog/andreas-horn-vibe-coding.jpeg" alt="LinkedIn post graphic by Andreas Horn arguing that vibe coding fails in real enterprise IT" width="800" height="1200" loading="lazy" />
+</a>
 </figure>
 </div><p><a href="https://12factor.net/" target="_blank" rel="noopener noreferrer">The twelve-factor app</a> made this same bet well over a decade ago: a fixed convention for how a SaaS app runs in production, not something every team invents from scratch. That bet gets sharper once the thing touching your system is an agent, not a person.</p>
 <h2>Why vibe coding breaks</h2>

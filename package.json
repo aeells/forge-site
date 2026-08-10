@@ -18,6 +18,7 @@
     "accordion-js": "^3.4.1",
     "aos": "2.3.4",
     "es-module-shims": "1.10.0",
+    "glightbox": "^3.3.1",
     "gray-matter": "^4.0.3",
     "htmlhint": "^1.7.1",
     "lazysizes": "5.3.2",
