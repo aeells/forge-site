@@ -32,7 +32,7 @@ Here's the sharper point: this isn't a talent problem, and it isn't a caution pr
 
 ## Why vibe coding breaks
 
-A coding agent doesn't reason about your architecture. It reads what's there and extends it. Give it a codebase where the -ilities are already expressed the same way a dozen times, and it follows those patterns reliably. Give it a blank project - which is what vibe coding usually means - and it has nothing to follow. It invents the patterns instead: how identity is checked, what gets logged, how failures propagate, where rate limits live. The result is often plausible. It is not always production-shaped.
+A coding agent doesn't reason about your architecture. It reads what's there and extends it. Give it a codebase where the -ilities are already expressed the same way a dozen times, and it follows those patterns reliably. Give it a blank project - which is what vibe coding usually means - and it has nothing to follow. It invents the patterns instead: how identity is checked, what gets logged, how failures propagate, where rate limits live. The result might be plausible. It is not always production-grade.
 
 That gap shows up in public. [WIRED reported](https://www.wired.com/story/thousands-of-vibe-coded-apps-expose-corporate-and-personal-data-on-the-open-web/) research from Red Access finding thousands of publicly accessible vibe-coded apps with effectively no authentication - and close to two thousand appearing to leak sensitive data. Security is only one -ility. The same blank-canvas pressure applies to scalability, observability, deployability, and maintainability. Agents optimise for something that works. The cross-cutting properties are what they have to guess.
 
