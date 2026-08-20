@@ -230,7 +230,7 @@
                 role="alert"></p>
               <div class="w-full">
                 <p class="mt-5 text-neutral-200 max-w-[640px] tracking-[-0.01em] leading-[145%]">
-                  Backbone gives funded SaaS teams <strong class="font-bold text-white">Year 3 operational maturity immediately</strong> — forked into your own AWS account in about two days, for a fraction of what building it yourself costs.
+                  Backbone gives funded SaaS teams <strong class="font-bold text-white">Year 3 operational maturity immediately</strong> - forked into your own AWS account in about two days, for a fraction of what building it yourself costs.
                   <a
                     class="underline underline-offset-4 transition text-[#C9D3EE] decoration-[#C9D3EE]/20 hover:decoration-[#C9D3EE]"
                     href="https://calendly.com/backbonehq/discovery-call"
@@ -434,7 +434,7 @@
             data-aos="fade-up"
             data-aos-delay="100"
             role="img"
-            aria-label="Layered diagram: your product sits on top of the Backbone platform. Backbone provides core service foundations, applications and UIs, delivery, operations, security, infrastructure, governance, and developer experience, all running on your own AWS account, GitHub, and ECS.">
+            aria-label="Layered diagram: your product sits on top of the Backbone platform. Backbone provides accounts and core services, apps and APIs, protection and scale, production visibility, security by default, your cloud automated, continuous delivery, and trust and readiness, all running on your own AWS account and GitHub.">
             <div class="backbone-stack__platform">
               <div class="backbone-stack__platform-label">
                 <span class="backbone-stack__badge">Backbone</span>
@@ -443,86 +443,90 @@
 
               <div class="backbone-stack__grid">
                 <article class="backbone-stack__cell">
-                  <h3>Core service foundations</h3>
-                  <p class="backbone-stack__cell-gloss">Shared services every product needs</p>
+                  <h3>Accounts &amp; core services</h3>
+                  <p class="backbone-stack__cell-gloss">The product plumbing every SaaS rebuilds</p>
                   <ul>
-                    <li>Authentication</li>
+                    <li>Sign-in &amp; accounts (email + Google/LinkedIn)</li>
                     <li>User profiles</li>
-                    <li>Notifications</li>
-                    <li>Document storage</li>
-                    <li>Audit</li>
+                    <li>Email notifications</li>
+                    <li>Document storage &amp; parsing</li>
+                    <li>Action audit trail</li>
                   </ul>
                 </article>
                 <article class="backbone-stack__cell">
-                  <h3>Applications &amp; UIs</h3>
-                  <p class="backbone-stack__cell-gloss">How clients reach your product</p>
+                  <h3>Apps &amp; APIs</h3>
+                  <p class="backbone-stack__cell-gloss">How customers and UIs talk to the system</p>
                   <ul>
-                    <li>BFF orchestration</li>
-                    <li>Reference website</li>
-                    <li>Persona APIs</li>
+                    <li>Backend-for-frontend APIs</li>
+                    <li>Stateless reference web app</li>
+                    <li>Ready-made API contracts</li>
                   </ul>
                 </article>
                 <article class="backbone-stack__cell">
-                  <h3>Delivery</h3>
-                  <p class="backbone-stack__cell-gloss">From commit to production</p>
+                  <h3>Protection &amp; scale</h3>
+                  <p class="backbone-stack__cell-gloss">Stays up when traffic or abuse arrives</p>
                   <ul>
-                    <li>CI/CD pipelines</li>
-                    <li>Infra as code</li>
-                    <li>Fully automated releases</li>
+                    <li>Highly scalable under load</li>
+                    <li>Rate limiting</li>
+                    <li>Shared caching</li>
+                    <li>Health checks</li>
+                    <li>Failure isolation</li>
+                    <li>Edge protection (CDN + WAF)</li>
                   </ul>
                 </article>
                 <article class="backbone-stack__cell">
-                  <h3>Operations</h3>
-                  <p class="backbone-stack__cell-gloss">Knowing it works in production</p>
+                  <h3>Production visibility</h3>
+                  <p class="backbone-stack__cell-gloss">You can see and run it after launch</p>
                   <ul>
-                    <li>Monitoring</li>
-                    <li>Logging</li>
-                    <li>Alerting</li>
-                    <li>Tracing</li>
-                    <li>Runbooks</li>
+                    <li>Metrics &amp; dashboards</li>
+                    <li>Structured logs (sensitive data masked)</li>
+                    <li>Request tracing</li>
+                    <li>Alerts</li>
                   </ul>
                 </article>
                 <article class="backbone-stack__cell">
-                  <h3>Security</h3>
-                  <p class="backbone-stack__cell-gloss">Locked down by default</p>
+                  <h3>Security by default</h3>
+                  <p class="backbone-stack__cell-gloss">Trust is verified, not assumed</p>
                   <ul>
-                    <li>Zero-trust</li>
-                    <li>Secrets</li>
-                    <li>Encryption</li>
-                    <li>Access control</li>
+                    <li>User &amp; service identity</li>
+                    <li>Least-privilege access</li>
+                    <li>Secrets kept out of code</li>
+                    <li>Private networking</li>
+                    <li>Encryption in transit &amp; at rest</li>
                   </ul>
                 </article>
                 <article class="backbone-stack__cell">
-                  <h3>Infrastructure</h3>
-                  <p class="backbone-stack__cell-gloss">Where it runs and stores data</p>
+                  <h3>Your cloud, automated</h3>
+                  <p class="backbone-stack__cell-gloss">Runs in accounts you own</p>
                   <ul>
-                    <li>AWS</li>
-                    <li>ECS</li>
-                    <li>Postgres, DynamoDB &amp; S3</li>
-                    <li>Networking</li>
-                    <li>Autoscaling</li>
+                    <li>AWS environments as code</li>
+                    <li>Containers that scale</li>
+                    <li>Databases &amp; object storage</li>
+                    <li>Networking &amp; multi-env layout</li>
                   </ul>
                 </article>
               </div>
 
               <div class="backbone-stack__grid-pair">
                 <article class="backbone-stack__cell">
-                  <h3>Governance</h3>
-                  <p class="backbone-stack__cell-gloss">Built for auditability</p>
+                  <h3>Ship continuously</h3>
+                  <p class="backbone-stack__cell-gloss">From commit to live without heroics</p>
                   <ul>
-                    <li>Audit trails</li>
-                    <li>Control mapping</li>
-                    <li>Compliance roadmap</li>
+                    <li>Build / test / deploy pipelines</li>
+                    <li>Automated releases</li>
+                    <li>Cost controls for non-prod</li>
+                    <li>Load-tested performance evidence</li>
                   </ul>
                 </article>
                 <article class="backbone-stack__cell">
-                  <h3>Developer experience</h3>
-                  <p class="backbone-stack__cell-gloss">Ready to build from day one</p>
+                  <h3>Trust &amp; readiness</h3>
+                  <p class="backbone-stack__cell-gloss">Diligence-ready without a rewrite</p>
                   <ul>
-                    <li>Task operations plane</li>
-                    <li>Free-tier local dev</li>
-                    <li>Docs &amp; templates</li>
-                    <li>Dependency mgmt</li>
+                    <li>Audit trails</li>
+                    <li>Compliance-aware control mapping</li>
+                    <li>Architecture decision records</li>
+                    <li>Shared open-source platform libraries</li>
+                    <li>Local dev &amp; docs from day one</li>
                   </ul>
                 </article>
               </div>
@@ -748,7 +752,7 @@
             </div>
             <div class="flex flex-col gap-y-1">
               <p class="text-neutral-200 text-13 leading-[145%]">Powered by</p>
-              <p class="proof__stat-value">31k+</p>
+              <p class="proof__stat-value">37k</p>
               <p class="text-neutral-200 text-13 leading-[145%]">lines of code, GHA workflows, Infrastructure as Code, and operational tooling</p>
             </div>
           </div>
