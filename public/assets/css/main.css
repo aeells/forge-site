@@ -6075,9 +6075,9 @@ html {
 .audience-section-watermark__img {
   position: absolute;
   right: 80px;
-  top: 50%;
+  top: calc(50% - 96px);
   z-index: 0;
-  width: min(140px, 19vw);
+  width: min(168px, 22.8vw);
   height: auto;
   max-height: 75%;
   object-fit: contain;
