@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 184" role="img" aria-hidden="true">
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="42%" r="58%">
+      <stop offset="0%" stop-color="#C5CBFF" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#7B85E8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#5B63D3" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="face" x1="22%" y1="6%" x2="78%" y2="96%">
+      <stop offset="0%" stop-color="#F4F6FF"/>
+      <stop offset="28%" stop-color="#B8BFF8"/>
+      <stop offset="62%" stop-color="#6E78E0"/>
+      <stop offset="100%" stop-color="#3A4299"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="45%" stop-color="#D7DCFF"/>
+      <stop offset="100%" stop-color="#8B95F0"/>
+    </linearGradient>
+    <linearGradient id="inset" x1="30%" y1="18%" x2="70%" y2="80%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+      <stop offset="40%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#1B2048" stop-opacity="0.25"/>
+    </linearGradient>
+    <filter id="soft" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#6B75E8" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+  <circle cx="80" cy="88" r="72" fill="url(#halo)"/>
+  <g filter="url(#soft)">
+    <path
+      fill="url(#face)"
+      stroke="url(#rim)"
+      stroke-width="5"
+      d="M80 18C64.5 31.2 46.8 39.6 22 43.4v45.8c0 35.2 24.4 65.2 58 74.8 33.6-9.6 58-39.6 58-74.8V43.4C113.2 39.6 95.5 31.2 80 18Z"/>
+    <path
+      fill="url(#inset)"
+      d="M80 30C67.2 41 52.4 47.8 34 50.8v36.6c0 28.4 19.2 52.8 46 61.2 26.8-8.4 46-32.8 46-61.2V50.8C107.6 47.8 92.8 41 80 30Z"/>
+    <path
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-width="11"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M52 92.5 72 111.5 112 62"/>
+  </g>
+</svg>

@@ -5815,9 +5815,15 @@
  * Home hero illustration. Size/mask live here — the shipped Tailwind bundle does not
  * include arbitrary utilities added only in index.html.
  */
+/**
+ * Home hero illustration.
+ * Desktop art + RHS float badge share one breakpoint (960px) so the image never
+ * stacks under the copy before being replaced by the centered compliance badge.
+ * (Project Tailwind `md` is 802px — do not couple hero art to md:flex-row.)
+ */
 .hero-home-art-wrap {
   position: relative;
-  display: block;
+  display: none;
   width: fit-content;
   max-width: min(20rem, 100%);
   margin-top: 2rem;
@@ -5826,17 +5832,26 @@
   transform: none;
   pointer-events: none;
 }
-@media (width >= 768px) {
+
+@media (width >= 960px) {
+  .hero-home-layout {
+    flex-direction: row;
+  }
+
+  .hero-home-art-column {
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 26rem;
+  }
+
   .hero-home-art-wrap {
+    display: block;
     max-width: 32rem;
     min-height: 0;
     margin-top: 0;
     margin-right: 0;
     /* y: image top ~ to “P” cap, not the h1 line box (see md:text-[53px] + leading) */
     transform: translate(1.25rem, 6.75rem);
-  }
-  .hero-home-art-column {
-    min-height: 26rem;
   }
 }
 .hero-home-art-wrap::after {
@@ -5887,7 +5902,7 @@ img.hero-home-art--desktop {
   mask-size: 100% 100%;
   filter: drop-shadow(0 0 1.25rem rgba(11, 12, 20, 0.65)) drop-shadow(0 0 2.5rem rgba(11, 12, 20, 0.4));
 }
-@media (width >= 768px) {
+@media (width >= 960px) {
   img.hero-home-art--desktop {
     object-position: center right;
   }

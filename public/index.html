@@ -91,7 +91,8 @@
 
     <script src="/assets/js/turbo-before-render.js" defer data-turbo-track="reload" nonce=""></script>
 
-    <link rel="stylesheet" href="/assets/css/main.css?v=homepage-marquee-css-v2" media="all" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/css/main.css?v=homepage-hero-swap-960" media="all" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/css/compliance-tag.css?v=9" media="all" />
     <script src="/assets/js/img-data-src.js" defer></script>
     <script type="importmap" data-turbo-track="reload" nonce="">
       {
@@ -121,7 +122,11 @@
     <script src="/assets/js/cfg.js" data-turbo-track="reload" nonce=""></script>
     <script type="module" src="/assets/js/homepage-imports.js" nonce=""></script>
   </head>
-  <body class="helvetica bg-[#0B0C14] text-neutral-200" data-aos-easing="ease" data-aos-duration="1000" data-aos-delay="0">
+  <body
+    class="helvetica bg-[#0B0C14] text-neutral-200"
+    data-aos-easing="ease"
+    data-aos-duration="1000"
+    data-aos-delay="0">
     <div class="main overflow-x-hidden">
       <header
         class="z-40 top-0 left-0 right-0 flex justify-center helvetica bg-[#0B0C14]/80 fixed before:absolute before:-z-10 before:inset-0 before:backdrop-blur-2xl"
@@ -175,7 +180,7 @@
 
       <section class="relative" id="hero">
         <!-- Content sections use .page-rail (1097px max-width, 20px gutter) for aligned left edges -->
-        <div class="page-rail pb-10 md:pb-14 flex flex-col md:flex-row max-md:bg-flare-hero">
+        <div class="page-rail pb-10 md:pb-14 flex flex-col hero-home-layout max-md:bg-flare-hero">
           <div class="flex-1 z-30 pt-32 md:pt-40">
             <div class="flex md:hidden w-full justify-center" data-aos="fade-up" data-aos-delay="50">
               <svg
@@ -252,7 +257,25 @@
             </div>
           </div>
           <div
-            class="hero-home-art-column relative z-0 flex min-w-0 flex-1 flex-col items-center justify-center md:items-end md:justify-center">
+            class="hero-home-art-column z-0 flex min-w-0 flex-1 flex-col items-center justify-center">
+            <a
+              class="compliance-tag compliance-tag--panel compliance-tag--rhs-float"
+              href="https://docs.backbonehq.io/docs/compliance"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Compliance-engineered — open compliance matrix">
+              <img
+                class="compliance-tag__shield"
+                src="/assets/images/brand/compliance-shield.svg?v=3"
+                width="64"
+                height="74"
+                alt=""
+                decoding="async" />
+              <span class="compliance-tag__copy">
+                <span class="compliance-tag__label">Compliance-engineered</span>
+                <span class="compliance-tag__cue">Enterprise control matrix →</span>
+              </span>
+            </a>
             <div class="hero-home-art-wrap">
               <img
                 fetchpriority="high"
@@ -597,40 +620,20 @@
                 <use href="/assets/icons/heroicons_v2/mini/chevron-right-03b53609.svg#root"></use>
               </svg>
             </a>
-            <div class="contact-launch-badges" data-aos="fade-up" data-aos-delay="50">
-              <a href="https://kittylaunch.com/p/forge-platform" target="_blank" rel="noopener">
-                <img
-                  src="https://kittylaunch.com/api/public/badges/launch_badge.svg?theme=dark&name=Backbone"
-                  width="280"
-                  alt="Backbone - Featured on KittyLaunch"
-                  data-kittylaunch-badge="1" />
-              </a>
-              <a
-                class="contact-launch-llama"
-                href="https://tools.launchllama.co?utm_source=badge&utm_medium=referral"
-                target="_blank"
-                rel="noopener noreferrer">
-                <img
-                  src="https://tools.launchllama.co/featured-badge.png?v=2"
-                  alt="As seen on Launch Llama Newsletter"
-                  width="280"
-                  height="70" />
-              </a>
-            </div>
+            <img
+              class="how-it-works__avatar"
+              src="/assets/images/brand/backbone-avatar.png"
+              alt=""
+              width="512"
+              height="512"
+              decoding="async"
+              aria-hidden="true" />
           </div>
         </div>
       </section>
 
       <hr class="page-rail-separator separator-margin-y relative z-10 border-0 border-t border-image-t border-separator-gradient" />
       <section class="audience-section-watermark relative z-10 page-rail" id="maturity">
-        <img
-          src="/assets/images/brand/backbone-avatar.png"
-          alt=""
-          width="512"
-          height="512"
-          decoding="async"
-          class="audience-section-watermark__img"
-          aria-hidden="true" />
         <div class="audience-section-watermark__content flex flex-col text-left w-full" data-aos="fade-up">
           <h2 class="logs-text text-transparent font-bold text-[24px] lg:text-[36px] leading-[108%]">
             Start with Year 3 platform maturity on Day 1
@@ -641,7 +644,25 @@
               rollout, or a fundraise - who can't afford months of undifferentiated platform work first.
             </p>
           </div>
-          <div class="mt-8 space-y-6 w-full" style="text-wrap: pretty" data-aos="fade-in" data-aos-delay="150">
+          <div class="maturity-lists mt-8 space-y-6 w-full" style="text-wrap: pretty" data-aos="fade-in" data-aos-delay="150">
+            <a
+              class="compliance-tag compliance-tag--panel compliance-tag--maturity-emblem"
+              href="https://docs.backbonehq.io/docs/compliance"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Compliance-engineered — open compliance matrix">
+              <img
+                class="compliance-tag__shield"
+                src="/assets/images/brand/compliance-shield.svg?v=3"
+                width="72"
+                height="83"
+                alt=""
+                decoding="async" />
+              <span class="compliance-tag__copy">
+                <span class="compliance-tag__label">Compliance-engineered</span>
+                <span class="compliance-tag__cue">Control matrix →</span>
+              </span>
+            </a>
             <div class="list-primary-discs">
               <h3 class="text-white font-medium leading-[145%]">What changes in practice</h3>
               <ul class="mt-3 space-y-2.5 text-neutral-200 leading-[145%] tracking-[-0.01em]">
