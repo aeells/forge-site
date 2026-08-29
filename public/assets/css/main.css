@@ -5999,6 +5999,11 @@ html {
   min-height: 1.5rem;
 }
 
+/* Keep tier blurbs the same height so price rows align when copy wraps */
+.pricing-tier-blurb {
+  min-height: 4rem;
+}
+
 /* Homepage content rail — single max-width + gutter for aligned sections */
 :root {
   --page-gutter: 20px;
