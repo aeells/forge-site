@@ -1,25 +1,72 @@
 # Backbone
 
-> Bootstrap like a much larger engineering organization.
+> Enterprise foundations. Startup speed. Backbone is a licensed, forkable platform engineering foundation that gives SaaS teams Year 3 operational maturity on Day 1: security, scale, and compliance-mapped controls, deployed into AWS accounts and GitHub orgs the operator owns.
 
-Backbone is an enterprise-grade platform engineering foundation for startups and greenfield engineering teams building distributed systems and microservice architectures.
+Backbone isn't a hosted SaaS product, and it isn't a framework. It's a pre-engineered operating model for distributed systems on AWS (Quarkus services, ECS Fargate, CDK). Teams fork `backbone-platform`. They configure domain and posture per environment (`DEV`, `INT`, `STAGE`, `PROD`). Then they ship on a CI/CD spine that already includes hygiene, tests, static analysis, coverage, versioning, ECR, and env deploy.
 
-Backbone provides opinionated infrastructure, service patterns, operational tooling, observability, deployment workflows, and zero-trust security foundations so teams can ship production-grade systems without rebuilding internal platform infrastructure from scratch.
+Licence tiers (`foundation`, `growth`, `enterprise`) share the same platform. Production posture scales with the licence: AZ count and HA endpoints, customer-managed encryption keys (AMK → CMK → BYOK), managed observability, and governance evidence. The discrete capability inventory lives at the features guide linked below.
 
-## Core resources
+Capabilities cluster under three umbrellas. Identity and zero-trust sit under security. Delivery, resilience, and observability sit under scale. Audit, evidence, and control mapping sit under compliance.
 
-- [Home](https://backbonehq.io/): Product overview, capabilities, architecture, and pricing
-- [Blog](https://backbonehq.io/blog/): Engineering insights on platform engineering, production readiness, and the foundations behind scalable software
-- [FAQ](https://backbonehq.io/faq/): Common questions about platform fit, onboarding, and commercial model
+Security. Zero-trust request model (stateless JWT, no server sessions). User authentication (email/password, Google OAuth2, LinkedIn OAuth2 with account linking) and service-to-service JWT via Cognito, with named-caller allowlists. GitHub Actions OIDC to constrained AWS deploy roles; no long-lived AWS keys in CI. Secrets in Secrets Manager / SSM. Private VPC per environment, CloudFront + WAF edge (host allowlist, geo, rate rules), origin-locked ALB, DNSSEC, and optional internal ALB TLS (Enterprise). Encryption in transit and at rest.
+
+Scale. Redis-backed application throttling and distributed cache-aside; CloudFront WAF edge throttling; circuit breakers on persistence paths; dependency-aware health and readiness. ECS Fargate with autoscaling and GraalVM native images (JVM fast-jar escape hatch). The CI/CD spine and observability stack (metrics, traces, PII-safe logs, optional AMP/AMG/X-Ray) sit here: delivery and visibility are how the platform scales. Published k6 baselines show near-linear throughput through every tested step (up to ~222 req/s on two tasks); no saturation point was reached. Enterprise unlocks unrestricted AZ count, HA endpoint mode, and unbounded desired count.
+
+Compliance. Backbone maps platform controls to SOC 2, GDPR, and HIPAA-aligned objectives. It does not certify a deployment: because the system runs in the operator's AWS account, the operator is the audited entity. What ships: annotation-driven audit trails with guaranteed delivery and EventBridge fan-out (SIEM rules attach as an operator extension); PII / sensitive-data log masking; least-privilege IAM documentation. Enterprise can enable governance evidence: regional CloudTrail, Object-Lock protected evidence storage, and ALB access logs — disable when an org-wide trail and log archive already exist.
+
+## Product
+
+- [Home](https://backbonehq.io/): Product overview, architecture, pricing, and proof (core services, zero-trust, delivery, benchmarks, compliance)
+- [FAQ](https://backbonehq.io/faq/): Fit, onboarding, commercial model, and the SOC 2 / HIPAA / GDPR shared-responsibility answer
+- [Compare](https://backbonehq.io/compare/): Backbone vs DIY and adjacent tools (ops maturity vs a single-layer vendor)
+- [Backbone vs DIY](https://backbonehq.io/compare/diy/): Build-it-yourself cost, time, and diligence risk
+- [Backbone vs DuploCloud](https://backbonehq.io/compare/duplocloud/): Your-cloud governance vs a forkable application foundation
+- [Backbone vs Coherence](https://backbonehq.io/compare/coherence/): Adjacent comparison
+- [Backbone vs Encore](https://backbonehq.io/compare/encore/): Backend framework vs a licensed operating model
+- [Licence](https://backbonehq.io/licence/): Licence terms
+
+## Security
+
+- [Platform security posture](https://docs.backbonehq.io/docs/security.md): Control baseline for identity, network, edge, secrets, and encryption
+- [User authentication](https://docs.backbonehq.io/docs/user-authentication.md): Cognito user pool, OAuth2, registration, refresh, password reset
+- [Service authentication](https://docs.backbonehq.io/docs/service-authentication.md): Service-to-service JWT and named-caller authorization
+- [AWS platform infrastructure](https://docs.backbonehq.io/docs/infrastructure.md): VPC, DNS, certs, WAF, ALB, ECS Fargate, datastores
+- [Customer-managed KMS per domain](https://docs.backbonehq.io/docs/0029-customer-managed-kms-per-domain.md): AMK / CMK / BYOK by licence tier
+
+## Scale
+
+- [Application caching and distributed scale](https://docs.backbonehq.io/docs/caching.md): ElastiCache Redis cache-aside
+- [Rate limiting](https://docs.backbonehq.io/docs/rate-limiting.md): Redis-backed application throttling and edge WAF
+- [Circuit breakers](https://docs.backbonehq.io/docs/circuit-breakers.md): Fault isolation on persistence paths
+- [Health checks](https://docs.backbonehq.io/docs/health-checks.md): Dependency-aware readiness (Postgres, DynamoDB, S3, Cognito, SES, Redis)
+- [Performance testing summary](https://docs.backbonehq.io/docs/performance.md): Published k6 baselines and operating points
+- [Observability architecture](https://docs.backbonehq.io/docs/observability.md): Metrics, traces, logs, and optional AMP / AMG / X-Ray export
+
+## Compliance
+
+- [Compliance](https://docs.backbonehq.io/docs/compliance.md): Control matrix vs SOC 2, GDPR, and HIPAA-aligned objectives; operator-owned certification
+- [Audit logging](https://docs.backbonehq.io/docs/audit.md): Central ingest, Postgres persistence, EventBridge fan-out
+- [Governance evidence architecture](https://docs.backbonehq.io/docs/0027-governance-evidence-architecture.md): Regional CloudTrail, protected evidence bucket, ALB access logs (Enterprise, optional)
+- [Governance evidence Object Lock](https://docs.backbonehq.io/docs/0028-governance-evidence-object-lock.md): S3 Object Lock (COMPLIANCE) retention for evidence
+- [Platform features](https://docs.backbonehq.io/docs/features.md): Full capability inventory, including licence-tier configuration
 
 ## Technical documentation
 
-- [Backbone technical docs](https://docs.backbonehq.io): Architecture documentation, platform operations, infrastructure automation, deployment workflows, observability, service development patterns, and production engineering guidance
+- [Docs index (llms.txt)](https://docs.backbonehq.io/llms.txt): Canonical documentation catalog; append `.md` to any docs URL for markdown
+- [Backbone technical docs](https://docs.backbonehq.io): Architecture, operations, infrastructure, delivery, observability, and service patterns
+- [Welcome](https://docs.backbonehq.io/docs/welcome.md): Runtime model and architecture overview
+- [Operations](https://docs.backbonehq.io/docs/operations.md): Platform operations
+- [Architecture Decision Records](https://docs.backbonehq.io/docs/adrs.md): Decision log for security, scale, and governance choices
+- [backbone-kit](https://github.com/get-backbone/backbone-kit): Open-source libraries for metrics, health, throttling, security, logging, and observability
 
-## Community and contact
+## Optional
 
+- [Blog](https://backbonehq.io/blog/): Engineering notes on platform engineering, production readiness, and the foundations behind scalable software
+- [What production-ready actually means](https://backbonehq.io/blog/what-production-ready-actually-means/): Why operational maturity is postponed until scale, security, or compliance force a rewrite
+- [Vibe coding is reckless](https://backbonehq.io/blog/vibe-coding-is-reckless-defined-architecture-patterns-fix-it/): Why defined architecture patterns matter when agents write the product
+- [Quarkus + GitHub Actions](https://backbonehq.io/blog/quarkus-github-actions-reducing-ci-time-by-half-without-larger-runners/): Cutting the build-and-test workflow roughly in half without larger runners
 - [Book a discovery call](https://calendly.com/backbonehq/discovery-call)
-- [LinkedIn](https://www.linkedin.com/company/get-backbone/)
 - [GitHub](https://github.com/get-backbone/)
+- [LinkedIn](https://www.linkedin.com/company/get-backbone/)
 - [X](https://x.com/_backbonehq)
 - [Reddit](https://www.reddit.com/user/backbonehq/)

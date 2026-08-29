@@ -45,8 +45,8 @@ marked.use({
   },
 });
 
-// Authoritative list of non-blog routes for the sitemap (mirrors the prior
-// hand-maintained sitemap so existing behaviour is preserved).
+// Authoritative list of non-blog routes on this host. Docs child pages live
+// on docs.backbonehq.io and are listed in ReadMe's own sitemap, not here.
 const STATIC_ROUTES = [
   { loc: `${SITE}/`, lastmod: "2026-05-25" },
   { loc: `${DOCS_SITE}/`, lastmod: "2026-06-22" },
@@ -54,6 +54,11 @@ const STATIC_ROUTES = [
   { loc: `${SITE}/privacy/`, lastmod: "2026-05-25" },
   { loc: `${SITE}/terms/`, lastmod: "2026-05-25" },
   { loc: `${SITE}/licence/`, lastmod: "2026-05-25" },
+  { loc: `${SITE}/compare/`, lastmod: "2026-08-07" },
+  { loc: `${SITE}/compare/diy/`, lastmod: "2026-08-07" },
+  { loc: `${SITE}/compare/duplocloud/`, lastmod: "2026-08-07" },
+  { loc: `${SITE}/compare/coherence/`, lastmod: "2026-08-07" },
+  { loc: `${SITE}/compare/encore/`, lastmod: "2026-08-07" },
 ];
 
 // --- URL helpers (single source of truth for trailing-slash convention) ---
