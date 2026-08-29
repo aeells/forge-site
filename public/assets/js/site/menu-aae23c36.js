@@ -158,15 +158,7 @@ function hookDesktopMenuHover() {
 
 let menuControllers = []
 
-document.addEventListener('turbo:load', function () {
-  const mobileController = hookMobileMenu()
-  const desktopController = hookDesktopMenu()
-  const hoverResult = hookDesktopMenuHover()
-
-  menuControllers = [mobileController, desktopController, hoverResult].filter(Boolean)
-})
-
-document.addEventListener('turbo:before-visit', function () {
+function unbindMenus() {
   menuControllers.forEach(item => {
     if (item?.controller) {
       item.controller.abort()
@@ -176,4 +168,22 @@ document.addEventListener('turbo:before-visit', function () {
     }
   })
   menuControllers = []
-})
+}
+
+function bindMenus() {
+  unbindMenus()
+  const mobileController = hookMobileMenu()
+  const desktopController = hookDesktopMenu()
+  const hoverResult = hookDesktopMenuHover()
+  menuControllers = [mobileController, desktopController, hoverResult].filter(Boolean)
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", bindMenus)
+} else {
+  bindMenus()
+}
+
+document.addEventListener('turbo:load', bindMenus)
+
+document.addEventListener('turbo:before-visit', unbindMenus)

@@ -107,9 +107,14 @@ function initObfuscatedPhones(root = document) {
   });
 }
 
+function afterLoad(fn) {
+  if (document.readyState === "complete") fn();
+  else window.addEventListener("load", fn, { once: true });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initObfuscatedPhones(document);
-  initDemoStatus(document);
+  afterLoad(() => initDemoStatus(document));
 });
 document.addEventListener("turbo:load", () => {
   initObfuscatedPhones(document);
