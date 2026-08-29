@@ -3264,7 +3264,7 @@
   }
   @media (width < 802px) {
     .max-md\:bg-flare-hero {
-      background-image: url("../images/homepage/flare-sm-e5829b13.png");
+      background-image: url("../images/homepage/flare-sm.webp");
       background-size: auto 60%;
       background-position: center top -100px;
       background-repeat: no-repeat;
