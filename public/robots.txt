@@ -14,3 +14,4 @@ User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://backbonehq.io/sitemap.xml
+# LLM Information: https://backbonehq.io/llms.txt
