@@ -238,24 +238,6 @@
             </div>
           </div>
           <div class="hero-home-art-column z-0 flex min-w-0 flex-1 flex-col items-center justify-center">
-            <a
-              class="compliance-tag compliance-tag--panel compliance-tag--rhs-float"
-              href="https://docs.backbonehq.io/docs/compliance"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Compliance-engineered — open compliance matrix">
-              <img
-                class="compliance-tag__shield"
-                src="/assets/images/brand/compliance-shield.svg?v=3"
-                width="64"
-                height="74"
-                alt=""
-                decoding="async" />
-              <span class="compliance-tag__copy">
-                <span class="compliance-tag__label">Compliance-engineered</span>
-                <span class="compliance-tag__cue">Enterprise control matrix →</span>
-              </span>
-            </a>
             <div class="hero-home-art-wrap">
               <picture>
                 <source media="(min-width: 960px)" srcset="/assets/images/brand/hero-home.webp" type="image/webp" />
@@ -272,23 +254,6 @@
           </div>
         </div>
       </section>
-
-      <div class="mt-10 md:mt-12">
-        <section class="relative overflow-hidden" aria-label="Early adopters">
-          <div class="early-adopters-marquee">
-            <div class="early-adopters-marquee__track">
-              <p class="early-adopters-marquee__group">
-                <span class="font-semibold text-white">Early adopters:</span>
-                <span class="text-neutral-100/90">Backbone includes a Fractional CTO engagement</span>
-              </p>
-              <p class="early-adopters-marquee__group" aria-hidden="true">
-                <span class="font-semibold text-white">Early adopters:</span>
-                <span class="text-neutral-100/90">Backbone includes a Fractional CTO engagement</span>
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
 
       <hr class="page-rail-separator separator-margin-y relative z-10 border-0 border-t border-image-t border-separator-gradient" />
       <section class="relative z-10 page-rail" id="cost">
@@ -837,9 +802,53 @@
             </div>
           </div>
 
-          <div class="grid gap-6 md:grid-cols-3 md:gap-5 lg:gap-6 w-full">
+          <div class="pricing-tiers grid gap-6 w-full">
             <article
-              class="relative flex flex-col rounded-xl border border-[#939DB8]/10 bg-[#0F101A] p-5 sm:p-6 hover:border-[#939DB8]/25 transition-colors">
+              class="relative flex flex-col rounded-xl border border-[#939DB8]/10 bg-[#0F101A] p-4 sm:p-5 hover:border-[#939DB8]/25 transition-colors">
+              <h3 class="text-white font-medium text-lg leading-snug">Community</h3>
+              <p class="pricing-tier-blurb mt-2 text-13 text-neutral-300 leading-[140%]">
+                Pre-seed startups who want development to start immediately and a golden path to scale and security.
+              </p>
+              <div class="mt-6">
+                <div class="flex items-baseline gap-1">
+                  <span class="text-3xl sm:text-4xl font-bold text-white tabular-nums">Free</span>
+                </div>
+                <p class="pricing-annual-note-row mt-2 text-13 text-neutral-300 leading-[140%] invisible" aria-hidden="true">&nbsp;</p>
+              </div>
+              <button
+                type="button"
+                class="mt-6 w-full inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 cursor-default"
+                aria-disabled="true">
+                Coming soon
+              </button>
+              <ul class="mt-6 space-y-3 text-13 text-neutral-300 leading-[140%]">
+                <li class="flex gap-3">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#7C87F7]" aria-hidden="true">
+                    <use href="#pricing-check-icon" width="20" height="20" />
+                  </svg>
+                  <span>Development-only platform</span>
+                </li>
+                <li class="flex gap-3">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#7C87F7]" aria-hidden="true">
+                    <use href="#pricing-check-icon" width="20" height="20" />
+                  </svg>
+                  <span>AWS environments emulated</span>
+                </li>
+                <li class="flex gap-3">
+                  <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#7C87F7]" aria-hidden="true">
+                    <use href="#pricing-check-icon" width="20" height="20" />
+                  </svg>
+                  <span>Templating service for RAD</span>
+                </li>
+              </ul>
+            </article>
+
+            <article
+              class="relative flex flex-col rounded-xl border border-[#7C87F7]/35 bg-[#0F101A] p-4 sm:p-5 ring-1 ring-[#7C87F7]/15 shadow-[0_0_0_1px_rgba(124,135,247,0.08)]">
+              <div
+                class="pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7C87F7] px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-white whitespace-nowrap shadow-[0_2px_8px_rgba(0,0,0,0.25)]">
+                Most popular
+              </div>
               <h3 class="text-white font-medium text-lg leading-snug">Foundation</h3>
               <p class="pricing-tier-blurb mt-2 text-13 text-neutral-300 leading-[140%]">
                 Funded or venture-backed teams building their first production platform.
@@ -857,7 +866,7 @@
                 </p>
               </div>
               <a
-                class="mt-6 w-full inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 hover:bg-[#727DA1]/20 transition-colors"
+                class="cta-button mt-6 w-full rounded-lg px-4 py-2.5 text-sm font-medium text-white inline-flex items-center justify-center"
                 href="https://buy.stripe.com/cNidR8cJ31JfepP2E5aMU07"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -887,11 +896,7 @@
             </article>
 
             <article
-              class="relative flex flex-col rounded-xl border border-[#7C87F7]/35 bg-[#0F101A] p-5 sm:p-6 ring-1 ring-[#7C87F7]/15 shadow-[0_0_0_1px_rgba(124,135,247,0.08)]">
-              <div
-                class="pointer-events-none absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7C87F7] px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-white whitespace-nowrap shadow-[0_2px_8px_rgba(0,0,0,0.25)]">
-                Most popular
-              </div>
+              class="relative flex flex-col rounded-xl border border-[#939DB8]/10 bg-[#0F101A] p-4 sm:p-5 hover:border-[#939DB8]/25 transition-colors">
               <h3 class="text-white font-medium text-lg leading-snug">Growth</h3>
               <p class="pricing-tier-blurb mt-2 text-13 text-neutral-300 leading-[140%]">
                 Established, security-conscious teams launching new products or replacing legacy platforms.
@@ -909,7 +914,7 @@
                 </p>
               </div>
               <a
-                class="cta-button mt-6 w-full rounded-lg px-4 py-2.5 text-sm font-medium text-white inline-flex items-center justify-center"
+                class="mt-6 w-full inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium text-white border border-[#939DB8]/20 bg-[#727DA1]/10 hover:bg-[#727DA1]/20 transition-colors"
                 href="https://buy.stripe.com/28E00i10l3RnbdDbaBaMU09"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -927,7 +932,7 @@
                   <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#7C87F7]" aria-hidden="true">
                     <use href="#pricing-check-icon" width="20" height="20" />
                   </svg>
-                  <span>Managed observability, plus customer-managed encryption (CMK)</span>
+                  <span>Managed observability, plus customer-managed encryption</span>
                 </li>
                 <li class="flex gap-3">
                   <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#7C87F7]" aria-hidden="true">
@@ -939,7 +944,7 @@
             </article>
 
             <article
-              class="relative flex flex-col rounded-xl border border-[#939DB8]/10 bg-[#0F101A] p-5 sm:p-6 hover:border-[#939DB8]/25 transition-colors">
+              class="relative flex flex-col rounded-xl border border-[#939DB8]/10 bg-[#0F101A] p-4 sm:p-5 hover:border-[#939DB8]/25 transition-colors">
               <h3 class="text-white font-medium text-lg leading-snug">Enterprise</h3>
               <p class="pricing-tier-blurb mt-2 text-13 text-neutral-300 leading-[140%]">
                 Multi-team, portfolio, or custom commercial terms - where compliance and security are non-negotiable.
@@ -966,7 +971,7 @@
                   <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#7C87F7]" aria-hidden="true">
                     <use href="#pricing-check-icon" width="20" height="20" />
                   </svg>
-                  <span>BYOK per domain, and a WORM-locked CloudTrail archive</span>
+                  <span>BYOK per domain; WORM-locked CloudTrail archive</span>
                 </li>
                 <li class="flex gap-3">
                   <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#7C87F7]" aria-hidden="true">
